@@ -1,6 +1,6 @@
 {
-	"name": "laravel/laravel",
-	"description": "The Laravel Framework.",
+	"name": "golfleague",
+	"description": "Michael Schmidt's Golf league Software",
 	"keywords": ["framework", "laravel"],
 	"license": "MIT",
 	"require": {
