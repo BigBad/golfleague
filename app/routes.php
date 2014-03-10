@@ -11,7 +11,6 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+Route::get('players', 'PlayersController@view');
+Route::get('players/getPlayers', 'PlayersController@getPlayers');
+Route::get('players/edit', 'PlayersController@edit');
