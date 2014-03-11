@@ -11,7 +11,7 @@
 <script type="text/javascript">
 $(function () {
     $("#players").jqGrid({
-        url: "http://localhost/golfleague/public/index.php/players/getPlayers",
+        url: "players/getPlayers",
         datatype: "json",
         mtype: "GET",
         colNames: ["Name", "Handicap"],
@@ -28,9 +28,10 @@ $(function () {
         gridview: true,
         autoencode: true,
         caption: "Players",
-		editurl:"http://localhost/golfleague/public/index.php/players/edit"
+		editurl:"players/edit"
     }); 
-}); 
+});
+$("#players").jqGrid("navGrid", "#playersPager",{edit:true,add:true,del:true,refresh:false});
 </script>
  
 </head>
