@@ -16,7 +16,7 @@ $(function () {
         mtype: "GET",
         colNames: ["Name", "Handicap"],
         colModel: [
-            { name: "name", width: 350, editable:true },
+            { name: "name", width: 375, editable:true },
             { name: "handicap", width: 100 }
         ],
         pager: "#playersPager",
@@ -52,11 +52,61 @@ $(function () {
     );
 });
 
+$(function () {
+    $("#courses").jqGrid({
+        url: "courses/getCourses",
+        datatype: "json",
+        mtype: "GET",
+        colNames: ["Name", "Par", "Rating", "Slope"],
+        colModel: [
+            { name: "name", width: 175, editable:true },
+			{ name: "par", width: 100, editable:true },
+            { name: "rating", width: 100, editable:true },
+			{ name: "slope", width: 100, editable:true },		
+        ],
+        pager: "#coursesPager",
+        rowNum: 10,
+        rowList: [10, 20, 30],
+        sortname: "name",
+        sortorder: "desc",
+        viewrecords: true,
+        gridview: true,
+        autoencode: true,
+        caption: "Courses",
+        editurl:"courses/edit"
+    });
+    $("#courses").jqGrid("navGrid", "#coursesPager",{edit:true,add:true,del:true,refresh:false},
+        {
+        closeAfterEdit:true,
+        recreateForm: true,
+        editCaption: "Edit Course",
+        errorTextFormat:function(data){
+            return data.statusText;
+        },
+            reloadAfterSubmit:true
+        },
+        {
+            closeAfterAdd:true,
+            recreateForm: true,
+            addCaption: "Add Course",
+            errorTextFormat:function(data){
+                return data.statusText;
+            },
+            reloadAfterSubmit:true,
+            }
+    );
+});
+
+
+
 </script>
 </head>
 <body>
     <table id="players"></table>
     <div id="playersPager"></div>
+	<br><br>
+	<table id="courses"></table>
+    <div id="coursesPager"></div>
 </body>
 </html>
 

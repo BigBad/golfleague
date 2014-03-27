@@ -1,10 +1,10 @@
 <?php
 
-class PlayersController extends \BaseController {
+class CoursesController extends \BaseController {
 
-    public function __construct(Player $player)
+    public function __construct(Course $course)
     {
-        $this->player = $player;
+        $this->course = $course;
     }
 
     /**
@@ -12,9 +12,9 @@ class PlayersController extends \BaseController {
      *
      * @return Response
      */
-    public function getPlayers()
+    public function getCourses()
     {
-        $data = $this->player->all();
+        $data = $this->course->all();
         return $data;
     }
 
@@ -50,18 +50,22 @@ class PlayersController extends \BaseController {
         $operation = Input::get('oper');
         switch ($operation) {
         case "add":
-            $this->player->name = Input::get('name');
-            $this->player->save();            
+            $this->course->name = Input::get('name');
+			$this->course->name = Input::get('rating');
+			$this->course->name = Input::get('slope');
+            $this->course->save();            
             break;
         case "edit":
             $id = Input::get('id');
-            $this->player = $this->player->find($id);
-            $this->player->name = Input::get('name');
-            $this->player->save();
+            $this->course = $this->course->find($id);
+            $this->course->name = Input::get('name');
+			$this->course->name = Input::get('rating');
+			$this->course->name = Input::get('slope');
+            $this->course->save();
             break;
         case "del":
             $id = Input::get('id');
-            $this->player = $this->player->destroy($id);
+            $this->course = $this->course->destroy($id);
             break;
         }
     }

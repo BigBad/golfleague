@@ -11,6 +11,10 @@
 |
 */
 
-Route::get('players', 'PlayersController@view');
+Route::get('administration', 'AdministrationController@view');
+
 Route::get('players/getPlayers', 'PlayersController@getPlayers');
 Route::post('players/edit', 'PlayersController@edit');
+
+Route::get('courses/getCourses', 'CoursesController@getCourses');
+Route::post('courses/edit', 'CoursesController@edit');
