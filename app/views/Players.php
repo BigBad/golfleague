@@ -16,7 +16,7 @@ $(function () {
         mtype: "GET",
         colNames: ["Name", "Handicap"],
         colModel: [
-            { name: "name", width: 150, editable:true },
+            { name: "name", width: 350, editable:true },
             { name: "handicap", width: 100 }
         ],
         pager: "#playersPager",
@@ -28,16 +28,35 @@ $(function () {
         gridview: true,
         autoencode: true,
         caption: "Players",
-		editurl:"players/edit"
-    }); 
+        editurl:"players/edit"
+    });
+    $("#players").jqGrid("navGrid", "#playersPager",{edit:true,add:true,del:true,refresh:false},
+        {
+        closeAfterEdit:true,
+        recreateForm: true,
+        editCaption: "Edit Player",
+        errorTextFormat:function(data){
+            return data.statusText;
+        },
+            reloadAfterSubmit:true
+        },
+        {
+            closeAfterAdd:true,
+            recreateForm: true,
+            addCaption: "Add Player",
+            errorTextFormat:function(data){
+                return data.statusText;
+            },
+            reloadAfterSubmit:true,
+            }
+    );
 });
-$("#players").jqGrid("navGrid", "#playersPager",{edit:true,add:true,del:true,refresh:false});
+
 </script>
- 
 </head>
 <body>
-    <table id="players"><tr><td></td></tr></table> 
-    <div id="playersPager"></div> 
+    <table id="players"></table>
+    <div id="playersPager"></div>
 </body>
 </html>
 

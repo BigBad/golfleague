@@ -13,4 +13,4 @@
 
 Route::get('players', 'PlayersController@view');
 Route::get('players/getPlayers', 'PlayersController@getPlayers');
-Route::get('players/edit', 'PlayersController@edit');
+Route::post('players/edit', 'PlayersController@edit');

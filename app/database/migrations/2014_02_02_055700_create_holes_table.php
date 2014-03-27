@@ -16,9 +16,9 @@ class CreateHolesTable extends Migration {
 			$table->increments('id');
 			$table->integer('course_id')->unsigned()->index();
 			$table->integer('number');
-			$table->integer('yards');
-			$table->integer('handicap');
 			$table->integer('par');
+			$table->integer('yards');
+			$table->integer('handicap');			
 			$table->timestamps();
 			$table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
 		});

@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class PivotMatchTeamTable extends Migration {
+class CreatePointsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,15 +12,19 @@ class PivotMatchTeamTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('match_team', function(Blueprint $table) {
+		Schema::create('points', function(Blueprint $table)
+		{
 			$table->increments('id');
+			$table->integer('player_id')->unsigned()->index();
 			$table->integer('match_id')->unsigned()->index();
-			$table->integer('team_id')->unsigned()->index();
+			$table->integer('single_earned');
+			$table->integer('team_earned');
+			$table->timestamps();
+			
+			$table->foreign('player_id')->references('id')->on('players')->onDelete('cascade');
 			$table->foreign('match_id')->references('id')->on('matches')->onDelete('cascade');
-			$table->foreign('team_id')->references('id')->on('teams')->onDelete('cascade');
 		});
 	}
-
 
 
 	/**
@@ -30,7 +34,7 @@ class PivotMatchTeamTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('match_team');
+		Schema::drop('points');
 	}
 
 }
