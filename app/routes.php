@@ -18,3 +18,5 @@ Route::post('players/edit', 'PlayersController@edit');
 
 Route::get('courses/getCourses', 'CoursesController@getCourses');
 Route::post('courses/edit', 'CoursesController@edit');
+
+Route::get('matches', 'MatchesController@view');

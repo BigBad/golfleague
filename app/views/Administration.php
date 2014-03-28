@@ -3,7 +3,14 @@
 <head>
 <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset('jquery-ui-1.10.4.custom/css/blitzer/jquery-ui-1.10.4.custom.css')?>" />
 <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset('jquery.jqGrid-4.5.4/css/ui.jqgrid.css')?>" />
-
+</head>
+<body>
+    <table id="players"></table>
+    <div id="playersPager"></div>
+	<br><br>
+	<table id="courses"></table>
+    <div id="coursesPager"></div>
+	
 <script src="<?php echo asset('jquery.jqGrid-4.5.4/js/jquery-1.9.0.min.js')?>" type="text/javascript"></script>
 <script src="<?php echo asset('jquery.jqGrid-4.5.4/js/i18n/grid.locale-en.js')?>" type="text/javascript"></script>
 <script src="<?php echo asset('jquery.jqGrid-4.5.4/js/jquery.jqGrid.min.js')?>" type="text/javascript"></script>
@@ -99,14 +106,7 @@ $(function () {
 
 
 
-</script>
-</head>
-<body>
-    <table id="players"></table>
-    <div id="playersPager"></div>
-	<br><br>
-	<table id="courses"></table>
-    <div id="coursesPager"></div>
+</script>	
 </body>
 </html>
 
