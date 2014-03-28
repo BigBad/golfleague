@@ -47,20 +47,22 @@ class CoursesController extends \BaseController {
      */
     public function edit()
     {
-        $operation = Input::get('oper');
+		$operation = Input::get('oper');
         switch ($operation) {
         case "add":
             $this->course->name = Input::get('name');
-			$this->course->name = Input::get('rating');
-			$this->course->name = Input::get('slope');
+			$this->course->par = Input::get('par');
+			$this->course->rating = Input::get('rating');
+			$this->course->slope = Input::get('slope');
             $this->course->save();            
             break;
         case "edit":
             $id = Input::get('id');
             $this->course = $this->course->find($id);
             $this->course->name = Input::get('name');
-			$this->course->name = Input::get('rating');
-			$this->course->name = Input::get('slope');
+			$this->course->par = Input::get('par');
+			$this->course->rating = Input::get('rating');
+			$this->course->slope = Input::get('slope');
             $this->course->save();
             break;
         case "del":
