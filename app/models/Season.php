@@ -1,10 +1,9 @@
 <?php
 
-class Course extends Eloquent 
+class Season extends Eloquent 
 {
 	public function matches()
     {
         return $this->hasMany('Match');
     }
-
 }

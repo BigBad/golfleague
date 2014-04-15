@@ -19,4 +19,7 @@ Route::post('players/edit', 'PlayersController@edit');
 Route::get('courses/getCourses', 'CoursesController@getCourses');
 Route::post('courses/edit', 'CoursesController@edit');
 
-Route::get('matches', 'MatchesController@view');
+Route::get('matches/getMatches', 'MatchesController@getMatches');
+Route::post('matches/edit', 'MatchesController@edit');
+
+Route::get('enterscores', 'EnterScoresController@view');

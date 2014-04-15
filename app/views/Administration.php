@@ -10,12 +10,16 @@
 	<br><br>
 	<table id="courses"></table>
     <div id="coursesPager"></div>
+	<br><br>
+	<table id="matches"></table>
+    <div id="matchesPager"></div>
 	
 <script src="<?php echo asset('jquery.jqGrid-4.5.4/js/jquery-1.9.0.min.js')?>" type="text/javascript"></script>
 <script src="<?php echo asset('jquery.jqGrid-4.5.4/js/i18n/grid.locale-en.js')?>" type="text/javascript"></script>
 <script src="<?php echo asset('jquery.jqGrid-4.5.4/js/jquery.jqGrid.min.js')?>" type="text/javascript"></script>
 
 <script type="text/javascript">
+//jqGrid code for the Players section
 $(function () {
     $("#players").jqGrid({
         url: "players/getPlayers",
@@ -59,6 +63,7 @@ $(function () {
     );
 });
 
+//jqGrid code for the Courses section
 $(function () {
     $("#courses").jqGrid({
         url: "courses/getCourses",
@@ -96,6 +101,55 @@ $(function () {
             closeAfterAdd:true,
             recreateForm: true,
             addCaption: "Add Course",
+            errorTextFormat:function(data){
+                return data.statusText;
+            },
+            reloadAfterSubmit:true,
+            }
+    );
+});
+
+//jqGrid code for the Matches section
+$(function () {
+    $("#matches").jqGrid({
+        url: "matches/getMatches",
+        datatype: "json",
+        mtype: "GET",
+        colNames: ["Player 1 Team 1", "Player 2 Team 1", "Player 1 Team 2", "Player 2 Team 2", "Course", "Season", "date"],
+        colModel: [
+            { name: "player_1_team_1", width: 100, editable:true },
+            { name: "player_2_team_1", width: 100, editable:true },
+			{ name: "player_1_team_2", width: 100, editable:true },
+			{ name: "player_2_team_2", width: 100, editable:true },
+			{ name: "course_id", width: 100, editable:true },
+			{ name: "season_id", width: 75, editable:true },
+			{ name: "date", width: 75, editable:true }			
+        ],
+        pager: "#matchesPager",
+        rowNum: 10,
+        rowList: [10, 20, 30],
+        sortname: "name",
+        sortorder: "desc",
+        viewrecords: true,
+        gridview: true,
+        autoencode: true,
+        caption: "Matches",
+        editurl:"matches/edit"
+    });
+    $("#matches").jqGrid("navGrid", "#matchesPager",{edit:true,add:true,del:true,refresh:false},
+        {
+        closeAfterEdit:true,
+        recreateForm: true,
+        editCaption: "Edit Match",
+        errorTextFormat:function(data){
+            return data.statusText;
+        },
+            reloadAfterSubmit:true
+        },
+        {
+            closeAfterAdd:true,
+            recreateForm: true,
+            addCaption: "Add Match",
             errorTextFormat:function(data){
                 return data.statusText;
             },

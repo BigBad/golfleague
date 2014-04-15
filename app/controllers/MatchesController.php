@@ -2,19 +2,95 @@
 
 class MatchesController extends \BaseController {
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function view()
+    public function __construct(Match $match, Course $course)
     {
-        $view = View::make('Matches');
-        return $view;
+        $this->match = $match;
+		$this->course = $course;
     }
 
     /**
-   
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
+    public function getMatches()
+    {
+        //$data = $this->match->all();
+		return $this->match->season()->get();
+        return $data;
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
+    public function store()
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function edit()
+    {
+        $operation = Input::get('oper');
+        switch ($operation) {
+        case "add":
+            $this->match->player_1_team_1 = Input::get('player_1_team_1');
+			$this->match->player_2_team_1 = Input::get('player_2_team_1');
+			$this->match->player_1_team_2 = Input::get('player_1_team_2');
+			$this->match->player_2_team_2 = Input::get('player_2_team_2');
+			$this->match->course_id = Input::get('course_id');
+			$this->match->season_id = Input::get('season_id');
+			$this->match->date = Input::get('date');
+            $this->match->save();            
+            break;
+        case "edit":
+            $id = Input::get('id');
+            $this->match = $this->match->find($id);
+			$this->match->player_1_team_1 = Input::get('player_1_team_1');
+			$this->match->player_2_team_1 = Input::get('player_2_team_1');
+			$this->match->player_1_team_2 = Input::get('player_1_team_2');
+			$this->match->player_2_team_2 = Input::get('player_2_team_2');
+			$this->match->course_id = Input::get('course_id');
+			$this->match->season_id = Input::get('season_id');
+			$this->match->date = Input::get('date');
+            $this->match->save();
+            break;
+        case "del":
+            $id = Input::get('id');
+            $this->match = $this->match->destroy($id);
+            break;
+        }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function update($id)
+    {
+        //
+    }
+
     /**
      * Remove the specified resource from storage.
      *
