@@ -6,18 +6,18 @@ class PlayersTableSeeder extends Seeder {
     {
         DB::table('players')->delete();
 
-        Player::create(array('name' => 'Michael Schmidt', 'handicap' => ''));
-		Player::create(array('name' => 'Michael Hutter', 'handicap' => ''));
-		Player::create(array('name' => 'Anthony Brown', 'handicap' => ''));
-		Player::create(array('name' => 'Justin Martin', 'handicap' => ''));
-		Player::create(array('name' => 'Jay Saldana', 'handicap' => ''));
-		Player::create(array('name' => 'Ryan Zimmer', 'handicap' => ''));
-		Player::create(array('name' => 'Matthew Pohlabel', 'handicap' => ''));
-		Player::create(array('name' => 'Kris Fishbach', 'handicap' => ''));
-		Player::create(array('name' => 'Jason Homan', 'handicap' => ''));
-		Player::create(array('name' => 'John Tomsic', 'handicap' => ''));
-		Player::create(array('name' => 'Derek Watkins', 'handicap' => ''));
-		Player::create(array('name' => 'Collins', 'handicap' => ''));
+        Player::create(array('name' => 'Michael Schmidt', 'handicap' => '4'));
+		Player::create(array('name' => 'Michael Hutter', 'handicap' => '4'));
+		Player::create(array('name' => 'Anthony Brown', 'handicap' => '3'));
+		Player::create(array('name' => 'Justin Martin', 'handicap' => '3'));
+		Player::create(array('name' => 'Jay Saldana', 'handicap' => '17'));
+		Player::create(array('name' => 'Ryan Zimmer', 'handicap' => '5'));
+		Player::create(array('name' => 'Matthew Pohlabel', 'handicap' => '9'));
+		Player::create(array('name' => 'Kris Fishbach', 'handicap' => '12'));
+		Player::create(array('name' => 'Jason Homan', 'handicap' => '8'));
+		Player::create(array('name' => 'John Tomsic', 'handicap' => '8'));
+		Player::create(array('name' => 'Derek Watkins', 'handicap' => '8'));
+		Player::create(array('name' => 'Collins', 'handicap' => '8'));
     }
 
 }

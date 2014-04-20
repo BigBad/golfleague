@@ -1,17 +1,17 @@
 <?php
 
-class Match extends Eloquent 
+class Match extends Eloquent
 {
 	protected $table = 'matches';
-	
-	public function season()
+
+	public function teams()
     {
-        return $this->belongsTo('Season');
+        return $this->hasMany('Team');
     }
-	
-	public function course()
+
+    public function singles()
     {
-        return $this->belongsTo('Course');
+        return $this->hasMany('Single');
     }
-	
+
 }
