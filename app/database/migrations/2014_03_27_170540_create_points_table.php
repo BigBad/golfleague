@@ -17,8 +17,8 @@ class CreatePointsTable extends Migration {
 			$table->increments('id');
 			$table->integer('player_id')->unsigned()->index();
 			$table->integer('match_id')->unsigned()->index();
-			$table->integer('single_earned');
-			$table->integer('team_earned');
+			$table->integer('single');
+			$table->integer('team');
 			$table->timestamps();
 			
 			$table->foreign('player_id')->references('id')->on('players')->onDelete('cascade');

@@ -15,9 +15,16 @@ class MatchesController extends \BaseController {
      */
     public function getMatches()
     {
-        //$data = $this->match->all();
-		return $this->match->season()->get();
-        return $data;
+		$matches = $this->match->getAllMatches();
+		return $matches;
+		foreach(Match::all() as $match)
+		{
+			echo $match;
+			echo $match->course->name;
+			echo $match->season->year;
+			echo $match->singlesPlayer;
+		}
+		
     }
 
     /**

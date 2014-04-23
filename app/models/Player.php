@@ -2,14 +2,25 @@
 
 class Player extends Eloquent
 {
-    public function teams()
+    public function seasons()
     {
-        return $this->hasMany('Team');
+        return $this->hasMany('Season');
+    }
+	
+	public function score()
+    {
+        return $this->hasMany('Score');
+    }
+	
+	public function team()
+    {
+        return $this->belongsTo('Team');
     }
 
-    public function singles()
+    public function single()
     {
-        return $this->hasMany('Single');
-    }
-
+        return $this->belongsTo('Single');
+    }	
+	
+	
 }

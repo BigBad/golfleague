@@ -7,8 +7,8 @@ class Team extends Eloquent
         return $this->belongsTo('Match');
     }
 
-    public function player()
+    public function players()
     {
-        return $this->belongsTo('Player');
+        return $this->hasMany('Player');
     }
 }

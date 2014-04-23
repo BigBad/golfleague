@@ -13,6 +13,9 @@
 
 Route::get('administration', 'AdministrationController@view');
 
+Route::get('score', 'ScoreController@view');
+Route::post('enterScore', 'ScoreController@store');
+
 Route::get('players/getPlayers', 'PlayersController@getPlayers');
 Route::post('players/edit', 'PlayersController@edit');
 

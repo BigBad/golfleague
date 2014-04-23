@@ -17,15 +17,15 @@ class CreateScoresTable extends Migration {
 			$table->integer('player_id')->unsigned()->index();
 			$table->integer('match_id')->unsigned()->index()->nullable();
 			$table->integer('total_score');
-			$table->integer('hole_1_score')->nullable();
-			$table->integer('hole_2_score')->nullable();
-			$table->integer('hole_3_score')->nullable();
-			$table->integer('hole_4_score')->nullable();
-			$table->integer('hole_5_score')->nullable();
-			$table->integer('hole_6_score')->nullable();
-			$table->integer('hole_7_score')->nullable();
-			$table->integer('hole_8_score')->nullable();
-			$table->integer('hole_9_score')->nullable();
+			$table->integer('hole_1')->nullable();
+			$table->integer('hole_2')->nullable();
+			$table->integer('hole_3')->nullable();
+			$table->integer('hole_4')->nullable();
+			$table->integer('hole_5')->nullable();
+			$table->integer('hole_6')->nullable();
+			$table->integer('hole_7')->nullable();
+			$table->integer('hole_8')->nullable();
+			$table->integer('hole_9')->nullable();
 			
 			$table->timestamps();
 			$table->foreign('match_id')->references('id')->on('matches')->onDelete('cascade');

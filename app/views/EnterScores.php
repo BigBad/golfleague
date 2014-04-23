@@ -3,8 +3,12 @@
 <head>
 </head>
 <body><div class="container_12">
-
-<div id="scores" class="grid_10 push_1"> 
+<form name= "scoreForm" id ="score" action ="enterScore" method="post">
+<div id="scores" class="">
+	<label>Player:</label><br>
+    <select class="ui-corner-all" id="player">
+    <option></option>
+    </select><br><br> 
     <label>Date:</label><br>
     <input class="ui-corner-all" id="date">
     <option></option>
@@ -13,40 +17,61 @@
     <select class="ui-corner-all" id="course">
     <option></option>
     </select><br><br>
-    <table border="1" id="course_table">
+    <table border="1" id="course_table"> Scores
         <tr>
-			<td>Player</td>		
-			<td>Score</td>
-			<td>Strokes</td>
-			<td>Points</td>
+			<td>Hole 1</td>
+			<td>Hole 2</td>
+			<td>Hole 3</td>
+			<td>Hole 4</td>
+			<td>Hole 5</td>
+			<td>Hole 6</td>
+			<td>Hole 7</td>
+			<td>Hole 8</td>
+			<td>Hole 9</td>
         </tr>
         <tr>
-			<td id="player_1_team_1"><text type="text" style="width:40px" disabled></text></td>
-			<td id="score"><input type="text" style="width:40px"></input></td>
-			<td id="strokes"><input type="text" style="width:40px" disabled></input></td>     
-			<td id="points"><input type="text" style="width:40px" disabled></input></td>        
-        </tr>
-		<tr>
-			<td id="player_1_team_1"><text type="text" style="width:40px" disabled></text></td>
-			<td id="score"><input type="text" style="width:40px"></input></td>
-			<td id="strokes"><input type="text" style="width:40px" disabled></input></td>
-			<td id="points"><input type="text" style="width:40px" disabled></input></td>        
-        </tr>
-		<tr>
-			<td id="player_1_team_1"><text type="text" style="width:40px" disabled></text></td>
-			<td id="score"><input type="text" style="width:40px"></input></td>
-			<td id="strokes"><input type="text" style="width:40px" disabled></input></td>
-			<td id="points"><input type="text" style="width:40px" disabled></input></td>        
-        </tr>
-		<tr>
-			<td id="player_1_team_1"><text type="text" style="width:40px" disabled></text></td>
-			<td id="score"><input type="text" style="width:40px"></input></td>
-			<td id="strokes"><input type="text" style="width:40px" disabled></input></td>
-			<td id="points"><input type="text" style="width:40px" disabled></input></td>        
-        </tr>
-      
-        
+			<td id="hole_1"><input type="number" style="width:40px" ></input></td>
+			<td id="hole_2"><input type="number" style="width:40px" ></input></td>
+			<td id="hole_3"><input type="number" style="width:40px" ></input></td>
+			<td id="hole_4"><input type="number" style="width:40px" ></input></td>
+			<td id="hole_5"><input type="number" style="width:40px" ></input></td>
+			<td id="hole_6"><input type="number" style="width:40px" ></input></td>
+			<td id="hole_7"><input type="number" style="width:40px" ></input></td>
+			<td id="hole_8"><input type="number" style="width:40px" ></input></td>
+			<td id="hole_9"><input type="number" style="width:40px" ></input></td>
+        </tr>       
     </table>
+	<br>
+	
+	<button>Post Score</button>
+</form>
+</div>
+	<link rel="stylesheet" href="<?php echo asset('jquery-ui-1.10.4.custom/css/blitzer/jquery-ui-1.10.4.custom.css')?>">
+	<script src="<?php echo asset('jquery-ui-1.10.4.custom/js/jquery-1.10.2.js')?>" type="text/javascript"></script>
+	<script src="<?php echo asset('jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js')?>" type="text/javascript"></script>
+	<script>
+	$("#date").datepicker();
+	$( "button" ).button();	
+	</script>
+	<script>
+	$(document).ready(function() {
+		$.getJSON("players/getPlayers", function(data){
+			$.each(data, function(index, text) {
+			$('#player').append(
+				$('<option></option>').val(text.id).html(text.name)
+				);
+			});
+		});
+		$.getJSON("courses/getCourses", function(data){
+			$.each(data, function(index, text) {
+			$('#course').append(
+				$('<option></option>').val(text.id).html(text.name)
+				);
+			});
+		});
+	});
+	</script>
+
 </body>
 </html>
 
