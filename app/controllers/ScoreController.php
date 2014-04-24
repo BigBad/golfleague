@@ -20,7 +20,9 @@ class ScoreController extends \BaseController {
      */
     public function store()
     {
-        return Input::all();
+		return Input::all();
+		//Insert score
+		//run handicap analysis
     }
    
     /**
