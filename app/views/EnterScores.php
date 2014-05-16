@@ -1,86 +1,79 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-</head>
-<body>
-<form id ="scoreForm" action="">
-	<label>Player:</label><br>
-    <select name ="player" class="ui-corner-all" id="player">
-		<option ></option>
-    </select><br></br>
- 
-    <label>Date:</label><br>
-    <input name="date" class="ui-corner-all" id="date"></input>
-	
-	<br></br>
-    <label>Course:</label><br>
-    <select name="course" class="ui-corner-all" id="course">
-		<option></option>
-    </select><br><br>
-    <table border="1" id="course_table"><tr><th>Scores</th></tr>
-        <tr>
-			<td>Hole 1</td>
-			<td>Hole 2</td>
-			<td>Hole 3</td>
-			<td>Hole 4</td>
-			<td>Hole 5</td>
-			<td>Hole 6</td>
-			<td>Hole 7</td>
-			<td>Hole 8</td>
-			<td>Hole 9</td>
-        </tr>
-        <tr>
-			<td id="hole_1"><input name="hole_1" type="number" style="width:40px" ></input></td>
-			<td id="hole_2"><input name="hole_2" type="number" style="width:40px" ></input></td>
-			<td id="hole_3"><input name="hole_3" type="number" style="width:40px" ></input></td>
-			<td id="hole_4"><input name="hole_4" type="number" style="width:40px" ></input></td>
-			<td id="hole_5"><input name="hole_5" type="number" style="width:40px" ></input></td>
-			<td id="hole_6"><input name="hole_6" type="number" style="width:40px" ></input></td>
-			<td id="hole_7"><input name="hole_7" type="number" style="width:40px" ></input></td>
-			<td id="hole_8"><input name="hole_8" type="number" style="width:40px" ></input></td>
-			<td id="hole_9"><input name="hole_9" type="number" style="width:40px" ></input></td>
-        </tr>       
-    </table>
-	<br>
-	</form>
-	<button onClick='submitScoreForm()'>Post Score</button>
-	
-
-	<link rel="stylesheet" href="<?php echo asset('jquery-ui-1.10.4.custom/css/blitzer/jquery-ui-1.10.4.custom.css')?>"></link>
-	<script src="<?php echo asset('jquery-ui-1.10.4.custom/js/jquery-1.10.2.js')?>" type="text/javascript"></script>
-	<script src="<?php echo asset('jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js')?>" type="text/javascript"></script>
-	<script>
-	$("#date").datepicker();
-	$( "button" ).button();	
-	</script>
-	<script>
-	$(document).ready(function() {
-		$.getJSON("players/getPlayers", function(data){
-			$.each(data, function(index, text) {
-			$('#player').append(
-				$('<option></option>').val(text.id).html(text.name)
-				);
-			});
-		});
-		$.getJSON("courses/getCourses", function(data){
-			$.each(data, function(index, text) {
-			$('#course').append(
-				$('<option></option>').val(text.id).html(text.name)
-				);
-			});
-		});
-	});
-	</script>
-	<script language="javascript" type="text/javascript">
-    function submitScoreForm() {
-	    $.ajax({
-			url:        'enterScore',
-			type:       'post',
-			data:	$('#scoreForm').serialize()
-		});
-	   
-	   
-    }
-</script>
-</body>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Golf League</title>
+        <link rel="stylesheet" href="<?php echo asset('jquery-ui-1.10.4.custom/css/blitzer/jquery-ui-1.10.4.custom.css')?>" />
+        <link rel="stylesheet" href="<?php echo asset('jquerymultiselect/jquery.multiselect.css')?>" />
+    </head>
+    <body>
+        <form id="scoreForm">
+            <label for="date">Date:</label>
+            <input type="text" id="date" class="ui-corner-all" name="date" />
+            <br />
+            <label for="purse">Purse:</label>
+            <input type="text" name="purse" class="ui-corner-all" id="purse" />
+            <br />
+            <label for="skins_a">Skins A:</label>
+            <input type="text" name="skins_a" class="ui-corner-all" id="skins_a" />
+            <label for="skins_b">Skins B:</label>
+            <input type="text" name="skins_b" class="ui-corner-all" id="skins_b" />
+            <br />
+            <label for="gross">Gross:</label>
+            <input type="text" name="gross" class="ui-corner-all" id="gross" />
+            <br />
+            <label for="net">Net:</label>
+            <input type="text" name="net" class="ui-corner-all" id="net" />
+            <br />
+            <label for="course">Course:</label>
+            <select name="course" class="ui-corner-all" id="course">
+                <option></option>
+            </select>
+            <br />
+            <label for="player">Players</label>
+            <select name="player[]" class="ui-corner-all" id="player" multiple="multiple"></select>
+            <br />
+            <input type="button" id="submitForm" onclick="submitScoreForm();" value="Enter Scores" />
+        </form>
+        <script src="<?php echo asset('jquery-ui-1.10.4.custom/js/jquery-1.10.2.js')?>" type="text/javascript"></script>
+        <script src="<?php echo asset('jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js')?>" type="text/javascript"></script>
+        <script src="<?php echo asset('jquerymultiselect/jquery.multiselect.min.js')?>" type="text/javascript"></script>
+        <script>
+            $("#date").datepicker();
+            $("button, input[type=button]").button();
+            function setMultiselect(elementId) {
+                $("#" + elementId).multiselect({
+                    noneSelectedText: "Click here to select...",
+                    selectedList: 4
+                }).bind("multiselectclick multiselectcheckall multiselectuncheckall", function(event, ui) {
+                        var checkedValues = $.map($(this).multiselect("getChecked"), function(input) {
+                            return input.value;
+                        });
+                }).triggerHandler("multiselectclick");
+            }
+            $(document).ready(function() {
+                $.getJSON("players/getPlayers", function(data){
+                    $.each(data, function(index, text) {
+                        $("#player").append(
+                            $("<option></option>").val(text.id).html(text.name)
+                        );
+                    });
+                    setMultiselect("player");
+                });
+                $.getJSON("courses/getCourses", function(data){
+                    $.each(data, function(index, text) {
+                    $("#course").append(
+                        $("<option></option>").val(text.id).html(text.name)
+                        );
+                    });
+                });
+            });
+            function submitScoreForm() {
+                $.ajax({
+                    url:    "enterScore",
+                    type:   "post",
+                    data:   $("#scoreForm").serialize()
+                });
+            }
+        </script>
+    </body>
 </html>
