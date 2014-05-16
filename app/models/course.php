@@ -12,11 +12,4 @@ class Course extends Eloquent
         return $this->hasOne('Match');
     }
 	
-	public function score()
-    {
-        return $this->belongsTo('Score');
-    }
-	
-	
-	
 }

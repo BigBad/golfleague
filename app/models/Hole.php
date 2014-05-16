@@ -2,8 +2,13 @@
 
 class Hole extends Eloquent 
 {
-	public function course()
+	public function courses()
     {
         return $this->belongsTo('Course');
+    }
+	
+	public function holescores()
+    {
+        return $this->hasMany('Holescore');
     }
 }

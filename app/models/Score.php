@@ -1,21 +1,17 @@
 <?php
 
-class Score extends Eloquent 
+class Score extends Eloquent
 {
-	
-	public function player()
+
+	public function players()
     {
         return $this->belongsTo('Player');
     }
-	
-	public function match()
+
+	public function holescores()
     {
-        return $this->belongsTo('Match');
+        return $this->belongsTo('Holescore');
     }
-	
-	public function courses()
-    {
-        return $this->hasManyThrough('Course', 'Match');
-    }
-	
+
+
 }

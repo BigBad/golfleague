@@ -7,8 +7,4 @@ class Season extends Eloquent
         return $this->hasMany('Match');
     }
 	
-	public function players()
-    {
-        return $this->hasMany('Player');
-    }
 }

@@ -8,37 +8,32 @@ class Match extends Eloquent
     {
         return $this->belongsTo('Course');
     }
-	
+
 	public function season()
     {
         return $this->belongsTo('Season');
     }
-	
-	public function teams()
+
+	public function winners()
     {
-        return $this->hasMany('Team');
+        return $this->hasMany('Winner');
     }
 
-    public function singles()
+	public function money()
     {
-        return $this->hasMany('Single');
-    }	
-		
-	public function score()
-    {
-        return $this->belongsTo('Score');
+        return $this->hasMany('Money');
     }
-	
-	public function teamPlayers()
+
+	public function skins()
     {
-        return $this->hasManyThrough('Player', 'Team');
+        return $this->hasMany('Skin');
     }
-	
-	public function singlesPlayers()
+
+	public function players()
     {
-        return $this->hasManyThrough('Player', 'Single');
+        return $this->belongsToMany('Player');
     }
-	
+
 	public function getAllMatches()
 	{
 		$matches = DB::table('matches')->get();
