@@ -8,6 +8,17 @@ class MatchesController extends \BaseController {
 		$this->course = $course;
     }
 
+	/**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function view()
+    {
+		$view = View::make('CreateMatch');
+        return $view;
+    }
+	
     /**
      * Show the form for creating a new resource.
      *

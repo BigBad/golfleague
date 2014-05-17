@@ -2,7 +2,7 @@
 
 class Hole extends Eloquent 
 {
-	public function courses()
+	public function course()
     {
         return $this->belongsTo('Course');
     }

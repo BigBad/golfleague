@@ -1,6 +1,6 @@
 <?php
 
-class Holescores extends Eloquent {
+class Holescore extends Eloquent {
 	
 	public function scores()
     {

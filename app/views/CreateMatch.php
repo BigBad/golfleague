@@ -32,7 +32,7 @@
             <label for="player">Players</label>
             <select name="player[]" class="ui-corner-all" id="player" multiple="multiple"></select>
             <br />
-            <input type="button" id="submitForm" onclick="submitScoreForm();" value="Enter Scores" />
+            <input type="button" id="submitForm" onclick="submitScoreForm();" value="Create League Match" />
         </form>
         <script src="<?php echo asset('jquery-ui-1.10.4.custom/js/jquery-1.10.2.js')?>" type="text/javascript"></script>
         <script src="<?php echo asset('jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js')?>" type="text/javascript"></script>

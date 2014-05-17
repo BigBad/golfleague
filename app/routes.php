@@ -11,10 +11,11 @@
 |
 */
 
+
 Route::get('administration', 'AdministrationController@view');
 
-Route::get('score', 'ScoreController@view');
-Route::post('enterScore', 'ScoreController@store');
+Route::get('enterscore', 'ScoreController@view');
+Route::post('storescore', 'ScoreController@store');
 
 Route::get('players/getPlayers', 'PlayersController@getPlayers');
 Route::post('players/edit', 'PlayersController@edit');
@@ -22,6 +23,10 @@ Route::post('players/edit', 'PlayersController@edit');
 Route::get('courses/getCourses', 'CoursesController@getCourses');
 Route::post('courses/edit', 'CoursesController@edit');
 
+Route::get('holes/getHoles', 'HolesController@show');
+Route::post('holes/edit', 'HolesController@edit');
+
+Route::get('creatematch', 'MatchesController@view');
 Route::get('matches/getMatches', 'MatchesController@getMatches');
 Route::post('matches/edit', 'MatchesController@edit');
 
