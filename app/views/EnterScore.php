@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html>
+<style type="text/css">
+
+</style>
     <head>
         <title>Golf League</title>
         <link rel="stylesheet" href="<?php echo asset('jquery-ui-1.10.4.custom/css/blitzer/jquery-ui-1.10.4.custom.css')?>" />
@@ -25,53 +28,93 @@
 			
 		<table border="1" id="course_table"><tr><th>Scores</th></tr>
 			<tr>
-				<td>Hole </td>
-				<td> </td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
+			<td>Hole:</td>
+				<td id="number_1"></td>
+				<td id="number_2"> </td>
+				<td id="number_3"> </td>
+				<td id="number_4"> </td>
+				<td id="number_5"> </td>
+				<td id="number_6"> </td>
+				<td id="number_7"> </td>
+				<td id="number_8"> </td>
+				<td id="number_9"> </td>
 			</tr>
-
 			<tr>
+				<td>Par</td>
+				<td id="par_1"></td>
+				<td id="par_2"></td>
+				<td id="par_3"></td>
+				<td id="par_4"></td>
+				<td id="par_5"></td>
+				<td id="par_6"></td>
+				<td id="par_7"></td>
+				<td id="par_8"></td>
+				<td id="par_9"></td>
+			</tr>			
+			<tr>
+				<td>HCap</td>
+				<td id="handi_1"></td>
+				<td id="handi_2"></td>
+				<td id="handi_3"></td>
+				<td id="handi_4"></td>
+				<td id="handi_5"></td>
+				<td id="handi_6"></td>
+				<td id="handi_7"></td>
+				<td id="handi_8"></td>
+				<td id="handi_9"></td>
+			</tr>
+			<tr>
+				<td>Yards</td>
+				<td id="yards_1"></td>
+				<td id="yards_2"></td>
+				<td id="yards_3"></td>
+				<td id="yards_4"></td>
+				<td id="yards_5"></td>
+				<td id="yards_6"></td>
+				<td id="yards_7"></td>
+				<td id="yards_8"></td>
+				<td id="yards_9"></td>
+			</tr>
+			<tr>
+				<td>Score</td>
 				<td id="hole_1">
-					<input name="hole_1" type="number" style="width:40px" ></input>
-					<input id="hole_1_id" name="hole_1_id" type="hidden"></input>
+					<input id="hole_id_1" name="hole_id_1" type="hidden"></input>
+					<input id="score_1" name="hole_1" type="number" style="width:40px" ></input>					
 				</td>
 				<td id="hole_2">
-					<input name="hole_2" type="number" style="width:40px" ></input>
-					<input id="hole_2_id" name="hole_2_id" type="hidden"></input>
+					<input id="hole_id_2" name="hole_id_2" type="hidden"></input>
+					<input id="score_2" name="hole_2" type="number" style="width:40px" ></input>					
 				</td>
 				<td id="hole_3">
-					<input name="hole_3" type="number" style="width:40px" ></input>
-					<input id="hole_3_id"  name="hole_3_id" type="hidden"></input>
+					<input id="hole_id_3"  name="hole_id_3" type="hidden"></input>
+					<input id="score_3" name="hole_3" type="number" style="width:40px" ></input>					
 				</td>
 				<td id="hole_4">
-					<input name="hole_4" type="number" style="width:40px" ></input>
-					<input id="hole_4_id" name="hole_4_id" type="hidden"></input>
+					<input id="hole_id_4" name="hole_id_4" type="hidden"></input>
+					<input id="score_4" name="hole_4" type="number" style="width:40px" ></input>					
 				</td>
 				<td id="hole_5">
-					<input name="hole_5" type="number" style="width:40px" ></input>
-					<input id="hole_5_id" name="hole_5_id" type="hidden"></input>
+					<input id="hole_id_5" name="hole_id_5" type="hidden"></input>
+					<input id="score_5" name="hole_5" type="number" style="width:40px" ></input>					
 				</td>
 				<td id="hole_6">
-					<input name="hole_6" type="number" style="width:40px" ></input>
-					<input id="hole_6_id" name="hole_6_id" type="hidden"></input>
+					<input id="hole_id_6" name="hole_id_6" type="hidden"></input>
+					<input id="score_6" name="hole_6" type="number" style="width:40px" ></input>					
 				</td>
 				<td id="hole_7">
-					<input name="hole_7" type="number" style="width:40px" ></input>
-					<input id="hole_7_id" id="hole_9_id" name="hole_7_id" type="hidden"></input>
+					<input id="hole_id_7"  name="hole_id_7" type="hidden"></input>
+					<input id="score_7" name="hole_7" type="number" style="width:40px" ></input>					
 				</td>
 				<td id="hole_8">
-					<input name="hole_8" type="number" style="width:40px" ></input>
-					<input id="hole_8_id" name="hole_8_id" type="hidden"></input>
+					<input id="hole_id_8" name="hole_id_8" type="hidden"></input>
+					<input id="score_8" name="hole_8" type="number" style="width:40px" ></input>					
 				</td>
 				<td id="hole_9">
-					<input name="hole_9" type="number" style="width:40px" ></input>
-					<input id="hole_9_id" name="hole_9_id" type="hidden"></input>
+					<input id="hole_id_9" name="hole_id_9" type="hidden"></input>
+					<input id="score_9" name="hole_9" type="number" style="width:40px" ></input>					
+				</td>
+				<td>
+					<input id="total" name="total"  style="width:40px" ></input>					
 				</td>
 			</tr>       
  	    </table>
@@ -100,13 +143,16 @@
 				});
 			});
 			//when course is selected get holes for the course and populate data
-			$('#course').on('change', function() {
+			$("#course").on("change", function() {
 				var course_id = $("#course").val();
 				$.getJSON("holes/getHoles", { course_id: course_id }, function(data){
 				var i=1;
 				$.each(data, function(index, text) {					
-					$("#hole_" + i + "_id").val(text.id);
-					var valu = $("#hole_" + i + "_id").val();
+					$("#number_" + i).html(text.number);
+					$("#hole_id_" + i).val(text.id);
+					$("#par_" + i).html(text.par);
+					$("#handi_" + i).html(text.handicap);
+					$("#yards_" + i).html(text.yards);
 					i++;
 				});
 			});
@@ -114,11 +160,19 @@
 			});
 
             function submitScoreForm() {
-                $.ajax({
-                    url:    "storescore",
-                    type:   "post",
-                    data:   $("#scoreForm").serialize()
-                });
+				//total hole scores
+				var score = 0;
+				for(i = 10; --i > 0;) {
+					score += document.getElementById("score_" + i ).value | 0;
+				}
+				$("#total").val(score);
+					  
+					$.ajax({
+						url:    "storescore",
+						type:   "post",
+						data:   $("#scoreForm").serialize(),
+						success: document.getElementById("scoreForm").reset()
+					});
             }
         </script>
     </body>

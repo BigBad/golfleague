@@ -26,18 +26,61 @@ class ScoreController extends \BaseController {
      */
     public function store()
     {
+		//{"date":"2014-05-13","player":"1","course":"1","hole_id_1":"1","hole_1":"4","hole_id_2":"2","hole_2":"4","hole_id_3":"3","hole_3":"4","hole_id_4":"4","hole_4":"4","hole_id_5":"5","hole_5":"4","hole_id_6":"6","hole_6":"4","hole_id_7":"7","hole_7":"4","hole_id_8":"8","hole_8":"4","hole_id_9":"9","hole_9":"4"}
+		
 		//return Input::all();
 		
-		$this->score->date = Input::get('date');
-		$this->score->player_id = Input::get('player');
-		$this->score->total = 36;
-		$this->score->save();    
-		$score_id = $this->score->id;
-		return $score_id;
-		
-		//$this->holescore->hole_id
 		//Insert score
+		$this->score->date = Input::get('date');
+		$this->score->total = Input::get('total');		
+		$this->score->save();
+		$score_id = $this->score->id;
+		
+		
+		//Insert hole scores
+		$i = 1;
+		while ( $i <=9 ) {
+			$holescore = new Holescore;
+			$hole_id = "hole_id_" . $i;
+			$score = "hole_" . $i;
+			$holescore->score = Input::get($score);
+			$holescore->hole_id = Input::get($hole_id);
+			$holescore->score_id = $score_id;
+			$holescore->save();
+			$i++;
+		}
+		
+		
+		
+		
+		$this->score->player_id = Input::get('player');
 		//run handicap analysis
+		$differentialArray = array(0,1,2,2,2,2,2,2,2,3,3,4,4,5,5,6,6,7,8,9,10);
+		$scores = Score::where('player_id', '=', $this->score->player_id)->take(20)->get();
+		$differential = $differentialArray[$scores->count()];
+		echo "Number of scores " . $scores->count() . " ";
+		echo "Number of differentials " . $differential . " ";
+		//$scores = $scores->toArray();
+		$differentials = array();
+		$i = 1;
+		foreach ($scores as $score) {			
+				$differentials[$i]  = $score->total;
+				$i++;
+		}
+		sort($differentials);
+		$chunkedScores = array_chunk($differentials,$differential,true);
+		$scoresToUse = $chunkedScores[0];
+		
+		$sumofDifferentials = array_sum($scoresToUse);
+		$handicap = (($sumofDifferentials / $differential) * .96) - 36;
+		$handicap = round($handicap ,2);
+		print_r($scoresToUse);
+		
+		echo $handicap;
+		
+		$player = Player::find( $this->score->player_id);
+		$player->handicap = $handicap;
+		$player->save();
     }
    
     /**

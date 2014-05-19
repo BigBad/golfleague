@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder {
 		$this->call('PlayersTableSeeder');
 		$this->call('SeasonsTableSeeder');
 		$this->call('HolesTableSeeder');
+		$this->call('ScoresTableSeeder');
 		//$this->call('MatchesTableSeeder');
 		
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');

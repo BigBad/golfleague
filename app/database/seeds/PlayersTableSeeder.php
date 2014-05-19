@@ -17,7 +17,14 @@ class PlayersTableSeeder extends Seeder {
 		Player::create(array('name' => 'Jason Homan', 'handicap' => '8'));
 		Player::create(array('name' => 'John Tomsic', 'handicap' => '8'));
 		Player::create(array('name' => 'Derek Watkins', 'handicap' => '8'));
-		Player::create(array('name' => 'Collins', 'handicap' => '8'));
+		Player::create(array('name' => 'Chris Collins', 'handicap' => '8'));
+		Player::create(array('name' => 'Bryan Braswell', 'handicap' => '8'));
+		Player::create(array('name' => 'Chris Barker', 'handicap' => '4'));
+		Player::create(array('name' => 'Brian Moore', 'handicap' => '5'));
+		Player::create(array('name' => 'Dainon', 'handicap' => '0'));
+		Player::create(array('name' => 'Caleb', 'handicap' => '0'));
+		Player::create(array('name' => 'Nick Metro', 'handicap' => '0'));
+		
     }
 
 }
