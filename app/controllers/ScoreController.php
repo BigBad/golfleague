@@ -32,6 +32,7 @@ class ScoreController extends \BaseController {
 		
 		//Insert score
 		$this->score->date = Input::get('date');
+		$this->score->player_id = Input::get('player');
 		$this->score->total = Input::get('total');		
 		$this->score->save();
 		$score_id = $this->score->id;
@@ -51,11 +52,8 @@ class ScoreController extends \BaseController {
 		}
 		
 		
-		
-		
-		$this->score->player_id = Input::get('player');
 		//run handicap analysis
-		$differentialArray = array(0,1,2,2,2,2,2,2,2,3,3,4,4,5,5,6,6,7,8,9,10);
+		$differentialArray = array(0,1,1,1,1,1,1,2,2,3,3,4,4,5,5,6,6,7,8,9,10);
 		$scores = Score::where('player_id', '=', $this->score->player_id)->take(20)->get();
 		$differential = $differentialArray[$scores->count()];
 		echo "Number of scores " . $scores->count() . " ";
