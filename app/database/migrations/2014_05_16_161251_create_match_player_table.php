@@ -17,6 +17,7 @@ class CreateMatchPlayerTable extends Migration {
 			$table->increments('id');
 			$table->integer('match_id')->unsigned()->index();
 			$table->integer('player_id')->unsigned()->index();
+			$table->decimal('handicap');
 
 			$table->timestamps();
 			$table->foreign('match_id')->references('id')->on('matches')->onDelete('cascade');
