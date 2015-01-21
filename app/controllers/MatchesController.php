@@ -20,7 +20,7 @@ class MatchesController extends \BaseController {
     }
 	
     /**
-     * Show the form for creating a new resource.
+     * Get Data for all matches
      *
      * @return Response
      */

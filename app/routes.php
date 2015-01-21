@@ -31,3 +31,5 @@ Route::get('matches/getMatches', 'MatchesController@getMatches');
 Route::post('matches/edit', 'MatchesController@edit');
 
 Route::get('enterscores', 'EnterScoresController@view');
+
+Route::get('scores/getScores', 'ScoresController@getScores');

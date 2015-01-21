@@ -54,7 +54,7 @@ class ScoreController extends \BaseController {
 		
 		//run handicap analysis
 		$differentialArray = array(0,1,1,1,1,1,1,2,2,3,3,4,4,5,5,6,6,7,8,9,10);
-		$scores = Score::where('player_id', '=', $this->score->player_id)->take(20)->get();
+		$scores = Score::where('player_id', '=', $this->score->player_id)->orderBy('date', 'desc')->take(20)->get();
 		$differential = $differentialArray[$scores->count()];
 		echo "Number of scores " . $scores->count() . " ";
 		echo "Number of differentials " . $differential . " ";

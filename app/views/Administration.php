@@ -11,8 +11,8 @@
 	<table id="courses"></table>
     <div id="coursesPager"></div>
 	<br><br>
-	<table id="matches"></table>
-    <div id="matchesPager"></div>
+	<table id="scores"></table>
+    <div id="scoresPager"></div>
 	
 <script src="<?php echo asset('jquery.jqGrid-4.5.4/js/jquery-1.9.0.min.js')?>" type="text/javascript"></script>
 <script src="<?php echo asset('jquery.jqGrid-4.5.4/js/i18n/grid.locale-en.js')?>" type="text/javascript"></script>
@@ -36,6 +36,7 @@ $(function () {
         sortname: "name",
         sortorder: "desc",
         viewrecords: true,
+		loadonce: true,
         gridview: true,
         autoencode: true,
         caption: "Players",
@@ -109,23 +110,32 @@ $(function () {
     );
 });
 
-//jqGrid code for the Matches section
+//jqGrid code for the Scores section
 $(function () {
-    $("#matches").jqGrid({
-        url: "matches/getMatches",
+    $("#scores").jqGrid({
+        url: "scores/getScores",
         datatype: "json",
         mtype: "GET",
-        colNames: ["Player 1 Team 1", "Player 2 Team 1", "Player 1 Team 2", "Player 2 Team 2", "Course", "Season", "date"],
+        colNames: ["Player", "Date", "Course", "Total", 
+					"Hole 1", "Hole 2", "Hole 3", "Hole 4", 
+					"Hole 5", "Hole 6", "Hole 7", "Hole 8", "Hole 9"
+				],
         colModel: [
-            { name: "player_1_team_1", width: 100, editable:true },
-            { name: "player_2_team_1", width: 100, editable:true },
-			{ name: "player_1_team_2", width: 100, editable:true },
-			{ name: "player_2_team_2", width: 100, editable:true },
-			{ name: "course_id", width: 100, editable:true },
-			{ name: "season_id", width: 75, editable:true },
-			{ name: "date", width: 75, editable:true }			
+            { name: "Player", width: 100, editable:true },
+            { name: "Date", width: 75, editable:true },
+			{ name: "Course", width: 75, editable:true },
+			{ name: "Total", width: 50, editable:true },
+			{ name: "hole_1", width: 50, editable:true },
+			{ name: "hole_2", width: 50, editable:true },
+			{ name: "hole_3", width: 50, editable:true },
+			{ name: "hole_4", width: 50, editable:true },
+			{ name: "hole_5", width: 50, editable:true },
+			{ name: "hole_6", width: 50, editable:true },
+			{ name: "hole_7", width: 50, editable:true },
+			{ name: "hole_8", width: 50, editable:true },
+			{ name: "hole_9", width: 50, editable:true }			
         ],
-        pager: "#matchesPager",
+        pager: "#scoresPager",
         rowNum: 10,
         rowList: [10, 20, 30],
         sortname: "name",
@@ -133,14 +143,13 @@ $(function () {
         viewrecords: true,
         gridview: true,
         autoencode: true,
-        caption: "Matches",
-        editurl:"matches/edit"
+        caption: "Scores",
     });
-    $("#matches").jqGrid("navGrid", "#matchesPager",{edit:true,add:true,del:true,refresh:false},
+    $("#matches").jqGrid("navGrid", "#scoresPager",{edit:false,add:false,del:false,refresh:false},
         {
         closeAfterEdit:true,
         recreateForm: true,
-        editCaption: "Edit Match",
+        editCaption: "Edit Score",
         errorTextFormat:function(data){
             return data.statusText;
         },

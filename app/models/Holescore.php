@@ -2,13 +2,14 @@
 
 class Holescore extends Eloquent {
 	
-	public function scores()
+	public function score()
     {
         return $this->belongsTo('Score');
     }
 	
-	public function holes()
+	public function hole()
     {
         return $this->belongsTo('Hole');
     }
+
 }

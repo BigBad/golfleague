@@ -3,15 +3,14 @@
 class Score extends Eloquent
 {
 
-	public function players()
+	public function player()
     {
         return $this->belongsTo('Player');
     }
 
-	public function holescores()
+	public function holescore()
     {
-        return $this->belongsTo('Holescore');
-    }
-
-
+        return $this->hasMany('Holescore');
+    }	
 }
+
