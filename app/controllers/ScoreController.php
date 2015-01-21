@@ -2,10 +2,10 @@
 
 class ScoreController extends \BaseController {
 
-    public function __construct(Score $score, HoleScore $holescore)
+    public function __construct(Score $score, Holescore $holescore)
     {
         $this->score = $score;
-		$this->holescore = $holescore;
+	$this->holescore = $holescore;
     }
 	
 	/**
@@ -15,7 +15,7 @@ class ScoreController extends \BaseController {
      */
     public function view()
     {
-		$view = View::make('EnterScore');
+	$view = View::make('EnterScore');
         return $view;
     }
 
