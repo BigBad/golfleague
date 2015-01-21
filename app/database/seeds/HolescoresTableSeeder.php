@@ -1,6 +1,6 @@
 <?php
 
-class ScoresTableSeeder extends Seeder {
+class HolescoresTableSeeder extends Seeder {
 
     public function run()
     {
@@ -944,7 +944,6 @@ class ScoresTableSeeder extends Seeder {
         Holescore::create(array('id' => '943','score' => '4','hole_id' => '16','score_id' => '253','created_at' => '2014-06-11 01:37:56','updated_at' => '2014-06-11 01:37:56'));
         Holescore::create(array('id' => '944','score' => '5','hole_id' => '17','score_id' => '253','created_at' => '2014-06-11 01:37:56','updated_at' => '2014-06-11 01:37:56'));
         Holescore::create(array('id' => '945','score' => '6','hole_id' => '18','score_id' => '253','created_at' => '2014-06-11 01:37:56','updated_at' => '2014-06-11 01:37:56'));
-
-
     }
 
+}
