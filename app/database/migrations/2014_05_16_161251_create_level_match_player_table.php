@@ -12,7 +12,7 @@ class CreateLevelMatchPlayerTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('match_player', function(Blueprint $table)
+		Schema::create('level_match_player', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->integer('level_id')->unsigned()->index();
