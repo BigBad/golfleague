@@ -8,6 +8,11 @@ class Player extends Eloquent
         return $this->hasMany('Score');
     }
 
+	public function holescores()
+	{
+		return $this->hasManyThrough('Holescore','Score');
+	}
+
 	public function skins()
     {
         return $this->hasMany('Skin');
@@ -15,7 +20,7 @@ class Player extends Eloquent
 
 	public function winners()
     {
-        return $this->hasMany('Winners');
+        return $this->hasMany('Winner');
     }
 
 	public function matches()
