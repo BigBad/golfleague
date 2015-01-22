@@ -11,6 +11,12 @@
 |
 */
 
+Route::get('test', function()
+{
+    $esc = new \GolfLeague\EquitableStrokeControl();
+    return $esc->calculate();
+    return 'Hello World';
+});
 
 Route::get('administration', 'AdministrationController@view');
 
