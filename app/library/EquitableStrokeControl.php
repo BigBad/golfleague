@@ -10,6 +10,10 @@ class EquitableStrokeControl {
         //$scores = \Score::with('holescores','holescores.hole.course')->has('holescores')->where('player_id', '=', 1)->get();
         //$scores =  \Score::with('holescores','holescores.hole.course')->where('player_id', '=', 1)->orderBy('date', 'desc')->take(20)->get();
         //return $scores;
+
+		$player = \Player::find(1);
+		$scores =  \Score::with('holescores','holescores.hole.course')->where('player_id', '=', $player->id)->orderBy('date', 'desc')->take(20)->get();
+		return $scores; //last 20 scores with holescores for player
         $x=1;
         while($x<15){
         $player = \Player::find($x);  // Get Player
