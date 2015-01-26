@@ -17,6 +17,7 @@ class CreateScoresTable extends Migration {
 			$table->date('date');
 			$table->integer('player_id')->unsigned()->index();
 			$table->integer('total');
+			$table->integer('esc');
 
 
 			$table->timestamps();

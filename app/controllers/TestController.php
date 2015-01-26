@@ -3,7 +3,7 @@
 use GolfLeague\EquitableStrokeControl;
 use GolfLeague\Handicap;
 
-class ScoreController extends \BaseController {
+class TestController extends \BaseController {
 
     public function __construct(Score $score, Holescore $holescore, EquitableStrokeControl $esc)
     {
@@ -18,9 +18,19 @@ class ScoreController extends \BaseController {
      * @return Response
      */
     public function view()
-    {
-	$view = View::make('EnterScore');
-        return $view;
+    {	
+        
+		$player = \Player::find(2);
+		
+		/*test Handicap
+		$handicap = new Handicap($player);
+		return $handicap->calculate();
+		*/
+		
+		//test ESC
+		$esc = new EquitableStrokeControl($player);
+		return $esc->calculate();
+		
     }
 
         /**

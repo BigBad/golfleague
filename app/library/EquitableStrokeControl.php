@@ -1,22 +1,34 @@
 <?php
 
 namespace GolfLeague;
+use \Player as Player;
 
+//Determines a net score using Equitable Scoring Control for individual hole
 class EquitableStrokeControl {
 
-    public function calculate()
+    public function __construct(Player $player)
+	{
+		$this->player = $player;
+	}	
+
+	public function calculate()
     {
-        //Get last 20 scores
+        	
+		
+		//Get last 20 scores
         //$scores = \Score::with('holescores','holescores.hole.course')->has('holescores')->where('player_id', '=', 1)->get();
         //$scores =  \Score::with('holescores','holescores.hole.course')->where('player_id', '=', 1)->orderBy('date', 'desc')->take(20)->get();
         //return $scores;
 
-		$player = \Player::find(1);
-		$scores =  \Score::with('holescores','holescores.hole.course')->where('player_id', '=', $player->id)->orderBy('date', 'desc')->take(20)->get();
-		return $scores; //last 20 scores with holescores for player
+		//$players = \Player::orderBy('handicap', 'asc')->get();
+		
+		//$scores =  \Score::with('holescores','holescores.hole.course')->where('player_id', '=', $player->id)->orderBy('date', 'desc')->take(20)->get();
+		return $this->player->handicap;
+		return $this->player->holescores; //last 20 scores with holescores for player
         $x=1;
-        while($x<15){
-        $player = \Player::find($x);  // Get Player
+       foreach ($players as $player)
+	  {
+
         $holescores = $player->holescores; // Get Players Holescores
 
         //$holescores = \Holescore::with('hole','score')->players()->get();
@@ -56,15 +68,17 @@ class EquitableStrokeControl {
 			//echo $holescore->hole->number .  " score = " . $holescore->score ." " . $diff . "<br>";
 
 		}
-		echo $player->name . "<br>";
+		echo $player->name . " Handicap: " . $player->handicap . "<br>";
         echo "Number of holes played  = " . $holes . "<br>";
-		echo "Number of birdies =" . $birdies . "     - " . round($birdies/$holes,2)*100 . "%<br>";
-		echo "Number of pars = " . $pars . "    - " . round($pars/$holes,2)*100 . "%<br>";
-		echo "Number of bogeys =" . $bogeys . "     - " . round($bogeys/$holes,2)*100 . "%<br>";
-		echo "Number of double bogeys = " . $doubleBogeys . "     - " . round($doubleBogeys/$holes,2)*100 . "%<br>";
-		echo "Number of triples =" . $triples . "     - " . round($triples/$holes,2)*100 . "%<br>";
-		echo "Number of others = " . $others . "     - " . round($others/$holes,2)*100 . "%<br>";
-        echo "<br><br>";
+		if ($holes > 0) {
+			echo "Number of birdies =" . $birdies . "     - " . round($birdies/$holes,2)*100 . "%<br>";
+			echo "Number of pars = " . $pars . "    - " . round($pars/$holes,2)*100 . "%<br>";
+			echo "Number of bogeys =" . $bogeys . "     - " . round($bogeys/$holes,2)*100 . "%<br>";
+			echo "Number of double bogeys = " . $doubleBogeys . "     - " . round($doubleBogeys/$holes,2)*100 . "%<br>";
+			echo "Number of triples =" . $triples . "     - " . round($triples/$holes,2)*100 . "%<br>";
+			echo "Number of others = " . $others . "     - " . round($others/$holes,2)*100 . "%<br>";
+        }
+		echo "<br><br>";
 
         $x++;
         }
