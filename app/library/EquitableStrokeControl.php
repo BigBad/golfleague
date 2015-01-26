@@ -1,106 +1,71 @@
 <?php
 
 namespace GolfLeague;
+use \Holescore as Holescore;
+use \Hole as Hole;
+use \Score as Score;
 use \Player as Player;
 
 //Determines a net score using Equitable Scoring Control for individual hole
+/*
+Course Handicap   Maximum Score
+4.5 or less                    Double Bogey(+2)
+5–9.5                                       7
+9.6–14.5                                   8
+14.6–19.5                                   9
+19.6 or more                               10
+*/
+
 class EquitableStrokeControl {
 
-    public function __construct(Player $player)
+    public function __construct(Holescore $holescore)
 	{
-		$this->player = $player;
-	}	
+		$this->holescore= $holescore;
+	}
 
 	public function calculate()
     {
-        	
-		
-		//Get last 20 scores
-        //$scores = \Score::with('holescores','holescores.hole.course')->has('holescores')->where('player_id', '=', 1)->get();
-        //$scores =  \Score::with('holescores','holescores.hole.course')->where('player_id', '=', 1)->orderBy('date', 'desc')->take(20)->get();
-        //return $scores;
+		//holescore
+		$holescore = $this->holescore->score; // Gross score on hole
 
-		//$players = \Player::orderBy('handicap', 'asc')->get();
-		
-		//$scores =  \Score::with('holescores','holescores.hole.course')->where('player_id', '=', $player->id)->orderBy('date', 'desc')->take(20)->get();
-		return $this->player->handicap;
-		return $this->player->holescores; //last 20 scores with holescores for player
-        $x=1;
-       foreach ($players as $player)
-	  {
+		//Use score to get player_id
+		$player = Score::find($this->holescore->score_id)->player_id;
+		//Get player's handicap
+		$handicap = Player::find($player)->handicap;
 
-        $holescores = $player->holescores; // Get Players Holescores
+		//Get par for hole
+		$holePar = Hole::find($this->holescore->hole_id)->par;
 
-        //$holescores = \Holescore::with('hole','score')->players()->get();
-        //return $holescores;
+		//Use par and handicap to determine max score for a hole
+		$maxScore = $this->maxAllowableScore($holePar, $handicap);
 
-        $birdies = 0;
-		$pars = 0;
-		$bogeys = 0;
-		$doubleBogeys = 0;
-		$triples = 0;
-		$others = 0;
-		$holes = 0;
-		foreach ($holescores as $holescore) {
-			$diff = ($holescore->score) - ($holescore->hole->par);
-
-			switch ($diff) {
-				case -1:
-					$birdies++;
-					break;
-				case 0:
-					$pars++;
-					break;
-				case 1:
-					$bogeys++;
-					break;
-				case 2:
-					$doubleBogeys++;
-					break;
-				case 3:
-					$triples++;
-					break;
-				case ($diff > 3):
-					$others++;
-					break;
-			}
-			$holes++;
-			//echo $holescore->hole->number .  " score = " . $holescore->score ." " . $diff . "<br>";
-
+		if($holescore > $maxScore) {
+			return $maxScore;
 		}
-		echo $player->name . " Handicap: " . $player->handicap . "<br>";
-        echo "Number of holes played  = " . $holes . "<br>";
-		if ($holes > 0) {
-			echo "Number of birdies =" . $birdies . "     - " . round($birdies/$holes,2)*100 . "%<br>";
-			echo "Number of pars = " . $pars . "    - " . round($pars/$holes,2)*100 . "%<br>";
-			echo "Number of bogeys =" . $bogeys . "     - " . round($bogeys/$holes,2)*100 . "%<br>";
-			echo "Number of double bogeys = " . $doubleBogeys . "     - " . round($doubleBogeys/$holes,2)*100 . "%<br>";
-			echo "Number of triples =" . $triples . "     - " . round($triples/$holes,2)*100 . "%<br>";
-			echo "Number of others = " . $others . "     - " . round($others/$holes,2)*100 . "%<br>";
-        }
-		echo "<br><br>";
 
-        $x++;
-        }
-		exit();
-		$scores = Score::where('player_id', '=', 2)->orderBy('date', 'desc')->take(20)->get();
+		return $holescore;
 
-		foreach( $scores->id as $scoreId) {
-			$holescores[$score_id] = Holescore::where('score_id', '=', $scoreId)->get();
+	}
+
+	private function maxAllowableScore($par, $handicap)
+	{
+		switch($handicap) {
+			case ($handicap < 4.6):
+				$maxScore = $par + 2;
+				break;
+			case (($handicap >= 4.6) && ($handicap < 9.6)):
+				$maxScore = 7;
+				break;
+			case (($handicap >= 9.6) && ($handicap < 14.6)):
+				$maxScore = 8;
+				break;
+			case (($handicap >= 14.6) && ($handicap < 19.6)):
+				$maxScore = 9;
+				break;
+			case ($handicap >= 19.6):
+				$maxScore = 10;
 		}
-		return $scores;
-        //Where there are holescores calculate ESC score for each
 
-        $i = 0;
-        $lastTwenty = array();
-        foreach ($scores as $score)
-        {
-            $lastTwenty[$i] = $score->total;
-            $i++;
-            sort($lastTwenty);
-        }
-        return $lastTwenty;
-        //return \Score::find(1)->holescores()->where('player_id', '=', 1)->get();
-        //return \Player::with('scores','scores.holescores','scores.holescores.hole.course')->where('id', '=', 2)->get();
-    }
+		return $maxScore;
+	}
 }
