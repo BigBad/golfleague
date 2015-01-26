@@ -19,53 +19,54 @@ Course Handicap   Maximum Score
 class EquitableStrokeControl {
 
     public function __construct(Holescore $holescore)
-	{
-		$this->holescore= $holescore;
-	}
-
-	public function calculate()
     {
-		//holescore
-		$holescore = $this->holescore->score; // Gross score on hole
+        $this->holescore= $holescore;
+    }
 
-		//Use score to get player_id
-		$player = Score::find($this->holescore->score_id)->player_id;
-		//Get player's handicap
-		$handicap = Player::find($player)->handicap;
+    public function calculate()
+    {
+        //holescore
+        $holescore = $this->holescore->score; // Gross score on hole
 
-		//Get par for hole
-		$holePar = Hole::find($this->holescore->hole_id)->par;
+        //Use score to get player_id
+        $player = Score::find($this->holescore->score_id)->player_id;
 
-		//Use par and handicap to determine max score for a hole
-		$maxScore = $this->maxAllowableScore($holePar, $handicap);
+        //Get player's handicap
+        $handicap = Player::find($player)->handicap;
 
-		if($holescore > $maxScore) {
-			return $maxScore;
-		}
+        //Get par for hole
+        $holePar = Hole::find($this->holescore->hole_id)->par;
 
-		return $holescore;
+        //Use par and handicap to determine max score for a hole
+        $maxScore = $this->maxAllowableScore($holePar, $handicap);
 
-	}
+        if($holescore > $maxScore) {
+            return $maxScore;
+        }
 
-	private function maxAllowableScore($par, $handicap)
-	{
-		switch($handicap) {
-			case ($handicap < 4.6):
-				$maxScore = $par + 2;
-				break;
-			case (($handicap >= 4.6) && ($handicap < 9.6)):
-				$maxScore = 7;
-				break;
-			case (($handicap >= 9.6) && ($handicap < 14.6)):
-				$maxScore = 8;
-				break;
-			case (($handicap >= 14.6) && ($handicap < 19.6)):
-				$maxScore = 9;
-				break;
-			case ($handicap >= 19.6):
-				$maxScore = 10;
-		}
+        return $holescore;
 
-		return $maxScore;
-	}
+    }
+
+    private function maxAllowableScore($par, $handicap)
+    {
+        switch($handicap) {
+            case ($handicap < 4.6):
+                $maxScore = $par + 2;
+                break;
+            case (($handicap >= 4.6) && ($handicap < 9.6)):
+                $maxScore = 7;
+                break;
+            case (($handicap >= 9.6) && ($handicap < 14.6)):
+                $maxScore = 8;
+                break;
+            case (($handicap >= 14.6) && ($handicap < 19.6)):
+                $maxScore = 9;
+                break;
+            case ($handicap >= 19.6):
+                $maxScore = 10;
+        }
+
+        return $maxScore;
+    }
 }
