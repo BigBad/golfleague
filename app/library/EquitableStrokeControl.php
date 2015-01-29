@@ -3,7 +3,7 @@
 namespace GolfLeague;
 use \Holescore as Holescore;
 use \Hole as Hole;
-use \Score as Score;
+use \Round as Round;
 use \Player as Player;
 
 //Determines a net score using Equitable Scoring Control for individual hole
@@ -28,8 +28,8 @@ class EquitableStrokeControl {
         //holescore
         $holescore = $this->holescore->score; // Gross score on hole
 
-        //Use score to get player_id
-        $player = Score::find($this->holescore->score_id)->player_id;
+        //Use Round to get player_id
+        $player = Round::find($this->holescore->round_id)->player_id;
 
         //Get player's handicap
         $handicap = Player::find($player)->handicap;

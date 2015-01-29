@@ -3,14 +3,14 @@
 class Player extends Eloquent
 {
 
-	public function scores()
+	public function rounds()
     {
-        return $this->hasMany('Score');
+        return $this->hasMany('Round');
     }
 
 	public function holescores()
 	{
-		return $this->hasManyThrough('Holescore','Score');
+		return $this->hasManyThrough('Holescore','Round');
 	}
 
 	public function skins()

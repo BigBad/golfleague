@@ -5,9 +5,9 @@ use GolfLeague\Handicap;
 
 class TestController extends \BaseController {
 
-    public function __construct(Score $score, Holescore $holescore, EquitableStrokeControl $esc)
+    public function __construct(Round $round, Holescore $holescore, EquitableStrokeControl $esc)
     {
-        $this->score = $score;
+        $this->round = $round;
         $this->holescore = $holescore;
         $this->esc = $esc;
     }
@@ -19,17 +19,20 @@ class TestController extends \BaseController {
      */
     public function view()
     {
-        /*test Handicap
+        //return View::make('test');
+		//test Handicap
         $player = \Player::find(2);
         $handicap = new Handicap($player);
         return $handicap->calculate();
-        */
+        
 
-        //test ESC
-        $holescore = \Holescore::find(20);
+        /*test ESC
+		
+        $holescore = \Holescore::find(2);
         $esc = new EquitableStrokeControl($holescore);
         return $esc->calculate();
-
+		*/
+		
     }
 
         /**

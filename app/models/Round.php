@@ -1,6 +1,6 @@
 <?php
 
-class Score extends Eloquent
+class Round extends Eloquent
 {
 
     public function player()

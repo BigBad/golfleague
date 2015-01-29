@@ -3,7 +3,7 @@
 namespace GolfLeague;
 
 use \Player as Player;
-use \Score as Score;
+use \Round as Round;
 
 class Handicap
 {
@@ -15,19 +15,19 @@ class Handicap
 	
 	public function calculate()
 	{
-		$scores = Score::where('player_id', '=', $this->player->id)->orderBy('date', 'desc')->take(20)->get();		
-		$differential = $this->differential($scores->count());
+		$rounds = Round::where('player_id', '=', $this->player->id)->orderBy('date', 'desc')->take(20)->get();		
+		$differential = $this->differential($rounds->count());
 		
 		$i = 1;
-		foreach ($scores as $score) {			
-				$differentials[$i]  = $score->total;
+		foreach ($rounds as $round) {			
+				$differentials[$i]  = $round->esc;
 				$i++;
 		}
 		sort($differentials);
-		$chunkedScores = array_chunk($differentials,$differential,true);
-		$scoresUsed = $chunkedScores[0];
+		$chunkedRounds = array_chunk($differentials,$differential,true);
+		$roundsUsed = $chunkedRounds[0];
 		
-		$sumofDifferentials = array_sum($scoresUsed);
+		$sumofDifferentials = array_sum($roundsUsed);
 		$handicap = (($sumofDifferentials / $differential) * .96) - 36;
 		$handicap = round($handicap ,2);
 		

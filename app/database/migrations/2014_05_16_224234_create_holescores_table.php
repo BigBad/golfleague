@@ -17,12 +17,12 @@ class CreateHolescoresTable extends Migration {
 			$table->increments('id');
 			$table->integer('score');
 			$table->integer('hole_id')->unsigned()->index();
-			$table->integer('score_id')->unsigned()->index();
+			$table->integer('round_id')->unsigned()->index();
 
 
 			$table->timestamps();
 			$table->foreign('hole_id')->references('id')->on('holes')->onDelete('cascade');
-			$table->foreign('score_id')->references('id')->on('scores')->onDelete('cascade');
+			$table->foreign('round_id')->references('id')->on('rounds')->onDelete('cascade');
 		});
 	}
 
