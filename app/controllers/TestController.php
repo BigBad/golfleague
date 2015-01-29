@@ -1,6 +1,7 @@
 <?php
 
 use GolfLeague\EquitableStrokeControl;
+use GolfLeague\Storage\Round\RoundRepository as Round;
 use GolfLeague\Handicap;
 
 class TestController extends \BaseController {
@@ -20,19 +21,21 @@ class TestController extends \BaseController {
     public function view()
     {
         //return View::make('test');
-		//test Handicap
+        /*test Handicap
         $player = \Player::find(2);
         $handicap = new Handicap($player);
         return $handicap->calculate();
-        
+        */
 
         /*test ESC
-		
+        
         $holescore = \Holescore::find(2);
         $esc = new EquitableStrokeControl($holescore);
         return $esc->calculate();
-		*/
-		
+        */
+        return $this->round->find(1);
+        
+        
     }
 
         /**

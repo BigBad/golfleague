@@ -13,9 +13,8 @@ class Round extends Eloquent
         return $this->hasMany('Holescore');
     }
 
-    public function course()
+    public function holes()
     {
-        return $this->holescores->course;
+        return $this->hasManyThrough('Hole','Holescore');
     }
-
 }

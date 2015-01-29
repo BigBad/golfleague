@@ -1,8 +1,8 @@
-<?php namespace GolfLeague\Storage\Score;
+<?php namespace GolfLeague\Storage\Round;
 
  
 
-interface ScoreRepository { 
+interface RoundRepository { 
 
   public function all();
   public function find($playerId);

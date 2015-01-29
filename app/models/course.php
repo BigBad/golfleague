@@ -11,4 +11,5 @@ class Course extends Eloquent
     {
         return $this->hasOne('Match');
     }
+	
 }

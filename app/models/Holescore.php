@@ -11,5 +11,4 @@ class Holescore extends Eloquent {
     {
         return $this->belongsTo('Hole');
     }
-
 }
