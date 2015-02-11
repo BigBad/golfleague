@@ -10,8 +10,8 @@ class PrizeMoney {
 
     public function __construct($purse)
     {
-    $this->ctp = 5;
-    $this->purse = $purse - ($this->ctp  * 2);
+        $this->ctp = 5;
+        $this->purse = $purse - ($this->ctp  * 2);
     }
 
     public function getlowScore()
