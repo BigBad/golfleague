@@ -1,21 +1,15 @@
 <?php
 
-class HolesController extends \BaseController {
+class RoundsController extends \BaseController {
 
-	public function __construct(Course $course, Hole $hole)
-    {
-		$this->course = $course;
-		$this->hole = $hole;
-    }
 	/**
-	 * Display a listing of the resource.
+	 * Get Data for all rounds
 	 *
 	 * @return Response
 	 */
 	public function index()
 	{
-		$data = $this->hole->all();
-        return $data;
+		return Round::all();
 	}
 
 	/**
@@ -41,14 +35,12 @@ class HolesController extends \BaseController {
 	/**
 	 * Display the specified resource.
 	 *
-	 * @param  int  $course_id
+	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show()
+	public function show($id)
 	{
-		$course_id = Input::get('course_id');
-		$holes = Hole::where('course_id', '=', $course_id)->get();
-		return $holes;
+		//
 	}
 
 	/**

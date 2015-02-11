@@ -7,6 +7,11 @@ class Round extends Eloquent
     {
         return $this->belongsTo('Player');
     }
+	
+	public function course()
+    {
+        return $this->belongsTo('Course');
+    }
 
     public function holescores()
     {

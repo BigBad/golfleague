@@ -1,7 +1,12 @@
 <?php
 
-class ScoresController extends \BaseController {
+class HoleScoresController extends \BaseController {
 
+	public function __construct(HoleSCore $holeScore)
+    {
+		$this->holeScore = $holeScore;
+    }
+	
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -9,18 +14,11 @@ class ScoresController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		$data = $this->holeScore->all();
+        return $data;
 	}
 
-	/**
-     * Get Data for all scores
-     *
-     * @return Response
-     */
-    public function getScores()
-    {
-		return Score::all();
-	}
+
 	/**
 	 * Show the form for creating a new resource.
 	 *
@@ -31,6 +29,7 @@ class ScoresController extends \BaseController {
 		//
 	}
 
+
 	/**
 	 * Store a newly created resource in storage.
 	 *
@@ -40,6 +39,7 @@ class ScoresController extends \BaseController {
 	{
 		//
 	}
+
 
 	/**
 	 * Display the specified resource.
@@ -52,6 +52,7 @@ class ScoresController extends \BaseController {
 		//
 	}
 
+
 	/**
 	 * Show the form for editing the specified resource.
 	 *
@@ -62,6 +63,7 @@ class ScoresController extends \BaseController {
 	{
 		//
 	}
+
 
 	/**
 	 * Update the specified resource in storage.
@@ -74,6 +76,7 @@ class ScoresController extends \BaseController {
 		//
 	}
 
+
 	/**
 	 * Remove the specified resource from storage.
 	 *
@@ -84,5 +87,6 @@ class ScoresController extends \BaseController {
 	{
 		//
 	}
+
 
 }

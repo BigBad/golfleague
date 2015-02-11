@@ -7,16 +7,15 @@ class PlayersController extends \BaseController {
         $this->player = $player;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function getPlayers()
-    {
-        $data = $this->player->all();
-        return $data;
-    }
+	/**
+	 * Get Data for all players
+	 *
+	 * @return Response
+	 */
+	public function index()
+	{
+		return Player::all();
+	}
 
     /**
      * Store a newly created resource in storage.

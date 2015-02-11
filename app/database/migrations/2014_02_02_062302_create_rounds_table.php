@@ -16,6 +16,7 @@ class CreateRoundsTable extends Migration {
 			$table->increments('id');
 			$table->date('date');
 			$table->integer('player_id')->unsigned()->index();
+			$table->integer('course_id')->unsigned()->index();
 			$table->integer('score');
 			$table->integer('esc');
 

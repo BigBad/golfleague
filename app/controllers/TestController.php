@@ -33,8 +33,19 @@ class TestController extends \BaseController {
         $esc = new EquitableStrokeControl($holescore);
         return $esc->calculate();
         */
-        return $this->round->find(1);
+		
+		/* Update 2014 rounds to include courses
+		$holescores =  Holescore::all();
+		foreach ($holescores as $holescore) {
+			$hole = \Hole::find($holescore->hole_id);
+			$round = \Round::find($holescore->round_id);
+			$round->course_id = $hole->course_id;
+			$round->save();
+		}
+		*/
+		return \Round::all();
         
+		
         
     }
 
