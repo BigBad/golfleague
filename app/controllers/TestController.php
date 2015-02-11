@@ -3,6 +3,7 @@
 use GolfLeague\EquitableStrokeControl;
 use GolfLeague\Storage\Round\RoundRepository as Round;
 use GolfLeague\Handicap;
+use GolfLeague\PrizeMoney;
 
 class TestController extends \BaseController {
 
@@ -43,10 +44,16 @@ class TestController extends \BaseController {
 			$round->save();
 		}
 		*/
-		return \Round::all();
-        
-		
-        
+		//return \Round::all();
+		$purse = 50;
+		$prizeMoney = new PrizeMoney($purse);
+		echo "Purse = " . $purse . "<br>";
+		echo "Low Net: " . $prizeMoney->getlowScore() . "<br>";
+		echo "Low Gross: " . $prizeMoney->getlowScore() . "<br>";
+		echo "Skins A: " . $prizeMoney->getSkins() . "<br>";
+        echo "Skins B: " . $prizeMoney->getSkins() . "<br>";
+		echo "CTP 1: " . $prizeMoney->getCtp() . "<br>";
+        echo "CTP 2: " . $prizeMoney->getCtp() . "<br>";
     }
 
         /**
