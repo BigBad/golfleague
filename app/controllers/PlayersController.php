@@ -14,7 +14,7 @@ class PlayersController extends \BaseController {
 	 */
 	public function index()
 	{
-		return Player::all();
+		return $this->player->all();
 	}
 
     /**

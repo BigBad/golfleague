@@ -39,4 +39,6 @@ Route::resource('rounds', 'RoundsController');
 Route::resource('players', 'PlayersController');
 Route::resource('holes', 'HolesController');
 Route::resource('holescores', 'HoleScoresController');
-
+Route::resource('matches', 'MatchesController');
+Route::resource('courses', 'CoursesController');
+Route::resource('levels', 'LevelsController');

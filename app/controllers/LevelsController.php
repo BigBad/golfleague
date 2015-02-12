@@ -1,11 +1,10 @@
 <?php
 
-class MatchesController extends \BaseController {
+class LevelsController extends \BaseController {
 
-    public function __construct(Match $match, Course $course)
+	public function __construct(Level $level)
     {
-        $this->match = $match;
-		$this->course = $course;
+        $this->level = $level;
     }
 
 	/**
@@ -15,7 +14,7 @@ class MatchesController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		return $this->level->all();
 	}
 
 
@@ -26,10 +25,10 @@ class MatchesController extends \BaseController {
 	 */
 	public function create()
 	{
-		$view = View::make('CreateMatch');
-        return $view;
-	}	
-	
+		//
+	}
+
+
 	/**
 	 * Store a newly created resource in storage.
 	 *
@@ -37,7 +36,7 @@ class MatchesController extends \BaseController {
 	 */
 	public function store()
 	{
-		return Input::all();
+		//
 	}
 
 
@@ -87,5 +86,6 @@ class MatchesController extends \BaseController {
 	{
 		//
 	}
+
 
 }

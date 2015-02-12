@@ -18,6 +18,7 @@ class CreateLevelMatchPlayerTable extends Migration {
 			$table->integer('level_id')->unsigned()->index();
 			$table->integer('match_id')->unsigned()->index();
 			$table->integer('player_id')->unsigned()->index();
+			$table->integer('group');
 			$table->decimal('handicap');
 
 			$table->timestamps();

@@ -16,10 +16,8 @@ class CreateMatchesTable extends Migration {
 			$table->increments('id');
 			$table->date('date');
 			$table->integer('course_id')->unsigned()->index();
-			$table->integer('season_id')->unsigned()->index();
 
 			$table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
-			$table->foreign('season_id')->references('id')->on('seasons')->onDelete('cascade');
 
 			$table->timestamps();
 		});

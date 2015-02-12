@@ -12,7 +12,7 @@ class CoursesController extends \BaseController {
      *
      * @return Response
      */
-    public function getCourses()
+    public function index()
     {
         $data = $this->course->all();
         return $data;

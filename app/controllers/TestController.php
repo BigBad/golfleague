@@ -45,7 +45,7 @@ class TestController extends \BaseController {
 		}
 		*/
 		//return \Round::all();
-		$purse = 50;
+		$purse = 55;
 		$prizeMoney = new PrizeMoney($purse);
 		echo "Purse = " . $purse . "<br>";
 		echo "Low Net: " . $prizeMoney->getlowScore() . "<br>";

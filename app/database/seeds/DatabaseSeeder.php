@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder {
 		$this->call('HolesTableSeeder');
 		$this->call('RoundsTableSeeder');
 		$this->call('HolescoresTableSeeder');
-		//$this->call('MatchesTableSeeder');
+		$this->call('LevelsTableSeeder');
 
 		//DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 	}
