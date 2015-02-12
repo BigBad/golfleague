@@ -5,36 +5,37 @@ use Illuminate\Database\Schema\Blueprint;
 
 class CreateRoundsTable extends Migration {
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		Schema::create('rounds', function(Blueprint $table) {
-			$table->increments('id');
-			$table->date('date');
-			$table->integer('player_id')->unsigned()->index();
-			$table->integer('course_id')->unsigned()->index();
-			$table->integer('score');
-			$table->integer('esc');
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('rounds', function(Blueprint $table) {
+            $table->increments('id');
+            $table->date('date');
+            $table->integer('player_id')->unsigned()->index();
+            $table->integer('course_id')->unsigned()->index();
+            $table->integer('score');
+            $table->integer('esc');
 
 
-			$table->timestamps();
-			$table->foreign('player_id')->references('id')->on('players')->onDelete('cascade');
-		});
-	}
+            $table->timestamps();
+            $table->foreign('player_id')->references('id')->on('players')->onDelete('cascade');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+        });
+    }
 
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::drop('scores');
-	}
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('scores');
+    }
 
 }
