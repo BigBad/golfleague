@@ -7,8 +7,7 @@ class PrizeMoney {
     protected $skins;
     protected $ctp;
     protected $purse;
-	
-	
+
     public function __construct($purse)
     {
 <<<<<<< HEAD

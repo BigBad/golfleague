@@ -37,6 +37,10 @@ class MatchesController extends \BaseController {
 	 */
 	public function store()
 	{
+		$this->match->date = Input::get('date');
+		$this->match->course_id = Input::get('course');
+		$this->match->save();
+		
 		return Input::all();
 	}
 
