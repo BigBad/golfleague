@@ -1,8 +1,10 @@
 <?php
 
+use GolfLeague\Storage\Match\MatchRepository as MatchRepo;
+
 class MatchesController extends \BaseController {
 
-    public function __construct(Match $match, Course $course)
+    public function __construct(MatchRepo $match, Course $course)
     {
         $this->match = $match;
 		$this->course = $course;
@@ -37,11 +39,14 @@ class MatchesController extends \BaseController {
 	 */
 	public function store()
 	{
+		/*
 		$this->match->date = Input::get('date');
 		$this->match->course_id = Input::get('course');
 		$this->match->save();
+		*/
+		$input = Input::all();
+		return $this->match->create($input);
 		
-		return Input::all();
 	}
 
 

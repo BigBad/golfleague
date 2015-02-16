@@ -12,5 +12,9 @@ class StorageServiceProvider extends ServiceProvider
           'GolfLeague\Storage\Round\RoundRepository',
           'GolfLeague\Storage\Round\EloquentRoundRepository'
         );
+		$this->app->bind(
+          'GolfLeague\Storage\Match\MatchRepository',
+          'GolfLeague\Storage\Match\EloquentMatchRepository'
+        );
     }
 }

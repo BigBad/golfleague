@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateLevelMatchPlayerTable extends Migration {
+class CreateMatchPlayerTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,19 +12,19 @@ class CreateLevelMatchPlayerTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('level_match_player', function(Blueprint $table)
+		Schema::create('match_player', function(Blueprint $table)
 		{
-			$table->increments('id');
-			$table->integer('level_id')->unsigned()->index();
+			$table->increments('id');			
 			$table->integer('match_id')->unsigned()->index();
 			$table->integer('player_id')->unsigned()->index();
+			$table->integer('level_id')->unsigned()->index();
 			$table->integer('group');
 			$table->decimal('handicap');
 
 			$table->timestamps();
-			$table->foreign('level_id')->references('id')->on('levels')->onDelete('cascade');
 			$table->foreign('match_id')->references('id')->on('matches')->onDelete('cascade');
 			$table->foreign('player_id')->references('id')->on('players')->onDelete('cascade');
+			$table->foreign('level_id')->references('id')->on('levels')->onDelete('cascade');
 		});
 	}
 

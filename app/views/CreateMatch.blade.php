@@ -72,8 +72,7 @@
 							$(".group").append(
 								$("<option></option>").val(groups[i]).html(groups[i])
 							);
-						}
-						
+						}						
 				  })
 				  .change();
             });
