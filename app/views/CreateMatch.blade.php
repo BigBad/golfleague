@@ -25,7 +25,6 @@
             <br /><br>
 			<div name="playersList" id="playersList">
 			</div>
-			<br /><br /><br /><br />
             <input type="button" id="submitForm" onclick="submitScoreForm();" value="Create League Match" />
         </form>
         <script src="<?php echo asset('jquery-ui-1.10.4.custom/js/jquery-1.10.2.js')?>" type="text/javascript"></script>
@@ -48,13 +47,10 @@
 				$.getJSON("{{URL::to('/')}}/levels", function(data){
                     levels = data;
                 });
-				for (i = 1; i < 13; i++) {
-					$("#players").append($("<option>1</option>").val(i).html(i));
+				for (i = 12; i > 0; i--) {
+					$("#players").append($("<option></option>").val(i).html(i));
 				}
-				
-				$(".group").append($("<option>1</option>").val('1').html('1'));
-				$(".group").append($("<option>2</option>").val('2').html('2'));
-				$(".group").append($("<option>3</option>").val('3').html('3'));
+				var groups = [1,2,3];
 				
 				$("#players")
 				  .change(function () {
@@ -71,7 +67,13 @@
 							$(".level").append(
 								$("<option></option>").val(text.id).html(text.name)
 							);
-						});	
+						});
+						for (i = 0; i < groups.length; i++) {
+							$(".group").append(
+								$("<option></option>").val(groups[i]).html(groups[i])
+							);
+						}
+						
 				  })
 				  .change();
             });
