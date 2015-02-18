@@ -14,12 +14,13 @@ class CreateMatchPlayerTable extends Migration {
 	{
 		Schema::create('match_player', function(Blueprint $table)
 		{
-			$table->increments('id');			
+			$table->increments('id');
 			$table->integer('match_id')->unsigned()->index();
 			$table->integer('player_id')->unsigned()->index();
 			$table->integer('level_id')->unsigned()->index();
 			$table->integer('group');
 			$table->decimal('handicap');
+			$table->decimal('winnings', 2);
 
 			$table->timestamps();
 			$table->foreign('match_id')->references('id')->on('matches')->onDelete('cascade');
