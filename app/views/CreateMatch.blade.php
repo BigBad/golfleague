@@ -10,9 +10,6 @@
             <label for="date">Date:</label>
             <input type="text" id="date" class="ui-corner-all" name="date" />
             <br />
-            <label for="purse">Purse:</label>
-            <input type="text" name="purse" class="ui-corner-all" id="purse" />
-            <br />
             <label for="course">Course:</label>
             <select name="course" class="ui-corner-all" id="course">
                 <option></option>
@@ -22,9 +19,13 @@
             <select name="players" class="ui-corner-all" id="players">
                 <option></option>
             </select>
-            <br /><br>
-			<div name="playersList" id="playersList">
+            <br />
+			<div id="pursediv">
+				<label for="purse">Purse:</label>
+				<input type="text" name="purse" class="ui-corner-all" id="purse" readonly />
 			</div>
+			<br />
+			<div name="playersList" id="playersList"></div>
             <input type="button" id="submitForm" onclick="submitScoreForm();" value="Create League Match" />
         </form>
         <script src="<?php echo asset('jquery-ui-1.10.4.custom/js/jquery-1.10.2.js')?>" type="text/javascript"></script>
@@ -57,7 +58,7 @@
 		  .change(function () {
 			$('#playersList').empty();
 			for (i = 1;  i <= $(this).val(); i++) {
-				$('#playersList').append('<div name="player"><label for="player">Player '+i+' </label><select name="player['+i+'][player_id]" class="player ui-corner-all" id="player"></select><label for="level">Level</label><select name="player['+i+'][level_id]" class="level ui-corner-all" id="level" ></select><label for="group">Group</label><select name="player['+i+'][group_id]" class="group ui-corner-all" id="group" ></select></div><br />'); //add player div
+				$('#playersList').append('<div name="player"><label for="player">'+i+'</label><select name="player['+i+'][player_id]" class="player ui-corner-all" id="player"></select><label for="level">Level</label><select name="player['+i+'][level_id]" class="level ui-corner-all" id="level" ></select><label for="group">Group</label><select name="player['+i+'][group_id]" class="group ui-corner-all" id="group" ></select></div><br />'); //add player div
 			}
 			$.each(players, function(index, text) {
 				$(".player").append(
@@ -74,6 +75,9 @@
 					$("<option></option>").val(groups[i]).html(groups[i])
 				);
 			}
+			//Determine purse and display
+			var purse = 5 * $(this).val();
+			$('#purse').val(purse);
 		  }).change();
             });
             function submitScoreForm() {
