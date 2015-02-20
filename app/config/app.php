@@ -107,7 +107,8 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Way\Generators\GeneratorsServiceProvider',
-		'GolfLeague\Storage\StorageServiceProvider'
+		'GolfLeague\Storage\StorageServiceProvider',
+        'GolfLeague\Services\ServicesServiceProvider'
 
 	),
 
