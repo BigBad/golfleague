@@ -20,7 +20,7 @@ class CreateMatchPlayerTable extends Migration {
 			$table->integer('level_id')->unsigned()->index();
 			$table->integer('group');
 			$table->decimal('handicap');
-			$table->decimal('winnings', 2);
+			$table->decimal('winnings', 12,2);
 
 			$table->timestamps();
 			$table->foreign('match_id')->references('id')->on('matches')->onDelete('cascade');
