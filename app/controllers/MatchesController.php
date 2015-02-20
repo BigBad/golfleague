@@ -1,13 +1,12 @@
 <?php
 
-use GolfLeague\Storage\Match\MatchRepository as MatchRepo;
+use GolfLeague\Services\MatchService as MatchService;
 
 class MatchesController extends \BaseController {
 
-    public function __construct(MatchRepo $match, Course $course)
+    public function __construct(MatchService $match)
     {
         $this->match = $match;
-		$this->course = $course;
     }
 
 	/**
@@ -30,8 +29,8 @@ class MatchesController extends \BaseController {
 	{
 		$view = View::make('CreateMatch');
         return $view;
-	}	
-	
+	}
+
 	/**
 	 * Store a newly created resource in storage.
 	 *
@@ -46,7 +45,7 @@ class MatchesController extends \BaseController {
 		*/
 		$input = Input::all();
 		return $this->match->create($input);
-		
+
 	}
 
 
