@@ -58,7 +58,7 @@
 		  .change(function () {
 			$('#playersList').empty();
 			for (i = 1;  i <= $(this).val(); i++) {
-				$('#playersList').append('<div name="player"><label for="player">'+i+'</label><select name="player['+i+'][player_id]" class="player ui-corner-all" id="player"></select><label for="level">Level</label><select name="player['+i+'][level_id]" class="level ui-corner-all" id="level" ></select><label for="group">Group</label><select name="player['+i+'][group_id]" class="group ui-corner-all" id="group" ></select></div><br />'); //add player div
+				$('#playersList').append('<div name="player"><label for="player">'+i+'</label><select name="player['+i+'][player_id]" class="player ui-corner-all" id="player"></select><label for="level">Level</label><select name="player['+i+'][level_id]" class="level ui-corner-all" id="level" ></select><label for="group">Group</label><select name="player['+i+'][group]" class="group ui-corner-all" id="group" ></select></div><br />'); //add player div
 			}
 			$.each(players, function(index, text) {
 				$(".player").append(
