@@ -1,4 +1,3 @@
-
 <?php namespace GolfLeague\Services;
 
 use GolfLeague\Storage\Match\MatchRepository;
@@ -43,13 +42,14 @@ class MatchService
         $matchdata['skinsamoney'] = $this->prizeMoney->getSkins();
         $matchdata['skinsbmoney'] = $this->prizeMoney->getSkins();
 
+        //append current handicap and set winnings to 0 for each player
         foreach ($matchdata['player'] as $key=>$player) {
             //get each player's current handicap
             $currentPlayer = $this->player->find($player['player_id']);
             $matchdata['player'][$key]['handicap'] = $currentPlayer->handicap;
             $matchdata['player'][$key]['winnings'] = 0;
         }// End foreach
-        return $matchdata;
-        return $this->matchRepo->create($matchdata);
+
+        $this->matchRepo->create($matchdata);
     }
 }
