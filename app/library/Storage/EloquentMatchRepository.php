@@ -43,15 +43,18 @@ class EloquentMatchRepository implements MatchRepository
 
 		$this->match->save();
 
-
-		//return $this->match->id;
-		//for each player get and set current handicap
-
-
+		foreach ($matchdata['player'] as $key => $player){
+			$currentPlayer = $this->player->find($player['player_id']);
+			$attributes = array(
+				"match_id" =>$this->match->id,
+				"level_id" => $player['level_id'],
+				"group" => $player['group'],
+				"handicap" => $player['handicap'],
+				"winnings" => $player['winnings'],
+			);
+			$currentPlayer->matches()->save($attributes);
+		}// End foreach
 
 		//enter values into match_player table
-
-
-
     }
 }
