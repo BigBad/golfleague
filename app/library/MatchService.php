@@ -36,7 +36,7 @@ class MatchService
         //calculate money with purse
         $this->prizeMoney->setPurse($matchdata['purse']);
 
-        $matchdata['purse'] = money_format('%i', $matchdata['purse']);
+        $matchdata['purse'] = number_format($matchdata['purse'], 2);
         $matchdata['grossmoney'] = $this->prizeMoney->getlowScore();
         $matchdata['netmoney'] = $this->prizeMoney->getlowScore();
         $matchdata['skinsamoney'] = $this->prizeMoney->getSkins();
