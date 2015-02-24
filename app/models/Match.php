@@ -4,6 +4,11 @@ class Match extends Eloquent
 {
 	protected $table = 'matches';
 
+	public function setDateAttribute($date)
+    {
+		$this->attributes['date'] = date('Y-m-d', strtotime(str_replace('-', '/', $date)));
+    }
+	
 	public function course()
     {
         return $this->belongsTo('Course');

@@ -38,11 +38,6 @@ class MatchesController extends \BaseController {
 	 */
 	public function store()
 	{
-		/*
-		$this->match->date = Input::get('date');
-		$this->match->course_id = Input::get('course');
-		$this->match->save();
-		*/
 		$input = Input::all();
 		return $this->match->create($input);
 
@@ -57,7 +52,8 @@ class MatchesController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$view = View::make('EnterMatch');
+        return $view;
 	}
 
 
