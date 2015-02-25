@@ -41,7 +41,7 @@ class EloquentMatchRepository implements MatchRepository
 		$this->match->grossmoney = $matchdata['grossmoney'];
 		$this->match->netmoney = $matchdata['netmoney'];
 
-		$this->match->save(); //save match
+		$this->match->save(); //save to match table
 		
 		foreach ($matchdata['player'] as $key => $player){
 			$currentPlayer = $this->player->find($player['player_id']);
@@ -51,7 +51,7 @@ class EloquentMatchRepository implements MatchRepository
 				"handicap" => $player['handicap'],
 				"winnings" => $player['winnings'],
 			);
-			$currentPlayer->matches()->save($this->match, $attributes); //save math_player pivot data
+			$currentPlayer->matches()->save($this->match, $attributes); //save match_player pivot data
 		}// End foreach
     }
 	
