@@ -17,6 +17,7 @@ class CreateRoundsTable extends Migration {
             $table->date('date');
             $table->integer('player_id')->unsigned()->index();
             $table->integer('course_id')->unsigned()->index();
+			$table->integer('match_id')->unsigned()->index()->nullable();
             $table->integer('score');
             $table->integer('esc');
 
@@ -24,6 +25,7 @@ class CreateRoundsTable extends Migration {
             $table->timestamps();
             $table->foreign('player_id')->references('id')->on('players')->onDelete('cascade');
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+			$table->foreign('match_id')->references('id')->on('matches')->onDelete('cascade');
         });
     }
 
