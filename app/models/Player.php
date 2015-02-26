@@ -25,7 +25,7 @@ class Player extends Eloquent
 
 	public function matches()
     {
-        return $this->belongsToMany('Match');
+        return $this->belongsToMany('Match')->withPivot('level_id', 'group', 'handicap', 'winnings')->withTimestamps();
     }
 
 }
