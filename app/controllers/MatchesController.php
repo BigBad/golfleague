@@ -28,7 +28,7 @@ class MatchesController extends \BaseController {
 	public function create()
 	{
 		$view = View::make('CreateMatch');
-        return $view;
+        	return $view;
 	}
 
 	/**
