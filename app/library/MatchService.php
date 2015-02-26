@@ -3,6 +3,7 @@
 use GolfLeague\Storage\Match\MatchRepository;
 use GolfLeague\PrizeMoney;
 use \Player;
+use \Match;
 /**
 * Our MatchService, containing all useful methods for business logic around Matches
 */
@@ -17,22 +18,22 @@ class MatchService
     * @param MatchRepository $matchRepo
     * @return MatchService
     */
-    public function __construct(MatchRepository $matchRepo, PrizeMoney $prizeMoney, Player $player)
+    public function __construct(MatchRepository $matchRepo, PrizeMoney $prizeMoney, Player $player, Match $match)
     {
         $this->matchRepo = $matchRepo;
         $this->prizeMoney = $prizeMoney;
         $this->player = $player;
+        $this->match = $match;
     }
 
     /**
-    * Method to creat match from input Match date
+    * Method to create match from input Match data
     *
     * @param mixed $matchdata
-    * @return string
+    * @return
     */
     public function create($matchdata)
     {
-
         //calculate money with purse
         $this->prizeMoney->setPurse($matchdata['purse']);
 
@@ -51,5 +52,18 @@ class MatchService
         }// End foreach
 
         $this->matchRepo->create($matchdata);
+    }
+
+    /**
+    * Method to get match from input Match data
+    *
+    * @param mixed $matchdata
+    * @return JSON object
+    */
+    public function get($matchdata)
+    {
+        $match =  $this->match->find($matchdata['match_id']);
+        return $match->players;
+        return $matchdata;
     }
 }
