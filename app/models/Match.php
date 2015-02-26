@@ -8,7 +8,7 @@ class Match extends Eloquent
     {
 		$this->attributes['date'] = date('Y-m-d', strtotime(str_replace('-', '/', $date)));
     }
-	
+
 	public function course()
     {
         return $this->belongsTo('Course');
@@ -36,7 +36,7 @@ class Match extends Eloquent
 
 	public function players()
     {
-        return $this->belongsToMany('Player');
+        return $this->belongsToMany('Player')->withPivot('level_id', 'group', 'handicap', 'winnings')->withTimestamps();
     }
 
 	public function getAllMatches()
