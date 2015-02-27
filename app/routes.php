@@ -42,3 +42,4 @@ Route::resource('holescores', 'HoleScoresController');
 Route::resource('matches', 'MatchesController');
 Route::resource('courses', 'CoursesController');
 Route::resource('levels', 'LevelsController');
+Route::resource('matchrounds', 'MatchRoundController');
