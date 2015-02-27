@@ -5,7 +5,7 @@ class RoundsTableSeeder extends Seeder {
     public function run()
     {
         DB::table('rounds')->delete();
-		
+
         Round::create(array('id' => '1','date' => '2013-06-01','player_id' => '1','course_id' => '1','score' => '43','esc' => '43','created_at' => '2014-05-20 01:13:55','updated_at' => '2014-05-20 01:13:55'));
 		Round::create(array('id' => '2','date' => '2013-06-02','player_id' => '1','course_id' => '1','score' => '39','esc' => '39','created_at' => '2014-05-20 01:13:55','updated_at' => '2014-05-20 01:13:55'));
 		Round::create(array('id' => '3','date' => '2013-06-03','player_id' => '1','course_id' => '1','score' => '44','esc' => '44','created_at' => '2014-05-20 01:13:55','updated_at' => '2014-05-20 01:13:55'));
@@ -257,5 +257,7 @@ class RoundsTableSeeder extends Seeder {
 		Round::create(array('id' => '251','date' => '2014-06-10','player_id' => '21','course_id' => '2','score' => '48','esc' => '48','created_at' => '2014-06-11 01:36:56','updated_at' => '2015-02-06 04:14:09'));
 		Round::create(array('id' => '252','date' => '2014-06-10','player_id' => '6','course_id' => '2','score' => '43','esc' => '43','created_at' => '2014-06-11 01:37:33','updated_at' => '2015-02-06 04:14:09'));
 		Round::create(array('id' => '253','date' => '2014-06-10','player_id' => '3','course_id' => '2','score' => '41','esc' => '41','created_at' => '2014-06-11 01:37:55','updated_at' => '2015-02-06 04:14:09'));
+
+		DB::statement('ALTER SEQUENCE rounds_id_seq RESTART WITH 254;');
 	}
 }
