@@ -3,7 +3,7 @@
 use Illuminate\Support\ServiceProvider;
 
 
-class StorageServiceProvider extends ServiceProvider 
+class StorageServiceProvider extends ServiceProvider
 {
 
     public function register()
@@ -15,6 +15,10 @@ class StorageServiceProvider extends ServiceProvider
 		$this->app->bind(
           'GolfLeague\Storage\Match\MatchRepository',
           'GolfLeague\Storage\Match\EloquentMatchRepository'
+        );
+		$this->app->bind(
+          'GolfLeague\Storage\MatchRound\MatchRoundRepository',
+          'GolfLeague\Storage\MatchRound\EloquentMatchRoundRepository'
         );
     }
 }
