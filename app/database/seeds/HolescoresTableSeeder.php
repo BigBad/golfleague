@@ -944,6 +944,7 @@ class HolescoresTableSeeder extends Seeder {
         Holescore::create(array('id' => '943','score' => '4','hole_id' => '16','round_id' => '253','created_at' => '2014-06-11 01:37:56','updated_at' => '2014-06-11 01:37:56'));
         Holescore::create(array('id' => '944','score' => '5','hole_id' => '17','round_id' => '253','created_at' => '2014-06-11 01:37:56','updated_at' => '2014-06-11 01:37:56'));
         Holescore::create(array('id' => '945','score' => '6','hole_id' => '18','round_id' => '253','created_at' => '2014-06-11 01:37:56','updated_at' => '2014-06-11 01:37:56'));
+        DB::statement('ALTER SEQUENCE holescores_id_seq RESTART WITH 946;');
     }
 
 }
