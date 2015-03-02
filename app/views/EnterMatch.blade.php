@@ -10,8 +10,8 @@
 		<link rel="stylesheet" href="<?php echo asset('jqGrid-4.5.4/css/ui.jqgrid.css')?>" />
     </head>
     <body>
-            <h3>Four Loko League Week 1</h3>
-			<h4>Course: </h4>
+            <h3>Four Loko League Date: {{$date}}</h3>
+			<h4>Course: {{$course}}</h4>
             <br>
 			<table id="group1Grid"></table>
 			<div id="group1Pager"></div>
@@ -29,30 +29,30 @@
         <script>
 		$(document).ready(function () {
 		var groupId = get('group');
-		
-		for (i = 1; i < 4; i++) { 
+
+		for (i = 1; i < 4; i++) {
 				$("#group"+ i +"Grid").jqGrid({
-					url: 'data.json',
+					url: 'https://172.29.97.12:51443/~schmidmi/golfleague/public/index.php/matchrounds/1?group=' + i,
 					datatype: "json",
 					 colModel: [
-						{ label: 'Player', name: 'player_id', width: 40, frozen: true },
-						{ label: 'Hole 1', name: 'Hole1', width: 20 },
-						{ label: 'Hole 2', name: 'Hole2', width: 20 },
-						{ label: 'Hole 3', name: 'Hole3', width: 20 },
-						{ label: 'Hole 4', name: 'Hole4', width: 20 },
-						{ label: 'Hole 5', name: 'Hole5', width: 20 },
-						{ label: 'Hole 6', name: 'Hole6', width: 20 },
-						{ label: 'Hole 7', name: 'Hole7', width: 20 },
-						{ label: 'Hole 8', name: 'Hole8', width: 20 },
-						{ label: 'Hole 9', name: 'Hole9', width: 20 },
-									  
+						{ label: 'Player', name: 'player.name', width: 40, frozen: true },
+						{ label: 'Hole 1', name: 'holescores.0.score', width: 20 },
+						{ label: 'Hole 2', name: 'holescores.1.score', width: 20 },
+						{ label: 'Hole 3', name: 'holescores.2.score', width: 20 },
+						{ label: 'Hole 4', name: 'holescores.3.score', width: 20 },
+						{ label: 'Hole 5', name: 'holescores.4.score', width: 20 },
+						{ label: 'Hole 6', name: 'holescores.5.score', width: 20 },
+						{ label: 'Hole 7', name: 'holescores.6.score', width: 20 },
+						{ label: 'Hole 8', name: 'holescores.7.score', width: 20 },
+						{ label: 'Hole 9', name: 'holescores.8.score', width: 20 },
+
 					],
 					viewrecords: true, // show the current page, data rang and total records on the toolbar
 					width: 480,
 					height: 200,
 					rowNum: 30,
 					loadonce: true, // this is just for the demo
-					pager: "#group"+ i +"Pager"
+					//pager: "#group"+ i +"Pager"
 				});
 		}
 });
