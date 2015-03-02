@@ -1,5 +1,6 @@
 <?php namespace GolfLeague\Services;
 
+use GolfLeague\Storage\Match\MatchRepository;
 use GolfLeague\Storage\MatchRound\MatchRoundRepository;
 use GolfLeague\Storage\Round\RoundRepository;
 
@@ -17,10 +18,11 @@ class MatchRoundService
     * @param MatchRepository $matchRepo
     * @return MatchService
     */
-    public function __construct(MatchRoundRepository $matchRoundRepo, RoundRepository $roundRepo)
+    public function __construct(MatchRoundRepository $matchRoundRepo, RoundRepository $roundRepo, MatchRepository $match)
     {
         $this->matchRoundRepo = $matchRoundRepo;
         $this->roundRepo = $roundRepo;
+        $this->match = $match;
     }
 
     public function all()
@@ -36,5 +38,18 @@ class MatchRoundService
     public function getByMatch($matchId)
     {
         return $this->matchRoundRepo->getByMatch($matchId);
+    }
+
+    public function getByMatchAndGroup($matchdata)
+    {
+        //Retrieve an array of players in group
+        $players = $this->matchRoundRepo->getPlayersInGroup($matchdata['match_id'], $matchdata['group']);
+        return $players;
+        return $this->matchRoundRepo->getByMatchAndGroup($matchdata['match_id'], $matchdata['group']);
+    }
+
+    public function getMatchData($matchid)
+    {
+        return $this->match->getMatchData($matchid);
     }
 }
