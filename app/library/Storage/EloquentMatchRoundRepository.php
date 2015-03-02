@@ -11,7 +11,7 @@ class EloquentMatchRoundRepository implements MatchRoundRepository
    * Date
    * Total
    * Course
-   * Multideminsional Array of Hole Numbers and scores 
+   * Multideminsional Array of Hole Numbers and scores
    **/
 
    //Retrieve all rounds associated with a match with holescores
@@ -20,10 +20,22 @@ class EloquentMatchRoundRepository implements MatchRoundRepository
         return Round::with('player', 'holescores')->whereNotNull('match_id')->get();
     }
 
-    //Retrieve Rounds of a match with holescores
+    // Retrieve Rounds of a match with holescores
+    // Return data is sorted by the order of the holes of the round
     public function getByMatch($matchid)
     {
         return Round::with('player', 'holescores')->where('match_id', '=', $matchid)->get();
+    }
+
+    // Retrieve Rounds of a match with holescores
+    // Return data is sorted by the order of the holes of the round
+    public function getByMatchAndGroup($matchid, $groupid)
+    {
+        $match = Match::find($matchid);
+        foreach ($match->players as $player){
+            echo $player->pivot->group;
+        }
+        //return Round::with('player', 'holescores')->where('match_id', '=', $matchid)->where('group', '=', $groupid)->get();
     }
 
     public function create($matchdata)
