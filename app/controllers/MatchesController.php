@@ -28,7 +28,7 @@ class MatchesController extends \BaseController {
 	public function create()
 	{
 		$view = View::make('CreateMatch');
-        	return $view;
+        return $view;
 	}
 
 	/**
@@ -54,11 +54,16 @@ class MatchesController extends \BaseController {
 	{
 		$matchdata = array(
 				'match_id' => $id,
-				'group_id' => Input::get('group')
+				'group' => Input::get('group')
 		);
-		$data = $this->match->get($matchdata);
+		//$data = $this->match->get($matchdata);
+		$data = array(
+				'date' => 'June 6th',
+				'course' => 'Legend'
+		);
 		$view = View::make('EnterMatch', $data);
-        	return $view;
+		//return $data;
+        return $view;
 	}
 
 
