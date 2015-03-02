@@ -50,7 +50,12 @@ class MatchRoundController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		return $this->matchRound->getByMatch($id);
+		$matchdata = array(
+				'match_id' => $id,
+				'group' => Input::get('group')
+		);
+		//Return holescores for match and group
+		return $this->matchRound->getByMatchAndGroup($matchdata);
 	}
 
 
