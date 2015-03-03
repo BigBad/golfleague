@@ -23,8 +23,12 @@ class EloquentMatchRepository implements MatchRepository
         return $this->player->eagerLoadAll()->all();
     }
 
-    //Find Scores by Player Id
+	public function get($matchid)
+	{
+		return Match::find($matchid)->get();
+	}
 
+    //Find Scores by Player Id
     public function find($playerId)
     {
         //return Round::with('player', 'holescores')->where('player_id', '=', $playerId)->get();
@@ -42,7 +46,7 @@ class EloquentMatchRepository implements MatchRepository
 		$this->match->netmoney = $matchdata['netmoney'];
 
 		$this->match->save(); //save to match table
-		
+
 		foreach ($matchdata['player'] as $key => $player){
 			$currentPlayer = $this->player->find($player['player_id']);
 			$attributes = array(
@@ -54,5 +58,5 @@ class EloquentMatchRepository implements MatchRepository
 			$currentPlayer->matches()->save($this->match, $attributes); //save match_player pivot data
 		}// End foreach
     }
-	
+
 }
