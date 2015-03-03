@@ -10,8 +10,9 @@
 		<link rel="stylesheet" href="<?php echo asset('jqGrid-4.5.4/css/ui.jqgrid.css')?>" />
     </head>
     <body>
-            <h3>Four Loko League Date: {{$date}}</h3>
-			<h4>Course: {{$course}}</h4>
+            <h3>Four Loko League Date: {{$data[0]->date}}</h3>
+			<h4>Course: {{$data[0]->course->name}}</h4>
+			<h4>Par: {{$data[0]->course->par}}</h4>
             <br>
 			<table id="group1Grid"></table>
 			<div id="group1Pager"></div>
@@ -35,16 +36,16 @@
 					url: '{{URL::to('/')}}/matchrounds/1?group=' + i,
 					datatype: "json",
 					 colModel: [
-						{ label: 'Player', name: 'player.name', width: 40, frozen: true },
-						{ label: 'Hole 1', name: 'holescores.0.score', width: 20 },
-						{ label: 'Hole 2', name: 'holescores.1.score', width: 20 },
-						{ label: 'Hole 3', name: 'holescores.2.score', width: 20 },
-						{ label: 'Hole 4', name: 'holescores.3.score', width: 20 },
-						{ label: 'Hole 5', name: 'holescores.4.score', width: 20 },
-						{ label: 'Hole 6', name: 'holescores.5.score', width: 20 },
-						{ label: 'Hole 7', name: 'holescores.6.score', width: 20 },
-						{ label: 'Hole 8', name: 'holescores.7.score', width: 20 },
-						{ label: 'Hole 9', name: 'holescores.8.score', width: 20 },
+						{ label: 'Player', name: 'name', width: 40, frozen: true },
+						{ label: 'Hole 1', name: 'round.0.holescores.0.score', width: 20 },
+						{ label: 'Hole 2', name: 'round.0.holescores.1.score', width: 20 },
+						{ label: 'Hole 3', name: 'round.0.holescores.2.score', width: 20 },
+						{ label: 'Hole 4', name: 'round.0.holescores.3.score', width: 20 },
+						{ label: 'Hole 5', name: 'round.0.holescores.4.score', width: 20 },
+						{ label: 'Hole 6', name: 'round.0.holescores.5.score', width: 20 },
+						{ label: 'Hole 7', name: 'round.0.holescores.6.score', width: 20 },
+						{ label: 'Hole 8', name: 'round.0.holescores.7.score', width: 20 },
+						{ label: 'Hole 9', name: 'round.0.holescores.8.score', width: 20 },
 
 					],
 					viewrecords: true, // show the current page, data rang and total records on the toolbar
