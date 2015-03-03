@@ -29,7 +29,7 @@ class EloquentMatchRoundRepository implements MatchRoundRepository
 
     // Retrieve Rounds of a match with holescores
     // Return data is sorted by the order of the holes of the round
-    public function getByMatchAndGroup($matchid, $groupid)
+    public function getByMatchAndGroup($matchid, $group)
     {
         $match = Match::find($matchid);
         foreach ($match->players as $player){
@@ -42,5 +42,16 @@ class EloquentMatchRoundRepository implements MatchRoundRepository
     {
 
     }
-
+	
+	public function matchGroup($matchid, $group)
+	{
+		$players = Match::find($matchid)->players()->having('pivot_group','=',$group)->get();
+		foreach($players as $player) {
+			//echo $player->pivot->group;
+			$rounds = Round::with('holescores')->where('match_id', '=', $matchid)->where('player_id', '=', $player->id)->get();
+		}
+		//return $players;
+		$playerRounds = $players->merge($rounds);
+		return $playerRounds;
+	}
 }

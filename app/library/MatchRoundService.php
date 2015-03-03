@@ -42,10 +42,9 @@ class MatchRoundService
 
     public function getByMatchAndGroup($matchdata)
     {
-        //Retrieve an array of players in group
-        $players = $this->matchRoundRepo->getPlayersInGroup($matchdata['match_id'], $matchdata['group']);
+        //Retrieve players in group
+        $players = $this->matchRoundRepo->matchGroup($matchdata['match_id'], $matchdata['group']);
         return $players;
-        return $this->matchRoundRepo->getByMatchAndGroup($matchdata['match_id'], $matchdata['group']);
     }
 
     public function getMatchData($matchid)

@@ -32,7 +32,7 @@
 
 		for (i = 1; i < 4; i++) {
 				$("#group"+ i +"Grid").jqGrid({
-					url: 'https://172.29.97.12:51443/~schmidmi/golfleague/public/index.php/matchrounds/1?group=' + i,
+					url: '{{URL::to('/')}}/matchrounds/1?group=' + i,
 					datatype: "json",
 					 colModel: [
 						{ label: 'Player', name: 'player.name', width: 40, frozen: true },

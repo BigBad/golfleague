@@ -38,7 +38,7 @@ class Match extends Eloquent
     {
         return $this->belongsToMany('Player')->withPivot('level_id', 'group', 'handicap', 'winnings')->withTimestamps();
     }
-
+	
 	public function getAllMatches()
 	{
 		$matches = DB::table('matches')->get();
