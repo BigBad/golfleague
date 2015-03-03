@@ -42,16 +42,19 @@ class EloquentMatchRoundRepository implements MatchRoundRepository
     {
 
     }
-	
+
 	public function matchGroup($matchid, $group)
 	{
-		$players = Match::find($matchid)->players()->having('pivot_group','=',$group)->get();
-		foreach($players as $player) {
-			//echo $player->pivot->group;
-			$rounds = Round::with('holescores')->where('match_id', '=', $matchid)->where('player_id', '=', $player->id)->get();
+        $players = Match::find($matchid)->players()->where('match_player.group','=',$group)->get();
+		foreach($players as $key => $player) {
+			$rounds = Round::with('holescores')->where('player_id', '=', $player->id)->where('match_id', '=', $matchid)->get();
+            $players[$key]['round'] = $rounds;
 		}
-		//return $players;
-		$playerRounds = $players->merge($rounds);
-		return $playerRounds;
+		return $players;
 	}
+
+    public function getMatchData($matchid)
+    {
+        return $matchid;
+    }
 }
