@@ -35,24 +35,27 @@
 				$("#group"+ i +"Grid").jqGrid({
 					url: '{{URL::to('/')}}/matchrounds/1?group=' + i,
 					datatype: "json",
-					 colModel: [
-						{ label: 'Player', name: 'name', width: 40, frozen: true },
-						{ label: 'Hole 1', name: 'round.0.holescores.0.score', width: 20 },
-						{ label: 'Hole 2', name: 'round.0.holescores.1.score', width: 20 },
-						{ label: 'Hole 3', name: 'round.0.holescores.2.score', width: 20 },
-						{ label: 'Hole 4', name: 'round.0.holescores.3.score', width: 20 },
-						{ label: 'Hole 5', name: 'round.0.holescores.4.score', width: 20 },
-						{ label: 'Hole 6', name: 'round.0.holescores.5.score', width: 20 },
-						{ label: 'Hole 7', name: 'round.0.holescores.6.score', width: 20 },
-						{ label: 'Hole 8', name: 'round.0.holescores.7.score', width: 20 },
-						{ label: 'Hole 9', name: 'round.0.holescores.8.score', width: 20 },
+					colModel: [
+						{ label: 'Player', name: 'name', width: 67, frozen: true },
+						{ label: 'Hole 1', name: 'round.0.holescores.0.score', width: 37, sorttype:"int", editable: true},
+						{ label: 'Hole 2', name: 'round.0.holescores.1.score', width: 37, editable: true},
+						{ label: 'Hole 3', name: 'round.0.holescores.2.score', width: 37, editable: true},
+						{ label: 'Hole 4', name: 'round.0.holescores.3.score', width: 37, editable: true},
+						{ label: 'Hole 5', name: 'round.0.holescores.4.score', width: 37, editable: true},
+						{ label: 'Hole 6', name: 'round.0.holescores.5.score', width: 37, editable: true},
+						{ label: 'Hole 7', name: 'round.0.holescores.6.score', width: 37, editable: true},
+						{ label: 'Hole 8', name: 'round.0.holescores.7.score', width: 37, editable: true},
+						{ label: 'Hole 9', name: 'round.0.holescores.8.score', width: 37, editable: true},
 
 					],
+					onSelectRow: function(id){
+						//jQuery("#group"+ i +"Grid").editRow(id,true);
+					  },
+					editurl: '{{URL::to('/')}}/',
 					viewrecords: true, // show the current page, data rang and total records on the toolbar
-					width: 480,
-					height: 200,
-					rowNum: 30,
-					loadonce: true, // this is just for the demo
+					width: 450,
+					height: 100,
+
 					//pager: "#group"+ i +"Pager"
 				});
 		}
