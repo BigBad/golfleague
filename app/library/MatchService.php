@@ -60,10 +60,10 @@ class MatchService
     * @param mixed $matchdata
     * @return JSON object
     */
-    public function get($matchdata)
+    public function get($matchid)
     {
-        $match =  $this->match->find($matchdata['match_id']);
-        return $match->players;
+        $matchdata =  $this->matchRepo->get($matchid);
         return $matchdata;
     }
+
 }
