@@ -46,9 +46,4 @@ class MatchRoundService
         $players = $this->matchRoundRepo->matchGroup($matchdata['match_id'], $matchdata['group']);
         return $players;
     }
-
-    public function getMatchData($matchid)
-    {
-        return $this->match->getMatchData($matchid);
-    }
 }
