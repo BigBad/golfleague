@@ -52,17 +52,9 @@ class MatchesController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$matchdata = array(
-				'match_id' => $id,
-				'group' => Input::get('group')
-		);
-		//$data = $this->match->get($matchdata);
-		$data = array(
-				'date' => 'June 6th',
-				'course' => 'Legend'
-		);
-		$view = View::make('EnterMatch', $data);
+		$data['data'] = $this->match->get($id);
 		//return $data;
+		$view = View::make('EnterMatch', $data);
         return $view;
 	}
 
