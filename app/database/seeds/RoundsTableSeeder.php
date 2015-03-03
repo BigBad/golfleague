@@ -258,6 +258,15 @@ class RoundsTableSeeder extends Seeder {
 		Round::create(array('id' => '252','date' => '2014-06-10','player_id' => '6','course_id' => '2','score' => '43','esc' => '43','created_at' => '2014-06-11 01:37:33','updated_at' => '2015-02-06 04:14:09'));
 		Round::create(array('id' => '253','date' => '2014-06-10','player_id' => '3','course_id' => '2','score' => '41','esc' => '41','created_at' => '2014-06-11 01:37:55','updated_at' => '2015-02-06 04:14:09'));
 
-		DB::statement('ALTER SEQUENCE rounds_id_seq RESTART WITH 254;');
+		
+		$database = Config::get('database.default');
+		switch ($database) {
+			case "mysql":
+				DB::statement('ALTER TABLE rounds AUTO_INCREMENT = 946');
+				break;
+			case "pgsql":
+				DB::statement('ALTER SEQUENCE rounds_id_seq RESTART WITH 254;');
+				break;
+		}		
 	}
 }
