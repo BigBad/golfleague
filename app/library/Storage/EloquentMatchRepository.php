@@ -25,7 +25,7 @@ class EloquentMatchRepository implements MatchRepository
 
 	public function get($matchid)
 	{
-		return Match::find($matchid)->get();
+		 return Match::with('course')->find($matchid);
 	}
 
     //Find Scores by Player Id
