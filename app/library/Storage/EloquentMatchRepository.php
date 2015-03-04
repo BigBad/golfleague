@@ -1,62 +1,49 @@
-<?php namespace GolfLeague\Storage\Match;
+<?php namespace GolfLeague\Services;
 
-use \Match as Match;
-use \Player as Player;
+use GolfLeague\Storage\Match\MatchRepository;
+use GolfLeague\Storage\MatchRound\MatchRoundRepository;
+use GolfLeague\Storage\Round\RoundRepository;
 
-class EloquentMatchRepository implements MatchRepository
+/**
+* Our MatchService, containing all useful methods for business logic around Matches
+*/
+class MatchRoundService
 {
-  /*Return Score collections that include:
-   * Player Name
-   * Date
-   * Total
-   * Course
-   * Multideminsional Array of Hole Numbers and scores   *
-   **/
-	public function __construct(Match $match, Player $player)
+    // Containing our pokemonRepository to make all our database calls to
+    protected $matchRepo;
+
+    /**
+    * Loads our $matchRepo
+    *
+    * @param MatchRepository $matchRepo
+    * @return MatchService
+    */
+    public function __construct(MatchRoundRepository $matchRoundRepo, RoundRepository $roundRepo, MatchRepository $match)
     {
+        $this->matchRoundRepo = $matchRoundRepo;
+        $this->roundRepo = $roundRepo;
         $this->match = $match;
-		$this->player = $player;
     }
 
     public function all()
     {
-        return $this->player->eagerLoadAll()->all();
+        return $this->matchRoundRepo->all();
     }
-
-	public function get($matchid)
-	{
-		return Match::find($matchid)->get();
-	}
-
-    //Find Scores by Player Id
-    public function find($playerId)
+    /**
+    * Method to get match data from input Match id
+    *
+    * @param mixed $matchdata
+    * @return JSON object
+    */
+    public function getByMatch($matchId)
     {
-        //return Round::with('player', 'holescores')->where('player_id', '=', $playerId)->get();
+        return $this->matchRoundRepo->getByMatch($matchId);
     }
 
-    public function create($matchdata)
+    public function getByMatchAndGroup($matchdata)
     {
-		//enter match data to Matches table
-		$this->match->date = $matchdata['date'];
-		$this->match->course_id = $matchdata['course'];
-		$this->match->purse = $matchdata['purse'];
-		$this->match->skinsamoney = $matchdata['skinsamoney'];
-		$this->match->skinsbmoney = $matchdata['skinsbmoney'];
-		$this->match->grossmoney = $matchdata['grossmoney'];
-		$this->match->netmoney = $matchdata['netmoney'];
-
-		$this->match->save(); //save to match table
-
-		foreach ($matchdata['player'] as $key => $player){
-			$currentPlayer = $this->player->find($player['player_id']);
-			$attributes = array(
-				"level_id" => $player['level_id'],
-				"group" => $player['group'],
-				"handicap" => $player['handicap'],
-				"winnings" => $player['winnings'],
-			);
-			$currentPlayer->matches()->save($this->match, $attributes); //save match_player pivot data
-		}// End foreach
+        //Retrieve players in group
+        $players = $this->matchRoundRepo->matchGroup($matchdata['match_id'], $matchdata['group']);
+        return $players;
     }
-
 }
