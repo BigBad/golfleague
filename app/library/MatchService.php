@@ -4,6 +4,8 @@ use GolfLeague\Storage\Match\MatchRepository;
 use GolfLeague\PrizeMoney;
 use \Player;
 use \Match;
+use Illuminate\Events\Dispatcher;
+
 /**
 * Our MatchService, containing all useful methods for business logic around Matches
 */
@@ -18,12 +20,13 @@ class MatchService
     * @param MatchRepository $matchRepo
     * @return MatchService
     */
-    public function __construct(MatchRepository $matchRepo, PrizeMoney $prizeMoney, Player $player, Match $match)
+    public function __construct(MatchRepository $matchRepo, PrizeMoney $prizeMoney, Player $player, Match $match, Dispatcher $events)
     {
         $this->matchRepo = $matchRepo;
         $this->prizeMoney = $prizeMoney;
         $this->player = $player;
         $this->match = $match;
+        $this->events = $events;
     }
 
     /**
@@ -51,7 +54,9 @@ class MatchService
             $matchdata['player'][$key]['winnings'] = 0;
         }// End foreach
 
-        $this->matchRepo->create($matchdata);
+        $matchid = $this->matchRepo->create($matchdata);
+        $matchdata['match_id'] = $matchid;
+        $this->events->fire('match.create', array($matchdata));
     }
 
     /**
