@@ -5,12 +5,8 @@ use GolfLeague\Storage\Round\RoundRepository as Round;
 use GolfLeague\Handicap;
 use GolfLeague\PrizeMoney;
 
-class TestController extends \BaseController {
-
-    /**
-     * The layout that should be used for responses.
-     */
-    protected $layout = 'master';
+class TestController extends \BaseController
+{
 
     public function __construct(Round $round, Holescore $holescore, EquitableStrokeControl $esc)
     {
@@ -26,7 +22,7 @@ class TestController extends \BaseController {
      */
     public function view()
     {
-        return View::make('test');
+        return View::make('template.base');
         //return View::make('test');
         /*test Handicap
         $player = \Player::find(2);
@@ -35,12 +31,12 @@ class TestController extends \BaseController {
         */
 
         /*test ESC
-        
+
         $holescore = \Holescore::find(2);
         $esc = new EquitableStrokeControl($holescore);
         return $esc->calculate();
         */
-		
+
 		/* Update 2014 rounds to include courses
 		$holescores =  Holescore::all();
 		foreach ($holescores as $holescore) {

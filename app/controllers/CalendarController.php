@@ -2,21 +2,29 @@
 
 use GolfLeague\Services\MatchService as MatchService;
 
-class MatchesController extends \BaseController {
+class CalendarController extends \BaseController {
 
-    public function __construct(MatchService $match)
+	public function __construct(MatchService $match)
     {
         $this->match = $match;
     }
 
-	/**
+    /**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
 	public function index()
 	{
-		//
+		dd($this->match->getByDate(Input::get('start')));
+
+        return array( array(
+            'title' => 'Match',
+            'start' => '2015-03-04'
+            )
+        );
+        return Input::all();
+
 	}
 
 
@@ -27,9 +35,9 @@ class MatchesController extends \BaseController {
 	 */
 	public function create()
 	{
-		$view = View::make('creatematch');
-        return $view;
+		//
 	}
+
 
 	/**
 	 * Store a newly created resource in storage.
@@ -38,9 +46,7 @@ class MatchesController extends \BaseController {
 	 */
 	public function store()
 	{
-		$input = Input::all();
-		return $this->match->create($input);
-
+		//
 	}
 
 
@@ -52,10 +58,7 @@ class MatchesController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$data = $this->match->get($id);
-		//return $data;
-		$view = View::make('EnterMatch', $data);
-        return $view;
+		//
 	}
 
 
@@ -93,5 +96,6 @@ class MatchesController extends \BaseController {
 	{
 		//
 	}
+
 
 }

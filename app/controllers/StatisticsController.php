@@ -1,13 +1,6 @@
 <?php
 
-use GolfLeague\Services\MatchService as MatchService;
-
-class MatchesController extends \BaseController {
-
-    public function __construct(MatchService $match)
-    {
-        $this->match = $match;
-    }
+class StatisticsController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -16,7 +9,7 @@ class MatchesController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		return View::make('statistics');
 	}
 
 
@@ -27,9 +20,9 @@ class MatchesController extends \BaseController {
 	 */
 	public function create()
 	{
-		$view = View::make('creatematch');
-        return $view;
+		//
 	}
+
 
 	/**
 	 * Store a newly created resource in storage.
@@ -38,9 +31,7 @@ class MatchesController extends \BaseController {
 	 */
 	public function store()
 	{
-		$input = Input::all();
-		return $this->match->create($input);
-
+		//
 	}
 
 
@@ -52,10 +43,7 @@ class MatchesController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$data = $this->match->get($id);
-		//return $data;
-		$view = View::make('EnterMatch', $data);
-        return $view;
+		//
 	}
 
 
@@ -93,5 +81,6 @@ class MatchesController extends \BaseController {
 	{
 		//
 	}
+
 
 }

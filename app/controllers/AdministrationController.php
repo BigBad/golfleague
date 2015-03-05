@@ -7,14 +7,13 @@ class AdministrationController extends \BaseController {
      *
      * @return Response
      */
-    public function view()
+    public function index()
     {
-        $view = View::make('Administration');
-        return $view;
+        return View::make('administration');
     }
 
     /**
-   
+
     /**
      * Remove the specified resource from storage.
      *
