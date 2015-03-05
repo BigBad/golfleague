@@ -7,6 +7,11 @@ use GolfLeague\PrizeMoney;
 
 class TestController extends \BaseController {
 
+    /**
+     * The layout that should be used for responses.
+     */
+    protected $layout = 'master';
+
     public function __construct(Round $round, Holescore $holescore, EquitableStrokeControl $esc)
     {
         $this->round = $round;
@@ -21,6 +26,7 @@ class TestController extends \BaseController {
      */
     public function view()
     {
+        return View::make('test');
         //return View::make('test');
         /*test Handicap
         $player = \Player::find(2);
