@@ -71,4 +71,9 @@ class MatchService
         return $matchdata;
     }
 
+    public function getByDate($date)
+	{
+		 return $this->matchRepo->getByDate($date);
+	}
+
 }

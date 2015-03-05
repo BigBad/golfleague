@@ -10,11 +10,15 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+Route::get('/', function()
+{
+    return View::make('home'); //make a home page
+});
 
 Route::get('test', 'TestController@view');
 
 
-Route::get('administration', 'AdministrationController@view');
+//Route::get('administration', 'AdministrationController@view');
 
 Route::get('enterscore', 'ScoreController@view');
 Route::post('storescore', 'ScoreController@store');
@@ -43,3 +47,8 @@ Route::resource('matches', 'MatchesController');
 Route::resource('courses', 'CoursesController');
 Route::resource('levels', 'LevelsController');
 Route::resource('matchrounds', 'MatchRoundController');
+Route::resource('statistics', 'StatisticsController');
+Route::resource('schedule', 'ScheduleController');
+Route::resource('leaderboard', 'LeaderboardController');
+Route::resource('administration', 'AdministrationController');
+Route::resource('calendar', 'CalendarController');

@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'default' => 'mysql',
+	'default' => 'pgsql',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -65,9 +65,9 @@ return array(
 
 		'pgsql' => array(
 			'driver'   => 'pgsql',
-			'host'     => 'localhost',
-			'database' => 'database',
-			'username' => 'root',
+			'host'     => '10.10.2.3',
+			'database' => 'golfleague',
+			'username' => 'postgres',
 			'password' => '',
 			'charset'  => 'utf8',
 			'prefix'   => '',
