@@ -71,9 +71,9 @@ class MatchService
         return $matchdata;
     }
 
-    public function getByDate($date)
+    public function getByDate($startDate, $endDate)
 	{
-		 return $this->matchRepo->getByDate($date);
+		 return $this->matchRepo->getByDate($startDate, $endDate);
 	}
 
 }

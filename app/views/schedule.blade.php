@@ -49,7 +49,11 @@
         // page is now ready, initialize the calendar...
         $('#calendar').fullCalendar({
             events: '{{URL::to('/')}}/calendar',
-            cache: true
+            cache: true,
+            eventClick: function(calEvent, jsEvent, view) {
+            alert(calEvent.id);
+
+            }
         })
     });
 </script>

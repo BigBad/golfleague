@@ -16,11 +16,13 @@ class CalendarController extends \BaseController {
 	 */
 	public function index()
 	{
-		dd($this->match->getByDate(Input::get('start')));
+		return $this->match->getByDate(Input::get('start'), Input::get('end'));
 
         return array( array(
+            'id' => 1,
             'title' => 'Match',
-            'start' => '2015-03-04'
+            'start' => '2015-03-04',
+            'url' => 'matches/19?group=1'
             )
         );
         return Input::all();
