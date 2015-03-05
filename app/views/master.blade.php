@@ -5,11 +5,11 @@
     <title>AdminLTE</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- bootstrap 3.2.0 -->
-    <link href=<?php echo asset('LTE/bootstrap/css/bootstrap.min.css')?> rel="stylesheet" type="text/css" />
+    <link href="<?php echo asset('LTE/bootstrap/css/bootstrap.min.css')?>" rel="stylesheet" type="text/css" />
     <!-- Font Awesome Icons -->
-    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo asset('LTE/dist/css/font-awesome.min.css') ?>" rel="stylesheet" type="text/css" />
     <!-- Ionicons -->
-    <link href="//code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+     <link href="<?php echo asset('LTE/dist/css/ionicons.min.css') ?>" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
     <link href="<?php echo asset('LTE/dist/css/AdminLTE.css')?>" rel="stylesheet" type="text/css" />
 
@@ -29,4 +29,6 @@
             @yield('content')
         </div>
     </body>
+
+
 </html>

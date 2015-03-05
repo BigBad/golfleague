@@ -22,7 +22,7 @@ class CalendarController extends \BaseController {
             'id' => 1,
             'title' => 'Match',
             'start' => '2015-03-04',
-            'url' => 'matches/19?group=1'
+            'url' => 'matches/1?group=1'
             )
         );
         return Input::all();
