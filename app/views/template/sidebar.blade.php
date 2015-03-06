@@ -12,13 +12,13 @@
                 </li>
                 <li class="treeview">
                     <a href="{{ URL::to('leaderboard') }}">
-                        <i class="fa fa-money"></i>
+                        <i class="fa fa-usd"></i>
                         <span>Leaderboard</span>
                     </a>
                 </li>
-                <li class="treeview">
+                <li class="treeview" id="sidenav-statistics">
                     <a href="{{ URL::to('statistics') }}">
-                        <i class="fa fa-pie-chart"></i>
+                        <i class="fa fa-bar-chart"></i>
                         <span>Statistics</span>
                     </a>
                 </li>
@@ -28,9 +28,19 @@
                         <span>Administration</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
-                    <ul class="treeview-menu">
-                        <li><a href="{{ URL::to('matches/create') }}">Create Match</a></li>
-                        <li><a href="{{ URL::to('administration') }}">Add Players</a></li>
+                    <ul class="treeview-menu" >
+                        <li>
+                            <a href="{{ URL::to('matches/create') }}" style="margin-left: 10px;">
+                                <i class="fa fa-save"></i>
+                                <span>Create Match</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ URL::to('administration') }}" style="margin-left: 10px;">
+                                <i class="fa fa-user-plus"></i>
+                                <span>Players/Courses</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
             </ul>

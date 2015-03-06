@@ -50,7 +50,7 @@ class PlayersController extends \BaseController {
         switch ($operation) {
         case "add":
             $this->player->name = Input::get('name');
-            $this->player->save();            
+            $this->player->save();
             break;
         case "edit":
             $id = Input::get('id');

@@ -37,7 +37,7 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>@yield('page-header')</h1>
-                <ol class="breadcrumb">@yield('breadcrumb')</ol>
+
             </section>
 
             <!-- Main content -->

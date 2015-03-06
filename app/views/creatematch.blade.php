@@ -19,45 +19,46 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-4">
-            <div class="box">
+        <div class="col-md-5">
+            <div class="box box-success">
                 <div class="box-header no-padding">
-
                 </div>{{-- end .box-header --}}
-                <div class="box-body no-padding">
+                <div class="box-body">
                     <form role="form" id="scoreForm">
                         <div id="class="form-group">
                             <label for="date">Date:</label>
                             <input class="form-control" type="text" id="date" class="ui-corner-all" name="date" />
                         </div>
-                        <div id="class="form-group">
-                            <label for="course">Course:</label>
-                            <select class="form-control" name="course" class="ui-corner-all" id="course">
-                                <option></option>
-                            </select>
-                        </div>
-                        <div id="class="form-group">
-                            <label for="players">Number of players:</label>
-                            <select class="form-control" name="players" class="ui-corner-all" id="players">
-                                <option></option>
-                            </select>
-                        </div>
-                        <div id="class="form-group">
-                            <div id="pursediv">
-                            <label for="purse">Purse:</label>
-                            <input class="form-control" type="text" name="purse" class="ui-corner-all" id="purse" readonly />
-                        </div>
-                        </div>
-
-                        <div name="playersList" id="playersList"></div>
-                        <input class="btn btn-success btn-sm" type="button" id="submitForm" onclick="submitScoreForm();" value="Create League Match" />
+						<div id="class="form-group">
+							<label for="course">Course:</label>
+							<select class="form-control" name="course" class="ui-corner-all" id="course">
+								<option></option>
+							</select>
+						</div>
+						<div id="class="form-group" >
+							<label for="players">Number of players:</label>
+							<select class="form-control" name="players" class="ui-corner-all" id="players" >
+								<option></option>
+							</select>
+						</div>
+						<div id="class="form-group">
+							<div id="pursediv">
+								<label for="purse">Purse:</label>
+								<input class="form-control" type="text" name="purse" class="ui-corner-all" id="purse" readonly />
+							</div>
+						</div>
+						</br>
+						<div id="class="form-group">
+							<div name="playersList" id="playersList"></div>
+						</div>
                     </form>
                 </div>{{-- end .box-body --}}
+					<div class="box-footer">
+						<input class="btn btn-success btn-sm" type="button" id="submitForm" onclick="submitScoreForm();" value="Create" />
+					</div>
             </div>{{-- end .box.box-primary --}}
         </div>{{-- end .col-md-5 --}}
     </div>{{-- end .row --}}
-
-
 
 @stop
 
