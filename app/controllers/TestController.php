@@ -2,6 +2,7 @@
 
 use GolfLeague\EquitableStrokeControl;
 use GolfLeague\Storage\Round\RoundRepository as Round;
+use GolfLeague\Storage\HoleScore\HoleScoreRepository as Holescore;
 use GolfLeague\Handicap;
 use GolfLeague\PrizeMoney;
 
@@ -22,7 +23,9 @@ class TestController extends \BaseController
      */
     public function view()
     {
-        return View::make('template.base');
+        return $this->holescore->all();
+		return \Round::with('course.holes')->get();
+		return View::make('template.base');
         //return View::make('test');
         /*test Handicap
         $player = \Player::find(2);

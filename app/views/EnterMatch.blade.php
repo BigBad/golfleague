@@ -6,6 +6,7 @@
 
 @section('first-css')
     <link rel="stylesheet" href="<?php echo asset('jqGrid-4.5.4/css/ui.jqgrid.css')?>" />
+    <link rel="stylesheet" href="<?php echo asset('LTE/plugins/datatables/dataTables.bootstrap.css')?>" />
 @stop
 
 @section('page-header')
@@ -19,19 +20,16 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-6">
-            <div class="box">
-                <div class="box-header no-padding">
-                </div>{{-- end .box-header --}}
-
-                <div class="box box-success collapsed-box">
+        <div class="col-md-3">
+            <div class="box box-success collapsed-box">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Course Info</h3>
+                        <h3 class="box-title">{{$course['name']}}</h3>
                         <div class="box-tools pull-right">
                             <button data-widget="collapse" class="btn btn-box-tool"><i class="fa fa-plus"></i></button>
+                            <button data-widget="remove" class="btn btn-box-tool"><i class="fa fa-times"></i></button>
                         </div><!-- /.box-tools -->
                     </div><!-- /.box-header -->
-                    <div class="box-body" style="display: none;">
+                <div class="box-body table-responsive" style="display: none;">
                         <table id="courseInfo" class="display" cellspacing="0" width="100%">
                             <thead>
                             <tr>
@@ -43,20 +41,127 @@
                         </table>
                     </div><!-- /.box-body -->
                 </div>
+        </div>{{-- end .col-md-3 --}}
+    </div>{{-- end .row --}}
 
-                <div class="box-body no-padding">
+
+
+    <div class="row">
+        <div class="col-md-7">
+
+            <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title">Group 1 TEST</h3>
+                  <div class="box-tools">
+
+                  </div>
+                </div><!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                  <table class="table table-hover">
+                    <tbody><tr>
+                        <th>Player</th>
+                        <th>Hole 1</th>
+                        <th>Hole 2</th>
+                        <th>Hole 3</th>
+                        <th>Hole 4</th>
+                        <th>Hole 5</th>
+                        <th>Hole 6</th>
+                        <th>Hole 7</th>
+                        <th>Hole 8</th>
+                        <th>Hole 9</th>
+                    </tr>
+                    <tr>
+                      <td>Player</td>
+                      <td>4</td>
+                      <td>4</td>
+                      <td>4</td>
+                      <td>4</td>
+                      <td>4</td>
+                      <td>4</td>
+                      <td>4</td>
+                      <td>4</td>
+                      <td>4</td>
+                    </tr>
+                    <tr>
+                    <td>Player</td>
+                      <td>4</td>
+                      <td>4</td>
+                      <td>4</td>
+                      <td>4</td>
+                      <td>4</td>
+                      <td>4</td>
+                      <td>4</td>
+                      <td>4</td>
+                      <td>4</td>
+                    </tr>
+                    <tr>
+                    <td>Player</td>
+                      <td>4</td>
+                      <td>4</td>
+                      <td>4</td>
+                      <td>4</td>
+                      <td>4</td>
+                      <td>4</td>
+                      <td>4</td>
+                      <td>4</td>
+                      <td>4</td>
+                    </tr>
+                    <tr>
+                    <td>Player</td>
+                      <td>4</td>
+                      <td>4</td>
+                      <td>4</td>
+                      <td>4</td>
+                      <td>4</td>
+                      <td>4</td>
+                      <td>4</td>
+                      <td>4</td>
+                      <td>4</td>
+                    </tr>
+                  </tbody></table>
+                </div><!-- /.box-body -->
+              </div>
+
+            <div class="box box-success">
+                <div class="box-header">
+                  <h3 class="box-title">Group 1</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body table-responsive">
                     <table id="group1Grid"></table>
                     <div id="group1Pager"></div>
-                    <br>
+                </div><!-- /.box-body -->
+                <div class="box-footer clearfix">
+                </div>
+            </div>
+
+            <div class="box box-success">
+                <div class="box-header">
+                  <h3 class="box-title">Group 2</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body table-responsive">
                     <table id="group2Grid"></table>
                     <div id="group2Pager"></div>
-                    <br>
+                </div><!-- /.box-body -->
+                <div class="box-footer clearfix">
+                </div>
+            </div>
+
+            <div class="box box-success">
+                <div class="box-header">
+                  <h3 class="box-title">Group 3</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body table-responsive">
                     <table id="group3Grid"></table>
                     <div id="group3Pager"></div>
-                </div>{{-- end .box-body --}}
-            </div>{{-- end .box.box-primary --}}
-        </div>{{-- end .col-md-5 --}}
-    </div>{{-- end .row --}}
+                </div><!-- /.box-body -->
+                <div class="box-footer clearfix">
+                </div>
+            </div>
+
+
+
+        </div>{{-- end .col-md-6 --}}
+</div>{{-- end .row --}}
 
 @stop
 
@@ -68,6 +173,7 @@
 
     <script src="<?php echo asset('jqGrid-4.5.4/js/i18n/grid.locale-en.js')?>" type="text/javascript"></script>
     <script src="<?php echo asset('jqGrid-4.5.4/js/jquery.jqGrid.min.js')?>" type="text/javascript"></script>
+    <script src="<?php echo asset('LTE/plugins/datatables/jquery.dataTables.js')?>" type="text/javascript"></script>
 
     <script>
         $(document).ready(function () {
@@ -173,23 +279,6 @@
 
 @section('onload')
     <script>
-    $('#example').dataTable( {
-    "ajax": "data/objects.txt",
-    "columns": [
-    { "data": "name" },
-    { "data": "position" },
-    { "data": "office" },
-    { "data": "extn" },
-    { "data": "start_date" },
-    { "data": "salary" }
-    ]
-    } );
+
     </script>
     @stop
-
-
-
-
-
-
-

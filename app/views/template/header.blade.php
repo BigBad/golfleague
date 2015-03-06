@@ -11,16 +11,56 @@
             </a>
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
+
+
+                <!-- Tasks: style can be found in dropdown.less -->
+        <li class="dropdown tasks-menu">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="fa fa-flag-o"></i>
+            <span class="label label-danger">2</span>
+          </a>
+          <ul class="dropdown-menu">
+            <li class="header"></li>
+            <li>
+              <!-- inner menu: contains the actual data -->
+              <ul class="menu">
+                <li><!-- Task item -->
+                  <a href="#">
+                    <h3>
+                      Schmidt made a birde on #3
+                      <small class="pull-right"></small>
+                    </h3>
+
+                  </a>
+                </li><!-- end task item -->
+                <li><!-- Task item -->
+                  <a href="#">
+                    <h3>
+                      Hutter made double bogey on #3
+                      <small class="pull-right"></small>
+                    </h3>
+
+                  </a>
+                </li><!-- end task item -->
+              </ul>
+            </li>
+            <li class="footer">
+              <a href="#"></a>
+            </li>
+          </ul>
+        </li>
+
+
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
+
                             <span class="hidden-xs">Michael Schmidt</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                                <img src="<?php echo asset('')?>" class="img-circle" alt="User Image" />
                                 <p>
                                     Alexander Pierce - Web Developer
                                     <small>Member since Nov. 2012</small>
