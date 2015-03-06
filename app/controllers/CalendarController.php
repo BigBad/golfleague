@@ -1,12 +1,12 @@
 <?php
 
-use GolfLeague\Services\MatchService as MatchService;
+use GolfLeague\Services\CalendarService as CalendarService;
 
 class CalendarController extends \BaseController {
 
-	public function __construct(MatchService $match)
+	public function __construct(CalendarService $calendar)
     {
-        $this->match = $match;
+        $this->calendar = $calendar;
     }
 
     /**
@@ -16,7 +16,7 @@ class CalendarController extends \BaseController {
 	 */
 	public function index()
 	{
-		return $this->match->getByDate(Input::get('start'), Input::get('end'));
+		return $this->calendar->getByDate(Input::get('start'), Input::get('end'));
 
         return array( array(
             'id' => 1,

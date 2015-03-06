@@ -51,7 +51,7 @@
             events: '{{URL::to('/')}}/calendar',
             cache: true,
             eventClick: function(calEvent, jsEvent, view) {
-            alert(calEvent.id);
+            
 
             }
         })

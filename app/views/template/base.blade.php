@@ -10,6 +10,8 @@
     <link href="<?php echo asset('LTE/plugins/font-awesome-4.3.0/css/font-awesome.min.css')?>" rel="stylesheet" type="text/css" />
     <!-- Ionicons -->
     <link href="<?php echo asset('LTE/plugins/ionicons-2.0.1/css/ionicons.min.css')?>" rel="stylesheet" type="text/css" />
+    <!-- Datatables -->
+    <link href="<?php echo asset('LTE/plugins/datatables/dataTables.bootstrap.css')?>" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
     <link href="<?php echo asset('LTE/dist/css/AdminLTE.min.css')?>" rel="stylesheet" type="text/css" />
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -54,6 +56,8 @@
 <script src=<?php echo asset('LTE/plugins/slimScroll/jquery.slimscroll.min.js')?> type="text/javascript"></script>
 <!-- FastClick -->
 <script src=<?php echo asset('LTE/plugins/fastclick/fastclick.min.js')?>></script>
+<!-- DataTables -->
+<script src=<?php echo asset('LTE/plugins/datatables/jquery.dataTables.js')?>></script>
 <!-- AdminLTE App -->
 <script src=<?php echo asset('LTE/dist/js/app.min.js')?> type="text/javascript"></script>
 @yield('include-js', '')

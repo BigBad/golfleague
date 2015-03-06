@@ -11,7 +11,7 @@ use Illuminate\Events\Dispatcher;
 */
 class MatchService
 {
-    // Containing our pokemonRepository to make all our database calls to
+    // Containing our matchRepository to make all our database calls to
     protected $matchRepo;
 
     /**
@@ -71,9 +71,5 @@ class MatchService
         return $matchdata;
     }
 
-    public function getByDate($startDate, $endDate)
-	{
-		 return $this->matchRepo->getByDate($startDate, $endDate);
-	}
 
 }
