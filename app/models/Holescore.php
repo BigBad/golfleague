@@ -1,8 +1,11 @@
 <?php
 
 class Holescore extends Eloquent {
-	
-	public function round()
+
+    protected $guarded = array('id');
+    protected $fillable = array('score', 'hole_id', 'round_id' );
+
+    public function round()
     {
         return $this->belongsTo('Round');
     }

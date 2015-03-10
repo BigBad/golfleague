@@ -34,21 +34,35 @@ class RoundHandler
     public function handle($round)
     {
         //create 9 initial holescores for a round
-
+/*
+        array (size=1)
+      0 => string 'id'
+    array (size=6)
+      0 => string 'date' (length=4)
+      1 => string 'player_id' (length=9)
+      2 => string 'course_id' (length=9)
+      3 => string 'match_id' (length=8)
+      4 => string 'score' (length=5)
+      5 => string 'esc' (length=3)
         //round object has course id
         //go get holes for the course
-        //$holes = Hole::where('course_id', '=', $round['course_id']);
+        $holes = Hole::where('course_id', '=', $round['course_id']);
 
         dd($round);
         //create input for initial holescore
+*/
+        //go get holes for the course
+        $holes = Hole::where('course_id', '=', $round['course_id'])->get();
+        foreach($holes as $hole){
+            $input = array(
+                'score' => null,
+                'hole_id' => $hole->id,
+                'match_id' => $round['id']
+            );
+            $this->holescoreRepo->create($input);
+        }
 
 
-        $input = array(
-                'score' => $round['date'],
-                'hole_id' => $round['course'],
-                'match_id' => $round['match_id'],
-                'score' => null
-        );
 
     }
 

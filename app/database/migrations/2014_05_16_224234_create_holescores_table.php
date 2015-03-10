@@ -15,7 +15,7 @@ class CreateHolescoresTable extends Migration {
 		Schema::create('holescores', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('score');
+			$table->integer('score')->nullable();
 			$table->integer('hole_id')->unsigned()->index();
 			$table->integer('round_id')->unsigned()->index();
 

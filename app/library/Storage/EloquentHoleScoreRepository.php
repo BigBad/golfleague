@@ -28,9 +28,9 @@ class EloquentHoleScoreRepository implements HoleScoreRepository
         //return Round::with('player', 'holescores')->where('player_id', '=', $playerId)->get();
     }
 
-    public function create($matchdata)
+    public function create($input)
     {
-
+        $this->holescore->create($input);
     }
 
 }
