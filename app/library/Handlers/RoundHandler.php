@@ -57,7 +57,7 @@ class RoundHandler
             $input = array(
                 'score' => null,
                 'hole_id' => $hole->id,
-                'match_id' => $round['id']
+                'round_id' => $round['id']
             );
             $this->holescoreRepo->create($input);
         }

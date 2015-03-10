@@ -71,7 +71,8 @@
         <script src="<?php echo asset('LTE/plugins/datepicker/bootstrap-datepicker.js')?>" type="text/javascript"></script>
         <script>
         $("#date").datepicker({
-            autoclose : true
+            autoclose : true,
+			todayHighlight: true
         });
 		var players = [];
 		var levels =[];
