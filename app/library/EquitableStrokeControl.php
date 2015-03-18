@@ -11,7 +11,7 @@ use \Player as Player;
 Course Handicap   Maximum Score
 4.5 or less                    Double Bogey(+2)
 5–9.5                                       7
-9.6–14.5                                   8
+9.6–14.5                                    8
 14.6–19.5                                   9
 19.6 or more                               10
 */

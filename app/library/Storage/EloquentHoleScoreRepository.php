@@ -33,4 +33,10 @@ class EloquentHoleScoreRepository implements HoleScoreRepository
         $this->holescore->create($input);
     }
 
+	public function update($id, $score)
+	{
+		$holescore = Holescore::find($id);
+		$holescore->score = $score;
+		$holescore->save();
+	}
 }

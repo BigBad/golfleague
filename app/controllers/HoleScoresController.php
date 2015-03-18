@@ -1,12 +1,14 @@
 <?php
 
+use GolfLeague\Services\ScoreService as HoleScore;
+
 class HoleScoresController extends \BaseController {
 
-	public function __construct(HoleSCore $holeScore)
+	public function __construct(HoleScore $holeScore)
     {
 		$this->holeScore = $holeScore;
     }
-	
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -61,7 +63,7 @@ class HoleScoresController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		//return $id;
 	}
 
 
@@ -73,7 +75,8 @@ class HoleScoresController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$score = Input::get('score');
+		$this->holeScore->update($id, $score);
 	}
 
 

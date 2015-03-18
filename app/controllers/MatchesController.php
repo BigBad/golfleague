@@ -53,9 +53,17 @@ class MatchesController extends \BaseController {
 	public function show($id)
 	{
 		$data = $this->match->get($id);
-		//return $data;
-		$view = View::make('EnterMatch', $data);
-        return $view;
+
+		if($data['date'] === date('Y-m-d')){
+			//Show Editable View
+		}
+		else {
+			//Show Readonly View
+			$view = View::make('EnterMatch', $data);
+			return $view;
+		}
+
+
 	}
 
 

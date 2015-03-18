@@ -3,6 +3,8 @@
 namespace GolfLeague\Handlers;
 
 use GolfLeague\Storage\Round\RoundRepository;
+use GolfLeague\Storage\HoleScore\HoleScoreRepository;
+
 
 /**
  * MatchHandler Connection Class
@@ -11,7 +13,7 @@ use GolfLeague\Storage\Round\RoundRepository;
  *
  * @author          Michael Schmidt
  */
-class MatchHandler
+class HoleScoreHandler
 {
     /**
      * Create a new instance of the MatchHandler
@@ -19,9 +21,10 @@ class MatchHandler
      * @param  GolfLeague\Storage\Round\RoundRepository $roundRepo
      * @return void
      */
-    public function __construct(RoundRepository $roundRepo)
+    public function __construct(RoundRepository $roundRepo, HoleScoreRepository $holescoreRepo)
     {
-        $this->roundRepo = $roundRepo;
+        $this->roundRepo= $roundRepo;
+        $this->holescoreRepo = $holescoreRepo;
     } // End of __construct
 
     /**
@@ -30,21 +33,13 @@ class MatchHandler
      * @param  Match $match
      * @return void
      */
-    public function handle($match)
+    public function handle($holescore)
     {
-        //for each player create an initial round
+        echo 'here';
+        //var_dump($holescore);
 
-        $input = array(
-                'date' => $match['date'],
-                'course_id' => $match['course'],
-                'match_id' => $match['match_id'],
-                'score' => 0,
-                'esc' =>0
-        );
-        foreach($match['player'] as $player){
-            $input['player_id'] = $player['player_id'];
-            $this->roundRepo->create($input);
-        }
+        // use holescore->round_id to get all holescores for that round
+
     }
 
     /**
@@ -55,6 +50,6 @@ class MatchHandler
      */
     public function subscribe($events)
     {
-        $events->listen('match.create', 'GolfLeague\Handlers\MatchHandler');
+        $events->listen('eloquent.updated: Holescore', 'GolfLeague\Handlers\HoleScoreHandler');
     }
 }
