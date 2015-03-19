@@ -1,22 +1,23 @@
 <?php
 
-use GolfLeague\Services\MatchService as MatchService;
+use GolfLeague\Services\LeaderboardService;
 
-class MatchesController extends \BaseController {
 
-    public function __construct(MatchService $match)
+class LiveLeaderboardController extends \BaseController {
+
+	public function __construct(LeaderboardService $leaderboard)
     {
-        $this->match = $match;
+        $this->leaderboard = $leaderboard;
     }
 
-	/**
+    /**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
 	public function index()
 	{
-		//
+		return 'LIVE!';
 	}
 
 
@@ -27,9 +28,9 @@ class MatchesController extends \BaseController {
 	 */
 	public function create()
 	{
-		$view = View::make('creatematch');
-        return $view;
+		//
 	}
+
 
 	/**
 	 * Store a newly created resource in storage.
@@ -38,9 +39,7 @@ class MatchesController extends \BaseController {
 	 */
 	public function store()
 	{
-		$input = Input::all();
-		return $this->match->create($input);
-
+		//
 	}
 
 
@@ -52,19 +51,11 @@ class MatchesController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$data = $this->match->get($id);
+        $match = Input::get('match');
+        $type = $id;
 
-		if($data['date'] === date('Y-m-d')){
-			//Show Editable View
-			$view = View::make('EnterMatch', $data);
-			return $view;
-		}
-		else {
-			//Show Readonly View //This needs created
-			$view = View::make('EnterMatch', $data);
-			return $view;
-		}
-
+        //return net or gross leaderboard for live scoring
+        return $this->leaderboard->calculate($match,$type);
 
 	}
 
@@ -103,5 +94,6 @@ class MatchesController extends \BaseController {
 	{
 		//
 	}
+
 
 }

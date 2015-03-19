@@ -52,3 +52,4 @@ Route::resource('schedule', 'ScheduleController');
 Route::resource('leaderboard', 'LeaderboardController');
 Route::resource('administration', 'AdministrationController');
 Route::resource('calendar', 'CalendarController');
+Route::resource('liveleaderboard', 'LiveLeaderboardController');

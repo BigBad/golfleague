@@ -43,7 +43,6 @@ class EquitableStrokeControl {
         if($holescore > $maxScore) {
             return $maxScore;
         }
-
         return $holescore;
 
     }

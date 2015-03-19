@@ -8,5 +8,6 @@ interface HoleScoreRepository {
   public function find($id);
   public function create($input);
   public function update($id, $score);
+  public function getByRound($roundId);
 
 }

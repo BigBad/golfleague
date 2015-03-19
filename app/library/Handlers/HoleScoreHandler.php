@@ -4,7 +4,7 @@ namespace GolfLeague\Handlers;
 
 use GolfLeague\Storage\Round\RoundRepository;
 use GolfLeague\Storage\HoleScore\HoleScoreRepository;
-
+use GolfLeague\EquitableStrokeControl;
 
 /**
  * MatchHandler Connection Class
@@ -35,11 +35,17 @@ class HoleScoreHandler
      */
     public function handle($holescore)
     {
-        echo 'here';
-        //var_dump($holescore);
-
-        // use holescore->round_id to get all holescores for that round
-
+        // Update score and esc in round table
+        $holescores = $this->holescoreRepo->getByRound($holescore->round_id);
+        $escTotal = 0;
+        foreach($holescores as $hole) {
+            $esc = new EquitableStrokeControl($hole);
+            $escTotal += $esc->calculate();
+        }
+        $round = $this->roundRepo->find($holescore->round_id);
+        $round->score = $holescores->sum('score');
+        $round->esc = $escTotal;
+        $this->roundRepo->update($round);
     }
 
     /**

@@ -31,10 +31,10 @@ class MatchHandler
      * @param  Match $match
      * @return void
      */
-    public function handle($holescore)
+    public function handle($match)
     {
         //for each player create an initial round
-
+        echo('here');
         //var_dump($holescore);
         $input = array(
         'date' => $match['date'],
@@ -60,6 +60,6 @@ class MatchHandler
      */
     public function subscribe($events)
     {
-        $events->listen('match.create: Holescore', 'GolfLeague\Handlers\HoleScoreHandler');
+        $events->listen('match.create', 'GolfLeague\Handlers\MatchHandler');
     }
 }

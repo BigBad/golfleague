@@ -22,10 +22,10 @@ class EloquentHoleScoreRepository implements HoleScoreRepository
         return $this->holescore->all();
     }
 
-    //Find Scores by Player Id
+
     public function find($id)
     {
-        //return Round::with('player', 'holescores')->where('player_id', '=', $playerId)->get();
+        return Holescore::find($id);
     }
 
     public function create($input)
@@ -35,8 +35,13 @@ class EloquentHoleScoreRepository implements HoleScoreRepository
 
 	public function update($id, $score)
 	{
-		$holescore = Holescore::find($id);
+		$holescore = $this->find($id);
 		$holescore->score = $score;
 		$holescore->save();
+	}
+
+	public function getByRound($roundId)
+	{
+		return $this->holescore->where('round_id', '=', $roundId)->orderBy('id', 'ASC')->get();
 	}
 }
