@@ -24,18 +24,7 @@ class EloquentMatchRoundRepository implements MatchRoundRepository
     // Return data is sorted by the order of the holes of the round
     public function getByMatch($matchid)
     {
-        return Round::with('player', 'holescores')->where('match_id', '=', $matchid)->get();
-    }
-
-    // Retrieve Rounds of a match with holescores
-    // Return data is sorted by the order of the holes of the round
-    public function getByMatchAndGroup($matchid, $group)
-    {
-        $match = Match::find($matchid);
-        foreach ($match->players as $player){
-            echo $player->pivot->group;
-        }
-        //return Round::with('player', 'holescores')->where('match_id', '=', $matchid)->where('group', '=', $groupid)->get();
+		return Round::with('player', 'holescores')->where('match_id', '=', $matchid)->get();
     }
 
     public function create($matchdata)

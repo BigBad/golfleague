@@ -2,20 +2,20 @@
 
 namespace GolfLeague\Services;
 
-use GolfLeague\Storage\Round\RoundRepository as Round;
+use GolfLeague\Storage\MatchRound\MatchRoundRepository as MatchRound;
 use \Course;
 
 class LeaderboardService
 {
-	public function __construct(Round $roundRepo)
+	public function __construct(MatchRound $matchRoundRepo)
     {
-        $this->roundRepo = $roundRepo;
+        $this->matchround = $matchRoundRepo;
     }
 
 	public function calculate($matchId, $type)
 	{
 
-		$rounds = $this->roundRepo->findByMatch($matchId);
+		$rounds = $this->matchround->getByMatch($matchId);
 		$leaderboard = array();
 		foreach ($rounds as $round){
 			$i = 0;
