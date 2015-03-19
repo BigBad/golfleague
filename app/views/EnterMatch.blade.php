@@ -118,19 +118,19 @@
                                                         }
                                                 }
                                             ]
-                            },
+                            }
 
                         },
                         { label: 'Hole 2', name: 'round.0.holescores.1.score', width: 37, editable: true,
                             edittype: 'select',
-                             editoptions : { value: scores,
+                            editoptions : { value: scores,
                                             dataEvents : [
                                                 { type: 'change', fn: function (e) {
                                                             getValue(e);
                                                         }
                                                 }
                                             ]
-                            },
+                            }
                         },
                         { label: 'Hole 3', name: 'round.0.holescores.2.score', width: 37, editable: true,
                             edittype: 'select',
@@ -141,7 +141,7 @@
                                                         }
                                                 }
                                             ]
-                            },
+                            }
                         },
                         { label: 'Hole 4', name: 'round.0.holescores.3.score', width: 37, editable: true,
                             edittype: 'select',
@@ -152,7 +152,7 @@
                                                         }
                                                 }
                                             ]
-                            },
+                            }
                         },
                         { label: 'Hole 5', name: 'round.0.holescores.4.score', width: 37, editable: true,
                             edittype: 'select',
@@ -163,7 +163,7 @@
                                                         }
                                                 }
                                             ]
-                            },
+                            }
                         },
                         { label: 'Hole 6', name: 'round.0.holescores.5.score', width: 37, editable: true,
                             edittype: 'select',
@@ -174,7 +174,7 @@
                                                         }
                                                 }
                                             ]
-                            },
+                            }
                         },
                         { label: 'Hole 7', name: 'round.0.holescores.6.score', width: 37, editable: true,
                             edittype: 'select',
@@ -185,7 +185,7 @@
                                                         }
                                                 }
                                             ]
-                            },
+                            }
                         },
                         { label: 'Hole 8', name: 'round.0.holescores.7.score', width: 37, editable: true,
                             edittype: 'select',
@@ -196,7 +196,7 @@
                                                         }
                                                 }
                                             ]
-                            },
+                            }
                         },
                         { label: 'Hole 9', name: 'round.0.holescores.8.score', width: 37, editable: true,
                             edittype: 'select',
@@ -207,7 +207,7 @@
                                                         }
                                                 }
                                             ]
-                            },
+                            }
                         }
 
                     ],
@@ -282,9 +282,15 @@
                 });
             }
         });
-
-
-
+                /* uncomment in production for refresh grid
+                intervalId = setInterval(
+                        function() {
+                            $("#group1Grid" ).trigger("reloadGrid");
+                            $("#group2Grid" ).trigger("reloadGrid");
+                            $("#group3Grid" ).trigger("reloadGrid");
+                        },
+                        30000); // 300 sec === 5 min
+                */
         function get(name){
             if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
                 return decodeURIComponent(name[1]);
