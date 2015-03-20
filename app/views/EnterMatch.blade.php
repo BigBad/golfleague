@@ -100,6 +100,53 @@
 
     <script>
         $(document).ready(function () {
+
+            var grossTable = $('#grossTable').DataTable( {
+                "scrollY":        "200px",
+                "bFilter": false,
+                "bPaginate": false,
+                "bInfo": false,
+                "bSort": false,
+                "bAutoWidth": false,
+                "ajax": {
+                    "url": "{{URL::to('/')}}/liveleaderboard/gross?match={{$id}}",
+                    "type": "GET"
+                },
+                "columns": [
+                    { "data": "name" },
+                    { "data": function(data){
+                            if (data.score === 0) {
+                                return "E";
+                            }
+                            else
+                                return data.score;
+                    }}
+                ]
+            });
+
+            var netTable = $('#netTable').DataTable( {
+                "scrollY":        "200px",
+                "bFilter": false,
+                "bPaginate": false,
+                "bInfo": false,
+                "bSort": false,
+                "bAutoWidth": false,
+                "ajax": {
+                    "url": "{{URL::to('/')}}/liveleaderboard/net?match={{$id}}",
+                    "type": "GET"
+                },
+                "columns": [
+                    { "data": "name" },
+                    { "data": function(data){
+                            if (data.score === 0) {
+                                return "E";
+                            }
+                            else
+                                return data.score;
+                    }}
+                ]
+            });
+
             var groupId = get('group');
             var scores = {'': '','1':'1','2':'2','3':'3','4':'4','5':'5','6':'6','7':'7','8':'8','9':'9','10':'10','11':'11','12':'12'};
             for (i = 1; i < 4; i++) {
@@ -279,6 +326,8 @@
                     $("#group1Grid" ).trigger("reloadGrid");
                     $("#group2Grid" ).trigger("reloadGrid");
                     $("#group3Grid" ).trigger("reloadGrid");
+                    grossTable.ajax.reload();
+                    netTable.ajax.reload();
                 });
             }
         });
@@ -298,6 +347,12 @@
 
 
     </script>
+
+        <script>
+    $(document).ready(function() {
+
+    });
+</script>
 @stop
 
 @section('onload')

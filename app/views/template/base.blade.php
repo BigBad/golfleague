@@ -17,6 +17,8 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link href="<?php echo asset('LTE/dist/css/skins/skin-green.min.css')?>" rel="stylesheet" type="text/css" />
+    <!-- Data Tables for Leaderboard -->
+    <link href="<?php echo asset('LTE/plugins/datatables/dataTables.bootstrap.css')?>" rel="stylesheet" type="text/css" />
     @yield('first-css')
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -60,10 +62,17 @@
 <script src=<?php echo asset('LTE/plugins/datatables/jquery.dataTables.js')?>></script>
 <!-- AdminLTE App -->
 <script src=<?php echo asset('LTE/dist/js/app.min.js')?> type="text/javascript"></script>
+<!-- Data Tables for Leaderboard -->
+<script src=<?php echo asset('LTE/plugins/datatables/jquery.dataTables.js')?> type="text/javascript"></script>
+
+
 @yield('include-js', '')
 
 @yield('page-js', '')
 
 @yield('onload', '')
+
+
+
 </body>
 </html>

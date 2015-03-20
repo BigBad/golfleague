@@ -55,7 +55,8 @@ class LiveLeaderboardController extends \BaseController {
         $type = $id;
 
         //return net or gross leaderboard for live scoring
-        return $this->leaderboard->calculate($match,$type);
+		$data['data'] = $this->leaderboard->calculate($match,$type);
+        return $data;
 
 	}
 
