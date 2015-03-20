@@ -18,7 +18,7 @@ class LeaderboardService
 		$rounds = $this->matchround->getByMatch($matchId);
 		$leaderboard = array();
 		foreach ($rounds as $round){
-			$i = 0;
+            $i = 0;
 			$holescores = $round->holescores;
 				//Filter out NULL scores
 				$filteredHolecores = $holescores->filter(function($holescore){
@@ -28,13 +28,18 @@ class LeaderboardService
 				});
 			//at this point have a collection of filtered holescores
 			$holescoreCount =  $filteredHolecores->count();
-
-			$Par =  $this->currentParTotal($round->course_id, $holescoreCount);
+            if($type === 'net') {
+                $par = $this->currentParTotalNet($round->course_id, $holescoreCount, $round->player->handicap);
+                return $par;
+            }
+            elseif($type === 'gross') {
+                $par = $this->currentParTotal($round->course_id, $holescoreCount);
+            }
 			$playerScore = $filteredHolecores->sum('score');
 
 			$player = [
 				"name" => $round->player->name,
-				"score" => $playerScore - $Par,
+				"score" => $playerScore - $par,
 			];
 			array_push($leaderboard, $player);
 		}
@@ -59,6 +64,16 @@ class LeaderboardService
 		$filteredHoles =$holes->slice(0,$holesPlayed);
 		return $filteredHoles->sum('par'); // Par for given number of holes
 
+    }
+
+    public function currentParTotalNet($courseId, $holesPlayed, $handicap)
+    {
+        $handicap = round($handicap,0);
+        dd($handicap);
+        $holes = Course::find($courseId)->holes;
+        $filteredHoles =$holes->slice(0,$holesPlayed);
+        //for holes left if handicap = handicap
+        return $filteredHoles;
     }
 
 
