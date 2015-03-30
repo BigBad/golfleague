@@ -36,6 +36,12 @@
                             </a>
                         </li>
                         <li>
+                            <a href="{{ URL::to('finalize/create') }}" style="margin-left: 10px;">
+                                <i class="fa fa-calculator"></i>
+                                <span>Finalize Match</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{ URL::to('administration') }}" style="margin-left: 10px;">
                                 <i class="fa fa-user-plus"></i>
                                 <span>Players/Courses</span>

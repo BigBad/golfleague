@@ -32,7 +32,7 @@ class CalendarService
         $events->toArray();
         foreach($events as $event){
             $event['title'] = 'Match ' . $event->course->name;
-            $event['url'] = 'matches/' . $event->id . '?group=1';
+            $event['url'] = 'matches/' . $event->id . '/edit?group=1';
         }
         return $events;
     }

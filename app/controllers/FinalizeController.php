@@ -1,25 +1,15 @@
 <?php
 
-use GolfLeague\Services\CalendarService as CalendarService;
+class FinalizeController extends \BaseController {
 
-class CalendarController extends \BaseController {
-
-	public function __construct(CalendarService $calendar)
-    {
-        $this->calendar = $calendar;
-    }
-
-    /**
+	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
 	public function index()
 	{
-		return $this->calendar->getByDate(Input::get('start'), Input::get('end'));
-
-        return Input::all();
-
+		//
 	}
 
 
@@ -30,7 +20,8 @@ class CalendarController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		$view = View::make('finalizematch');
+        return $view;
 	}
 
 
@@ -41,7 +32,7 @@ class CalendarController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		return Input::all();
 	}
 
 

@@ -1,12 +1,14 @@
 <?php
 
 use GolfLeague\Services\MatchService as MatchService;
+use GolfLeague\Storage\Match\MatchRepository as MatchRepository;
 
 class MatchesController extends \BaseController {
 
-    public function __construct(MatchService $match)
+    public function __construct(MatchService $match, MatchRepository $matchRepo)
     {
         $this->match = $match;
+		$this->matchRepo = $matchRepo;
     }
 
 	/**
@@ -16,7 +18,7 @@ class MatchesController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		return $this->matchRepo->all();
 	}
 
 
@@ -52,6 +54,18 @@ class MatchesController extends \BaseController {
 	 */
 	public function show($id)
 	{
+		return $this->matchRepo->get($id);
+	}
+
+
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function edit($id)
+	{
 		$data = $this->match->get($id);
 
 		if($data['date'] === date('Y-m-d')){
@@ -64,20 +78,6 @@ class MatchesController extends \BaseController {
 			$view = View::make('EnterMatch', $data);
 			return $view;
 		}
-
-
-	}
-
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
 	}
 
 

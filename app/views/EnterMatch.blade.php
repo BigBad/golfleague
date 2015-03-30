@@ -255,7 +255,8 @@
                                                 }
                                             ]
                             }
-                        }
+                        },
+                        { label: 'Total', name: 'round.0.score', width: 37}
 
                     ],
                     width: 470,
@@ -303,7 +304,8 @@
                         { label: 'Hole 6', name: 'round.0.holescores.5.score', width: 37 },
                         { label: 'Hole 7', name: 'round.0.holescores.6.score', width: 37 },
                         { label: 'Hole 8', name: 'round.0.holescores.7.score', width: 37 },
-                        { label: 'Hole 9', name: 'round.0.holescores.8.score', width: 37 }
+                        { label: 'Hole 9', name: 'round.0.holescores.8.score', width: 37 },
+                        { label: 'Total', name: 'round.0.score', width: 37}
 
                     ],
                     viewrecords: true,
@@ -348,13 +350,12 @@
 
     </script>
 
-        <script>
-    $(document).ready(function() {
-
-    });
-</script>
 @stop
 
 @section('onload')
-
+<script>
+    $(document).ready(function() {
+        $( "#leaderboard" ).show();
+    });
+</script>
     @stop

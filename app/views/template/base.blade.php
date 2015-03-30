@@ -58,19 +58,22 @@
 <script src=<?php echo asset('LTE/plugins/slimScroll/jquery.slimscroll.min.js')?> type="text/javascript"></script>
 <!-- FastClick -->
 <script src=<?php echo asset('LTE/plugins/fastclick/fastclick.min.js')?>></script>
-<!-- DataTables -->
-<script src=<?php echo asset('LTE/plugins/datatables/jquery.dataTables.js')?>></script>
 <!-- AdminLTE App -->
 <script src=<?php echo asset('LTE/dist/js/app.min.js')?> type="text/javascript"></script>
 <!-- Data Tables for Leaderboard -->
 <script src=<?php echo asset('LTE/plugins/datatables/jquery.dataTables.js')?> type="text/javascript"></script>
-
+<script>
+    $(document).ready(function() {
+        $( "#leaderboard" ).hide();
+    });
+</script>
 
 @yield('include-js', '')
 
 @yield('page-js', '')
 
 @yield('onload', '')
+
 
 
 

@@ -20,12 +20,12 @@ class EloquentMatchRepository implements MatchRepository
 
     public function all()
     {
-        return $this->player->eagerLoadAll()->all();
+		return $this->match->all();
     }
 
 	public function get($matchid)
 	{
-		 return Match::with('course')->find($matchid);
+		 return Match::with('course', 'players')->find($matchid);
 	}
 
 	public function getByDate($startDate, $endDate)
