@@ -36,7 +36,7 @@ class CoursesController extends \BaseController {
      */
     public function show($id)
     {
-        //
+        return Course::find($id)->get();
     }
 
     /**

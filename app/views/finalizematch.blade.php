@@ -24,24 +24,42 @@
                 </div>{{-- end .box-header --}}
                 <div class="box-body">
                     <form role="form" id="matchForm">
-						<div class="form-group">
-							<label for="match">Match Date</label>
-							<select class="form-control" name="match" class="ui-corner-all" id="match">
-								<option></option>
-							</select>
-						</div>
-                        <div class="form-group col-lg-6">
-							<label for="ctp1">Closest To Pin #1</label>
-							<select class="form-control" name="ctp1" class="ui-corner-all" id="ctp1">
-								<option></option>
-							</select>
-						</div>
-                        <div class="form-group col-lg-6">
-							<label for="ctp2">Closest To Pin #2</label>
-							<select class="form-control" name="ctp2" class="ui-corner-all" id="ctp2">
-								<option></option>
-							</select>
-						</div>
+                        <div class="row">
+                            <div class="form-group col-xs-6">
+                                <label for="match">Match Date</label>
+                                <select class="form-control" name="match" class="ui-corner-all" id="match">
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-xs-6">
+                                <label for="ctp1">Closest To Pin #1</label>
+                                <select class="form-control" name="ctp1" class="ui-corner-all" id="ctp1">
+                                    <option></option>
+                                </select>
+                            </div>
+                            <div class="form-group col-xs-3">
+                                <label for="ctp1hole">Hole</label>
+                                <select class="form-control" name="ctp1hole" class="ui-corner-all" id="ctp1hole">
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-xs-6">
+                                <label for="ctp2">Closest To Pin #1</label>
+                                <select class="form-control" name="ctp2" class="ui-corner-all" id="ctp2">
+                                    <option></option>
+                                </select>
+                            </div>
+                            <div class="form-group col-xs-3">
+                                <label for="ctp2hole">Hole</label>
+                                <select class="form-control" name="ctp2hole" class="ui-corner-all" id="ctp2hole">
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
                     </form>
                 </div>{{-- end .box-body --}}
                 <div class="box-footer">
@@ -141,29 +159,29 @@
                 });
             });
 
-            });
+        });
 
-            $("#match").change(function () {
-                $.getJSON("{{URL::to('/')}}/matches/" + $("#match").val(), function(data){
+        $("#match").change(function () {
+            $.getJSON("{{URL::to('/')}}/matches/" + $("#match").val(), function(data){
                 $.each(data.players, function(index, data) {
                     $("#ctp1, #ctp2").append(
                         $("<option></option>").val(data.id).html(data.name)
                         );
                 });
-            });
-            });
 
+             });
+        });
 
-            function submitMatchForm() {
-                $.ajax({
-                    url:    "{{URL::to('/finalize')}}/",
-                    type:   "post",
-                    data:   $("#matchForm").serializeArray()
-                })
-                    .done(function(data){
-                        $('#results').css('visibility','visible').hide().fadeIn('slow');
-                    });
-            }
+        function submitMatchForm() {
+            $.ajax({
+                url:    "{{URL::to('/finalize')}}/",
+                type:   "post",
+                data:   $("#matchForm").serializeArray()
+            })
+                .done(function(data){
+                    $('#results').css('visibility','visible').hide().fadeIn('slow');
+                });
+        }
         </script>
 @stop
 
