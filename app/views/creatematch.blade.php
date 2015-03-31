@@ -53,6 +53,7 @@
 						</div>
                     </form>
                 </div>{{-- end .box-body --}}
+					<div id="loadingOverlay"><i id="spinImage"></i></div>
 					<div class="box-footer">
 						<input class="btn btn-success btn-sm" type="button" id="submitForm" onclick="submitScoreForm();" value="Create" />
 					</div>
@@ -122,10 +123,16 @@
 		  }).change();
             });
             function submitScoreForm() {
+				$("#loadingOverlay").addClass("overlay");
+				$("#spinImage").addClass("fa fa-refresh fa-spin");
                 $.ajax({
                     url:    "{{URL::to('/')}}/matches",
                     type:   "post",
-                    data:   $("#scoreForm").serializeArray()
+                    data:   $("#scoreForm").serializeArray(),
+					success: function(data){
+						$("#loadingOverlay").removeClass("overlay");
+						$("#spinImage").removeClass("fa fa-refresh fa-spin");
+					}
                 });
             }
         </script>

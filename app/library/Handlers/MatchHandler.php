@@ -34,7 +34,6 @@ class MatchHandler
     public function handle($match)
     {
         //for each player create an initial round
-        echo('here');
         //var_dump($holescore);
         $input = array(
         'date' => $match['date'],

@@ -1,9 +1,14 @@
 <?php namespace GolfLeague\Services;
 
 use GolfLeague\Storage\Match\MatchRepository;
+use GolfLeague\Storage\MatchRound\MatchRoundRepository;
 use GolfLeague\PrizeMoney;
+use GolfLeague\Games;
 use \Player;
 use \Match;
+use \Ctp;
+use \Grosswinner;
+use \Netwinner;
 use Illuminate\Events\Dispatcher;
 
 /**
@@ -20,8 +25,16 @@ class MatchService
     * @param MatchRepository $matchRepo
     * @return MatchService
     */
-    public function __construct(MatchRepository $matchRepo, PrizeMoney $prizeMoney, Player $player, Match $match, Dispatcher $events)
+    public function __construct(Games $games,
+                                MatchRoundRepository $matchRoundRepo,
+                                MatchRepository $matchRepo,
+                                PrizeMoney $prizeMoney,
+                                Player $player,
+                                Match $match,
+                                Dispatcher $events)
     {
+        $this->games = $games;
+        $this->matchRoundRepo = $matchRoundRepo;
         $this->matchRepo = $matchRepo;
         $this->prizeMoney = $prizeMoney;
         $this->player = $player;
@@ -43,8 +56,24 @@ class MatchService
         $matchdata['purse'] = number_format($matchdata['purse'], 2);
         $matchdata['grossmoney'] = $this->prizeMoney->getlowScore();
         $matchdata['netmoney'] = $this->prizeMoney->getlowScore();
-        $matchdata['skinsamoney'] = $this->prizeMoney->getSkins();
-        $matchdata['skinsbmoney'] = $this->prizeMoney->getSkins();
+
+        //How many A and B players
+        $totalPlayers = 0;
+        $aPlayerCount = 0;
+        $bPlayerCount = 0;
+        foreach($matchdata['player'] as $player){
+            if ($player['level_id'] == '1'){
+                $aPlayerCount++;
+            }
+            else {
+                $bPlayerCount++;
+            }
+            $totalPlayers++;
+        }
+
+        //Calculate Skins money based on how many players in each group
+        $matchdata['skinsamoney'] = $this->prizeMoney->skinsGroupPot($matchdata['purse'], $totalPlayers, $aPlayerCount);
+        $matchdata['skinsbmoney'] = $this->prizeMoney->skinsGroupPot($matchdata['purse'], $totalPlayers, $bPlayerCount);
 
         //append current handicap and set winnings to 0 for each player
         foreach ($matchdata['player'] as $key=>$player) {
@@ -57,6 +86,114 @@ class MatchService
         $matchid = $this->matchRepo->create($matchdata);
         $matchdata['match_id'] = $matchid;
         $this->events->fire('match.create', array($matchdata));
+    }
+
+    public function finalize($matchdata)
+    {
+        /* post CTP1 and CTP2
+        $ctp = new Ctp;
+        $ctp->match_id = $matchdata['match'];
+        $ctp->player_id = $matchdata['ctp1'];
+        $ctp->hole_id = $matchdata['ctp1hole'];
+        $ctp->money = $this->prizeMoney->getCtp();
+        $ctp->save();
+
+        $ctp = new Ctp;
+        $ctp->match_id = $matchdata['match'];
+        $ctp->player_id = $matchdata['ctp2'];
+        $ctp->hole_id = $matchdata['ctp2hole'];
+        $ctp->money = $this->prizeMoney->getCtp();
+        $ctp->save();
+        */
+        //calculate Gross winner and post to grossWinnersTable
+
+        $matchRound = $this->matchRoundRepo->getByMatch($matchdata['match']);
+
+        //return $matchRound;
+        /*
+        $lowGross = array();
+        foreach ($matchRound as $key => $match){
+            $lowGross[$key] = $match['score'];
+        }
+        $arrayLowGross = array_keys($lowGross, min($lowGross));
+        $arrayKeyLowGross = $arrayLowGross[0];
+
+        $grossWinner = new Grosswinner;
+        $grossWinner->player_id = $matchRound[$arrayKeyLowGross]->player_id;
+        $grossWinner->match_id = $matchdata['match'];
+        $grossWinner->score = $matchRound[$arrayKeyLowGross]->score;
+        $grossWinner->money = $this->prizeMoney->getlowScore();
+
+        $grossWinner->save();
+
+        return $grossWinner;
+
+        //Calculate NET winner
+
+        $lowNet = array();
+        $scores =array();
+        foreach ($matchRound as $key => $match){
+            $netScore = ($match['score'] - round($match['player']->handicap,0));
+            $lowNet[$key] = $netScore;
+        }
+        $arrayLowNet = array_keys($lowNet, min($lowNet));
+        $arrayKeyLowNet = $arrayLowNet[0];
+
+        $netWinner = new Netwinner;
+        $netWinner->player_id = $matchRound[$arrayKeyLowNet]->player_id;
+        $netWinner->match_id = $matchdata['match'];
+        $netWinner->score = $lowNet[$arrayKeyLowNet];
+        $netWinner->money = $this->prizeMoney->getlowScore();
+
+        $netWinner->save();
+        */
+
+
+        //Calculate Skins A
+        //Calculate Skins B
+
+        //determine A and B players
+        $match = $this->match->find($matchdata['match']);
+        $aPlayers = array();
+        $bPlayers = array();
+
+
+        foreach($match->players as $player)
+        {
+            if($player->pivot->level_id == 1){
+                $aPlayers[] = $player->pivot->player_id;
+
+            }
+            if($player->pivot->level_id == 2){
+                $bPlayers[] = $player->pivot->player_id;
+            }
+        }
+        //return $aPlayers;
+        //Create A players array
+        // match_id, player_id, 'holescores'
+
+        //['player_id'] =
+        //foreach matchround sort into players array
+
+        foreach($matchRound as $key => $round) {
+            if (in_array($round->player_id,$aPlayers)){
+                $aPlayersSkins[$key]['player_id'] = $round->player_id;
+                $aPlayersSkins[$key]['holescores'] = $round->holescores;
+            }
+            if (in_array($round->player_id,$bPlayers)){
+                $bPlayersSkins[$key]['player_id'] = $round->player_id;
+                $bPlayersSkins[$key]['holescores'] = $round->holescores;
+            }
+        }
+
+        $aPlayersSkins['match_id'] = $matchdata['match'];
+        $aPlayersSkins['level_id'] = 1;
+        $bPlayersSkins['match_id'] = $matchdata['match'];
+        $aPlayersSkins['level_id'] = 2;
+
+        return $aPlayersSkins;
+
+
     }
 
     /**

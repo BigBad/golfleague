@@ -54,7 +54,7 @@ class CoursesController extends \BaseController {
 			$this->course->par = Input::get('par');
 			$this->course->rating = Input::get('rating');
 			$this->course->slope = Input::get('slope');
-            $this->course->save();            
+            $this->course->save();
             break;
         case "edit":
             $id = Input::get('id');

@@ -25,7 +25,7 @@ class EloquentMatchRepository implements MatchRepository
 
 	public function get($matchid)
 	{
-		 return Match::with('course', 'players')->find($matchid);
+		 return Match::with('course', 'players', 'course.holes')->find($matchid);
 	}
 
 	public function getByDate($startDate, $endDate)

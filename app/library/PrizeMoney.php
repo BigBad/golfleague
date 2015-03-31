@@ -3,10 +3,11 @@ namespace GolfLeague;
 
 class PrizeMoney {
 
-    protected $lowScore;
+    protected $lowScore = 7;
     protected $skins;
     protected $ctp = 5;
     protected $purse;
+	protected $skinsPot;
 
     public function setPurse($purse)
     {
@@ -15,8 +16,7 @@ class PrizeMoney {
 
     public function getlowScore()
     {
-        $this->lowScore = .18 * $this->purse;
-        return $this->asMoney($this->lowScore);
+		return $this->asMoney($this->lowScore);
     }
 
     public function getSkins()
@@ -25,11 +25,23 @@ class PrizeMoney {
         return $this->asMoney($this->skins);
     }
 
+	public function getSkinsPot($purse)
+	{
+		$this->skinsPot = $purse - (2*($this->ctp) + 2*($this->lowScore));
+		return $this->asMoney($this->skinsPot);
+	}
+
+	public function skinsGroupPot($purse, $totalPlayers, $groupPlayers)
+	{
+		$this->skinsPot = $this->getSkinsPot($purse);
+		$groupPercentage = ($groupPlayers / $totalPlayers);
+		return ($groupPercentage * $this->skinsPot);
+	}
     public function getCtp()
     {
         return $this->asMoney($this->ctp);
     }
-	
+
 	function asMoney($value) {
 	  return number_format($value, 2);
 	}

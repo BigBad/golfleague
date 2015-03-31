@@ -44,6 +44,11 @@ class Match extends Eloquent
 		return $this->hasMany('Round');
 	}
 
+	public function holes()
+	{
+        return $this->hasManyThrough('Hole', 'Course');
+    }
+
 	public function getAllMatches()
 	{
 		$matches = DB::table('matches')->get();

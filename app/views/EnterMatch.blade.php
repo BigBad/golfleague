@@ -269,16 +269,7 @@
 
                             //For each cell in this row edit the id
                             for (k = 0; k < 9; k++) {
-
-                                if ($this.jqGrid('getGridParam', 'id') == 'group1Grid') {
-                                    var player = j+1; //player is row id
-                                }
-                                if ($this.jqGrid('getGridParam', 'id') == 'group2Grid') {
-                                    var player = j+5; //player is row id
-                                }
-                                if ($this.jqGrid('getGridParam', 'id') == 'group3Grid') {
-                                    var player = j+9; //player is row id
-                                }
+                                var player = data[j].id;
                                 var oldId = player + '_round\\.0\\.holescores\\.'+ k +'\\.score';
                                 var newId = data[j].round[0].holescores[k].id;
 

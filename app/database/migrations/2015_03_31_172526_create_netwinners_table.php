@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCtpsTable extends Migration {
+class CreateNetwinnersTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,18 +12,17 @@ class CreateCtpsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('ctps', function(Blueprint $table)
+		Schema::create('netwinners', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->integer('match_id')->unsigned()->index();
 			$table->integer('player_id')->unsigned()->index();
-			$table->integer('hole_id')->unsigned()->index();
+            $table->integer('score');
 			$table->decimal('money', 12, 2);
 
 			$table->timestamps();
 			$table->foreign('match_id')->references('id')->on('matches')->onDelete('cascade');
 			$table->foreign('player_id')->references('id')->on('players')->onDelete('cascade');
-			$table->foreign('hole_id')->references('id')->on('holes')->onDelete('cascade');
 		});
 	}
 
@@ -34,7 +33,7 @@ class CreateCtpsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('ctps');
+		Schema::drop('netwinners');
 	}
 
 }

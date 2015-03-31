@@ -31,6 +31,11 @@
                                     <option></option>
                                 </select>
                             </div>
+							<div class="form-group col-xs-6">
+                                <label for="course">Course</label>
+                                <input class="form-control" name="course" class="ui-corner-all" id="course" disabled>
+                                </input>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-xs-6">
@@ -40,10 +45,9 @@
                                 </select>
                             </div>
                             <div class="form-group col-xs-3">
-                                <label for="ctp1hole">Hole</label>
-                                <select class="form-control" name="ctp1hole" class="ui-corner-all" id="ctp1hole">
-                                    <option></option>
-                                </select>
+                                <label for="ctp1hole">Hole #</label>
+                                <input class="form-control" name="ctp1holeText" class="ui-corner-all" id="ctp1holeText" disabled/>
+                                <input class="form-control" name="ctp1hole" class="ui-corner-all" id="ctp1hole" type="hidden"/>
                             </div>
                         </div>
                         <div class="row">
@@ -54,10 +58,9 @@
                                 </select>
                             </div>
                             <div class="form-group col-xs-3">
-                                <label for="ctp2hole">Hole</label>
-                                <select class="form-control" name="ctp2hole" class="ui-corner-all" id="ctp2hole">
-                                    <option></option>
-                                </select>
+                                <label for="ctp2hole">Hole #</label>
+                                <input class="form-control" name="ctp2holeText" class="ui-corner-all" id="ctp2holeText" disabled/>
+                                <input class="form-control" name="ctp2hole" class="ui-corner-all" id="ctp2hole" type="hidden"/>
                             </div>
                         </div>
                     </form>
@@ -158,17 +161,25 @@
                     );
                 });
             });
-
         });
 
         $("#match").change(function () {
+			$("#ctp1, #ctp2").empty();
             $.getJSON("{{URL::to('/')}}/matches/" + $("#match").val(), function(data){
                 $.each(data.players, function(index, data) {
                     $("#ctp1, #ctp2").append(
                         $("<option></option>").val(data.id).html(data.name)
                         );
                 });
-
+				$("#course").val(data.course.name);
+				var i = 1;
+				$.each(data.course.holes, function(index, data) {
+					if (data.par === 3){
+						$("#ctp" + i +"hole").val(data.id);
+						$("#ctp" + i +"holeText").val(data.number);
+						i++;
+					}
+                });
              });
         });
 

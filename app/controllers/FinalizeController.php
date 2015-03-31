@@ -1,6 +1,13 @@
 <?php
 
+use GolfLeague\Services\MatchService as MatchService;
+
 class FinalizeController extends \BaseController {
+
+	public function __construct(MatchService $matchService)
+	{
+		$this->matchService = $matchService;
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -32,7 +39,7 @@ class FinalizeController extends \BaseController {
 	 */
 	public function store()
 	{
-		return Input::all();
+		return $this->matchService->finalize(Input::all());
 	}
 
 
