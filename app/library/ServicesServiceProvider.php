@@ -12,5 +12,10 @@ class ServicesServiceProvider extends ServiceProvider
         {
             return new \GolfLeague\PrizeMoney;
         });
+
+        $this->app->bind('GolfLeague\Services\MoneyService', function()
+        {
+            return new \GolfLeague\Services\MoneyService;
+        });
     }
 }

@@ -56,3 +56,4 @@ Route::resource('calendar', 'CalendarController');
 Route::resource('liveleaderboard', 'LiveLeaderboardController');
 Route::resource('register', 'RegisterController');
 Route::resource('users', 'UsersController');
+Route::resource('money', 'MoneyController');

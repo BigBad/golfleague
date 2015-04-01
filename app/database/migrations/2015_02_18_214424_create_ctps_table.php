@@ -24,6 +24,7 @@ class CreateCtpsTable extends Migration {
 			$table->foreign('match_id')->references('id')->on('matches')->onDelete('cascade');
 			$table->foreign('player_id')->references('id')->on('players')->onDelete('cascade');
 			$table->foreign('hole_id')->references('id')->on('holes')->onDelete('cascade');
+			$table->unique(array('match_id', 'hole_id'));
 		});
 	}
 

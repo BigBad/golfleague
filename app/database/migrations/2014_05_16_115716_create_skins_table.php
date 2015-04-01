@@ -19,6 +19,7 @@ class CreateSkinsTable extends Migration {
 			$table->integer('level_id')->unsigned()->index();
 			$table->integer('match_id')->unsigned()->index();
 			$table->integer('hole_id')->unsigned()->index();
+			$table->decimal('money', 12, 2)->nullable();
 
 			$table->timestamps();
 			$table->foreign('player_id')->references('id')->on('players')->onDelete('cascade');

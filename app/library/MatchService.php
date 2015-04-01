@@ -9,6 +9,7 @@ use \Match;
 use \Ctp;
 use \Grosswinner;
 use \Netwinner;
+use \Skin;
 use Illuminate\Events\Dispatcher;
 
 /**
@@ -90,7 +91,8 @@ class MatchService
 
     public function finalize($matchdata)
     {
-        /* post CTP1 and CTP2
+        //return 'success';
+        // post CTP1 and CTP2
         $ctp = new Ctp;
         $ctp->match_id = $matchdata['match'];
         $ctp->player_id = $matchdata['ctp1'];
@@ -104,13 +106,12 @@ class MatchService
         $ctp->hole_id = $matchdata['ctp2hole'];
         $ctp->money = $this->prizeMoney->getCtp();
         $ctp->save();
-        */
+
         //calculate Gross winner and post to grossWinnersTable
 
         $matchRound = $this->matchRoundRepo->getByMatch($matchdata['match']);
 
-        //return $matchRound;
-        /*
+
         $lowGross = array();
         foreach ($matchRound as $key => $match){
             $lowGross[$key] = $match['score'];
@@ -126,7 +127,6 @@ class MatchService
 
         $grossWinner->save();
 
-        return $grossWinner;
 
         //Calculate NET winner
 
@@ -146,18 +146,16 @@ class MatchService
         $netWinner->money = $this->prizeMoney->getlowScore();
 
         $netWinner->save();
-        */
 
 
-        //Calculate Skins A
-        //Calculate Skins B
+
+        //Calculate Skins
 
         //determine A and B players
+        //using pivot table match_player
         $match = $this->match->find($matchdata['match']);
         $aPlayers = array();
         $bPlayers = array();
-
-
         foreach($match->players as $player)
         {
             if($player->pivot->level_id == 1){
@@ -168,13 +166,9 @@ class MatchService
                 $bPlayers[] = $player->pivot->player_id;
             }
         }
-        //return $aPlayers;
-        //Create A players array
-        // match_id, player_id, 'holescores'
 
-        //['player_id'] =
-        //foreach matchround sort into players array
-
+        //Create Skins arrays
+        //player_id, 'holescores'
         foreach($matchRound as $key => $round) {
             if (in_array($round->player_id,$aPlayers)){
                 $aPlayersSkins[$key]['player_id'] = $round->player_id;
@@ -186,13 +180,78 @@ class MatchService
             }
         }
 
-        $aPlayersSkins['match_id'] = $matchdata['match'];
-        $aPlayersSkins['level_id'] = 1;
-        $bPlayersSkins['match_id'] = $matchdata['match'];
-        $aPlayersSkins['level_id'] = 2;
+        //Run A Skins analysis
+        $scores = array();
+        foreach($aPlayersSkins as $key => $playerSkin){
+            foreach($playerSkin['holescores'] as $hole => $holescore){
+                $scores[$holescore['hole_id']][$playerSkin['player_id']] = $holescore['score'];
+            }
+        }
 
-        return $aPlayersSkins;
+        foreach($scores as $hole_id => $hole) {
+            $minScore = min($hole);
+            $winners[$hole_id] = array_keys($hole, min($hole)); //gets player id of lowest score
+        }
+        $aSkinsWon = 0;
+        foreach($winners as $key => $winner) {
+            if(count($winner)  ===  1) {
+                //post to DB
+                $skinWinner = new Skin;
+                $skinWinner->player_id = $winner[0];
+                $skinWinner->level_id = 1;
+                $skinWinner->match_id = intval($matchdata['match']);
+                $skinWinner->hole_id = $key;
+                $skinWinner->save();
+                $aSkinsWon++;
+            }
+        }
 
+        //Run B Skins analysis
+        $scores = array();
+        foreach($bPlayersSkins as $key => $playerSkin){
+            foreach($playerSkin['holescores'] as $hole => $holescore){
+                $scores[$holescore['hole_id']][$playerSkin['player_id']] = $holescore['score'];
+            }
+        }
+
+        foreach($scores as $hole_id => $hole) {
+            $minScore = min($hole);
+            $winners[$hole_id] = array_keys($hole, min($hole)); //gets player id of lowest score
+        }
+        $bSkinsWon = 0;
+        foreach($winners as $key => $winner) {
+            if(count($winner)  ===  1) {
+                //post to DB
+                $skinWinner = new Skin;
+                $skinWinner->player_id = $winner[0];
+                $skinWinner->level_id = 2;
+                $skinWinner->match_id = intval($matchdata['match']);
+                $skinWinner->hole_id = $key;
+                $skinWinner->save();
+                $bSkinsWon++;
+            }
+        }
+
+
+
+        $match =  Match::find($matchdata['match']);
+
+        $skinsamoney = $match->skinsamoney;
+        $skinsbmoney = $match->skinsbmoney;
+        $moneyperskinA = $skinsamoney / $aSkinsWon;
+        $moneyperskinB = $skinsbmoney / $bSkinsWon;
+
+        $aSkins = Skin::where('match_id', '=', $matchdata['match'])->where('level_id', '=', 1)->get();
+        foreach ($aSkins as $askin){
+            $askin->money = $moneyperskinA;
+            $askin->save();
+        }
+
+        $bSkins = Skin::where('match_id', '=', $matchdata['match'])->where('level_id', '=', 2)->get();
+        foreach ($bSkins as $bskin){
+            $bskin->money = $moneyperskinB;
+            $bskin->save();
+        }
 
     }
 
@@ -207,6 +266,7 @@ class MatchService
         $matchdata =  $this->matchRepo->get($matchid);
         return $matchdata;
     }
+
 
 
 }
