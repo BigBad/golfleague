@@ -7,7 +7,7 @@ class Grosswinner extends Eloquent {
         return $this->belongsTo('Match');
     }
 
-    public function players()
+    public function player()
     {
         return $this->belongsTo('Player');
     }

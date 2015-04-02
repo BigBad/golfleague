@@ -10,6 +10,11 @@
                         <i class="fa fa-calendar"></i> <span>Schedule</span>
                     </a>
                 </li>
+				<li class="treeview">
+                    <a href="{{ URL::to('results') }}">
+                        <i class="fa fa-flag-checkered"></i> <span>Results</span>
+                    </a>
+                </li>
                 <li class="treeview">
                     <a href="{{ URL::to('leaderboard') }}">
                         <i class="fa fa-usd"></i>

@@ -2,7 +2,7 @@
 
 class Skin extends Eloquent {
 
-	public function players()
+	public function player()
     {
         return $this->belongsTo('Player');
     }

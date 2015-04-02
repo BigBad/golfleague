@@ -65,79 +65,13 @@
                         </div>
                     </form>
                 </div>{{-- end .box-body --}}
+				<div id="loadingOverlay"><i id="spinImage"></i></div>
                 <div class="box-footer">
 						<input class="btn btn-success btn-sm" type="button" id="submitForm" onclick="submitMatchForm();" value="Submit" />
 				</div>
-            </div>{{-- end .box.box-primary --}}
+            </div>{{-- end .box.box-primary --}}			
         </div>{{-- end .col-md-5 --}}
     </div>{{-- end .row --}}
-
-    <div class="row">
-    <div class="col-md-5">
-        <div class="box box-success">
-            <div class="box-header with-border">
-                <h3 class="box-title">Match Results</h3>
-
-            </div><!-- /.box-header -->
-            <div class="box-body" id ="results" style="visibility: hidden;">
-
-                <div class="info-box bg-green">
-                    <span class="info-box-icon"><i class="fa fa-thumbs-up"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">Gross Winner</span>
-                        <span class="info-box-number">Player Name</span>
-
-                        <span class="progress-description">
-                        $ amount
-                        </span>
-                    </div><!-- /.info-box-content -->
-                </div><!-- /.info-box -->
-
-                <div class="info-box bg-green">
-                    <span class="info-box-icon"><i class="fa fa-wheelchair"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">Net Winner</span>
-                        <span class="info-box-number">Player Name</span>
-
-                        <span class="progress-description">
-                        $ amount
-                        </span>
-                    </div><!-- /.info-box-content -->
-                </div><!-- /.info-box -->
-
-                <div class="info-box bg-green">
-                    <span class="info-box-icon"><i class="fa fa-money">A</i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">Skins A</span>
-                        <span class="info-box-number">Player Name</span>
-
-                        <span class="progress-description">
-                        $ amount
-                        </span>
-                    </div><!-- /.info-box-content -->
-                </div><!-- /.info-box -->
-
-                <div class="info-box bg-green">
-                    <span class="info-box-icon"><i class="fa fa-money">B</i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">Skins B</span>
-                        <span class="info-box-number">Player Name</span>
-
-                        <span class="progress-description">
-                        $ amount
-                        </span>
-                    </div><!-- /.info-box-content -->
-                </div><!-- /.info-box -->
-
-            </div><!-- /.box-body -->
-        </div><!-- /.box -->
-    </div>{{-- end .col-md-5 --}}
-    </div>{{-- end .row --}}
-
-
-
-
-
 @stop
 
 @section('include-js')
@@ -184,14 +118,17 @@
         });
 
         function submitMatchForm() {
+			$("#loadingOverlay").addClass("overlay");
+			$("#spinImage").addClass("fa fa-refresh fa-spin");
             $.ajax({
                 url:    "{{URL::to('/finalize')}}/",
                 type:   "post",
-                data:   $("#matchForm").serializeArray()
+                data:   $("#matchForm").serializeArray(),
+				success: function(data){
+						$("#loadingOverlay").removeClass("overlay");
+						$("#spinImage").removeClass("fa fa-refresh fa-spin");
+					}
             })
-                .done(function(data){
-                    $('#results').css('visibility','visible').hide().fadeIn('slow');
-                });
         }
         </script>
 @stop
