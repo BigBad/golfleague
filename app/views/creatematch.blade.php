@@ -56,6 +56,7 @@
 					<div id="loadingOverlay"><i id="spinImage"></i></div>
 					<div class="box-footer">
 						<input class="btn btn-success btn-sm" type="button" id="submitForm" onclick="submitScoreForm();" value="Create" />
+						<div id="errorText"></div>
 					</div>
             </div>{{-- end .box.box-primary --}}
         </div>{{-- end .col-md-5 --}}
@@ -132,6 +133,11 @@
 					success: function(data){
 						$("#loadingOverlay").removeClass("overlay");
 						$("#spinImage").removeClass("fa fa-refresh fa-spin");
+					},
+					error: function(data){
+						$("#loadingOverlay").removeClass("overlay");
+						$("#spinImage").removeClass("fa fa-refresh fa-spin");
+						$("#errorText").html(data.statusText);
 					}
                 });
             }

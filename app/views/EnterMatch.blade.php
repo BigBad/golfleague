@@ -310,6 +310,9 @@
             function getValue(e) {
                 var currentId = $(e.target).attr('id');
                 $.ajax({
+                beforeSend: function() {
+                    $('input[type="text"], input[type="checkbox"], select').prop("disabled", true);
+                },
                 type: 'PUT',
                 url: '{{URL::to('/')}}/holescores/' + currentId,
                 data: $(e.target).serialize()

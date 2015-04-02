@@ -68,8 +68,11 @@
 				<div id="loadingOverlay"><i id="spinImage"></i></div>
                 <div class="box-footer">
 						<input class="btn btn-success btn-sm" type="button" id="submitForm" onclick="submitMatchForm();" value="Submit" />
+						<div id="errorText"></div>
 				</div>
-            </div>{{-- end .box.box-primary --}}			
+
+				</div>
+            </div>{{-- end .box.box-primary --}}
         </div>{{-- end .col-md-5 --}}
     </div>{{-- end .row --}}
 @stop
@@ -108,7 +111,7 @@
 				$("#course").val(data.course.name);
 				var i = 1;
 				$.each(data.course.holes, function(index, data) {
-					if (data.par === 3){
+					if (data.par == 3){
 						$("#ctp" + i +"hole").val(data.id);
 						$("#ctp" + i +"holeText").val(data.number);
 						i++;
@@ -121,13 +124,18 @@
 			$("#loadingOverlay").addClass("overlay");
 			$("#spinImage").addClass("fa fa-refresh fa-spin");
             $.ajax({
-                url:    "{{URL::to('/finalize')}}/",
+                url:    "{{URL::to('/')}}/finalize",
                 type:   "post",
                 data:   $("#matchForm").serializeArray(),
 				success: function(data){
 						$("#loadingOverlay").removeClass("overlay");
 						$("#spinImage").removeClass("fa fa-refresh fa-spin");
-					}
+				},
+				error: function(data){
+					$("#loadingOverlay").removeClass("overlay");
+					$("#spinImage").removeClass("fa fa-refresh fa-spin");
+					$("#errorText").html(data.statusText);
+				}
             })
         }
         </script>

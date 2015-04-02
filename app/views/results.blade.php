@@ -30,9 +30,9 @@
                                 <select class="form-control" name="match" class="ui-corner-all" id="match">
                                     <option></option>
                                 </select>
-                            </div>							
+                            </div>
                         </div>
-                        
+
                     </form>
                 </div>{{-- end .box-body --}}
             </div>{{-- end .box.box-primary --}}
@@ -43,15 +43,23 @@
     <div class="col-md-5">
         <div class="box box-success">
             <div class="box-header with-border">
-                <h3 class="box-title">Match Results</h3>
+                <h3 class="box-title" id="matchResults">Match Results</h3>
 
             </div><!-- /.box-header -->
             <div class="box-body" id ="results" >
-			
+
+				<div class="info-box bg-green">
+                    <span class="info-box-icon"><i class="fa fa-trophy"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Match Money List</span>
+						<div id="moneyLeaders"></div>
+                    </div><!-- /.info-box-content -->
+                </div><!-- /.info-box -->
+
 				<div class="info-box bg-green">
                     <span class="info-box-icon"><i class="fa fa-flag"></i></span>
                     <div class="info-box-content">
-                        <span class="info-box-text">CLosest To Pin</span>						
+                        <span class="info-box-text">CLosest To Pin</span>
 							<div class="col-xs">
 							<span class="info-box-number" id="CTP1"></span>
 							<span class="progress-description" id="CTP1Money">
@@ -59,10 +67,10 @@
 							<div class="col-xs">
 							<span class="info-box-number" id="CTP2"></span>
 							<span class="progress-description" id="CTP2Money">
-							</div>                      						
+							</div>
                     </div><!-- /.info-box-content -->
                 </div><!-- /.info-box -->
-				
+
                 <div class="info-box bg-green">
                     <span class="info-box-icon"><i class="fa fa-thumbs-up"></i></span>
                     <div class="info-box-content">
@@ -78,7 +86,7 @@
                         <span class="info-box-text">Net Winner</span>
                         <span class="info-box-number" id="netPlayer"></span>
 
-                        <span class="progress-description" id="netMoney">            
+                        <span class="progress-description" id="netMoney">
                         </span>
                     </div><!-- /.info-box-content -->
                 </div><!-- /.info-box -->
@@ -87,7 +95,7 @@
                     <span class="info-box-icon"><i class="fa fa-money">A</i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Skins A</span>
-						<div id="skinsA"></div>                        
+						<div id="skinsA"></div>
                     </div><!-- /.info-box-content -->
                 </div><!-- /.info-box -->
 
@@ -95,7 +103,7 @@
                     <span class="info-box-icon"><i class="fa fa-money">B</i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Skins B</span>
-						<div id="skinsB"></div>                        
+						<div id="skinsB"></div>
                     </div><!-- /.info-box-content -->
                 </div><!-- /.info-box -->
 
@@ -135,26 +143,30 @@
 
         $("#match").change(function () {
             $.getJSON("{{URL::to('/')}}/money/" + $("#match").val(), function(data){
-                $("#skinsA, #skinsB").empty();
-				$("#grossPlayer").html(data.grosswinner[0].player.name);
-				$("#grossMoney").html('$' + data.grosswinner[0].money);
-				$("#netPlayer").html(data.netwinner[0].player.name);
-				$("#netMoney").html('$' + data.netwinner[0].money);
-				$("#CTP1").html(data.ctps[0].player.name);
-				$("#CTP1Money").html('$' + data.ctps[0].money);
-				$("#CTP2").html(data.ctps[0].player.name);
-				$("#CTP2Money").html('$' + data.ctps[0].money);
-				$.each(data.skins, function(index, data) {
-					if(data.level_id === 1){
-						$("#skinsA").append('<span class="info-box-number">'+ data.player.name+'</span>$'+ data.money+'<span class="progress-description"></span>');
-					}
-					else {
-						$("#skinsB").append('<span class="info-box-number">'+ data.player.name+'</span>$'+ data.money+'<span class="progress-description"></span>');
-						
-						
-					}
-                });
-				
+				if (jQuery.isEmptyObject(data.ctps) === false) {
+					$("#skinsA, #skinsB").empty();
+					$("#grossPlayer").html(data.grosswinner[0].player.name + ' - ' +data.grosswinner[0].score);
+					$("#grossMoney").html('$' + data.grosswinner[0].money);
+					$("#netPlayer").html(data.netwinner[0].player.name + ' - ' +data.netwinner[0].score);
+					$("#netMoney").html('$' + data.netwinner[0].money);
+					$("#CTP1").html(data.ctps[0].player.name);
+					$("#CTP1Money").html('$' + data.ctps[0].money);
+					$("#CTP2").html(data.ctps[1].player.name);
+					$("#CTP2Money").html('$' + data.ctps[0].money);
+					$.each(data.skins, function(index, data) {
+						if(data.level_id == "1"){
+							$("#skinsA").append('<span class="info-box-number">'+ data.player.name+' - Hole: ' + data.hole.number +'</span>$'+ data.money+'<span class="progress-description"></span>');
+						}
+						else {
+							$("#skinsB").append('<span class="info-box-number">'+ data.player.name+' - Hole: ' + data.hole.number +'</span>$'+ data.money+'<span class="progress-description"></span>');
+						}
+					});
+					$.each(data.moneylist[0].players, function(index, data) {
+						if (data.pivot.winnings != "0.00") {
+							$("#moneyLeaders").append('<span class="info-box-number">'+ data.name+'</span>$'+ data.pivot.winnings+'<span class="progress-description"></span>');
+						}
+					});
+				}
              });
         });
         </script>

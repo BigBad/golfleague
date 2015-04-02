@@ -17,7 +17,7 @@ class Skin extends Eloquent {
         return $this->belongsTo('Level');
     }
 
-	public function holes()
+	public function hole()
     {
         return $this->belongsTo('Hole');
     }

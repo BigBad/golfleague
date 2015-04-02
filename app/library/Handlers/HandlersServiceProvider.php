@@ -31,6 +31,12 @@ class HandlersServiceProvider extends ServiceProvider
         );
 
         $this->app->events->subscribe(
+            new FinalizeHandler(
+                $this->app->make('GolfLeague\Storage\Round\RoundRepository')
+            )
+        );
+
+        $this->app->events->subscribe(
             new HoleScoreHandler(
                 $this->app->make('GolfLeague\Storage\Round\RoundRepository'),
                 $this->app->make('GolfLeague\Storage\HoleScore\HoleScoreRepository'),

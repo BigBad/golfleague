@@ -253,6 +253,8 @@ class MatchService
             $bskin->save();
         }
 
+        //Fire event to calculate money won and add to pivot table match_player
+        $this->events->fire('match.finalize', $match);
     }
 
     /**

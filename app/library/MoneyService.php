@@ -33,10 +33,10 @@ class MoneyService
     {
         //get player id and money for ctp
         $results['ctps'] =  Ctp::with('player')->where('match_id', '=', $matchId)->get();
-        $results['skins'] = Skin::with('player')->where('match_id', '=', $matchId)->get();
+        $results['skins'] = Skin::with('player', 'hole')->where('match_id', '=', $matchId)->get();
         $results['netwinner'] = Netwinner::with('player')->where('match_id', '=', $matchId)->get();
         $results['grosswinner'] = Grosswinner::with('player')->where('match_id', '=', $matchId)->get();
+        $results['moneylist'] = Match::with('players')->where('id', '=', $matchId)->get();
 		return $results;
     }
-
 }
