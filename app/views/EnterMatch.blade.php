@@ -6,7 +6,11 @@
 
 @section('first-css')
     <link rel="stylesheet" href="<?php echo asset('jqGrid/css/ui.jqgrid.css')?>" />
-
+	<style>
+		a {
+			color: #00A65A;
+		}
+	</style>
 @stop
 
 @section('page-header')
@@ -19,6 +23,7 @@
 @stop
 
 @section('content')
+	<!--
     <div class="row">
         <div class="col-md-6">
             <div class="box box-success collapsed-box">
@@ -27,8 +32,8 @@
                         <div class="box-tools pull-right">
                             <button data-widget="collapse" class="btn btn-box-tool"><i class="fa fa-plus"></i></button>
                             <button data-widget="remove" class="btn btn-box-tool"><i class="fa fa-times"></i></button>
-                        </div><!-- /.box-tools -->
-                    </div><!-- /.box-header -->
+                        </div><!-- /.box-tools
+                    </div><!-- /.box-header 
                 <div class="box-body table-responsive" style="display: none;">
                         <table id="courseInfo" class="display" cellspacing="0" width="100%">
                             <thead>
@@ -39,18 +44,18 @@
                             </tr>
                             </thead>
                         </table>
-                    </div><!-- /.box-body -->
+                    </div><!-- /.box-body
                 </div>
         </div>{{-- end .col-md-3 --}}
     </div>{{-- end .row --}}
-
+	-->
 
 
     <div class="row">
         <div class="col-md-6">
             <div class="box box-success" id="group1">
                 <div class="box-header">
-                  <h3 class="box-title">Group 1</h3>
+                  <h3 class="box-title"><a href="edit?group=1">Group 1</a></h3> 
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive">
                     <table id="group1Grid"></table>
@@ -62,7 +67,7 @@
 
             <div class="box box-success" id="group2">
                 <div class="box-header">
-                  <h3 class="box-title">Group 2</h3>
+                  <h3 class="box-title"><a href="edit?group=2">Group 2</a></h3> 
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive">
                     <table id="group2Grid"></table>
@@ -74,7 +79,7 @@
 
             <div class="box box-success" id="group3">
                 <div class="box-header">
-                  <h3 class="box-title">Group 3</h3>
+                  <h3 class="box-title"><a href="edit?group=3">Group 3</a></h3> 
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive">
                     <table id="group3Grid"></table>
