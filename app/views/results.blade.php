@@ -144,6 +144,7 @@
         $("#match").change(function () {
             $.getJSON("{{URL::to('/')}}/money/" + $("#match").val(), function(data){
 				if (jQuery.isEmptyObject(data.ctps) === false) {
+					$("#moneyLeaders").html('<span class="info-box-number"></span><span class="progress-description"></span>');
 					$("#skinsA, #skinsB").empty();
 					$("#grossPlayer").html(data.grosswinner[0].player.name + ' - ' +data.grosswinner[0].score);
 					$("#grossMoney").html('$' + data.grosswinner[0].money);
