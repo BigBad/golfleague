@@ -91,8 +91,7 @@ class MatchService
 
     public function finalize($matchdata)
     {
-        /*
-		//return 'success';
+	//return 'success';
         // post CTP1 and CTP2
         $ctp = new Ctp;
         $ctp->match_id = $matchdata['match'];
@@ -147,7 +146,6 @@ class MatchService
         $netWinner->money = $this->prizeMoney->getlowScore();
 
         $netWinner->save();
-
 
 
         //Calculate Skins
@@ -233,8 +231,6 @@ class MatchService
             }
         }
 
-
-
         $match =  Match::find($matchdata['match']);
 
         $skinsamoney = $match->skinsamoney;
@@ -255,7 +251,6 @@ class MatchService
         }
 */
         //Fire event to calculate money won and add to pivot table match_player
-		$match =  Match::find($matchdata['match']);
         $this->events->fire('match.finalize', $match);
     }
 
