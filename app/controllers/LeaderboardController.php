@@ -50,7 +50,9 @@ class LeaderboardController extends \BaseController {
 	public function show($id)
 	{
 		$year = $id;
-		return $this->leaderboardRepo->get($year);
+		$results  = $this->leaderboardRepo->get($year);
+		$data['data'] = $results[0];
+		return $data;
 	}
 
 

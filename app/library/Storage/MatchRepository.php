@@ -1,11 +1,12 @@
 <?php namespace GolfLeague\Storage\Match;
 
- 
 
-interface MatchRepository { 
+
+interface MatchRepository {
 
   public function all();
   public function find($playerId);
   public function create($input);
+  public function delete($matchId);
 
 }

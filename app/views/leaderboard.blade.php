@@ -21,11 +21,18 @@
     <div class="row">
         <div class="col-md-12">
             <div class="box">
-                <div class="box-header no-padding">
-                    <h3 class="box-title"></h3>
+                <div class="box-header">
+                    <h3 class="box-title">2015</h3>
                 </div>{{-- end .box-header --}}
                 <div class="box-body no-padding">
-                    <div id="statistics-table" style="height: 681px;"></div>
+                    <table id="leaderboardTable" class="display table table-bordered table-hover dataTable" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Money</th>
+            </tr>
+        </thead>
+    </table>
                 </div>{{-- end .box-body --}}
             </div>{{-- end .box.box-primary --}}
         </div>{{-- end .col-md-5 --}}
@@ -38,7 +45,22 @@
 @stop
 
 @section('page-js')
+<script>
+    $(document).ready(function() {
+    $('#leaderboardTable').dataTable( {
+        "order": [[ 1, "desc" ]],
+        "bPaginate": false,
+        "bFilter": false,
+        "bInfo": false,
+        "ajax": "{{URL::to('/')}}/leaderboard/2015",
+        "columns": [
+            { "data": "name" },
+            { "data": "pivot.winnings" }
+        ]
+    } );
+} );
 
+</script>
 @stop
 
 @section('onload')

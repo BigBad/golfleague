@@ -101,7 +101,7 @@ class MatchesController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		return $this->matchRepo->delete($id);
 	}
 
 }

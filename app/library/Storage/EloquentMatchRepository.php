@@ -65,4 +65,9 @@ class EloquentMatchRepository implements MatchRepository
 		return $this->match->id;
     }
 
+	public function delete($matchId)
+	{
+		return 'deleted';
+	}
+
 }
