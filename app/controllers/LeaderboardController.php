@@ -1,7 +1,13 @@
 <?php
 
+use GolfLeague\Storage\Leaderboard\LeaderboardRepository as LeaderboardRepository;
+
 class LeaderboardController extends \BaseController {
 
+	public function __construct(LeaderboardRepository $leaderboardRepo)
+    {
+        $this->leaderboardRepo = $leaderboardRepo;
+    }
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -43,7 +49,8 @@ class LeaderboardController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$year = $id;
+		return $this->leaderboardRepo->get($year);
 	}
 
 

@@ -28,5 +28,9 @@ class StorageServiceProvider extends ServiceProvider
           'GolfLeague\Storage\HoleScore\HoleScoreRepository',
           'GolfLeague\Storage\HoleScore\EloquentHoleScoreRepository'
         );
+		$this->app->bind(
+          'GolfLeague\Storage\Leaderboard\LeaderboardRepository',
+          'GolfLeague\Storage\Leaderboard\EloquentLeaderboardRepository'
+        );
     }
 }

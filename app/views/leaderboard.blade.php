@@ -22,7 +22,7 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header no-padding">
-                    <h3 class="box-title">2015</h3>
+                    <h3 class="box-title"></h3>
                 </div>{{-- end .box-header --}}
                 <div class="box-body no-padding">
                     <div id="statistics-table" style="height: 681px;"></div>
