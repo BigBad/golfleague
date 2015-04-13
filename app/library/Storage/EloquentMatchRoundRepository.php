@@ -36,7 +36,7 @@ class EloquentMatchRoundRepository implements MatchRoundRepository
 	{
         $players = Match::find($matchid)->players()->where('match_player.group','=',$group)->get();
 		foreach($players as $key => $player) {
-			$rounds = Round::with('holescores')->where('player_id', '=', $player->id)->where('match_id', '=', $matchid)->get();
+			$rounds = Round::with('holescores', 'course.holes')->where('player_id', '=', $player->id)->where('match_id', '=', $matchid)->get();
             $players[$key]['round'] = $rounds;
 		}
 		return $players;

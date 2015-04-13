@@ -33,7 +33,7 @@
                             <button data-widget="collapse" class="btn btn-box-tool"><i class="fa fa-plus"></i></button>
                             <button data-widget="remove" class="btn btn-box-tool"><i class="fa fa-times"></i></button>
                         </div><!-- /.box-tools
-                    </div><!-- /.box-header 
+                    </div><!-- /.box-header
                 <div class="box-body table-responsive" style="display: none;">
                         <table id="courseInfo" class="display" cellspacing="0" width="100%">
                             <thead>
@@ -55,7 +55,7 @@
         <div class="col-md-6">
             <div class="box box-success" id="group1">
                 <div class="box-header">
-                  <h3 class="box-title"><a href="edit?group=1">Group 1</a></h3> 
+                  <h3 class="box-title"><a href="edit?group=1">Group 1</a></h3>
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive">
                     <table id="group1Grid"></table>
@@ -67,7 +67,7 @@
 
             <div class="box box-success" id="group2">
                 <div class="box-header">
-                  <h3 class="box-title"><a href="edit?group=2">Group 2</a></h3> 
+                  <h3 class="box-title"><a href="edit?group=2">Group 2</a></h3>
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive">
                     <table id="group2Grid"></table>
@@ -79,7 +79,7 @@
 
             <div class="box box-success" id="group3">
                 <div class="box-header">
-                  <h3 class="box-title"><a href="edit?group=3">Group 3</a></h3> 
+                  <h3 class="box-title"><a href="edit?group=3">Group 3</a></h3>
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive">
                     <table id="group3Grid"></table>
@@ -160,8 +160,8 @@
                     url: '{{URL::to('/')}}/matchrounds/'+{{$id}} +'?group=' + i,
                     datatype: "json",
                     colModel: [
-                        { label: 'Player', name: 'name',  width: 80, frozen: true },
-                        { label: 'Hole 1', index: 'score', name: 'round.0.holescores.0.score', width: 37, sorttype:"int", editable: true,
+                        { label: 'Hole <br /> <font color="blue">Par</font>', name: 'name',  width: 80, frozen: true },
+                        { label: 'Hole', index: 'score', name: 'round.0.holescores.0.score', width: 37, sorttype:"int", editable: true,
                             edittype: 'select',
                             editoptions : { value: scores,
                                             dataEvents : [
@@ -173,7 +173,7 @@
                             }
 
                         },
-                        { label: 'Hole 2', name: 'round.0.holescores.1.score', width: 37, editable: true,
+                        { label: 'Hole', name: 'round.0.holescores.1.score', width: 37, editable: true,
                             edittype: 'select',
                             editoptions : { value: scores,
                                             dataEvents : [
@@ -184,7 +184,7 @@
                                             ]
                             }
                         },
-                        { label: 'Hole 3', name: 'round.0.holescores.2.score', width: 37, editable: true,
+                        { label: 'Hole', name: 'round.0.holescores.2.score', width: 37, editable: true,
                             edittype: 'select',
                             editoptions : { value: scores,
                                             dataEvents : [
@@ -195,7 +195,7 @@
                                             ]
                             }
                         },
-                        { label: 'Hole 4', name: 'round.0.holescores.3.score', width: 37, editable: true,
+                        { label: 'Hole', name: 'round.0.holescores.3.score', width: 37, editable: true,
                             edittype: 'select',
                             editoptions : { value: scores,
                                             dataEvents : [
@@ -206,7 +206,7 @@
                                             ]
                             }
                         },
-                        { label: 'Hole 5', name: 'round.0.holescores.4.score', width: 37, editable: true,
+                        { label: 'Hole', name: 'round.0.holescores.4.score', width: 37, editable: true,
                             edittype: 'select',
                             editoptions : { value: scores,
                                             dataEvents : [
@@ -217,7 +217,7 @@
                                             ]
                             }
                         },
-                        { label: 'Hole 6', name: 'round.0.holescores.5.score', width: 37, editable: true,
+                        { label: 'Hole', name: 'round.0.holescores.5.score', width: 37, editable: true,
                             edittype: 'select',
                             editoptions : { value: scores,
                                             dataEvents : [
@@ -228,7 +228,7 @@
                                             ]
                             }
                         },
-                        { label: 'Hole 7', name: 'round.0.holescores.6.score', width: 37, editable: true,
+                        { label: 'Hole', name: 'round.0.holescores.6.score', width: 37, editable: true,
                             edittype: 'select',
                             editoptions : { value: scores,
                                             dataEvents : [
@@ -239,7 +239,7 @@
                                             ]
                             }
                         },
-                        { label: 'Hole 8', name: 'round.0.holescores.7.score', width: 37, editable: true,
+                        { label: 'Hole', name: 'round.0.holescores.7.score', width: 37, editable: true,
                             edittype: 'select',
                             editoptions : { value: scores,
                                             dataEvents : [
@@ -250,7 +250,7 @@
                                             ]
                             }
                         },
-                        { label: 'Hole 9', name: 'round.0.holescores.8.score', width: 37, editable: true,
+                        { label: 'Hole', name: 'round.0.holescores.8.score', width: 37, editable: true,
                             edittype: 'select',
                             editoptions : { value: scores,
                                             dataEvents : [
@@ -261,7 +261,7 @@
                                             ]
                             }
                         },
-                        { label: 'Total', name: 'round.0.score', width: 37}
+                        { label: '<br />Total', name: 'round.0.score', width: 37}
 
                     ],
                     width: 470,
@@ -282,7 +282,15 @@
                                 $("#"+newId).attr('name', 'score');
                             }
                         }
+						//use data to populate the course holes and par
+						$.each(data[0].round[0].course.holes, function(key, value) {
+							var name = 'round.0.holescores.' + key + '.score';
+							var par = value.par;
+							var label = value.number + '<br /><font color="blue">' + par + '</font>';
+							$this.jqGrid('setLabel', name, label );
+						});
                     }
+
                     });
                 }
                 else{
@@ -291,22 +299,34 @@
                     url: '{{URL::to('/')}}/matchrounds/'+{{$id}} +'?group=' + i,
                     datatype: "json",
                     colModel: [
-                        { label: 'Player', name: 'name', width: 80, frozen: true },
-                        { label: 'Hole 1', name: 'round.0.holescores.0.score', width: 37 },
-                        { label: 'Hole 2', name: 'round.0.holescores.1.score', width: 37 },
-                        { label: 'Hole 3', name: 'round.0.holescores.2.score', width: 37 },
-                        { label: 'Hole 4', name: 'round.0.holescores.3.score', width: 37 },
-                        { label: 'Hole 5', name: 'round.0.holescores.4.score', width: 37 },
-                        { label: 'Hole 6', name: 'round.0.holescores.5.score', width: 37 },
-                        { label: 'Hole 7', name: 'round.0.holescores.6.score', width: 37 },
-                        { label: 'Hole 8', name: 'round.0.holescores.7.score', width: 37 },
-                        { label: 'Hole 9', name: 'round.0.holescores.8.score', width: 37 },
-                        { label: 'Total', name: 'round.0.score', width: 37}
+                        { label: 'Hole <br /> <font color="blue">Par</font>', name: 'name', height:50, width: 80, frozen: true },
+                        { label: 'Hole', name: 'round.0.holescores.0.score', width: 37 },
+                        { label: 'Hole', name: 'round.0.holescores.1.score', width: 37 },
+                        { label: 'Hole', name: 'round.0.holescores.2.score', width: 37 },
+                        { label: 'Hole', name: 'round.0.holescores.3.score', width: 37 },
+                        { label: 'Hole', name: 'round.0.holescores.4.score', width: 37 },
+                        { label: 'Hole', name: 'round.0.holescores.5.score', width: 37 },
+                        { label: 'Hole', name: 'round.0.holescores.6.score', width: 37 },
+                        { label: 'Hole', name: 'round.0.holescores.7.score', width: 37 },
+                        { label: 'Hole', name: 'round.0.holescores.8.score', width: 37 },
+                        { label: '<br />Total', name: 'round.0.score', width: 37}
 
                     ],
                     viewrecords: true,
                     width: 470,
-                    height: 100
+                    height: 100,
+					loadComplete: function (data) {
+
+						var $this = $(this), ids = $this.jqGrid('getDataIDs'), j, l = ids.length;
+						$("table.ui-jqgrid-htable th div").css ("height", 30);
+						//use data to populate the course holes and par
+						$.each(data[0].round[0].course.holes, function(key, value) {
+							var name = 'round.0.holescores.' + key + '.score';
+							var par = value.par;
+							var label = value.number + '<br /><font color="blue">' + par + '</font>';
+							$this.jqGrid('setLabel', name, label );
+						});
+                    }
                 });
 
                 }
