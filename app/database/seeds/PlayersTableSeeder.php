@@ -26,6 +26,7 @@ class PlayersTableSeeder extends Seeder {
 		Player::create(array('id' => '19','name' => 'Andy','handicap' => '13.92','created_at' => '2014-05-20 02:18:34','updated_at' => '2014-05-20 02:38:53'));
 		Player::create(array('id' => '20','name' => 'Tony','handicap' => '11.04','created_at' => '2014-06-11 01:32:14','updated_at' => '2014-06-11 01:35:43'));
 		Player::create(array('id' => '21','name' => 'Sean','handicap' => '10.08','created_at' => '2014-06-11 01:32:23','updated_at' => '2014-06-11 01:36:57'));
+		Player::create(array('id' => '22','name' => 'Patrick Shutte','handicap' => '5.00','created_at' => '2015-04-11 01:32:23','updated_at' => '2015-04-11 01:36:57'));
 		
 		$database = Config::get('database.default');
 		switch ($database) {
