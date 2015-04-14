@@ -161,7 +161,7 @@
                     datatype: "json",
                     colModel: [
                         { label: 'Hole <br /> <font color="blue">Par</font>', name: 'name',  width: 80, frozen: true },
-                        { label: 'Hole', index: 'score', name: 'round.0.holescores.0.score', width: 37, sorttype:"int", editable: true,
+                        { label: 'Hole', index: 'score', name: 'round.0.holescores.0.score', width: 37, align: 'center', sorttype:"int", editable: true,
                             edittype: 'select',
                             editoptions : { value: scores,
                                             dataEvents : [
@@ -173,7 +173,7 @@
                             }
 
                         },
-                        { label: 'Hole', name: 'round.0.holescores.1.score', width: 37, editable: true,
+                        { label: 'Hole', name: 'round.0.holescores.1.score', width: 37, align: 'center', editable: true,
                             edittype: 'select',
                             editoptions : { value: scores,
                                             dataEvents : [
@@ -184,7 +184,7 @@
                                             ]
                             }
                         },
-                        { label: 'Hole', name: 'round.0.holescores.2.score', width: 37, editable: true,
+                        { label: 'Hole', name: 'round.0.holescores.2.score', width: 37, align: 'center', editable: true,
                             edittype: 'select',
                             editoptions : { value: scores,
                                             dataEvents : [
@@ -195,7 +195,7 @@
                                             ]
                             }
                         },
-                        { label: 'Hole', name: 'round.0.holescores.3.score', width: 37, editable: true,
+                        { label: 'Hole', name: 'round.0.holescores.3.score', width: 37, align: 'center', editable: true,
                             edittype: 'select',
                             editoptions : { value: scores,
                                             dataEvents : [
@@ -206,7 +206,7 @@
                                             ]
                             }
                         },
-                        { label: 'Hole', name: 'round.0.holescores.4.score', width: 37, editable: true,
+                        { label: 'Hole', name: 'round.0.holescores.4.score', width: 37, align: 'center', editable: true,
                             edittype: 'select',
                             editoptions : { value: scores,
                                             dataEvents : [
@@ -217,7 +217,7 @@
                                             ]
                             }
                         },
-                        { label: 'Hole', name: 'round.0.holescores.5.score', width: 37, editable: true,
+                        { label: 'Hole', name: 'round.0.holescores.5.score', width: 37, align: 'center', editable: true,
                             edittype: 'select',
                             editoptions : { value: scores,
                                             dataEvents : [
@@ -228,7 +228,7 @@
                                             ]
                             }
                         },
-                        { label: 'Hole', name: 'round.0.holescores.6.score', width: 37, editable: true,
+                        { label: 'Hole', name: 'round.0.holescores.6.score', width: 37, align: 'center', editable: true,
                             edittype: 'select',
                             editoptions : { value: scores,
                                             dataEvents : [
@@ -239,7 +239,7 @@
                                             ]
                             }
                         },
-                        { label: 'Hole', name: 'round.0.holescores.7.score', width: 37, editable: true,
+                        { label: 'Hole', name: 'round.0.holescores.7.score', width: 37, align: 'center', editable: true,
                             edittype: 'select',
                             editoptions : { value: scores,
                                             dataEvents : [
@@ -250,7 +250,7 @@
                                             ]
                             }
                         },
-                        { label: 'Hole', name: 'round.0.holescores.8.score', width: 37, editable: true,
+                        { label: 'Hole', name: 'round.0.holescores.8.score', width: 37, align: 'center', editable: true,
                             edittype: 'select',
                             editoptions : { value: scores,
                                             dataEvents : [
@@ -261,7 +261,7 @@
                                             ]
                             }
                         },
-                        { label: '<br />Total', name: 'round.0.score', width: 37}
+                        { label: '<br />Total', name: 'round.0.score', width: 37, align: 'center'}
 
                     ],
                     width: 470,
@@ -300,16 +300,16 @@
                     datatype: "json",
                     colModel: [
                         { label: 'Hole <br /> <font color="blue">Par</font>', name: 'name', height:50, width: 80, frozen: true },
-                        { label: 'Hole', name: 'round.0.holescores.0.score', width: 37 },
-                        { label: 'Hole', name: 'round.0.holescores.1.score', width: 37 },
-                        { label: 'Hole', name: 'round.0.holescores.2.score', width: 37 },
-                        { label: 'Hole', name: 'round.0.holescores.3.score', width: 37 },
-                        { label: 'Hole', name: 'round.0.holescores.4.score', width: 37 },
-                        { label: 'Hole', name: 'round.0.holescores.5.score', width: 37 },
-                        { label: 'Hole', name: 'round.0.holescores.6.score', width: 37 },
-                        { label: 'Hole', name: 'round.0.holescores.7.score', width: 37 },
-                        { label: 'Hole', name: 'round.0.holescores.8.score', width: 37 },
-                        { label: '<br />Total', name: 'round.0.score', width: 37}
+                        { label: 'Hole', name: 'round.0.holescores.0.score', width: 37, align: 'center'},
+                        { label: 'Hole', name: 'round.0.holescores.1.score', width: 37, align: 'center' },
+                        { label: 'Hole', name: 'round.0.holescores.2.score', width: 37, align: 'center' },
+                        { label: 'Hole', name: 'round.0.holescores.3.score', width: 37, align: 'center' },
+                        { label: 'Hole', name: 'round.0.holescores.4.score', width: 37, align: 'center' },
+                        { label: 'Hole', name: 'round.0.holescores.5.score', width: 37, align: 'center' },
+                        { label: 'Hole', name: 'round.0.holescores.6.score', width: 37, align: 'center' },
+                        { label: 'Hole', name: 'round.0.holescores.7.score', width: 37, align: 'center' },
+                        { label: 'Hole', name: 'round.0.holescores.8.score', width: 37, align: 'center' },
+                        { label: '<br />Total', name: 'round.0.score', width: 37, align: 'center'}
 
                     ],
                     viewrecords: true,
