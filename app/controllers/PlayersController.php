@@ -24,7 +24,9 @@ class PlayersController extends \BaseController {
      */
     public function store()
     {
-        //
+		$this->player->name = Input::get('name');
+		$this->player->handicap = Input::get('handicap');
+		$this->player->save();
     }
 
     /**

@@ -25,30 +25,30 @@
                 </div>{{-- end .box-header --}}
                 <div class="box-body">
                     <form role="form" id="scoreForm">
-                        <div id="class="form-group">
+                        <div class="form-group">
                             <label for="date">Date:</label>
                             <input class="form-control" type="text" id="date" class="ui-corner-all" name="date" />
                         </div>
-						<div id="class="form-group">
+						<div class="form-group">
 							<label for="course">Course:</label>
 							<select class="form-control" name="course" class="ui-corner-all" id="course">
 								<option></option>
 							</select>
 						</div>
-						<div id="class="form-group" >
+						<div class="form-group" >
 							<label for="players">Number of players:</label>
 							<select class="form-control" name="players" class="ui-corner-all" id="players" >
 								<option></option>
 							</select>
 						</div>
-						<div id="class="form-group">
+						<div class="form-group">
 							<div id="pursediv">
 								<label for="purse">Purse:</label>
 								<input class="form-control" type="text" name="purse" class="ui-corner-all" id="purse" readonly />
 							</div>
 						</div>
 						</br>
-						<div id="class="form-group">
+						<div class="form-group">
 							<div name="playersList" id="playersList"></div>
 						</div>
                     </form>

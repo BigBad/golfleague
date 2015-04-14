@@ -26,7 +26,26 @@
             <div class="box-body">
                 <div id="players" style="height:400px"></div>
             </div><!-- /.box-body -->
-            <button class="btn btn-success btn-sm" type="button" onclick="addARecord('players');">Add Player</button>
+            <div id="loadingOverlay"><i id="spinImage"></i></div>
+        <button id ="playerButton" class="btn btn-success" type="button" onclick="$('#playerFormDiv').toggle();">Add Player</button>
+            <div id="playerFormDiv" style="display:none;">
+                <div class="box-body">
+                    <form role="form" id="playerForm" >
+                        <div class="form-group">
+                          <label for="name">Player Name</label>
+                          <input type="text" placeholder="Enter name" id="name" name="name" class="form-control">
+                        </div>
+                        <div class="form-group">
+                          <label for="handicap">Handicap</label>
+                          <input type="number" step="0.01" placeholder="Enter Handicap" id="handicap" name="handicap" class="form-control">
+                        </div>
+                    </form>
+                    <div class="box-footer">
+                        <button id="submitPlayerForm" class="btn btn-success" type="submit">Submit</button>
+                        <div id="errorText"></div>
+                    </div>
+                </div>
+            </div>
         </div><!-- /.box -->
     </div>
     <div class="col-md-7">
@@ -54,6 +73,8 @@
 
 @section('onload')
 <script>
+
+
     $('#players').w2grid({
     name    : 'players',
     method  : 'GET',
@@ -97,17 +118,29 @@ $('#courses').w2grid({
     }
 });
 
-function addARecord(grid) {
-    var g = w2ui[grid].records.length;
+    $( "#submitPlayerForm" ).click(function( event ) {
+        $("#loadingOverlay").addClass("overlay");
+		$("#spinImage").addClass("fa fa-refresh fa-spin");
+        var datastring = $("#playerForm").serialize();
+        $.ajax({
+            type: "POST",
+            url: "{{URL::to('/')}}/players",
+            data: datastring,
+            success: function(data){
+					$("#loadingOverlay").removeClass("overlay");
+					$("#spinImage").removeClass("fa fa-refresh fa-spin");
+                    $("#playerForm").trigger('reset');//clear form
+                    w2ui['players'].reload();//reload grid
+                    $('#playerFormDiv').toggle();//close div
+				},
+            error: function(data){
+                $("#loadingOverlay").removeClass("overlay");
+                $("#spinImage").removeClass("fa fa-refresh fa-spin");
+                $("#errorText").html(data.statusText);
+            }
+          });
+    });
 
-    var columns = {'recid' : g+1};
-    for (i=0; i < w2ui[grid].columns.length; i++) {
-        columns[w2ui[grid].columns[i].field] = '';
-    }
-    w2ui[grid].add(columns);
-
-    w2ui[grid].editField(g+1,0);
-}
 </script>
 
 @stop
