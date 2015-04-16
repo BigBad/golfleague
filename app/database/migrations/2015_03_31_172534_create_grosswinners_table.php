@@ -15,7 +15,7 @@ class CreateGrosswinnersTable extends Migration {
 		Schema::create('grosswinners', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('match_id')->unsigned()->index()->unique();
+			$table->integer('match_id')->unsigned()->index();
 			$table->integer('player_id')->unsigned()->index();
             $table->integer('score');
 			$table->decimal('money', 12, 2);

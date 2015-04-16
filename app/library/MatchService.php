@@ -91,7 +91,7 @@ class MatchService
 
     public function finalize($matchdata)
     {
-	//return 'success';
+		//return 'success';
         // post CTP1 and CTP2
         $ctp = new Ctp;
         $ctp->match_id = $matchdata['match'];
@@ -117,37 +117,34 @@ class MatchService
             $lowGross[$key] = $match['score'];
         }
         $arrayLowGross = array_keys($lowGross, min($lowGross));
-        $arrayKeyLowGross = $arrayLowGross[0];
-
-        $grossWinner = new Grosswinner;
-        $grossWinner->player_id = $matchRound[$arrayKeyLowGross]->player_id;
-        $grossWinner->match_id = $matchdata['match'];
-        $grossWinner->score = $matchRound[$arrayKeyLowGross]->score;
-        $grossWinner->money = $this->prizeMoney->getlowScore();
-
-        $grossWinner->save();
-
+		
+		foreach($arrayLowGross as $key => $lowgrossPlayer) {
+			$grossWinner = new Grosswinner;
+			$grossWinner->player_id = $lowgrossPlayer;
+			$grossWinner->match_id = $matchdata['match'];
+			$grossWinner->score = $lowGross[$lowgrossPlayer];
+			$grossWinner->money = $this->prizeMoney->getlowScore() / count($arrayLowNet);
+			$grossWinner->save();
+		}
 
         //Calculate NET winner
-
         $lowNet = array();
         $scores =array();
         foreach ($matchRound as $key => $match){
-            $netScore = ($match['score'] - round($match['player']->handicap,0));
-            $lowNet[$key] = $netScore;
+            $netScore = ($match['score'] - round($match['player']->handicap,0)); //calculate net score
+            $lowNet[$match['player']->id] = $netScore;
         }
-        $arrayLowNet = array_keys($lowNet, min($lowNet));
-        $arrayKeyLowNet = $arrayLowNet[0];
-
-        $netWinner = new Netwinner;
-        $netWinner->player_id = $matchRound[$arrayKeyLowNet]->player_id;
-        $netWinner->match_id = $matchdata['match'];
-        $netWinner->score = $lowNet[$arrayKeyLowNet];
-        $netWinner->money = $this->prizeMoney->getlowScore();
-
-        $netWinner->save();
-
-
+        $arrayLowNet = array_keys($lowNet, min($lowNet));      
+		
+		foreach($arrayLowNet as $key => $lownetPlayer) {		
+			$netWinner = new Netwinner;
+			$netWinner->player_id = $lownetPlayer;
+			$netWinner->match_id = $matchdata['match'];
+			$netWinner->score = $lowNet[$lownetPlayer];
+			$netWinner->money = $this->prizeMoney->getlowScore() /  count($arrayLowNet);
+			$netWinner->save();
+		}
+		
         //Calculate Skins
 
         //determine A and B players
@@ -232,7 +229,8 @@ class MatchService
         }
 
         $match =  Match::find($matchdata['match']);
-
+		
+		//Need to add Carry over money if there is any
         $skinsamoney = $match->skinsamoney;
         $skinsbmoney = $match->skinsbmoney;
         $moneyperskinA = $skinsamoney / $aSkinsWon;
