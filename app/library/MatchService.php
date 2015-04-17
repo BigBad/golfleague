@@ -230,9 +230,10 @@ class MatchService
 
         $match =  Match::find($matchdata['match']);
 		
-		//Need to add Carry over money if there is any
-        $skinsamoney = $match->skinsamoney;
-        $skinsbmoney = $match->skinsbmoney;
+		//Need to add Carry over money if there no skins are won
+		//check for carry over money
+        $skinsamoney = $match->skinsamoney; // + carryover A money if any
+        $skinsbmoney = $match->skinsbmoney; // + carryover B money if any
         $moneyperskinA = $skinsamoney / $aSkinsWon;
         $moneyperskinB = $skinsbmoney / $bSkinsWon;
 
