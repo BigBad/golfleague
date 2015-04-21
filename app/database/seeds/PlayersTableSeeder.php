@@ -27,7 +27,8 @@ class PlayersTableSeeder extends Seeder {
 		Player::create(array('id' => '20','name' => 'Tony','handicap' => '11.04','created_at' => '2014-06-11 01:32:14','updated_at' => '2014-06-11 01:35:43'));
 		Player::create(array('id' => '21','name' => 'Sean','handicap' => '10.08','created_at' => '2014-06-11 01:32:23','updated_at' => '2014-06-11 01:36:57'));
 		Player::create(array('id' => '22','name' => 'Patrick Shutte','handicap' => '5.00','created_at' => '2015-04-11 01:32:23','updated_at' => '2015-04-11 01:36:57'));
-		
+		Player::create(array('id' => '23','name' => 'Keith Heckman','handicap' => '7.00','created_at' => '2015-04-11 01:32:23','updated_at' => '2015-04-11 01:36:57'));
+
 		$database = Config::get('database.default');
 		switch ($database) {
 			case "mysql":
@@ -36,8 +37,8 @@ class PlayersTableSeeder extends Seeder {
 			case "pgsql":
 				DB::statement('ALTER SEQUENCE players_id_seq RESTART WITH 22;');
 				break;
-		}		
-		
+		}
+
     }
 
 }

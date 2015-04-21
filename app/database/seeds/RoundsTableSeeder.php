@@ -258,14 +258,27 @@ class RoundsTableSeeder extends Seeder {
 		Round::create(array('id' => '252','date' => '2014-06-10','player_id' => '6','course_id' => '2','score' => '43','esc' => '43','created_at' => '2014-06-11 01:37:33','updated_at' => '2015-02-06 04:14:09'));
 		Round::create(array('id' => '253','date' => '2014-06-10','player_id' => '3','course_id' => '2','score' => '41','esc' => '41','created_at' => '2014-06-11 01:37:55','updated_at' => '2015-02-06 04:14:09'));
 
+		//2015 Practice round
+		Round::create(array('id' => '946','date' => '2015-04-14','player_id' => '1','course_id' => '1','score' => '56','esc' => '50','created_at' => '2015-04-14 21:29:13','updated_at' => '2015-04-15 00:16:17'));
+		Round::create(array('id' => '947','date' => '2015-04-14','player_id' => '2','course_id' => '1','score' => '41','esc' => '41','created_at' => '2015-04-14 21:29:14','updated_at' => '2015-04-15 00:16:25'));
+		Round::create(array('id' => '948','date' => '2015-04-14','player_id' => '3','course_id' => '1','score' => '42','esc' => '42','created_at' => '2015-04-14 21:29:14','updated_at' => '2015-04-15 00:05:15'));
+		Round::create(array('id' => '949','date' => '2015-04-14','player_id' => '4','course_id' => '1','score' => '42','esc' => '42','created_at' => '2015-04-14 21:29:15','updated_at' => '2015-04-15 00:25:41'));
+		Round::create(array('id' => '950','date' => '2015-04-14','player_id' => '6','course_id' => '1','score' => '46','esc' => '46','created_at' => '2015-04-14 21:29:15','updated_at' => '2015-04-15 00:30:54'));
+		Round::create(array('id' => '951','date' => '2015-04-14','player_id' => '12','course_id' => '1','score' => '46','esc' => '46','created_at' => '2015-04-14 21:29:16','updated_at' => '2015-04-15 00:06:00'));
+		Round::create(array('id' => '952','date' => '2015-04-14','player_id' => '7','course_id' => '1','score' => '48','esc' => '48','created_at' => '2015-04-14 21:29:17','updated_at' => '2015-04-15 00:16:34'));
+		Round::create(array('id' => '953','date' => '2015-04-14','player_id' => '9','course_id' => '1','score' => '52','esc' => '50','created_at' => '2015-04-14 21:29:17','updated_at' => '2015-04-15 00:25:54'));
+		Round::create(array('id' => '954','date' => '2015-04-14','player_id' => '22','course_id' => '1','score' => '52','esc' => '51','created_at' => '2015-04-14 21:29:18','updated_at' => '2015-04-15 00:16:42'));
+		Round::create(array('id' => '955','date' => '2015-04-14','player_id' => '23','course_id' => '1','score' => '54','esc' => '52','created_at' => '2015-04-14 21:29:19','updated_at' => '2015-04-15 00:26:15'));
+		Round::create(array('id' => '956','date' => '2015-04-14','player_id' => '8','course_id' => '1','score' => '50','esc' => '50','created_at' => '2015-04-14 21:29:19','updated_at' => '2015-04-15 00:26:24'));
+
 
 		$database = Config::get('database.default');
 		switch ($database) {
-			case "mysql":
-				DB::statement('ALTER TABLE rounds AUTO_INCREMENT = 946');
+			case 'mysql':
+				DB::statement('ALTER TABLE rounds AUTO_INCREMENT = 957');
 				break;
-			case "pgsql":
-				DB::statement('ALTER SEQUENCE rounds_id_seq RESTART WITH 254;');
+			case 'pgsql':
+				DB::statement('ALTER SEQUENCE rounds_id_seq RESTART WITH 957;');
 				break;
 		}
 	}

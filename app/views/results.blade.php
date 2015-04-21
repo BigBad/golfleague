@@ -75,8 +75,7 @@
                     <span class="info-box-icon"><i class="fa fa-thumbs-up"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Gross Winner</span>
-                        <span class="info-box-number" id="grossPlayer"></span>
-                        <span class="progress-description" id="grossMoney"></span>
+                        <span id="grossPlayer"></span>
                     </div><!-- /.info-box-content -->
                 </div><!-- /.info-box -->
 
@@ -84,9 +83,7 @@
                     <span class="info-box-icon"><i class="fa fa-wheelchair"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Net Winner</span>
-                        <span class="info-box-number" id="netPlayer"></span>
-
-                        <span class="progress-description" id="netMoney">
+                        <span id="netPlayer"></span>
                         </span>
                     </div><!-- /.info-box-content -->
                 </div><!-- /.info-box -->
@@ -146,10 +143,15 @@
 				if (jQuery.isEmptyObject(data.ctps) === false) {
 					$("#moneyLeaders").html('<span class="info-box-number"></span><span class="progress-description"></span>');
 					$("#skinsA, #skinsB").empty();
-					$("#grossPlayer").html(data.grosswinner[0].player.name + ' - ' +data.grosswinner[0].score);
-					$("#grossMoney").html('$' + data.grosswinner[0].money);
-					$("#netPlayer").html(data.netwinner[0].player.name + ' - ' +data.netwinner[0].score);
-					$("#netMoney").html('$' + data.netwinner[0].money);
+
+					//loop through gross winners
+					$.each(data.grosswinner, function(index,data) {
+						$("#grossPlayer").append('<span class="info-box-number">'+ data.player.name+'</span>$'+ data.money+'<span class="progress-description"></span>');
+					});
+					//loop through net winners
+					$.each(data.netwinner, function(index,data) {
+						$("#netPlayer").append('<span class="info-box-number">'+ data.player.name+'</span>$'+ data.money+'<span class="progress-description"></span>');
+					});
 					$("#CTP1").html(data.ctps[0].player.name);
 					$("#CTP1Money").html('$' + data.ctps[0].money);
 					$("#CTP2").html(data.ctps[1].player.name);

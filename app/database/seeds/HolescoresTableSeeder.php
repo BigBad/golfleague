@@ -944,17 +944,120 @@ class HolescoresTableSeeder extends Seeder {
         Holescore::create(array('id' => '943','score' => '4','hole_id' => '16','round_id' => '253','created_at' => '2014-06-11 01:37:56','updated_at' => '2014-06-11 01:37:56'));
         Holescore::create(array('id' => '944','score' => '5','hole_id' => '17','round_id' => '253','created_at' => '2014-06-11 01:37:56','updated_at' => '2014-06-11 01:37:56'));
         Holescore::create(array('id' => '945','score' => '6','hole_id' => '18','round_id' => '253','created_at' => '2014-06-11 01:37:56','updated_at' => '2014-06-11 01:37:56'));
-        	
+
+
+        //2015 Practice round
+        Holescore::create(array('id' => '946','score' => '8','hole_id' => '1','round_id' => '946','created_at' => '2015-04-14 21:29:13','updated_at' => '2015-04-14 22:03:06'));
+        Holescore::create(array('id' => '947','score' => '6','hole_id' => '2','round_id' => '946','created_at' => '2015-04-14 21:29:13','updated_at' => '2015-04-14 22:26:32'));
+        Holescore::create(array('id' => '948','score' => '6','hole_id' => '3','round_id' => '946','created_at' => '2015-04-14 21:29:13','updated_at' => '2015-04-14 22:37:41'));
+        Holescore::create(array('id' => '949','score' => '6','hole_id' => '4','round_id' => '946','created_at' => '2015-04-14 21:29:13','updated_at' => '2015-04-14 22:57:09'));
+        Holescore::create(array('id' => '950','score' => '5','hole_id' => '5','round_id' => '946','created_at' => '2015-04-14 21:29:13','updated_at' => '2015-04-14 23:12:36'));
+        Holescore::create(array('id' => '951','score' => '12','hole_id' => '6','round_id' => '946','created_at' => '2015-04-14 21:29:14','updated_at' => '2015-04-14 23:33:42'));
+        Holescore::create(array('id' => '952','score' => '4','hole_id' => '7','round_id' => '946','created_at' => '2015-04-14 21:29:14','updated_at' => '2015-04-14 23:46:08'));
+        Holescore::create(array('id' => '953','score' => '5','hole_id' => '8','round_id' => '946','created_at' => '2015-04-14 21:29:14','updated_at' => '2015-04-15 00:01:46'));
+        Holescore::create(array('id' => '954','score' => '4','hole_id' => '9','round_id' => '946','created_at' => '2015-04-14 21:29:14','updated_at' => '2015-04-15 00:16:16'));
+        Holescore::create(array('id' => '955','score' => '6','hole_id' => '1','round_id' => '947','created_at' => '2015-04-14 21:29:14','updated_at' => '2015-04-14 22:03:15'));
+        Holescore::create(array('id' => '956','score' => '4','hole_id' => '2','round_id' => '947','created_at' => '2015-04-14 21:29:14','updated_at' => '2015-04-14 22:26:38'));
+        Holescore::create(array('id' => '957','score' => '4','hole_id' => '3','round_id' => '947','created_at' => '2015-04-14 21:29:14','updated_at' => '2015-04-14 22:38:19'));
+        Holescore::create(array('id' => '958','score' => '4','hole_id' => '4','round_id' => '947','created_at' => '2015-04-14 21:29:14','updated_at' => '2015-04-14 22:57:19'));
+        Holescore::create(array('id' => '959','score' => '4','hole_id' => '5','round_id' => '947','created_at' => '2015-04-14 21:29:14','updated_at' => '2015-04-14 23:12:43'));
+        Holescore::create(array('id' => '960','score' => '6','hole_id' => '6','round_id' => '947','created_at' => '2015-04-14 21:29:14','updated_at' => '2015-04-14 23:33:51'));
+        Holescore::create(array('id' => '961','score' => '4','hole_id' => '7','round_id' => '947','created_at' => '2015-04-14 21:29:14','updated_at' => '2015-04-14 23:46:01'));
+        Holescore::create(array('id' => '962','score' => '4','hole_id' => '8','round_id' => '947','created_at' => '2015-04-14 21:29:14','updated_at' => '2015-04-15 00:01:54'));
+        Holescore::create(array('id' => '963','score' => '5','hole_id' => '9','round_id' => '947','created_at' => '2015-04-14 21:29:14','updated_at' => '2015-04-15 00:16:24'));
+        Holescore::create(array('id' => '964','score' => '6','hole_id' => '1','round_id' => '948','created_at' => '2015-04-14 21:29:14','updated_at' => '2015-04-14 21:52:31'));
+        Holescore::create(array('id' => '965','score' => '5','hole_id' => '2','round_id' => '948','created_at' => '2015-04-14 21:29:14','updated_at' => '2015-04-14 22:16:13'));
+        Holescore::create(array('id' => '966','score' => '3','hole_id' => '3','round_id' => '948','created_at' => '2015-04-14 21:29:14','updated_at' => '2015-04-14 22:28:36'));
+        Holescore::create(array('id' => '967','score' => '4','hole_id' => '4','round_id' => '948','created_at' => '2015-04-14 21:29:15','updated_at' => '2015-04-14 22:49:35'));
+        Holescore::create(array('id' => '968','score' => '4','hole_id' => '5','round_id' => '948','created_at' => '2015-04-14 21:29:15','updated_at' => '2015-04-14 23:00:47'));
+        Holescore::create(array('id' => '969','score' => '6','hole_id' => '6','round_id' => '948','created_at' => '2015-04-14 21:29:15','updated_at' => '2015-04-14 23:21:36'));
+        Holescore::create(array('id' => '970','score' => '4','hole_id' => '7','round_id' => '948','created_at' => '2015-04-14 21:29:15','updated_at' => '2015-04-14 23:31:42'));
+        Holescore::create(array('id' => '971','score' => '6','hole_id' => '8','round_id' => '948','created_at' => '2015-04-14 21:29:15','updated_at' => '2015-04-14 23:47:15'));
+        Holescore::create(array('id' => '972','score' => '4','hole_id' => '9','round_id' => '948','created_at' => '2015-04-14 21:29:15','updated_at' => '2015-04-15 00:05:13'));
+        Holescore::create(array('id' => '973','score' => '6','hole_id' => '1','round_id' => '949','created_at' => '2015-04-14 21:29:15','updated_at' => '2015-04-14 22:13:15'));
+        Holescore::create(array('id' => '974','score' => '6','hole_id' => '2','round_id' => '949','created_at' => '2015-04-14 21:29:15','updated_at' => '2015-04-14 22:37:24'));
+        Holescore::create(array('id' => '975','score' => '4','hole_id' => '3','round_id' => '949','created_at' => '2015-04-14 21:29:15','updated_at' => '2015-04-14 22:49:49'));
+        Holescore::create(array('id' => '976','score' => '5','hole_id' => '4','round_id' => '949','created_at' => '2015-04-14 21:29:15','updated_at' => '2015-04-14 23:07:41'));
+        Holescore::create(array('id' => '977','score' => '5','hole_id' => '5','round_id' => '949','created_at' => '2015-04-14 21:29:15','updated_at' => '2015-04-14 23:22:31'));
+        Holescore::create(array('id' => '978','score' => '5','hole_id' => '6','round_id' => '949','created_at' => '2015-04-14 21:29:15','updated_at' => '2015-04-14 23:43:53'));
+        Holescore::create(array('id' => '979','score' => '3','hole_id' => '7','round_id' => '949','created_at' => '2015-04-14 21:29:15','updated_at' => '2015-04-14 23:55:47'));
+        Holescore::create(array('id' => '980','score' => '4','hole_id' => '8','round_id' => '949','created_at' => '2015-04-14 21:29:15','updated_at' => '2015-04-15 00:10:38'));
+        Holescore::create(array('id' => '981','score' => '4','hole_id' => '9','round_id' => '949','created_at' => '2015-04-14 21:29:15','updated_at' => '2015-04-15 00:25:40'));
+        Holescore::create(array('id' => '982','score' => '5','hole_id' => '1','round_id' => '950','created_at' => '2015-04-14 21:29:16','updated_at' => '2015-04-14 21:52:36'));
+        Holescore::create(array('id' => '983','score' => '5','hole_id' => '2','round_id' => '950','created_at' => '2015-04-14 21:29:16','updated_at' => '2015-04-14 22:16:19'));
+        Holescore::create(array('id' => '984','score' => '4','hole_id' => '3','round_id' => '950','created_at' => '2015-04-14 21:29:16','updated_at' => '2015-04-14 22:28:43'));
+        Holescore::create(array('id' => '985','score' => '6','hole_id' => '4','round_id' => '950','created_at' => '2015-04-14 21:29:16','updated_at' => '2015-04-14 22:49:58'));
+        Holescore::create(array('id' => '986','score' => '6','hole_id' => '5','round_id' => '950','created_at' => '2015-04-14 21:29:16','updated_at' => '2015-04-14 23:03:07'));
+        Holescore::create(array('id' => '987','score' => '6','hole_id' => '6','round_id' => '950','created_at' => '2015-04-14 21:29:16','updated_at' => '2015-04-14 23:21:44'));
+        Holescore::create(array('id' => '988','score' => '3','hole_id' => '7','round_id' => '950','created_at' => '2015-04-14 21:29:16','updated_at' => '2015-04-15 00:30:53'));
+        Holescore::create(array('id' => '989','score' => '6','hole_id' => '8','round_id' => '950','created_at' => '2015-04-14 21:29:16','updated_at' => '2015-04-14 23:47:33'));
+        Holescore::create(array('id' => '990','score' => '5','hole_id' => '9','round_id' => '950','created_at' => '2015-04-14 21:29:16','updated_at' => '2015-04-15 00:05:21'));
+        Holescore::create(array('id' => '991','score' => '6','hole_id' => '1','round_id' => '951','created_at' => '2015-04-14 21:29:16','updated_at' => '2015-04-14 21:52:43'));
+        Holescore::create(array('id' => '992','score' => '5','hole_id' => '2','round_id' => '951','created_at' => '2015-04-14 21:29:16','updated_at' => '2015-04-14 22:16:26'));
+        Holescore::create(array('id' => '993','score' => '4','hole_id' => '3','round_id' => '951','created_at' => '2015-04-14 21:29:16','updated_at' => '2015-04-14 22:29:06'));
+        Holescore::create(array('id' => '994','score' => '7','hole_id' => '4','round_id' => '951','created_at' => '2015-04-14 21:29:16','updated_at' => '2015-04-14 22:49:51'));
+        Holescore::create(array('id' => '995','score' => '4','hole_id' => '5','round_id' => '951','created_at' => '2015-04-14 21:29:16','updated_at' => '2015-04-14 23:01:04'));
+        Holescore::create(array('id' => '996','score' => '6','hole_id' => '6','round_id' => '951','created_at' => '2015-04-14 21:29:16','updated_at' => '2015-04-14 23:22:07'));
+        Holescore::create(array('id' => '997','score' => '4','hole_id' => '7','round_id' => '951','created_at' => '2015-04-14 21:29:16','updated_at' => '2015-04-14 23:32:03'));
+        Holescore::create(array('id' => '998','score' => '5','hole_id' => '8','round_id' => '951','created_at' => '2015-04-14 21:29:16','updated_at' => '2015-04-14 23:47:46'));
+        Holescore::create(array('id' => '999','score' => '5','hole_id' => '9','round_id' => '951','created_at' => '2015-04-14 21:29:17','updated_at' => '2015-04-15 00:05:59'));
+        Holescore::create(array('id' => '1000','score' => '6','hole_id' => '1','round_id' => '952','created_at' => '2015-04-14 21:29:17','updated_at' => '2015-04-14 22:03:26'));
+        Holescore::create(array('id' => '1001','score' => '6','hole_id' => '2','round_id' => '952','created_at' => '2015-04-14 21:29:17','updated_at' => '2015-04-14 22:26:46'));
+        Holescore::create(array('id' => '1002','score' => '5','hole_id' => '3','round_id' => '952','created_at' => '2015-04-14 21:29:17','updated_at' => '2015-04-14 22:38:26'));
+        Holescore::create(array('id' => '1003','score' => '6','hole_id' => '4','round_id' => '952','created_at' => '2015-04-14 21:29:17','updated_at' => '2015-04-14 22:57:29'));
+        Holescore::create(array('id' => '1004','score' => '5','hole_id' => '5','round_id' => '952','created_at' => '2015-04-14 21:29:17','updated_at' => '2015-04-14 23:12:57'));
+        Holescore::create(array('id' => '1005','score' => '6','hole_id' => '6','round_id' => '952','created_at' => '2015-04-14 21:29:17','updated_at' => '2015-04-14 23:34:00'));
+        Holescore::create(array('id' => '1006','score' => '4','hole_id' => '7','round_id' => '952','created_at' => '2015-04-14 21:29:17','updated_at' => '2015-04-14 23:45:54'));
+        Holescore::create(array('id' => '1007','score' => '5','hole_id' => '8','round_id' => '952','created_at' => '2015-04-14 21:29:17','updated_at' => '2015-04-15 00:02:09'));
+        Holescore::create(array('id' => '1008','score' => '5','hole_id' => '9','round_id' => '952','created_at' => '2015-04-14 21:29:17','updated_at' => '2015-04-15 00:16:32'));
+        Holescore::create(array('id' => '1009','score' => '5','hole_id' => '1','round_id' => '953','created_at' => '2015-04-14 21:29:17','updated_at' => '2015-04-14 22:13:53'));
+        Holescore::create(array('id' => '1010','score' => '8','hole_id' => '2','round_id' => '953','created_at' => '2015-04-14 21:29:17','updated_at' => '2015-04-14 22:37:36'));
+        Holescore::create(array('id' => '1011','score' => '5','hole_id' => '3','round_id' => '953','created_at' => '2015-04-14 21:29:17','updated_at' => '2015-04-14 22:49:57'));
+        Holescore::create(array('id' => '1012','score' => '5','hole_id' => '4','round_id' => '953','created_at' => '2015-04-14 21:29:18','updated_at' => '2015-04-14 23:08:13'));
+        Holescore::create(array('id' => '1013','score' => '4','hole_id' => '5','round_id' => '953','created_at' => '2015-04-14 21:29:18','updated_at' => '2015-04-14 23:22:43'));
+        Holescore::create(array('id' => '1014','score' => '10','hole_id' => '6','round_id' => '953','created_at' => '2015-04-14 21:29:18','updated_at' => '2015-04-14 23:44:01'));
+        Holescore::create(array('id' => '1015','score' => '4','hole_id' => '7','round_id' => '953','created_at' => '2015-04-14 21:29:18','updated_at' => '2015-04-14 23:55:54'));
+        Holescore::create(array('id' => '1016','score' => '4','hole_id' => '8','round_id' => '953','created_at' => '2015-04-14 21:29:18','updated_at' => '2015-04-15 00:10:46'));
+        Holescore::create(array('id' => '1017','score' => '7','hole_id' => '9','round_id' => '953','created_at' => '2015-04-14 21:29:18','updated_at' => '2015-04-15 00:25:53'));
+        Holescore::create(array('id' => '1018','score' => '8','hole_id' => '1','round_id' => '954','created_at' => '2015-04-14 21:29:18','updated_at' => '2015-04-14 22:03:38'));
+        Holescore::create(array('id' => '1019','score' => '4','hole_id' => '2','round_id' => '954','created_at' => '2015-04-14 21:29:18','updated_at' => '2015-04-14 22:26:51'));
+        Holescore::create(array('id' => '1020','score' => '3','hole_id' => '3','round_id' => '954','created_at' => '2015-04-14 21:29:18','updated_at' => '2015-04-14 22:38:34'));
+        Holescore::create(array('id' => '1021','score' => '7','hole_id' => '4','round_id' => '954','created_at' => '2015-04-14 21:29:18','updated_at' => '2015-04-14 22:57:37'));
+        Holescore::create(array('id' => '1022','score' => '7','hole_id' => '5','round_id' => '954','created_at' => '2015-04-14 21:29:18','updated_at' => '2015-04-14 23:13:06'));
+        Holescore::create(array('id' => '1023','score' => '5','hole_id' => '6','round_id' => '954','created_at' => '2015-04-14 21:29:18','updated_at' => '2015-04-14 23:34:05'));
+        Holescore::create(array('id' => '1024','score' => '4','hole_id' => '7','round_id' => '954','created_at' => '2015-04-14 21:29:18','updated_at' => '2015-04-14 23:45:45'));
+        Holescore::create(array('id' => '1025','score' => '7','hole_id' => '8','round_id' => '954','created_at' => '2015-04-14 21:29:19','updated_at' => '2015-04-15 00:02:16'));
+        Holescore::create(array('id' => '1026','score' => '7','hole_id' => '9','round_id' => '954','created_at' => '2015-04-14 21:29:19','updated_at' => '2015-04-15 00:16:41'));
+        Holescore::create(array('id' => '1027','score' => '6','hole_id' => '1','round_id' => '955','created_at' => '2015-04-14 21:29:19','updated_at' => '2015-04-14 22:13:27'));
+        Holescore::create(array('id' => '1028','score' => '5','hole_id' => '2','round_id' => '955','created_at' => '2015-04-14 21:29:19','updated_at' => '2015-04-14 22:37:46'));
+        Holescore::create(array('id' => '1029','score' => '5','hole_id' => '3','round_id' => '955','created_at' => '2015-04-14 21:29:19','updated_at' => '2015-04-14 22:50:06'));
+        Holescore::create(array('id' => '1030','score' => '8','hole_id' => '4','round_id' => '955','created_at' => '2015-04-14 21:29:19','updated_at' => '2015-04-14 23:07:30'));
+        Holescore::create(array('id' => '1031','score' => '5','hole_id' => '5','round_id' => '955','created_at' => '2015-04-14 21:29:19','updated_at' => '2015-04-14 23:22:57'));
+        Holescore::create(array('id' => '1032','score' => '6','hole_id' => '6','round_id' => '955','created_at' => '2015-04-14 21:29:19','updated_at' => '2015-04-14 23:44:14'));
+        Holescore::create(array('id' => '1033','score' => '5','hole_id' => '7','round_id' => '955','created_at' => '2015-04-14 21:29:19','updated_at' => '2015-04-14 23:56:02'));
+        Holescore::create(array('id' => '1034','score' => '8','hole_id' => '8','round_id' => '955','created_at' => '2015-04-14 21:29:19','updated_at' => '2015-04-15 00:10:58'));
+        Holescore::create(array('id' => '1035','score' => '6','hole_id' => '9','round_id' => '955','created_at' => '2015-04-14 21:29:19','updated_at' => '2015-04-15 00:26:14'));
+        Holescore::create(array('id' => '1036','score' => '6','hole_id' => '1','round_id' => '956','created_at' => '2015-04-14 21:29:19','updated_at' => '2015-04-14 22:14:01'));
+        Holescore::create(array('id' => '1037','score' => '6','hole_id' => '2','round_id' => '956','created_at' => '2015-04-14 21:29:19','updated_at' => '2015-04-14 22:38:05'));
+        Holescore::create(array('id' => '1038','score' => '5','hole_id' => '3','round_id' => '956','created_at' => '2015-04-14 21:29:19','updated_at' => '2015-04-14 22:50:14'));
+        Holescore::create(array('id' => '1039','score' => '7','hole_id' => '4','round_id' => '956','created_at' => '2015-04-14 21:29:19','updated_at' => '2015-04-14 23:08:17'));
+        Holescore::create(array('id' => '1040','score' => '5','hole_id' => '5','round_id' => '956','created_at' => '2015-04-14 21:29:19','updated_at' => '2015-04-14 23:22:50'));
+        Holescore::create(array('id' => '1041','score' => '7','hole_id' => '6','round_id' => '956','created_at' => '2015-04-14 21:29:20','updated_at' => '2015-04-14 23:44:22'));
+        Holescore::create(array('id' => '1042','score' => '4','hole_id' => '7','round_id' => '956','created_at' => '2015-04-14 21:29:20','updated_at' => '2015-04-14 23:56:09'));
+        Holescore::create(array('id' => '1043','score' => '5','hole_id' => '8','round_id' => '956','created_at' => '2015-04-14 21:29:20','updated_at' => '2015-04-15 00:11:16'));
+        Holescore::create(array('id' => '1044','score' => '5','hole_id' => '9','round_id' => '956','created_at' => '2015-04-14 21:29:20','updated_at' => '2015-04-15 00:26:23'));
+
+
 		$database = Config::get('database.default');
 		switch ($database) {
-			case "mysql":
-				DB::statement('ALTER TABLE holescores AUTO_INCREMENT = 946');
+			case 'mysql':
+				DB::statement('ALTER TABLE holescores AUTO_INCREMENT = 1045');
 				break;
-			case "pgsql":
-				DB::statement('ALTER SEQUENCE holescores_id_seq RESTART WITH 946;');
+			case 'pgsql':
+				DB::statement('ALTER SEQUENCE holescores_id_seq RESTART WITH 1045;');
 				break;
-		}		
-		
+		}
+
     }
 
 }

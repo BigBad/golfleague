@@ -4,6 +4,7 @@ use GolfLeague\Storage\Match\MatchRepository;
 use GolfLeague\Storage\MatchRound\MatchRoundRepository;
 use GolfLeague\PrizeMoney;
 use GolfLeague\Games;
+use GolfLeague\Handicap;
 use \Player;
 use \Match;
 use \Ctp;
@@ -117,13 +118,13 @@ class MatchService
             $lowGross[$key] = $match['score'];
         }
         $arrayLowGross = array_keys($lowGross, min($lowGross));
-		
+
 		foreach($arrayLowGross as $key => $lowgrossPlayer) {
 			$grossWinner = new Grosswinner;
 			$grossWinner->player_id = $lowgrossPlayer;
 			$grossWinner->match_id = $matchdata['match'];
 			$grossWinner->score = $lowGross[$lowgrossPlayer];
-			$grossWinner->money = $this->prizeMoney->getlowScore() / count($arrayLowNet);
+			$grossWinner->money = $this->prizeMoney->getlowScore() / count($arrayLowGross);
 			$grossWinner->save();
 		}
 
@@ -134,9 +135,9 @@ class MatchService
             $netScore = ($match['score'] - round($match['player']->handicap,0)); //calculate net score
             $lowNet[$match['player']->id] = $netScore;
         }
-        $arrayLowNet = array_keys($lowNet, min($lowNet));      
-		
-		foreach($arrayLowNet as $key => $lownetPlayer) {		
+        $arrayLowNet = array_keys($lowNet, min($lowNet));
+
+		foreach($arrayLowNet as $key => $lownetPlayer) {
 			$netWinner = new Netwinner;
 			$netWinner->player_id = $lownetPlayer;
 			$netWinner->match_id = $matchdata['match'];
@@ -144,7 +145,7 @@ class MatchService
 			$netWinner->money = $this->prizeMoney->getlowScore() /  count($arrayLowNet);
 			$netWinner->save();
 		}
-		
+
         //Calculate Skins
 
         //determine A and B players
@@ -229,7 +230,7 @@ class MatchService
         }
 
         $match =  Match::find($matchdata['match']);
-		
+
 		//Need to add Carry over money if there no skins are won
 		//check for carry over money
         $skinsamoney = $match->skinsamoney; // + carryover A money if any
@@ -249,8 +250,18 @@ class MatchService
             $bskin->save();
         }
 
+		//foreach player in pivot table create player and run handicap analysis
+		foreach($match->players as $matchplayer)
+        {
+            $player = Player::find($matchplayer->pivot->player_id);
+			$handicap = new Handicap($player);
+			$player->handicap = $handicap->calculate();
+			$player->save();
+        }
+
         //Fire event to calculate money won and add to pivot table match_player
         $this->events->fire('match.finalize', $match);
+
     }
 
     /**
