@@ -109,16 +109,16 @@ class MatchService
         $ctp->save();
 
         //calculate Gross winner and post to grossWinnersTable
-
+	   
         $matchRound = $this->matchRoundRepo->getByMatch($matchdata['match']);
 
 
         $lowGross = array();
         foreach ($matchRound as $key => $match){
-            $lowGross[$key] = $match['score'];
+            $lowGross[$match['player']->id] = $match['score'];
         }
         $arrayLowGross = array_keys($lowGross, min($lowGross));
-
+		print_r($lowGross);
 		foreach($arrayLowGross as $key => $lowgrossPlayer) {
 			$grossWinner = new Grosswinner;
 			$grossWinner->player_id = $lowgrossPlayer;
