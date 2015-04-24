@@ -5,13 +5,18 @@ use \Match as Match;
 class EloquentLeaderboardRepository implements LeaderboardRepository
 {
 
+	public function __construct(Match $match)
+    {
+        $this->match = $match;
+    }
+
     public function get($year)
     {
         //Get all match ids for a given year
 		//get all player ids
 		//for each player id get total winnings from pivot where (player id and match id)
 		$year = $year . '-01-01';
-		$match = Match::with('players')->where('created_at', '>', $year)->get(); //get match eventually by year
+		$match = $this->match->with('players')->where('created_at', '>', $year)->get(); //get match eventually by year
 		//filter out players from match
 		foreach($match as $item){
 			$players[] = $item->players;
