@@ -118,7 +118,6 @@ class MatchService
             $lowGross[$match['player']->id] = $match['score'];
         }
         $arrayLowGross = array_keys($lowGross, min($lowGross));
-		print_r($lowGross);
 		foreach($arrayLowGross as $key => $lowgrossPlayer) {
 			$grossWinner = new Grosswinner;
 			$grossWinner->player_id = $lowgrossPlayer;
