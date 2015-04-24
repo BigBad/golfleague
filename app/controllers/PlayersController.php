@@ -1,8 +1,10 @@
 <?php
 
+use GolfLeague\Storage\Player\PlayerRepository as PlayerRepo;
+
 class PlayersController extends \BaseController {
 
-    public function __construct(Player $player)
+    public function __construct(PlayerRepo $player)
     {
         $this->player = $player;
     }
@@ -24,9 +26,7 @@ class PlayersController extends \BaseController {
      */
     public function store()
     {
-		$this->player->name = Input::get('name');
-		$this->player->handicap = Input::get('handicap');
-		$this->player->save();
+		$this->player->create(Input::get('name'), Input::get('handicap'));
     }
 
     /**
@@ -48,23 +48,7 @@ class PlayersController extends \BaseController {
      */
     public function edit()
     {
-        $operation = Input::get('oper');
-        switch ($operation) {
-        case "add":
-            $this->player->name = Input::get('name');
-            $this->player->save();
-            break;
-        case "edit":
-            $id = Input::get('id');
-            $this->player = $this->player->find($id);
-            $this->player->name = Input::get('name');
-            $this->player->save();
-            break;
-        case "del":
-            $id = Input::get('id');
-            $this->player = $this->player->destroy($id);
-            break;
-        }
+
     }
 
     /**

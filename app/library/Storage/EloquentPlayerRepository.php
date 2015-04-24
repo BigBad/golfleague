@@ -2,7 +2,7 @@
 
 use \Player as Player;
 
-class EloquentMatchRepository implements MatchRepository
+class EloquentPlayerRepository implements PlayerRepository
 {
   /*Return Score collections that include:
    * Player Name
@@ -18,7 +18,7 @@ class EloquentMatchRepository implements MatchRepository
 
     public function all()
     {
-        return $this->player->eagerLoadAll()->all();
+        return $this->player->orderBy('handicap','asc')->get();
     }
 
     //Find Player by Player Id
@@ -27,9 +27,11 @@ class EloquentMatchRepository implements MatchRepository
         //return Round::with('player', 'holescores')->where('player_id', '=', $playerId)->get();
     }
 
-    public function create($matchdata)
+    public function create($name, $handicap)
     {
-
+		$this->player->name = $name;
+		$this->player->handicap = $handicap;
+		$this->player->save();
     }
 
 }

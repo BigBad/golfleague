@@ -6,6 +6,6 @@ interface PlayerRepository {
 
   public function all();
   public function find($playerId);
-  public function create($input);
+  public function create($name, $handicap);
 
 }
