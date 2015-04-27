@@ -54,7 +54,7 @@ class FinalizeHandler
 		$winningPlayers = $this->playerMoneyCombine($grossWinners, $winningPlayers);
 
         $skinWinners = Skin::where('match_id', '=', $match->id)->get();
-		$winningPlayers = $this->playerMoneyCombine($grossWinners, $winningPlayers);
+		$winningPlayers = $this->playerMoneyCombine($skinWinners, $winningPlayers);
 
         foreach ($winningPlayers as $key => $player){
 			$currentPlayer = Player::find($player['player_id']);
