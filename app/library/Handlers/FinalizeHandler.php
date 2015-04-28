@@ -42,19 +42,75 @@ class FinalizeHandler
         //store in the pivot table match_player for the given player
 
         $winningPlayers = array();
-
+        $i = 0;
 
         $ctpWinners = Ctp::where('match_id', '=', $match->id)->get();
-		$winningPlayers = $this->playerMoneyCombine($ctpWinners, $winningPlayers);
+        foreach($ctpWinners as $key => $ctpWinner){
+            $playerExists = $this->recursive_array_search($ctpWinner->player_id, $winningPlayers);
+            //if player is already there add money here to other money
+            if($playerExists){
+                $winningPlayers[$i]['player_id'] = $ctpWinner->player_id;
+                $winningPlayers[$i]['money'] = ($ctpWinner->money + $winningPlayers[$playerExists]['money']);
+            }
+            else {
+                $winningPlayers[$i]['player_id'] = $ctpWinner->player_id;
+                $winningPlayers[$i]['money'] = $ctpWinner->money;
+            }
+            $i++;
+        }
 
         $netWinners = Netwinner::where('match_id', '=', $match->id)->get();
-		$winningPlayers = $this->playerMoneyCombine($netWinners, $winningPlayers);
+        foreach($netWinners as $key => $netWinner){
+            $playerExists = $this->recursive_array_search($netWinner->player_id, $winningPlayers);
+            //if player is already there add money here to other money
+            if($playerExists){
+                $winningPlayers[$i]['player_id'] = $netWinner->player_id;
+                $winningPlayers[$i]['money'] = ($netWinner->money + $winningPlayers[$playerExists]['money']);
+                unset($winningPlayers[$playerExists]);
+            }
+            else{
+                $winningPlayers[$i]['player_id'] = $netWinner->player_id;
+                $winningPlayers[$i]['money'] = $netWinner->money;
+            }
+            $i++;
+        }
 
         $grossWinners = Grosswinner::where('match_id', '=', $match->id)->get();
-		$winningPlayers = $this->playerMoneyCombine($grossWinners, $winningPlayers);
+        foreach($grossWinners as $key => $grossWinner){
+            $playerExists = $this->recursive_array_search($grossWinner->player_id, $winningPlayers);
+            //if player is already there add money here to other money
+            if($playerExists){
+                $winningPlayers[$i]['player_id'] = $grossWinner->player_id;
+                $winningPlayers[$i]['money'] = ($grossWinner->money + $winningPlayers[$playerExists]['money']);
+                unset($winningPlayers[$playerExists]);
+            }
+            else{
+                $winningPlayers[$i]['player_id'] = $grossWinner->player_id;
+                $winningPlayers[$i]['money'] = $grossWinner->money;
+            }
+            $i++;
+        }
 
         $skinWinners = Skin::where('match_id', '=', $match->id)->get();
-		$winningPlayers = $this->playerMoneyCombine($skinWinners, $winningPlayers);
+        foreach($skinWinners as $key => $skinWinner){
+            $playerExists = $this->recursive_array_search($skinWinner->player_id, $winningPlayers);
+            //if player is already there add money here to other money
+            if($playerExists){
+                $winningPlayers[$i]['player_id'] = $skinWinner->player_id;
+                $winningPlayers[$i]['money'] = ($skinWinner->money + $winningPlayers[$playerExists]['money']);
+                unset($winningPlayers[$playerExists]);
+            }
+            else{
+                $winningPlayers[$i]['player_id'] = $skinWinner->player_id;
+                $winningPlayers[$i]['money'] = $skinWinner->money;
+            }
+            $i++;
+        }
+
+        //Consolidate any multiple instances of a player
+        foreach ($winningPlayers as $key => $winningPlayer){
+            array_search($winningPlayer['player_id'], $winningPlayers);
+        }
 
         foreach ($winningPlayers as $key => $player){
 			$currentPlayer = Player::find($player['player_id']);
@@ -66,26 +122,6 @@ class FinalizeHandler
 
 
     }
-
-	private function playerMoneyCombine($winners, $winningPlayers){
-		$i = 1;
-		foreach($winners as $key => $winner){
-            $playerExists = $this->recursive_array_search($winner->player_id, $winningPlayers);
-            //if player is already there add money here to other money
-            if($playerExists){
-                $winningPlayers[$i]['player_id'] = $winner->player_id;
-                $winningPlayers[$i]['money'] = ($winner->money + $winningPlayers[$playerExists]['money']);
-                unset($winningPlayers[$playerExists]);
-            }
-            else{
-                $winningPlayers[$i]['player_id'] = $winner->player_id;
-                $winningPlayers[$i]['money'] = $winner->money;
-            }
-            $i++;
-        }
-		return $winningPlayers;
-
-	}
 
     /**
      * Register the listeners for the subscriber.

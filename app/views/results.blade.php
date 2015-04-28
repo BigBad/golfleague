@@ -139,10 +139,13 @@
         });
 
         $("#match").change(function () {
+
+			$("#moneyLeaders, #CTP1, #CTP2, #grossPlayer, #netPlayer, #skinsA, #skinsB").empty();
+
             $.getJSON("{{URL::to('/')}}/money/" + $("#match").val(), function(data){
 				if (jQuery.isEmptyObject(data.ctps) === false) {
 					$("#moneyLeaders").html('<span class="info-box-number"></span><span class="progress-description"></span>');
-					$("#skinsA, #skinsB").empty();
+
 
 					//loop through gross winners
 					$.each(data.grosswinner, function(index,data) {
