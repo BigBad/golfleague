@@ -49,6 +49,7 @@ class EquitableStrokeControl {
 
     private function maxAllowableScore($par, $handicap)
     {
+        $maxScore = '';
         switch($handicap) {
             case ($handicap < 4.6):
                 $maxScore = $par + 2;
