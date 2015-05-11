@@ -234,21 +234,26 @@ class MatchService
 		//check for carry over money
         $skinsamoney = $match->skinsamoney; // + carryover A money if any
         $skinsbmoney = $match->skinsbmoney; // + carryover B money if any
-        $moneyperskinA = $skinsamoney / $aSkinsWon;
-        $moneyperskinB = $skinsbmoney / $bSkinsWon;
+		
+		if($aSkinsWon > 0) {
+			$moneyperskinA = $skinsamoney / $aSkinsWon;        
 
-        $aSkins = Skin::where('match_id', '=', $matchdata['match'])->where('level_id', '=', 1)->get();
-        foreach ($aSkins as $askin){
-            $askin->money = $moneyperskinA;
-            $askin->save();
-        }
-
-        $bSkins = Skin::where('match_id', '=', $matchdata['match'])->where('level_id', '=', 2)->get();
-        foreach ($bSkins as $bskin){
-            $bskin->money = $moneyperskinB;
-            $bskin->save();
-        }
-
+			$aSkins = Skin::where('match_id', '=', $matchdata['match'])->where('level_id', '=', 1)->get();
+			foreach ($aSkins as $askin){
+				$askin->money = $moneyperskinA;
+				$askin->save();
+			}
+		}
+		
+		if($bSkinsWon > 0) {
+			$moneyperskinB = $skinsbmoney / $bSkinsWon;		
+			
+			$bSkins = Skin::where('match_id', '=', $matchdata['match'])->where('level_id', '=', 2)->get();
+			foreach ($bSkins as $bskin){
+				$bskin->money = $moneyperskinB;
+				$bskin->save();
+			}
+		}
 		//foreach player in pivot table create player and run handicap analysis
 		foreach($match->players as $matchplayer)
         {
