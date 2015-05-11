@@ -42,7 +42,7 @@ class FinalizeHandler
         //store in the pivot table match_player for the given player
 
         $winningPlayers = array();
-        $i = 0;
+        $i = 1;
 
         $ctpWinners = Ctp::where('match_id', '=', $match->id)->get();
         foreach($ctpWinners as $key => $ctpWinner){

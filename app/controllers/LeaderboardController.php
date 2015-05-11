@@ -49,7 +49,7 @@ class LeaderboardController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$year = $id;
+		$year = 2015;
 		$results  = $this->leaderboardRepo->get($year);
 		$data['data'] = $results[0];
 		return $data;

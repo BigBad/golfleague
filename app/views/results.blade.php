@@ -140,7 +140,7 @@
 
         $("#match").change(function () {
 
-			$("#moneyLeaders, #CTP1, #CTP2, #grossPlayer, #netPlayer, #skinsA, #skinsB").empty();
+			$("#moneyLeaders, #CTP1, #CTP1Money, #CTP2, #CTP2Money, #grossPlayer, #netPlayer, #skinsA, #skinsB").empty();
 
             $.getJSON("{{URL::to('/')}}/money/" + $("#match").val(), function(data){
 				if (jQuery.isEmptyObject(data.ctps) === false) {
