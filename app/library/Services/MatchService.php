@@ -11,6 +11,7 @@ use \Ctp;
 use \Grosswinner;
 use \Netwinner;
 use \Skin;
+use GolfLeague\Services\CarryOver;
 use Illuminate\Events\Dispatcher;
 
 /**
@@ -76,6 +77,11 @@ class MatchService
         //Calculate Skins money based on how many players in each group
         $matchdata['skinsamoney'] = $this->prizeMoney->skinsGroupPot($matchdata['purse'], $totalPlayers, $aPlayerCount);
         $matchdata['skinsbmoney'] = $this->prizeMoney->skinsGroupPot($matchdata['purse'], $totalPlayers, $bPlayerCount);
+		//check for carry over money and if there is add it to skins money
+		$carryOver = new CarryOver;
+		$carryOverMoney = $carryOver->calculate();
+		$matchdata['skinsamoney'] +=  $carryOverMoney[1];
+		$matchdata['skinsbmoney'] +=  $carryOverMoney[2];
 
         //append current handicap and set winnings to 0 for each player
         foreach ($matchdata['player'] as $key=>$player) {
@@ -109,7 +115,7 @@ class MatchService
         $ctp->save();
 
         //calculate Gross winner and post to grossWinnersTable
-	   
+
         $matchRound = $this->matchRoundRepo->getByMatch($matchdata['match']);
 
 
@@ -234,9 +240,9 @@ class MatchService
 		//check for carry over money
         $skinsamoney = $match->skinsamoney; // + carryover A money if any
         $skinsbmoney = $match->skinsbmoney; // + carryover B money if any
-		
+
 		if($aSkinsWon > 0) {
-			$moneyperskinA = $skinsamoney / $aSkinsWon;        
+			$moneyperskinA = $skinsamoney / $aSkinsWon;
 
 			$aSkins = Skin::where('match_id', '=', $matchdata['match'])->where('level_id', '=', 1)->get();
 			foreach ($aSkins as $askin){
@@ -244,10 +250,10 @@ class MatchService
 				$askin->save();
 			}
 		}
-		
+
 		if($bSkinsWon > 0) {
-			$moneyperskinB = $skinsbmoney / $bSkinsWon;		
-			
+			$moneyperskinB = $skinsbmoney / $bSkinsWon;
+
 			$bSkins = Skin::where('match_id', '=', $matchdata['match'])->where('level_id', '=', 2)->get();
 			foreach ($bSkins as $bskin){
 				$bskin->money = $moneyperskinB;

@@ -15,8 +15,12 @@ Route::get('/', function()
     return View::make('home'); //make a home page
 });
 
-Route::get('test', 'TestController@view');
-
+/*
+Route::get('test', function() {
+    $carryOver = new GolfLeague\Services\CarryOver;
+    return $carryOver->calculate();
+    });
+*/
 
 //Route::get('administration', 'AdministrationController@view');
 
