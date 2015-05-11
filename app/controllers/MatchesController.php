@@ -68,14 +68,14 @@ class MatchesController extends \BaseController {
 	{
 		$data = $this->match->get($id);
 
-		if($data['date'] === date('Y-m-d')){
+		if($data['date'] >= date('Y-m-d')){
 			//Show Editable View
 			$view = View::make('EnterMatch', $data);
 			return $view;
 		}
 		else {
 			//Show Readonly View //This needs created
-			$view = View::make('EnterMatch', $data);
+			$view = View::make('ViewMatch', $data);
 			return $view;
 		}
 	}
