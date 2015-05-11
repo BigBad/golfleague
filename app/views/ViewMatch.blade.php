@@ -233,8 +233,6 @@
 
 @section('onload')
 <script>
-    $(document).ready(function() {
-        $( "#leaderboard" ).show();
-    });
+
 </script>
     @stop
