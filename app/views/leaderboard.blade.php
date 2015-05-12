@@ -30,6 +30,8 @@
             <tr>
                 <th>Name</th>
                 <th>Money</th>
+                <th>Entry Fees</th>
+                <th>Net Money Won</th>
             </tr>
         </thead>
     </table>
@@ -55,7 +57,9 @@
         "ajax": "{{URL::to('/')}}/leaderboard/2015",
         "columns": [
             { "data": "name" },
-            { "data": "winnings" }
+            { "data": "winnings" },
+            { "data": "entryfees" },
+            { "data": "net" }
         ]
     } );
 } );

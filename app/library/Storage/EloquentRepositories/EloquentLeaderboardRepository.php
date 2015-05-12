@@ -27,15 +27,23 @@ class EloquentLeaderboardRepository implements LeaderboardRepository
 				if (array_key_exists($player->id, $moneyList)) {
 					//add previois to new
 					$moneyList[$player->id]['winnings'] = sprintf('%01.2f', ($moneyList[$player->id]['winnings'] + $player->pivot->winnings));
+					$moneyList[$player->id]['entryfees'] += 5;
+					$moneyList[$player->id]['entryfees'] = sprintf('%01.2f',$moneyList[$player->id]['entryfees']);
+					$moneyList[$player->id]['net'] = $moneyList[$player->id]['winnings'] - $moneyList[$player->id]['entryfees'];
+					$moneyList[$player->id]['net'] = sprintf('%01.2f',$moneyList[$player->id]['net']);
 				}
 				else {
 					$moneyList[$player->id]['id'] = $player->id;
 					$moneyList[$player->id]['name'] = $player->name;
 					$moneyList[$player->id]['winnings'] = sprintf('%01.2f',$player->pivot->winnings);
+					$moneyList[$player->id]['entryfees'] = 5;
+					$moneyList[$player->id]['entryfees'] = sprintf('%01.2f',$moneyList[$player->id]['entryfees']);
+					$moneyList[$player->id]['net'] = $moneyList[$player->id]['winnings'] - $moneyList[$player->id]['entryfees'];
+					$moneyList[$player->id]['net'] = sprintf('%01.2f',$moneyList[$player->id]['net']);
 				}
 			}
 		}
-		
+
 		return $moneyList;
     }
 }
