@@ -151,7 +151,10 @@
                     }}
                 ]
             });
-
+			$( "#leaderboard" ).click(function(){
+				grossTable.ajax.reload();
+				netTable.ajax.reload();
+			});
             var groupId = get('group');
             var scores = {'': '','1':'1','2':'2','3':'3','4':'4','5':'5','6':'6','7':'7','8':'8','9':'9','10':'10','11':'11','12':'12'};
             for (i = 1; i < 4; i++) {
@@ -361,6 +364,8 @@
                         },
                         30000); // 300 sec === 5 min
                 */
+
+
         function get(name){
             if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
                 return decodeURIComponent(name[1]);
@@ -374,7 +379,7 @@
 @section('onload')
 <script>
     $(document).ready(function() {
-        $( "#leaderboard" ).show();
+		$( "#leaderboard" ).show();
     });
 </script>
     @stop

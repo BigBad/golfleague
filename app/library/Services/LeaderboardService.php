@@ -18,7 +18,6 @@ class LeaderboardService
 		$rounds = $this->matchround->getByMatch($matchId);
 		$leaderboard = array();
 		foreach ($rounds as $round){
-            $i = 0;
 			$holescores = $round->holescores;
 				//Filter out NULL scores
 				$filteredHolecores = $holescores->filter(function($holescore){
@@ -43,14 +42,15 @@ class LeaderboardService
 			];
 			array_push($leaderboard, $player);
 		}
-			foreach ($leaderboard as $key => $player) {
-				$name[$key]  = $player['name'];
-				$score[$key] = $player['score'];
-			}
+		$name = array();
+		$score = array();
+		foreach ($leaderboard as $key => $player) {
+			$name[$key]  = $player['name'];
+			$score[$key] = $player['score'];
+		}
 
-			array_multisort($score, SORT_ASC, $name, SORT_ASC, $leaderboard);
-
-			return $leaderboard;
+		array_multisort($score, SORT_ASC, $name, SORT_ASC, $leaderboard);
+		return $leaderboard;
 
 	}
 	/*

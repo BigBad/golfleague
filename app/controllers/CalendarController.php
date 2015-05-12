@@ -17,9 +17,6 @@ class CalendarController extends \BaseController {
 	public function index()
 	{
 		return $this->calendar->getByDate(Input::get('start'), Input::get('end'));
-
-        return Input::all();
-
 	}
 
 
