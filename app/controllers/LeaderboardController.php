@@ -51,7 +51,8 @@ class LeaderboardController extends \BaseController {
 	{
 		$year = 2015;
 		$results  = $this->leaderboardRepo->get($year);
-		$data['data'] = $results[0];
+		$newvalue = array_values( (array)$results );
+		$data['data'] = $newvalue;
 		return $data;
 	}
 

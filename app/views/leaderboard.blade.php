@@ -55,7 +55,7 @@
         "ajax": "{{URL::to('/')}}/leaderboard/2015",
         "columns": [
             { "data": "name" },
-            { "data": "pivot.winnings" }
+            { "data": "winnings" }
         ]
     } );
 } );
