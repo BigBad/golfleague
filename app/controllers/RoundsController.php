@@ -1,6 +1,13 @@
 <?php
 
+use GolfLeague\Storage\Round\RoundRepository as RoundRepo;
+
 class RoundsController extends \BaseController {
+
+	public function __construct(RoundRepo $roundRepo)
+    {
+		$this->roundRepo = $roundRepo;
+    }
 
 	/**
 	 * Get Data for all rounds
@@ -9,7 +16,7 @@ class RoundsController extends \BaseController {
 	 */
 	public function index()
 	{
-		return Round::all();
+		return $this->roundRepo->all();
 	}
 
 	/**
@@ -40,7 +47,7 @@ class RoundsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		return $this->roundRepo->findByPlayer($id);
 	}
 
 	/**

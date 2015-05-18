@@ -25,7 +25,22 @@
                     <a href="{{ URL::to('statistics') }}">
                         <i class="fa fa-bar-chart"></i>
                         <span>Statistics</span>
+						<i class="fa fa-angle-left pull-right"></i>
                     </a>
+					<ul class="treeview-menu" >
+                        <li>
+                            <a href="{{ URL::to('statistics/league') }}" style="margin-left: 10px;">
+                                <i class="fa fa-users"></i>
+                                <span>League</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ URL::to('statistics/individual') }}" style="margin-left: 10px;">
+                                <i class="fa fa-user"></i>
+                                <span>Individual</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                     <li class="treeview">
                     <a href="">

@@ -43,7 +43,8 @@ class StatisticsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$view = $id . 'Statistics';
+		return View::make($view);
 	}
 
 

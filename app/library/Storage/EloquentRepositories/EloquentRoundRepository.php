@@ -14,7 +14,7 @@ class EloquentRoundRepository implements RoundRepository
 
     public function all()
     {
-        return Round::eagerLoadAll()->all();
+        return Round::all();
     }
 
     public function find($id)

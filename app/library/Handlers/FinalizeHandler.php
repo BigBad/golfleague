@@ -51,6 +51,7 @@ class FinalizeHandler
             if($playerExists){
                 $winningPlayers[$i]['player_id'] = $ctpWinner->player_id;
                 $winningPlayers[$i]['money'] = ($ctpWinner->money + $winningPlayers[$playerExists]['money']);
+                unset($winningPlayers[$playerExists]);
             }
             else {
                 $winningPlayers[$i]['player_id'] = $ctpWinner->player_id;

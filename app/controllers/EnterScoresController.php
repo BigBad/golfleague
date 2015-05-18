@@ -14,6 +14,10 @@ class EnterScoresController extends \BaseController {
 			echo $score->player->name . "<br>";
 		}
 		*/
+	$holescores = Holescore::with('hole')->where('created_at', '>=', '2015-04-28')->get();
+	$count = $holescores->count();
+
+		$eagles = 0;
 		$birdies = 0;
 		$pars = 0;
 		$bogeys = 0;
@@ -21,10 +25,13 @@ class EnterScoresController extends \BaseController {
 		$triples = 0;
 		$others = 0;
 		$holes = 1;
-		foreach (Holescore::with('hole')->get() as $holescore) {
+		foreach (Holescore::with('hole')->where('created_at', '>=', '2015-04-28')->get() as $holescore) {
 			$diff = ($holescore->score) - ($holescore->hole->par);
-			
+
 			switch ($diff) {
+				case -2:
+					$eagles++;
+					break;
 				case -1:
 					$birdies++;
 					break;
@@ -46,26 +53,26 @@ class EnterScoresController extends \BaseController {
 			}
 			$holes++;
 			//echo $holescore->hole->number .  " score = " . $holescore->score ." " . $diff . "<br>";
-			
+
 		}
-		echo "Number of holes played by all = " . $holes . "<br>";
-		echo "Number of birdies =" . $birdies . "     " . round($birdies/$holes,2) . "%<br>";
-		echo "Number of pars = " . $pars . "     " . round($pars/$holes,2) . "%<br>";
-		echo "Number of bogeys =" . $bogeys . "     " . round($bogeys/$holes,2) . "%<br>";
-		echo "Number of double bogeys = " . $doubleBogeys . "     " . round($doubleBogeys/$holes,2) . "%<br>";
-		echo "Number of triples =" . $triples . "     " . round($triples/$holes,2) . "%<br>";
-		echo "Number of others = " . $others . "     " . round($others/$holes,2) . "%<br>";
+		echo "Number of holes played by all = " . $count . "<br>";
+		echo "Number of birdies =" . $birdies . "     " . round($birdies/$count,2) . "%<br>";
+		echo "Number of pars = " . $pars . "     " . round($pars/$count,2) . "%<br>";
+		echo "Number of bogeys =" . $bogeys . "     " . round($bogeys/$count,2) . "%<br>";
+		echo "Number of double bogeys = " . $doubleBogeys . "     " . round($doubleBogeys/$count,2) . "%<br>";
+		echo "Number of triples =" . $triples . "     " . round($triples/$count,2) . "%<br>";
+		echo "Number of others = " . $others . "     " . round($others/$count,2) . "%<br>";
 		exit();
 		$scores = Score::where('player_id', '=', 2)->orderBy('date', 'desc')->take(20)->get();
 
 		foreach( $scores->id as $scoreId) {
-			$holescores[$score_id] = Holescore::where('score_id', '=', $scoreId)->get();		
+			$holescores[$score_id] = Holescore::where('score_id', '=', $scoreId)->get();
 		}
 		return $scores;
     }
 
     /**
-   
+
     /**
      * Remove the specified resource from storage.
      *

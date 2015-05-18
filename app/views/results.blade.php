@@ -149,11 +149,11 @@
 
 					//loop through gross winners
 					$.each(data.grosswinner, function(index,data) {
-						$("#grossPlayer").append('<span class="info-box-number">'+ data.player.name+'</span>$'+ data.money+'<span class="progress-description"></span>');
+						$("#grossPlayer").append('<span class="info-box-number">'+ data.player.name+' - ' + data.score + '</span>$'+ data.money +'<span class="progress-description"></span>');
 					});
 					//loop through net winners
 					$.each(data.netwinner, function(index,data) {
-						$("#netPlayer").append('<span class="info-box-number">'+ data.player.name+'</span>$'+ data.money+'<span class="progress-description"></span>');
+						$("#netPlayer").append('<span class="info-box-number">'+ data.player.name+' - ' + data.score + '</span>$'+ data.money+'<span class="progress-description"></span>');
 					});
 					$("#CTP1").html(data.ctps[0].player.name);
 					$("#CTP1Money").html('$' + data.ctps[0].money);
