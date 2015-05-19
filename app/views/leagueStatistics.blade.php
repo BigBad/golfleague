@@ -214,6 +214,23 @@
                 ]
             });
 
+            $('#top5NetTable').dataTable( {
+                "order": [[ 1, "asc" ]],
+                "bPaginate": false,
+                "bFilter": false,
+                "bInfo": false,
+                "scrollY":        "205px",
+                "scrollX": false,
+                "scrollCollapse": true,
+                "paging":         false,
+                "ajax": "{{URL::to('/')}}/net/" + year,
+                "columns": [
+                    { "data": "player.name" },
+                    { "data": "score" },
+                    { "data": "match.course.name" },
+                ]
+            });
+
         });
     });
 

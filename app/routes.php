@@ -59,3 +59,4 @@ Route::resource('results', 'ResultsController');
 Route::resource('skins', 'SkinsController');
 Route::resource('gross', 'GrossController');
 Route::resource('scoringaverage', 'ScoringAverageController');
+Route::resource('net', 'NetController');

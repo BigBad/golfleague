@@ -3,6 +3,7 @@
 use \Round;
 use \Player;
 use \Skin;
+use \Netwinner;
 
 class LeagueStatisticsEloquent implements LeagueStatistics
 {
@@ -53,6 +54,12 @@ class LeagueStatisticsEloquent implements LeagueStatistics
         array_multisort($average);
         return $average;
     }
+
+    public function topFiveNetScoresByYear($year)
+    {
+         return Netwinner::with('player','match','match.course')->orderBy('score')->take(5)->get();
+    }
+
     public function mostSkinsByYear($year)
     {
         $year = $year . '-01-01';

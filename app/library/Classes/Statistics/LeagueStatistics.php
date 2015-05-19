@@ -6,6 +6,7 @@ interface LeagueStatistics {
     public function topFiveLowestScores();
     public function topFiveLowestScoresByYear($year);
     public function topFiveScoringAverageByYear($year);
+    public function topFiveNetScoresByYear($year);
     public function mostSkinsByYear($year);
     public function totalEagles();
     public function totalBirdies();

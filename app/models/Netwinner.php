@@ -2,7 +2,7 @@
 
 class Netwinner extends Eloquent {
 
-	public function matches()
+	public function match()
     {
         return $this->belongsTo('Match');
     }
