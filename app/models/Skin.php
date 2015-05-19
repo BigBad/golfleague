@@ -12,7 +12,7 @@ class Skin extends Eloquent {
         return $this->belongsTo('Match');
     }
 
-	public function levels()
+	public function level()
     {
         return $this->belongsTo('Level');
     }

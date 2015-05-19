@@ -15,6 +15,12 @@ Route::get('/', function()
     return View::make('home'); //make a home page
 });
 
+Route::get('/test', function()
+{
+    $stats = new  GolfLeague\Statistics\League\LeagueStatisticsEloquent();
+    return $stats->topFiveScoringAverageByYear('2015');
+});
+
 Route::get('enterscore', 'ScoreController@view');
 Route::post('storescore', 'ScoreController@store');
 
@@ -39,7 +45,8 @@ Route::resource('finalize', 'FinalizeController');
 Route::resource('courses', 'CoursesController');
 Route::resource('levels', 'LevelsController');
 Route::resource('matchrounds', 'MatchRoundController');
-Route::resource('statistics', 'StatisticsController');
+Route::resource('statistics/league', 'LeagueStatisticsController');
+Route::resource('statistics/individual', 'IndividualStatisticsController');
 Route::resource('schedule', 'ScheduleController');
 Route::resource('leaderboard', 'LeaderboardController');
 Route::resource('administration', 'AdministrationController');
@@ -49,3 +56,6 @@ Route::resource('register', 'RegisterController');
 Route::resource('users', 'UsersController');
 Route::resource('money', 'MoneyController');
 Route::resource('results', 'ResultsController');
+Route::resource('skins', 'SkinsController');
+Route::resource('gross', 'GrossController');
+Route::resource('scoringaverage', 'ScoringAverageController');

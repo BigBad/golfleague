@@ -32,5 +32,9 @@ class StorageServiceProvider extends ServiceProvider
           'GolfLeague\Storage\Leaderboard\LeaderboardRepository',
           'GolfLeague\Storage\Leaderboard\EloquentLeaderboardRepository'
         );
+		$this->app->bind(
+          'GolfLeague\Storage\Skin\SkinRepository',
+          'GolfLeague\Storage\Skin\EloquentSkinRepository'
+        );
     }
 }

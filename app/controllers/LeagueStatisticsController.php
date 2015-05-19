@@ -1,15 +1,22 @@
 <?php
 
-class StatisticsController extends \BaseController {
+use GolfLeague\Statistics\League\LeagueStatistics as LeagueStatistics;
 
-	/**
+class LeagueStatisticsController extends \BaseController {
+
+	public function __construct(LeagueStatistics $leagueStatistics)
+    {
+        $this->leagueStatistics = $leagueStatistics;
+    }
+
+    /**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
 	public function index()
 	{
-		return View::make('statistics');
+		return View::make('leagueStatistics');
 	}
 
 
@@ -43,8 +50,7 @@ class StatisticsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$view = $id . 'Statistics';
-		return View::make($view);
+        return $this->leagueStatistics{$id}(Input::get('year'));
 	}
 
 
@@ -56,7 +62,7 @@ class StatisticsController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		return $id;
 	}
 
 

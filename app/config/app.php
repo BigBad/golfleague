@@ -109,7 +109,8 @@ return array(
 		'Way\Generators\GeneratorsServiceProvider',
 		'GolfLeague\Storage\StorageServiceProvider',
         'GolfLeague\Services\ServicesServiceProvider',
-        'GolfLeague\Handlers\HandlersServiceProvider'
+        'GolfLeague\Handlers\HandlersServiceProvider',
+        'GolfLeague\Statistics\StatisticsServiceProvider'
 
 	),
 

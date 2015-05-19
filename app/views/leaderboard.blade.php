@@ -26,15 +26,15 @@
                 </div>{{-- end .box-header --}}
                 <div class="box-body no-padding">
                     <table id="leaderboardTable" class="display table table-bordered table-hover dataTable" cellspacing="0" width="100%">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Money</th>
-                <th>Entry Fees</th>
-                <th>Net Money Won</th>
-            </tr>
-        </thead>
-    </table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Money</th>
+                                <th>Entry Fees</th>
+                                <th>Net Money Won</th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>{{-- end .box-body --}}
             </div>{{-- end .box.box-primary --}}
         </div>{{-- end .col-md-5 --}}
