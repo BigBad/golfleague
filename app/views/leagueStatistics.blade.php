@@ -152,6 +152,43 @@
         </div>{{-- end .col-md-5 --}}
     </div>{{-- end .row --}}
 
+        <div class="row">
+        <div class="col-md-5">
+            <div class="box box-success">
+                <div class="box-header">
+                    <h3 class="box-title">Bogeys</h3>
+                </div>{{-- end .box-header --}}
+                <div class="box-body no-padding">
+                    <table id="bogeys" class="display table table-bordered table-hover dataTable" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Player</th>
+                                <th>Bogeys</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>{{-- end .box-body --}}
+            </div>{{-- end .box.box-primary --}}
+        </div>{{-- end .col-md-5 --}}
+        <div class="col-md-5">
+            <div class="box box-success">
+                <div class="box-header">
+                    <h3 class="box-title">Double Bogeys</h3>
+                </div>{{-- end .box-header --}}
+                <div class="box-body no-padding">
+                    <table id="doubles" class="display table table-bordered table-hover dataTable" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Player</th>
+                                <th>Double Bogeys</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>{{-- end .box-body --}}
+            </div>{{-- end .box.box-primary --}}
+        </div>{{-- end .col-md-5 --}}
+    </div>{{-- end .row --}}
+
 @stop
 
 @section('include-js')
@@ -230,7 +267,7 @@
                     { "data": "match.course.name" },
                 ]
             });
-			
+
 			$('#mostBirdies').dataTable( {
                 "order": [[ 1, "desc" ]],
                 "bPaginate": false,
@@ -246,7 +283,7 @@
                     { "data": "birds" }
                 ]
             });
-			
+
 			$('#mostPars').dataTable( {
                 "order": [[ 1, "desc" ]],
                 "bPaginate": false,
@@ -260,6 +297,38 @@
                 "columns": [
                     { "data": "name" },
                     { "data": "pars" }
+                ]
+            });
+
+            $('#bogeys').dataTable( {
+                "order": [[ 1, "desc" ]],
+                "bPaginate": false,
+                "bFilter": false,
+                "bInfo": false,
+                "scrollY":        "205px",
+                "scrollX": false,
+                "scrollCollapse": true,
+                "paging":         false,
+                "ajax": "{{URL::to('/')}}/bogey/" + year,
+                "columns": [
+                    { "data": "name" },
+                    { "data": "bogeys" }
+                ]
+            });
+
+			$('#doubles').dataTable( {
+                "order": [[ 1, "desc" ]],
+                "bPaginate": false,
+                "bFilter": false,
+                "bInfo": false,
+                "scrollY":        "205px",
+                "scrollX": false,
+                "scrollCollapse": true,
+                "paging":         false,
+                "ajax": "{{URL::to('/')}}/double/" + year,
+                "columns": [
+                    { "data": "name" },
+                    { "data": "doubles" }
                 ]
             });
 

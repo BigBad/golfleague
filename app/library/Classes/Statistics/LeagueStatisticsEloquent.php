@@ -81,7 +81,7 @@ class LeagueStatisticsEloquent implements LeagueStatistics
         array_multisort($skinsCount, SORT_DESC);
         return $skinsCount;
     }
-    public function totalEagles(){}
+    public function totalEagles($year){}
     public function totalBirdies($year)
 	{
 		$year = $year . '-01-01';
@@ -90,7 +90,7 @@ class LeagueStatisticsEloquent implements LeagueStatistics
 			->get();
 		$allBirdies = array();
 		foreach($holescores as $key => $holescore) {
-			if( ($holescore['hole']['par'] - $holescore['score']) === 1) {				
+			if( ($holescore['hole']['par'] - $holescore['score']) === 1) {
 					$allBirdies[]= $holescore['round']['player']['name'];
 			}
 		}
@@ -111,7 +111,7 @@ class LeagueStatisticsEloquent implements LeagueStatistics
 			->get();
 		$allPars = array();
 		foreach($holescores as $key => $holescore) {
-			if( ($holescore['hole']['par'] - $holescore['score']) === 0) {				
+			if( ($holescore['hole']['par'] - $holescore['score']) === 0) {
 					$allPars[]= $holescore['round']['player']['name'];
 			}
 		}
@@ -124,8 +124,67 @@ class LeagueStatisticsEloquent implements LeagueStatistics
 			}
 			return $pars;
 	}
-    public function totalBogeys(){}
-    public function totalDoubles(){}
-    public function totalOthers(){}
-
+    public function totalBogeys($year)
+	{
+		$year = $year . '-01-01';
+		$holescores = Holescore::with('round.player','hole')
+			->where('created_at', '>', $year)
+			->get();
+		$allBogeys = array();
+		foreach($holescores as $key => $holescore) {
+			if( ($holescore['score'] - $holescore['hole']['par']) === 1) {
+					$allBogeys[]= $holescore['round']['player']['name'];
+			}
+		}
+		$i = 0;
+		$newArray = array_count_values($allBogeys);
+			foreach ($newArray as $key => $value) {
+				$bogeys[$i]['name'] = $key;
+				$bogeys[$i]['bogeys'] =$value;
+				$i++;
+			}
+		return $bogeys;
+	}
+    public function totalDoubles($year)
+	{
+		$year = $year . '-01-01';
+		$holescores = Holescore::with('round.player','hole')
+			->where('created_at', '>', $year)
+			->get();
+		$allDoubles = array();
+		foreach($holescores as $key => $holescore) {
+			if( ($holescore['score'] - $holescore['hole']['par']) === 2) {
+					$allDoubles[]= $holescore['round']['player']['name'];
+			}
+		}
+		$i = 0;
+		$newArray = array_count_values($allDoubles);
+			foreach ($newArray as $key => $value) {
+				$doubles[$i]['name'] = $key;
+				$doubles[$i]['doubles'] =$value;
+				$i++;
+			}
+		return $doubles;
+	}
+    public function totalOthers($year)
+	{
+		$year = $year . '-01-01';
+		$holescores = Holescore::with('round.player','hole')
+			->where('created_at', '>', $year)
+			->get();
+		$allOthers = array();
+		foreach($holescores as $key => $holescore) {
+			if( ($holescore['score'] - $holescore['hole']['par']) > 2) {
+				$allOthers[]= $holescore['round']['player']['name'];
+			}
+		}
+		$i = 0;
+		$newArray = array_count_values($allOthers);
+			foreach ($newArray as $key => $value) {
+				$others[$i]['name'] = $key;
+				$others[$i]['others'] =$value;
+				$i++;
+			}
+		return $others;
+	}
 }

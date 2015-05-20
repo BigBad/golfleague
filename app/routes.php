@@ -14,13 +14,13 @@ Route::get('/', function()
 {
     return View::make('home'); //make a home page
 });
-
+/*
 Route::get('/test', function()
 {
     $stats = new  GolfLeague\Statistics\League\LeagueStatisticsEloquent();
-    return $stats->totalPars('2015');
+    return $stats->totalOthers('2015');
 });
-
+*/
 Route::get('enterscore', 'ScoreController@view');
 Route::post('storescore', 'ScoreController@store');
 
@@ -62,3 +62,5 @@ Route::resource('scoringaverage', 'ScoringAverageController');
 Route::resource('net', 'NetController');
 Route::resource('bird', 'BirdController');
 Route::resource('par', 'ParController');
+Route::resource('bogey', 'BogeyController');
+Route::resource('double', 'DoubleController');
