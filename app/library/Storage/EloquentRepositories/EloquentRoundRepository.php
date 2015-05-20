@@ -25,7 +25,7 @@ class EloquentRoundRepository implements RoundRepository
 
     public function findByPlayer($playerId)
     {
-        return Round::with('player', 'holescores')->where('player_id', '=', $playerId)->get();
+        return Round::with('player', 'holescores', 'course')->where('player_id', '=', $playerId)->get();
     }
 
     public function findByMatch($matchId)

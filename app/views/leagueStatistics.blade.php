@@ -45,7 +45,7 @@
                     <h3 class="box-title">Top 5 Gross scores</h3>
                 </div>{{-- end .box-header --}}
                 <div class="box-body no-padding">
-                    <table id="topGrossTable" class="display table table-bordered table-hover dataTable" cellspacing="0" width="100%">
+                    <table id="topGrossTable" class="display table table-bordered table-hover DataTable" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th>Player</th>
@@ -63,7 +63,7 @@
                     <h3 class="box-title">Top 5 Net Scores</h3>
                 </div>{{-- end .box-header --}}
                 <div class="box-body no-padding">
-                    <table id="top5NetTable" class="display table table-bordered table-hover dataTable" cellspacing="0" width="100%">
+                    <table id="top5NetTable" class="display table table-bordered table-hover DataTable" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th>Player</th>
@@ -84,7 +84,7 @@
                     <h3 class="box-title">Scoring Average</h3>
                 </div>{{-- end .box-header --}}
                 <div class="box-body no-padding">
-                    <table id="scoringAverage" class="display table table-bordered table-hover dataTable" cellspacing="0" width="100%">
+                    <table id="scoringAverage" class="display table table-bordered table-hover DataTable" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th>Player</th>
@@ -102,7 +102,7 @@
                     <h3 class="box-title">Most Skins Won</h3>
                 </div>{{-- end .box-header --}}
                 <div class="box-body no-padding">
-                    <table id="mostSkins" class="display table table-bordered table-hover dataTable" cellspacing="0" width="100%">
+                    <table id="mostSkins" class="display table table-bordered table-hover DataTable" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th>Player</th>
@@ -122,7 +122,7 @@
                     <h3 class="box-title">Birdie Leaders</h3>
                 </div>{{-- end .box-header --}}
                 <div class="box-body no-padding">
-                    <table id="mostBirdies" class="display table table-bordered table-hover dataTable" cellspacing="0" width="100%">
+                    <table id="mostBirdies" class="display table table-bordered table-hover DataTable" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th>Player</th>
@@ -139,7 +139,7 @@
                     <h3 class="box-title">Par Leaders</h3>
                 </div>{{-- end .box-header --}}
                 <div class="box-body no-padding">
-                    <table id="mostPars" class="display table table-bordered table-hover dataTable" cellspacing="0" width="100%">
+                    <table id="mostPars" class="display table table-bordered table-hover DataTable" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th>Player</th>
@@ -159,7 +159,7 @@
                     <h3 class="box-title">Bogeys</h3>
                 </div>{{-- end .box-header --}}
                 <div class="box-body no-padding">
-                    <table id="bogeys" class="display table table-bordered table-hover dataTable" cellspacing="0" width="100%">
+                    <table id="bogeys" class="display table table-bordered table-hover DataTable" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th>Player</th>
@@ -176,7 +176,7 @@
                     <h3 class="box-title">Double Bogeys</h3>
                 </div>{{-- end .box-header --}}
                 <div class="box-body no-padding">
-                    <table id="doubles" class="display table table-bordered table-hover dataTable" cellspacing="0" width="100%">
+                    <table id="doubles" class="display table table-bordered table-hover DataTable" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th>Player</th>
@@ -196,7 +196,7 @@
                     <h3 class="box-title">Others</h3>
                 </div>{{-- end .box-header --}}
                 <div class="box-body no-padding">
-                    <table id="others" class="display table table-bordered table-hover dataTable" cellspacing="0" width="100%">
+                    <table id="others" class="display table table-bordered table-hover DataTable" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th>Player</th>
@@ -223,7 +223,7 @@
         $("#year").change(function (){
             var year = $("#year").val();
 
-            $('#mostSkins').dataTable( {
+            $('#mostSkins').DataTable( {
                 "order": [[ 1, "desc" ]],
                 "bPaginate": false,
                 "bFilter": false,
@@ -239,7 +239,7 @@
                 ]
             });
 
-            $('#topGrossTable').dataTable( {
+            $('#topGrossTable').DataTable( {
                 "order": [[ 1, "asc" ]],
                 "bPaginate": false,
                 "bFilter": false,
@@ -256,7 +256,7 @@
                 ]
             });
 
-            $('#scoringAverage').dataTable( {
+            $('#scoringAverage').DataTable( {
                 "order": [[ 2, "asc" ]],
                 "bPaginate": false,
                 "bFilter": false,
@@ -273,7 +273,7 @@
                 ]
             });
 
-            $('#top5NetTable').dataTable( {
+            $('#top5NetTable').DataTable( {
                 "order": [[ 1, "asc" ]],
                 "bPaginate": false,
                 "bFilter": false,
@@ -290,7 +290,7 @@
                 ]
             });
 
-			$('#mostBirdies').dataTable( {
+			$('#mostBirdies').DataTable( {
                 "order": [[ 1, "desc" ]],
                 "bPaginate": false,
                 "bFilter": false,
@@ -306,7 +306,7 @@
                 ]
             });
 
-			$('#mostPars').dataTable( {
+			$('#mostPars').DataTable( {
                 "order": [[ 1, "desc" ]],
                 "bPaginate": false,
                 "bFilter": false,
@@ -322,7 +322,7 @@
                 ]
             });
 
-            $('#bogeys').dataTable( {
+            $('#bogeys').DataTable( {
                 "order": [[ 1, "desc" ]],
                 "bPaginate": false,
                 "bFilter": false,
@@ -338,7 +338,7 @@
                 ]
             });
 
-			$('#doubles').dataTable( {
+			$('#doubles').DataTable( {
                 "order": [[ 1, "desc" ]],
                 "bPaginate": false,
                 "bFilter": false,
@@ -354,7 +354,7 @@
                 ]
             });
 
-            $('#others').dataTable( {
+            $('#others').DataTable( {
                 "order": [[ 1, "desc" ]],
                 "bPaginate": false,
                 "bFilter": false,

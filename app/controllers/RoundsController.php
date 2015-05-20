@@ -47,7 +47,9 @@ class RoundsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		return $this->roundRepo->findByPlayer($id);
+		$results  = $this->roundRepo->findByPlayer($id);
+		$data['data'] = $results;
+		return $data;
 	}
 
 	/**
