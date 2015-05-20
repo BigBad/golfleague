@@ -9,8 +9,8 @@ interface LeagueStatistics {
     public function topFiveNetScoresByYear($year);
     public function mostSkinsByYear($year);
     public function totalEagles();
-    public function totalBirdies();
-    public function totalPars();
+    public function totalBirdies($year);
+    public function totalPars($year);
     public function totalBogeys();
     public function totalDoubles();
     public function totalOthers();

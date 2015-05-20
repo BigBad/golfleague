@@ -169,7 +169,7 @@
                 "bPaginate": false,
                 "bFilter": false,
                 "bInfo": false,
-                "scrollY":        "200px",
+                "scrollY":        "205px",
                 "scrollX": false,
                 "scrollCollapse": true,
                 "paging":         false,
@@ -228,6 +228,38 @@
                     { "data": "player.name" },
                     { "data": "score" },
                     { "data": "match.course.name" },
+                ]
+            });
+			
+			$('#mostBirdies').dataTable( {
+                "order": [[ 1, "desc" ]],
+                "bPaginate": false,
+                "bFilter": false,
+                "bInfo": false,
+                "scrollY":        "205px",
+                "scrollX": false,
+                "scrollCollapse": true,
+                "paging":         false,
+                "ajax": "{{URL::to('/')}}/bird/" + year,
+                "columns": [
+                    { "data": "name" },
+                    { "data": "birds" }
+                ]
+            });
+			
+			$('#mostPars').dataTable( {
+                "order": [[ 1, "desc" ]],
+                "bPaginate": false,
+                "bFilter": false,
+                "bInfo": false,
+                "scrollY":        "205px",
+                "scrollX": false,
+                "scrollCollapse": true,
+                "paging":         false,
+                "ajax": "{{URL::to('/')}}/par/" + year,
+                "columns": [
+                    { "data": "name" },
+                    { "data": "pars" }
                 ]
             });
 

@@ -4,6 +4,7 @@ use \Round;
 use \Player;
 use \Skin;
 use \Netwinner;
+use \Holescore;
 
 class LeagueStatisticsEloquent implements LeagueStatistics
 {
@@ -81,8 +82,48 @@ class LeagueStatisticsEloquent implements LeagueStatistics
         return $skinsCount;
     }
     public function totalEagles(){}
-    public function totalBirdies(){}
-    public function totalPars(){}
+    public function totalBirdies($year)
+	{
+		$year = $year . '-01-01';
+		$holescores = Holescore::with('round.player','hole')
+			->where('created_at', '>', $year)
+			->get();
+		$allBirdies = array();
+		foreach($holescores as $key => $holescore) {
+			if( ($holescore['hole']['par'] - $holescore['score']) === 1) {				
+					$allBirdies[]= $holescore['round']['player']['name'];
+			}
+		}
+		$i =0;
+		$newArray = array_count_values($allBirdies);
+			foreach ($newArray as $key => $value) {
+				$birds[$i]['name'] = $key;
+				$birds[$i]['birds'] =$value;
+				$i++;
+			}
+			return $birds;
+	}
+    public function totalPars($year)
+	{
+		$year = $year . '-01-01';
+		$holescores = Holescore::with('round.player','hole')
+			->where('created_at', '>', $year)
+			->get();
+		$allPars = array();
+		foreach($holescores as $key => $holescore) {
+			if( ($holescore['hole']['par'] - $holescore['score']) === 0) {				
+					$allPars[]= $holescore['round']['player']['name'];
+			}
+		}
+		$i =0;
+		$newArray = array_count_values($allPars);
+			foreach ($newArray as $key => $value) {
+				$pars[$i]['name'] = $key;
+				$pars[$i]['pars'] =$value;
+				$i++;
+			}
+			return $pars;
+	}
     public function totalBogeys(){}
     public function totalDoubles(){}
     public function totalOthers(){}

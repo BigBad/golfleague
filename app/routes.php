@@ -18,7 +18,7 @@ Route::get('/', function()
 Route::get('/test', function()
 {
     $stats = new  GolfLeague\Statistics\League\LeagueStatisticsEloquent();
-    return $stats->topFiveScoringAverageByYear('2015');
+    return $stats->totalPars('2015');
 });
 
 Route::get('enterscore', 'ScoreController@view');
@@ -60,3 +60,5 @@ Route::resource('skins', 'SkinsController');
 Route::resource('gross', 'GrossController');
 Route::resource('scoringaverage', 'ScoringAverageController');
 Route::resource('net', 'NetController');
+Route::resource('bird', 'BirdController');
+Route::resource('par', 'ParController');
