@@ -189,6 +189,28 @@
         </div>{{-- end .col-md-5 --}}
     </div>{{-- end .row --}}
 
+            <div class="row">
+        <div class="col-md-5">
+            <div class="box box-success">
+                <div class="box-header">
+                    <h3 class="box-title">Others</h3>
+                </div>{{-- end .box-header --}}
+                <div class="box-body no-padding">
+                    <table id="others" class="display table table-bordered table-hover dataTable" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Player</th>
+                                <th>Others</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>{{-- end .box-body --}}
+            </div>{{-- end .box.box-primary --}}
+        </div>{{-- end .col-md-5 --}}
+        <div class="col-md-5">
+
+        </div>{{-- end .col-md-5 --}}
+    </div>{{-- end .row --}}
 @stop
 
 @section('include-js')
@@ -329,6 +351,22 @@
                 "columns": [
                     { "data": "name" },
                     { "data": "doubles" }
+                ]
+            });
+
+            $('#others').dataTable( {
+                "order": [[ 1, "desc" ]],
+                "bPaginate": false,
+                "bFilter": false,
+                "bInfo": false,
+                "scrollY":        "205px",
+                "scrollX": false,
+                "scrollCollapse": true,
+                "paging":         false,
+                "ajax": "{{URL::to('/')}}/other/" + year,
+                "columns": [
+                    { "data": "name" },
+                    { "data": "others" }
                 ]
             });
 
