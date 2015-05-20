@@ -90,8 +90,10 @@ class LeagueStatisticsEloquent implements LeagueStatistics
 			->get();
 		$allBirdies = array();
 		foreach($holescores as $key => $holescore) {
-			if( ($holescore['hole']['par'] - $holescore['score']) === 1) {
-					$allBirdies[]= $holescore['round']['player']['name'];
+			if($holescore['round']['match_id'] != null){
+				if( ($holescore['hole']['par'] - $holescore['score']) === 1) {
+						$allBirdies[]= $holescore['round']['player']['name'];
+				}
 			}
 		}
 		$i =0;
@@ -111,8 +113,10 @@ class LeagueStatisticsEloquent implements LeagueStatistics
 			->get();
 		$allPars = array();
 		foreach($holescores as $key => $holescore) {
-			if( ($holescore['hole']['par'] - $holescore['score']) === 0) {
-					$allPars[]= $holescore['round']['player']['name'];
+			if($holescore['round']['match_id'] != null){
+				if( ($holescore['hole']['par'] - $holescore['score']) === 0) {
+						$allPars[]= $holescore['round']['player']['name'];
+				}
 			}
 		}
 		$i =0;
@@ -132,8 +136,10 @@ class LeagueStatisticsEloquent implements LeagueStatistics
 			->get();
 		$allBogeys = array();
 		foreach($holescores as $key => $holescore) {
-			if( ($holescore['score'] - $holescore['hole']['par']) === 1) {
-					$allBogeys[]= $holescore['round']['player']['name'];
+			if($holescore['round']['match_id'] != null){
+				if( ($holescore['score'] - $holescore['hole']['par']) === 1) {
+						$allBogeys[]= $holescore['round']['player']['name'];
+				}
 			}
 		}
 		$i = 0;
@@ -153,8 +159,10 @@ class LeagueStatisticsEloquent implements LeagueStatistics
 			->get();
 		$allDoubles = array();
 		foreach($holescores as $key => $holescore) {
-			if( ($holescore['score'] - $holescore['hole']['par']) === 2) {
-					$allDoubles[]= $holescore['round']['player']['name'];
+			if($holescore['round']['match_id'] != null){
+				if( ($holescore['score'] - $holescore['hole']['par']) === 2) {
+						$allDoubles[]= $holescore['round']['player']['name'];
+				}
 			}
 		}
 		$i = 0;
@@ -174,8 +182,10 @@ class LeagueStatisticsEloquent implements LeagueStatistics
 			->get();
 		$allOthers = array();
 		foreach($holescores as $key => $holescore) {
-			if( ($holescore['score'] - $holescore['hole']['par']) > 2) {
-				$allOthers[]= $holescore['round']['player']['name'];
+			if($holescore['round']['match_id'] != null){
+				if( ($holescore['score'] - $holescore['hole']['par']) > 2) {
+					$allOthers[]= $holescore['round']['player']['name'];
+				}
 			}
 		}
 		$i = 0;
