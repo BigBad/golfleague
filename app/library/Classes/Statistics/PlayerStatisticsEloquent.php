@@ -3,9 +3,11 @@
 class PlayerStatisticsEloquent implements PlayerStatistics
 {
 
+    public function matchesHandicap($playerId){}
     public function scoringAverage(){}
     public function scoringAverageByYear($year){}
     public function scoringAverageMatchesByYear($year){}
+    public function handicapRounds($playerId){}
 
     public function scoringAverageCourse($course){}
     public function scoringAverageCourseByYear($course, $year){}

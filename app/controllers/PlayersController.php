@@ -37,7 +37,7 @@ class PlayersController extends \BaseController {
      */
     public function show($id)
     {
-        //
+        return $this->player->find($id);
     }
 
     /**

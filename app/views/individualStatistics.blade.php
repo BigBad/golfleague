@@ -45,8 +45,38 @@
     </div>{{-- end .row --}}
 
     <div class="row">
-        <div class="col-md-6">
-            <div class="box box-success">
+        <div class="col-md-4">
+            <!-- small box -->
+              <div class="small-box bg-green stats">
+                <div class="inner">
+                <p>Current Handicap</p>
+                  <h3 id="handicap"><sup style="font-size: 20px"></sup></h3>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-wheelchair"></i>
+                </div>
+              </div>
+        </div>
+
+        <div class="col-md-4">
+            <!-- small box -->
+            <!--
+              <div class="small-box bg-green stats">
+                <div class="inner">
+                <p>Scoring Average</p>
+                  <h3 id="average"><sup style="font-size: 20px"></sup></h3>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-bar-chart"></i>
+                </div>
+              </div> -->
+        </div>
+
+    </div>{{-- end .row --}}
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="box box-success stats">
                 <div class="box-header">
                     <h3 class="box-title">All Scores</h3>
                 </div>{{-- end .box-header --}}
@@ -78,6 +108,7 @@
 @section('page-js')
     <script>
     $(document).ready(function() {
+     $('.stats').hide();
         $.getJSON("{{URL::to('/')}}/players", function(data){
                 $.each(data, function(index, text) {
                     $("#player").append(
@@ -106,6 +137,12 @@
         $("#player").change(function (){
             var url = "{{URL::to('/')}}/rounds/" + $("#player").val();
             allScoresTable.ajax.url(url).load();
+
+            $.getJSON("{{URL::to('/')}}/players/" + $("#player").val(), function(data){
+                $("#playerName").html(data.name);
+                $("#handicap").html(data.handicap);
+                $('.stats').show("slow");
+            });
         });
     });
     </script>

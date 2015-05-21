@@ -24,7 +24,7 @@ class EloquentPlayerRepository implements PlayerRepository
     //Find Player by Player Id
     public function find($playerId)
     {
-        //return Round::with('player', 'holescores')->where('player_id', '=', $playerId)->get();
+        return $this->player->find($playerId);
     }
 
     public function create($name, $handicap)
