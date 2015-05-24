@@ -67,14 +67,19 @@ class MatchesController extends \BaseController {
 	public function edit($id)
 	{
 		$data = $this->match->get($id);
-		return View::make('EnterMatch', $data);
-		if($data['date'] >= date('Y-m-d')){
+
+		$today=date_create(date('Y-m-d'));
+		$matchDate=date_create($data['date']);
+		$diff=date_diff($today,$matchDate);
+		$dateDiff = $diff->format("%a");
+
+		if($dateDiff <= 2){
 			//Show Editable View
 			$view = View::make('EnterMatch', $data);
 			return $view;
 		}
 		else {
-			//Show Readonly View //This needs created
+			//Show Readonly View
 			$view = View::make('ViewMatch', $data);
 			return $view;
 		}
