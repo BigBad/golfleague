@@ -8,7 +8,7 @@ use \Player as Player;
 
 //Determines a net score using Equitable Scoring Control for individual hole
 /*
-Course Handicap   Maximum Score
+Course Handicap   				Maximum Score
 4.5 or less                    Double Bogey(+2)
 5–9.5                                       7
 9.6–14.5                                    8
