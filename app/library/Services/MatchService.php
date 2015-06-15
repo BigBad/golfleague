@@ -3,11 +3,10 @@
 use GolfLeague\Storage\Match\MatchRepository;
 use GolfLeague\Storage\MatchRound\MatchRoundRepository;
 use GolfLeague\PrizeMoney;
-use GolfLeague\Games;
 use GolfLeague\Handicap;
 use \Player;
 use \Match;
-use \Ctp;
+use \GolfLeague\Storage\Ctp\CtpRepository;
 use \Grosswinner;
 use \Netwinner;
 use \Skin;
@@ -28,20 +27,20 @@ class MatchService
     * @param MatchRepository $matchRepo
     * @return MatchService
     */
-    public function __construct(Games $games,
-                                MatchRoundRepository $matchRoundRepo,
+    public function __construct(MatchRoundRepository $matchRoundRepo,
                                 MatchRepository $matchRepo,
                                 PrizeMoney $prizeMoney,
                                 Player $player,
                                 Match $match,
+								CtpRepository $ctp,
                                 Dispatcher $events)
     {
-        $this->games = $games;
         $this->matchRoundRepo = $matchRoundRepo;
         $this->matchRepo = $matchRepo;
         $this->prizeMoney = $prizeMoney;
         $this->player = $player;
         $this->match = $match;
+		$this->ctp = $ctp;
         $this->events = $events;
     }
 
@@ -98,21 +97,21 @@ class MatchService
 
     public function finalize($matchdata)
     {
-		//return 'success';
         // post CTP1 and CTP2
-        $ctp = new Ctp;
-        $ctp->match_id = $matchdata['match'];
-        $ctp->player_id = $matchdata['ctp1'];
-        $ctp->hole_id = $matchdata['ctp1hole'];
-        $ctp->money = $this->prizeMoney->getCtp();
-        $ctp->save();
-
-        $ctp = new Ctp;
-        $ctp->match_id = $matchdata['match'];
-        $ctp->player_id = $matchdata['ctp2'];
-        $ctp->hole_id = $matchdata['ctp2hole'];
-        $ctp->money = $this->prizeMoney->getCtp();
-        $ctp->save();
+		$ctp1 = array(
+					'match_id' => $matchdata['match'],
+					'player_id' => $matchdata['ctp1'],
+					'hole_id' => $matchdata['ctp1hole'],
+					'money' => $this->prizeMoney->getCtp()
+				);
+		$this->ctp->create($ctp1);
+		$ctp2 = array(
+					'match_id' => $matchdata['match'],
+					'player_id' => $matchdata['ctp2'],
+					'hole_id' => $matchdata['ctp2hole'],
+					'money' => $this->prizeMoney->getCtp()
+				);
+		$this->ctp->create($ctp2);
 
         //calculate Gross winner and post to grossWinnersTable
 
