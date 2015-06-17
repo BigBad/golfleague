@@ -44,6 +44,16 @@ class EloquentMatchRoundRepository implements MatchRoundRepository
 
     public function getMatchData($matchid)
     {
-        return $matchid;
+        $match = Match::find($matchid)->players()->where('match_player.match_id','=', $matchid)->get();
+		return $match;
     }
+
+	public function getMatchPlayerHandicap($matchid, $playerId)
+	{
+		$players = Player::find($playerId)->matches()->where('match_player.match_id','=', $matchid)->get();
+		foreach($players as $player){
+			$handicap = $player['pivot']['handicap'];
+		}
+		return $handicap;
+	}
 }

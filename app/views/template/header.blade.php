@@ -19,7 +19,7 @@
                   <i class="fa fa-trophy"></i>
                 </a>
                 <ul class="dropdown-menu ">
-                  <li class="header"><h4>{{ date("m-d-Y") }} Leaderboards</h4>  </li>
+                  <li class="header"><h4>Leaderboards</h4>  </li>
                   <li>
                         <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; ">
                                 <div class="slimScrollBar" style="background: none repeat scroll 0% 0% rgb(0, 0, 0); width: 3px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px;"></div><div class="slimScrollRail" style="width: 3px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: none repeat scroll 0% 0% rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div>

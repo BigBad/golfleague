@@ -14,7 +14,6 @@ class LeaderboardService
 
 	public function calculate($matchId, $type)
 	{
-
 		$rounds = $this->matchround->getByMatch($matchId);
 		$leaderboard = array();
 		foreach ($rounds as $round){
@@ -29,9 +28,10 @@ class LeaderboardService
 			$holescoreCount =  $filteredHolecores->count();
 			$par = $this->currentParTotal($round->course_id, $holescoreCount);
 
+			if($type === 'net') {
 
-           if($type === 'net') {
-				$handicap = round($round->player->handicap,0);
+				$handicap = round($this->matchround->getMatchPlayerHandicap($matchId, $round->player->id),0);
+				//$handicap = round($round->player->handicap,0);
                 $par = $handicap + $par;
             }
 			$playerScore = $filteredHolecores->sum('score');
