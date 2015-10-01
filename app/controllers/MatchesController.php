@@ -67,7 +67,9 @@ class MatchesController extends \BaseController {
 	public function edit($id)
 	{
 		$data = $this->match->get($id);
-
+		
+		// Logic to allow editable for day of match and next day
+		// after the 2nd day the match page will be read only
 		$today=date_create(date('Y-m-d'));
 		$matchDate=date_create($data['date']);
 		$diff=date_diff($today,$matchDate);
