@@ -10,7 +10,7 @@ use \Skin;
 use Illuminate\Events\Dispatcher;
 
 /**
-* ScoreService, containing all useful methods for business logic for scoring a round
+* MoneyService, containing all useful methods for business logic for money relating to a match
 */
 class MoneyService
 {
