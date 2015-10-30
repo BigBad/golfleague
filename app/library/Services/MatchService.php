@@ -32,7 +32,7 @@ class MatchService
                                 PrizeMoney $prizeMoney,
                                 Player $player,
                                 Match $match,
-								CtpRepository $ctp,
+                                CtpRepository $ctp,
                                 Dispatcher $events)
     {
         $this->matchRoundRepo = $matchRoundRepo;
@@ -40,7 +40,7 @@ class MatchService
         $this->prizeMoney = $prizeMoney;
         $this->player = $player;
         $this->match = $match;
-		$this->ctp = $ctp;
+        $this->ctp = $ctp;
         $this->events = $events;
     }
 
@@ -76,11 +76,11 @@ class MatchService
         //Calculate Skins money based on how many players in each group
         $matchdata['skinsamoney'] = $this->prizeMoney->skinsGroupPot($matchdata['purse'], $totalPlayers, $aPlayerCount);
         $matchdata['skinsbmoney'] = $this->prizeMoney->skinsGroupPot($matchdata['purse'], $totalPlayers, $bPlayerCount);
-		//check for carry over money and if there is add it to skins money
-		$carryOver = new CarryOver;
-		$carryOverMoney = $carryOver->calculate();
-		$matchdata['skinsamoney'] +=  $carryOverMoney[1];
-		$matchdata['skinsbmoney'] +=  $carryOverMoney[2];
+        //check for carry over money and if there is add it to skins money
+        $carryOver = new CarryOver;
+        $carryOverMoney = $carryOver->calculate();
+        $matchdata['skinsamoney'] +=  $carryOverMoney[1];
+        $matchdata['skinsbmoney'] +=  $carryOverMoney[2];
 
         //append current handicap and set winnings to 0 for each player
         foreach ($matchdata['player'] as $key=>$player) {
@@ -98,20 +98,20 @@ class MatchService
     public function finalize($matchdata)
     {
         // post CTP1 and CTP2
-		$ctp1 = array(
-					'match_id' => $matchdata['match'],
-					'player_id' => $matchdata['ctp1'],
-					'hole_id' => $matchdata['ctp1hole'],
-					'money' => $this->prizeMoney->getCtp()
-				);
-		$this->ctp->create($ctp1);
-		$ctp2 = array(
-					'match_id' => $matchdata['match'],
-					'player_id' => $matchdata['ctp2'],
-					'hole_id' => $matchdata['ctp2hole'],
-					'money' => $this->prizeMoney->getCtp()
-				);
-		$this->ctp->create($ctp2);
+        $ctp1 = array(
+                    'match_id' => $matchdata['match'],
+                    'player_id' => $matchdata['ctp1'],
+                    'hole_id' => $matchdata['ctp1hole'],
+                    'money' => $this->prizeMoney->getCtp()
+                );
+        $this->ctp->create($ctp1);
+        $ctp2 = array(
+                    'match_id' => $matchdata['match'],
+                    'player_id' => $matchdata['ctp2'],
+                    'hole_id' => $matchdata['ctp2hole'],
+                    'money' => $this->prizeMoney->getCtp()
+                );
+        $this->ctp->create($ctp2);
 
         //calculate Gross winner and post to grossWinnersTable
 
@@ -123,14 +123,14 @@ class MatchService
             $lowGross[$match['player']->id] = $match['score'];
         }
         $arrayLowGross = array_keys($lowGross, min($lowGross));
-		foreach($arrayLowGross as $key => $lowgrossPlayer) {
-			$grossWinner = new Grosswinner;
-			$grossWinner->player_id = $lowgrossPlayer;
-			$grossWinner->match_id = $matchdata['match'];
-			$grossWinner->score = $lowGross[$lowgrossPlayer];
-			$grossWinner->money = $this->prizeMoney->getlowScore() / count($arrayLowGross);
-			$grossWinner->save();
-		}
+        foreach($arrayLowGross as $key => $lowgrossPlayer) {
+            $grossWinner = new Grosswinner;
+            $grossWinner->player_id = $lowgrossPlayer;
+            $grossWinner->match_id = $matchdata['match'];
+            $grossWinner->score = $lowGross[$lowgrossPlayer];
+            $grossWinner->money = $this->prizeMoney->getlowScore() / count($arrayLowGross);
+            $grossWinner->save();
+        }
 
         //Calculate NET winner
         $lowNet = array();
@@ -141,14 +141,14 @@ class MatchService
         }
         $arrayLowNet = array_keys($lowNet, min($lowNet));
 
-		foreach($arrayLowNet as $key => $lownetPlayer) {
-			$netWinner = new Netwinner;
-			$netWinner->player_id = $lownetPlayer;
-			$netWinner->match_id = $matchdata['match'];
-			$netWinner->score = $lowNet[$lownetPlayer];
-			$netWinner->money = $this->prizeMoney->getlowScore() /  count($arrayLowNet);
-			$netWinner->save();
-		}
+        foreach($arrayLowNet as $key => $lownetPlayer) {
+            $netWinner = new Netwinner;
+            $netWinner->player_id = $lownetPlayer;
+            $netWinner->match_id = $matchdata['match'];
+            $netWinner->score = $lowNet[$lownetPlayer];
+            $netWinner->money = $this->prizeMoney->getlowScore() /  count($arrayLowNet);
+            $netWinner->save();
+        }
 
         //Calculate Skins
 
@@ -235,37 +235,37 @@ class MatchService
 
         $match =  Match::find($matchdata['match']);
 
-		//Need to add Carry over money if there no skins are won
-		//check for carry over money
+        //Need to add Carry over money if there no skins are won
+        //check for carry over money
         $skinsamoney = $match->skinsamoney; // + carryover A money if any
         $skinsbmoney = $match->skinsbmoney; // + carryover B money if any
 
-		if($aSkinsWon > 0) {
-			$moneyperskinA = $skinsamoney / $aSkinsWon;
+        if($aSkinsWon > 0) {
+            $moneyperskinA = $skinsamoney / $aSkinsWon;
 
-			$aSkins = Skin::where('match_id', '=', $matchdata['match'])->where('level_id', '=', 1)->get();
-			foreach ($aSkins as $askin){
-				$askin->money = $moneyperskinA;
-				$askin->save();
-			}
-		}
+            $aSkins = Skin::where('match_id', '=', $matchdata['match'])->where('level_id', '=', 1)->get();
+            foreach ($aSkins as $askin){
+                $askin->money = $moneyperskinA;
+                $askin->save();
+            }
+        }
 
-		if($bSkinsWon > 0) {
-			$moneyperskinB = $skinsbmoney / $bSkinsWon;
+        if($bSkinsWon > 0) {
+            $moneyperskinB = $skinsbmoney / $bSkinsWon;
 
-			$bSkins = Skin::where('match_id', '=', $matchdata['match'])->where('level_id', '=', 2)->get();
-			foreach ($bSkins as $bskin){
-				$bskin->money = $moneyperskinB;
-				$bskin->save();
-			}
-		}
-		//foreach player in pivot table create player and run handicap analysis
-		foreach($match->players as $matchplayer)
+            $bSkins = Skin::where('match_id', '=', $matchdata['match'])->where('level_id', '=', 2)->get();
+            foreach ($bSkins as $bskin){
+                $bskin->money = $moneyperskinB;
+                $bskin->save();
+            }
+        }
+        //foreach player in pivot table create player and run handicap analysis
+        foreach($match->players as $matchplayer)
         {
             $player = Player::find($matchplayer->pivot->player_id);
-			$handicap = new Handicap($player);
-			$player->handicap = $handicap->calculate();
-			$player->save();
+            $handicap = new Handicap($player);
+            $player->handicap = $handicap->calculate();
+            $player->save();
         }
 
         //Fire event to calculate money won and add to pivot table match_player
@@ -284,7 +284,4 @@ class MatchService
         $matchdata =  $this->matchRepo->get($matchid);
         return $matchdata;
     }
-
-
-
 }
