@@ -58,7 +58,13 @@ class LeagueStatisticsEloquent implements LeagueStatistics
 
     public function topFiveNetScoresByYear($year)
     {
-         return Netwinner::with('player','match','match.course')->orderBy('score')->take(5)->get();
+		$date1 = $year . '-01-01';
+		$date2 = $year . '-12-31';
+
+		return Netwinner::with('player','match','match.course')
+				->where('created_at', '>=', $date1)
+				->where('created_at', '<=', $date2)
+				->orderBy('score')->take(5)->get();
     }
 
     public function mostSkinsByYear($year)
@@ -98,6 +104,7 @@ class LeagueStatisticsEloquent implements LeagueStatistics
 		}
 		$i =0;
 		$newArray = array_count_values($allBirdies);
+			$birds = array();
 			foreach ($newArray as $key => $value) {
 				$birds[$i]['name'] = $key;
 				$birds[$i]['birds'] =$value;
@@ -121,6 +128,7 @@ class LeagueStatisticsEloquent implements LeagueStatistics
 		}
 		$i =0;
 		$newArray = array_count_values($allPars);
+			$pars = array();
 			foreach ($newArray as $key => $value) {
 				$pars[$i]['name'] = $key;
 				$pars[$i]['pars'] =$value;
@@ -144,6 +152,7 @@ class LeagueStatisticsEloquent implements LeagueStatistics
 		}
 		$i = 0;
 		$newArray = array_count_values($allBogeys);
+		$bogeys = array();
 			foreach ($newArray as $key => $value) {
 				$bogeys[$i]['name'] = $key;
 				$bogeys[$i]['bogeys'] =$value;
@@ -167,6 +176,7 @@ class LeagueStatisticsEloquent implements LeagueStatistics
 		}
 		$i = 0;
 		$newArray = array_count_values($allDoubles);
+			$doubles = array();
 			foreach ($newArray as $key => $value) {
 				$doubles[$i]['name'] = $key;
 				$doubles[$i]['doubles'] =$value;
@@ -190,6 +200,7 @@ class LeagueStatisticsEloquent implements LeagueStatistics
 		}
 		$i = 0;
 		$newArray = array_count_values($allOthers);
+		$others = array();
 			foreach ($newArray as $key => $value) {
 				$others[$i]['name'] = $key;
 				$others[$i]['others'] =$value;
