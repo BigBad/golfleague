@@ -29,6 +29,7 @@
                                 <select class="form-control" name="player" class="ui-corner-all" id="year">
                                     <option></option>
                                     <option value="2015">2015</option>
+                                    <option value="2016">2016</option>
                                 </select>
                             </div>
                         </div>
@@ -222,154 +223,154 @@
     $(document).ready(function() {
         $("#year").change(function (){
             var year = $("#year").val();
+            if(year != '') {
+                $('#mostSkins').DataTable({
+                    "order": [[1, "desc"]],
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bInfo": false,
+                    "scrollY": "205px",
+                    "scrollX": false,
+                    "scrollCollapse": true,
+                    "paging": false,
+                    "ajax": "{{URL::to('/')}}/skins/" + year,
+                    "columns": [
+                        {"data": "name"},
+                        {"data": "skins"}
+                    ]
+                });
 
-            $('#mostSkins').DataTable( {
-                "order": [[ 1, "desc" ]],
-                "bPaginate": false,
-                "bFilter": false,
-                "bInfo": false,
-                "scrollY":        "205px",
-                "scrollX": false,
-                "scrollCollapse": true,
-                "paging":         false,
-                "ajax": "{{URL::to('/')}}/skins/" + year,
-                "columns": [
-                    { "data": "name" },
-                    { "data": "skins" }
-                ]
-            });
+                $('#topGrossTable').DataTable({
+                    "order": [[1, "asc"]],
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bInfo": false,
+                    "scrollY": "205px",
+                    "scrollX": false,
+                    "scrollCollapse": true,
+                    "paging": false,
+                    "ajax": "{{URL::to('/')}}/gross/" + year,
+                    "columns": [
+                        {"data": "player.name"},
+                        {"data": "score"},
+                        {"data": "course.name"},
+                    ]
+                });
 
-            $('#topGrossTable').DataTable( {
-                "order": [[ 1, "asc" ]],
-                "bPaginate": false,
-                "bFilter": false,
-                "bInfo": false,
-                "scrollY":        "205px",
-                "scrollX": false,
-                "scrollCollapse": true,
-                "paging":         false,
-                "ajax": "{{URL::to('/')}}/gross/" + year,
-                "columns": [
-                    { "data": "player.name" },
-                    { "data": "score" },
-                    { "data": "course.name" },
-                ]
-            });
+                $('#scoringAverage').DataTable({
+                    "order": [[2, "asc"]],
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bInfo": false,
+                    "scrollY": "205px",
+                    "scrollX": false,
+                    "scrollCollapse": true,
+                    "paging": false,
+                    "ajax": "{{URL::to('/')}}/scoringaverage/" + year,
+                    "columns": [
+                        {"data": "name"},
+                        {"data": "rounds"},
+                        {"data": "average"},
+                    ]
+                });
 
-            $('#scoringAverage').DataTable( {
-                "order": [[ 2, "asc" ]],
-                "bPaginate": false,
-                "bFilter": false,
-                "bInfo": false,
-                "scrollY":        "205px",
-                "scrollX": false,
-                "scrollCollapse": true,
-                "paging":         false,
-                "ajax": "{{URL::to('/')}}/scoringaverage/" + year,
-                "columns": [
-                    { "data": "name" },
-                    { "data": "rounds" },
-                    { "data": "average" },
-                ]
-            });
+                $('#top5NetTable').DataTable({
+                    "order": [[1, "asc"]],
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bInfo": false,
+                    "scrollY": "205px",
+                    "scrollX": false,
+                    "scrollCollapse": true,
+                    "paging": false,
+                    "ajax": "{{URL::to('/')}}/net/" + year,
+                    "columns": [
+                        {"data": "player.name"},
+                        {"data": "score"},
+                        {"data": "match.course.name"},
+                    ]
+                });
 
-            $('#top5NetTable').DataTable( {
-                "order": [[ 1, "asc" ]],
-                "bPaginate": false,
-                "bFilter": false,
-                "bInfo": false,
-                "scrollY":        "205px",
-                "scrollX": false,
-                "scrollCollapse": true,
-                "paging":         false,
-                "ajax": "{{URL::to('/')}}/net/" + year,
-                "columns": [
-                    { "data": "player.name" },
-                    { "data": "score" },
-                    { "data": "match.course.name" },
-                ]
-            });
+                $('#mostBirdies').DataTable({
+                    "order": [[1, "desc"]],
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bInfo": false,
+                    "scrollY": "205px",
+                    "scrollX": false,
+                    "scrollCollapse": true,
+                    "paging": false,
+                    "ajax": "{{URL::to('/')}}/bird/" + year,
+                    "columns": [
+                        {"data": "name"},
+                        {"data": "birds"}
+                    ]
+                });
 
-			$('#mostBirdies').DataTable( {
-                "order": [[ 1, "desc" ]],
-                "bPaginate": false,
-                "bFilter": false,
-                "bInfo": false,
-                "scrollY":        "205px",
-                "scrollX": false,
-                "scrollCollapse": true,
-                "paging":         false,
-                "ajax": "{{URL::to('/')}}/bird/" + year,
-                "columns": [
-                    { "data": "name" },
-                    { "data": "birds" }
-                ]
-            });
+                $('#mostPars').DataTable({
+                    "order": [[1, "desc"]],
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bInfo": false,
+                    "scrollY": "205px",
+                    "scrollX": false,
+                    "scrollCollapse": true,
+                    "paging": false,
+                    "ajax": "{{URL::to('/')}}/par/" + year,
+                    "columns": [
+                        {"data": "name"},
+                        {"data": "pars"}
+                    ]
+                });
 
-			$('#mostPars').DataTable( {
-                "order": [[ 1, "desc" ]],
-                "bPaginate": false,
-                "bFilter": false,
-                "bInfo": false,
-                "scrollY":        "205px",
-                "scrollX": false,
-                "scrollCollapse": true,
-                "paging":         false,
-                "ajax": "{{URL::to('/')}}/par/" + year,
-                "columns": [
-                    { "data": "name" },
-                    { "data": "pars" }
-                ]
-            });
+                $('#bogeys').DataTable({
+                    "order": [[1, "desc"]],
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bInfo": false,
+                    "scrollY": "205px",
+                    "scrollX": false,
+                    "scrollCollapse": true,
+                    "paging": false,
+                    "ajax": "{{URL::to('/')}}/bogey/" + year,
+                    "columns": [
+                        {"data": "name"},
+                        {"data": "bogeys"}
+                    ]
+                });
 
-            $('#bogeys').DataTable( {
-                "order": [[ 1, "desc" ]],
-                "bPaginate": false,
-                "bFilter": false,
-                "bInfo": false,
-                "scrollY":        "205px",
-                "scrollX": false,
-                "scrollCollapse": true,
-                "paging":         false,
-                "ajax": "{{URL::to('/')}}/bogey/" + year,
-                "columns": [
-                    { "data": "name" },
-                    { "data": "bogeys" }
-                ]
-            });
+                $('#doubles').DataTable({
+                    "order": [[1, "desc"]],
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bInfo": false,
+                    "scrollY": "205px",
+                    "scrollX": false,
+                    "scrollCollapse": true,
+                    "paging": false,
+                    "ajax": "{{URL::to('/')}}/double/" + year,
+                    "columns": [
+                        {"data": "name"},
+                        {"data": "doubles"}
+                    ]
+                });
 
-			$('#doubles').DataTable( {
-                "order": [[ 1, "desc" ]],
-                "bPaginate": false,
-                "bFilter": false,
-                "bInfo": false,
-                "scrollY":        "205px",
-                "scrollX": false,
-                "scrollCollapse": true,
-                "paging":         false,
-                "ajax": "{{URL::to('/')}}/double/" + year,
-                "columns": [
-                    { "data": "name" },
-                    { "data": "doubles" }
-                ]
-            });
-
-            $('#others').DataTable( {
-                "order": [[ 1, "desc" ]],
-                "bPaginate": false,
-                "bFilter": false,
-                "bInfo": false,
-                "scrollY":        "205px",
-                "scrollX": false,
-                "scrollCollapse": true,
-                "paging":         false,
-                "ajax": "{{URL::to('/')}}/other/" + year,
-                "columns": [
-                    { "data": "name" },
-                    { "data": "others" }
-                ]
-            });
-
+                $('#others').DataTable({
+                    "order": [[1, "desc"]],
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bInfo": false,
+                    "scrollY": "205px",
+                    "scrollX": false,
+                    "scrollCollapse": true,
+                    "paging": false,
+                    "ajax": "{{URL::to('/')}}/other/" + year,
+                    "columns": [
+                        {"data": "name"},
+                        {"data": "others"}
+                    ]
+                });
+            }
         });
     });
 
