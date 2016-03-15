@@ -11,29 +11,31 @@ use \Grosswinner;
 use \Netwinner;
 use \Skin;
 use GolfLeague\Services\CarryOver;
+use GolfLeague\Services\Purse;
 use Illuminate\Events\Dispatcher;
 
 /**
-* Our MatchService, containing all useful methods for business logic around Matches
-*/
+ * Our MatchService, containing all useful methods for business logic around Matches
+ */
 class MatchService
 {
     // Containing our matchRepository to make all our database calls to
     protected $matchRepo;
 
     /**
-    * Loads our $matchRepo
-    *
-    * @param MatchRepository $matchRepo
-    * @return MatchService
-    */
+     * Loads our $matchRepo
+     *
+     * @param MatchRepository $matchRepo
+     * @return MatchService
+     */
     public function __construct(MatchRoundRepository $matchRoundRepo,
                                 MatchRepository $matchRepo,
                                 PrizeMoney $prizeMoney,
                                 Player $player,
                                 Match $match,
                                 CtpRepository $ctp,
-                                Dispatcher $events)
+                                Dispatcher $events,
+                                Purse $purse)
     {
         $this->matchRoundRepo = $matchRoundRepo;
         $this->matchRepo = $matchRepo;
@@ -42,18 +44,23 @@ class MatchService
         $this->match = $match;
         $this->ctp = $ctp;
         $this->events = $events;
+        $this->purse = $purse;
     }
 
     /**
-    * Method to create match from input Match data
-    *
-    * @param mixed $matchdata
-    * @return
-    */
+     * Method to create match from input Match data
+     *
+     * @param mixed $matchdata
+     * @return
+     */
     public function create($matchdata)
     {
+
         //calculate money with purse
+        $this->purse->setPurse($matchdata['purse']);
+        echo $this->purse->getPurse();  exit();
         $this->prizeMoney->setPurse($matchdata['purse']);
+
 
         $matchdata['purse'] = number_format($matchdata['purse'], 2);
         $matchdata['grossmoney'] = $this->prizeMoney->getlowScore();
@@ -61,7 +68,9 @@ class MatchService
 
         //How many A and B players
         $totalPlayers = 0;
+
         $aPlayerCount = 0;
+        
         $bPlayerCount = 0;
         foreach($matchdata['player'] as $player){
             if ($player['level_id'] == '1'){
@@ -74,6 +83,7 @@ class MatchService
         }
 
         //Calculate Skins money based on how many players in each group
+
         $matchdata['skinsamoney'] = $this->prizeMoney->skinsGroupPot($matchdata['purse'], $totalPlayers, $aPlayerCount);
         $matchdata['skinsbmoney'] = $this->prizeMoney->skinsGroupPot($matchdata['purse'], $totalPlayers, $bPlayerCount);
         //check for carry over money and if there is add it to skins money
@@ -99,18 +109,18 @@ class MatchService
     {
         // post CTP1 and CTP2
         $ctp1 = array(
-                    'match_id' => $matchdata['match'],
-                    'player_id' => $matchdata['ctp1'],
-                    'hole_id' => $matchdata['ctp1hole'],
-                    'money' => $this->prizeMoney->getCtp()
-                );
+            'match_id' => $matchdata['match'],
+            'player_id' => $matchdata['ctp1'],
+            'hole_id' => $matchdata['ctp1hole'],
+            'money' => $this->prizeMoney->getCtp()
+        );
         $this->ctp->create($ctp1);
         $ctp2 = array(
-                    'match_id' => $matchdata['match'],
-                    'player_id' => $matchdata['ctp2'],
-                    'hole_id' => $matchdata['ctp2hole'],
-                    'money' => $this->prizeMoney->getCtp()
-                );
+            'match_id' => $matchdata['match'],
+            'player_id' => $matchdata['ctp2'],
+            'hole_id' => $matchdata['ctp2hole'],
+            'money' => $this->prizeMoney->getCtp()
+        );
         $this->ctp->create($ctp2);
 
         //calculate Gross winner and post to grossWinnersTable
@@ -274,11 +284,11 @@ class MatchService
     }
 
     /**
-    * Method to get match from input Match data
-    *
-    * @param mixed $matchdata
-    * @return JSON object
-    */
+     * Method to get match from input Match data
+     *
+     * @param mixed $matchdata
+     * @return JSON object
+     */
     public function get($matchid)
     {
         $matchdata =  $this->matchRepo->get($matchid);
