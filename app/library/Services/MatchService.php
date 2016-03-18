@@ -58,7 +58,6 @@ class MatchService
 
         //calculate money with purse
         $this->purse->setPurse($matchdata['purse']);
-        echo $this->purse->getPurse();  exit();
         $this->prizeMoney->setPurse($matchdata['purse']);
 
 
