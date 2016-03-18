@@ -140,7 +140,11 @@
 
             $.getJSON("{{URL::to('/')}}/players/" + $("#player").val(), function(data){
                 $("#playerName").html(data.name);
-                $("#handicap").html(data.handicap);
+                if(data.handicap < 0){
+                    $("#handicap").html('+' + Math.abs(data.handicap));
+                } else {
+                    $("#handicap").html(data.handicap);
+                }
                 $('.stats').show("slow");
             });
         });
