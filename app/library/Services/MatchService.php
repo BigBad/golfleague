@@ -11,7 +11,6 @@ use \Grosswinner;
 use \Netwinner;
 use \Skin;
 use GolfLeague\Services\CarryOver;
-use GolfLeague\Services\Purse;
 use Illuminate\Events\Dispatcher;
 
 /**
@@ -34,8 +33,7 @@ class MatchService
                                 Player $player,
                                 Match $match,
                                 CtpRepository $ctp,
-                                Dispatcher $events,
-                                Purse $purse)
+                                Dispatcher $events)
     {
         $this->matchRoundRepo = $matchRoundRepo;
         $this->matchRepo = $matchRepo;
@@ -44,7 +42,6 @@ class MatchService
         $this->match = $match;
         $this->ctp = $ctp;
         $this->events = $events;
-        $this->purse = $purse;
     }
 
     /**
@@ -56,10 +53,7 @@ class MatchService
     public function create($matchdata)
     {
 
-        //calculate money with purse
-        $this->purse->setPurse($matchdata['purse']);
         $this->prizeMoney->setPurse($matchdata['purse']);
-
 
         $matchdata['purse'] = number_format($matchdata['purse'], 2);
         $matchdata['grossmoney'] = $this->prizeMoney->getlowScore();
