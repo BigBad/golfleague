@@ -37,7 +37,11 @@ class Handicap
 	//
 	public function differential($numberOfScores)
 	{
-		return $this->differentialArray[$numberOfScores];
+		if($numberOfScores <= 20){
+			return $this->differentialArray[$numberOfScores];
+		} else {
+			return $this->differentialArray[20];
+		}
 	}
 
 
