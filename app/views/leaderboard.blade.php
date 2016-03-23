@@ -26,8 +26,6 @@
                         <label for="year">Year</label>
                         <select class="form-control" name="year" class="ui-corner-all" id="year">
                             <option></option>
-                            <option value="2015">2015</option>
-                            <option value="2016">2016</option>
                         </select>
                     </div>
                 </div>{{-- end .box-header --}}
@@ -58,6 +56,7 @@
     function createLeaderboard(year){
         $('#leaderboardTable').dataTable({
             "order": [[1, "desc"]],
+            "bDestroy": true,
             "bPaginate": false,
             "bFilter": false,
             "bInfo": false,
@@ -72,9 +71,15 @@
     }
 
     $(document).ready(function() {
-        createLeaderboard(2015);
+
+        $.getJSON("{{URL::to('/')}}/years", function(result) {
+            var options = $("#year");
+            $.each(result, function(key, value) {
+                options.append($("<option />").val(value).text(value));
+            });
+        });
+
         $("#year").change(function () {
-            $('#leaderboardTable').dataTable().fnClearTable();
             var year = $("#year").val();
             if (year != '') {
                 createLeaderboard(year);
