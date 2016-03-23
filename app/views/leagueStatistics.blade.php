@@ -25,8 +25,8 @@
                     <form role="form" id="matchForm">
                         <div class="row">
                              <div class="form-group col-xs-6">
-                                <label for="player">Year</label>
-                                <select class="form-control" name="player" class="ui-corner-all" id="year">
+                                <label for="year">Year</label>
+                                <select class="form-control" name="year" class="ui-corner-all" id="year">
                                     <option></option>
                                     <option value="2015">2015</option>
                                     <option value="2016">2016</option>

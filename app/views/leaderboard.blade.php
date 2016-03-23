@@ -22,7 +22,14 @@
         <div class="col-md-12">
             <div class="box box-success">
                 <div class="box-header">
-                    <h3 class="box-title">2015</h3>
+                    <div class="form-group col-xs-2">
+                        <label for="year">Year</label>
+                        <select class="form-control" name="year" class="ui-corner-all" id="year">
+                            <option></option>
+                            <option value="2015">2015</option>
+                            <option value="2016">2016</option>
+                        </select>
+                    </div>
                 </div>{{-- end .box-header --}}
                 <div class="box-body no-padding">
                     <table id="leaderboardTable" class="display table table-bordered table-hover dataTable" cellspacing="0" width="100%">
@@ -48,21 +55,32 @@
 
 @section('page-js')
 <script>
+    function createLeaderboard(year){
+        $('#leaderboardTable').dataTable({
+            "order": [[1, "desc"]],
+            "bPaginate": false,
+            "bFilter": false,
+            "bInfo": false,
+            "ajax": "{{URL::to('/')}}/leaderboard/" + year,
+            "columns": [
+                {"data": "name"},
+                {"data": "winnings"},
+                {"data": "entryfees"},
+                {"data": "net"}
+            ]
+        });
+    }
+
     $(document).ready(function() {
-    $('#leaderboardTable').dataTable( {
-        "order": [[ 1, "desc" ]],
-        "bPaginate": false,
-        "bFilter": false,
-        "bInfo": false,
-        "ajax": "{{URL::to('/')}}/leaderboard/2015",
-        "columns": [
-            { "data": "name" },
-            { "data": "winnings" },
-            { "data": "entryfees" },
-            { "data": "net" }
-        ]
-    } );
-} );
+        createLeaderboard(2015);
+        $("#year").change(function () {
+            $('#leaderboardTable').dataTable().fnClearTable();
+            var year = $("#year").val();
+            if (year != '') {
+                createLeaderboard(year);
+            }
+        })
+    });
 
 </script>
 @stop
