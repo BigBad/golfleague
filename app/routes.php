@@ -49,11 +49,15 @@ Route::resource('statistics/league', 'LeagueStatisticsController');
 Route::resource('statistics/individual', 'IndividualStatisticsController');
 Route::resource('schedule', 'ScheduleController');
 Route::resource('leaderboard', 'LeaderboardController');
-Route::resource('administration', 'AdministrationController');
+
+
+//Route::resource('administration', 'AdministrationController');
+Route::get('administration', array('before' => 'auth', 'uses' => 'AdministrationController@index'));
+
 Route::resource('calendar', 'CalendarController');
 Route::resource('liveleaderboard', 'LiveLeaderboardController');
 Route::resource('register', 'RegisterController');
-Route::resource('users', 'UsersController');
+//Route::resource('users', 'UsersController');
 Route::resource('money', 'MoneyController');
 Route::resource('results', 'ResultsController');
 Route::resource('skins', 'SkinsController');
@@ -64,4 +68,17 @@ Route::resource('bird', 'BirdController');
 Route::resource('par', 'ParController');
 Route::resource('bogey', 'BogeyController');
 Route::resource('double', 'DoubleController');
-Route::resource('other', 'OtherController');
+Route::resource('other', 'OtherController');//
+
+
+// Confide routes
+Route::get('users/create', 'UsersController@create');
+Route::post('users', 'UsersController@store');
+Route::get('users/login', 'UsersController@login');
+Route::post('users/login', 'UsersController@doLogin');
+Route::get('users/confirm/{code}', 'UsersController@confirm');
+Route::get('users/forgot_password', 'UsersController@forgotPassword');
+Route::post('users/forgot_password', 'UsersController@doForgotPassword');
+Route::get('users/reset_password/{token}', 'UsersController@resetPassword');
+Route::post('users/reset_password', 'UsersController@doResetPassword');
+Route::get('users/logout', 'UsersController@logout');

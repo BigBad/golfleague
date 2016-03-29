@@ -7,7 +7,8 @@
 		"laravel/framework": "4.2.*",
 		"jarektkaczyk/eloquent-triple-pivot": "dev-master",
 		"way/generators": "3.0.*",
-		"fzaninotto/faker": "1.4.*@dev"
+		"fzaninotto/faker": "1.4.*@dev",
+		"zizaco/confide": "^4.3"
 	},
 	"autoload": {
 		"classmap": [

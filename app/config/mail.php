@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => null, 'name' => null),
+	'from' => array('golf.league@inthedom.com' => null, 'Golf League' => null),
 
 	/*
 	|--------------------------------------------------------------------------
