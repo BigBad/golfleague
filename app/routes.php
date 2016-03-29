@@ -72,6 +72,11 @@ Route::resource('other', 'OtherController');
 Route::resource('years', 'YearsController');
 
 
+//Player Statistics
+Route::get('playerStatistics/scoringAverage/{playerId}', 'PlayerStatisticsController@scoringAverage');
+Route::get('playerStatistics/scoringAverage/{playerId}/{year}', 'PlayerStatisticsController@scoringAverageByYear');
+Route::get('playerStatistics/birdies/{playerId}/{year}', 'PlayerStatisticsController@birdiesByYear');
+
 // Confide routes
 Route::get('users/create', 'UsersController@create');
 Route::post('users', 'UsersController@store');

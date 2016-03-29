@@ -1,11 +1,49 @@
 <?php namespace GolfLeague\Statistics\Player;
 
+use \Round;
+use \Player;
+use \Skin;
+use \Netwinner;
+use \Holescore;
+
+
 class PlayerStatisticsEloquent implements PlayerStatistics
 {
+    private $date1 = '-01-01';
+    private $date2 = '-12-31';
 
     public function matchesHandicap($playerId){}
-    public function scoringAverage(){}
-    public function scoringAverageByYear($year){}
+    public function scoringAverage($playerId)
+    {
+        $rounds = Round::where('match_id', '>', '0')
+            ->where('player_id', '=', $playerId)
+            ->get();
+
+        $scores = $rounds->map(function($round)
+        {
+            return $round->score;
+        });
+        return round(array_sum($scores->toArray())/($rounds->count()), 2);
+    }
+    public function scoringAverageByYear($playerId, $year)
+    {
+        $rounds = Round::where('match_id', '>', '0')
+            ->where('player_id', '=', $playerId)
+            ->where('date', '>=', $year . $this->date1)
+            ->where('date', '<=', $year . $this->date2)
+            ->get();
+        $scores = $rounds->map(function($round)
+        {
+            return $round->score;
+        });
+        if($rounds->count() > 0) {
+            return round(array_sum($scores->toArray())/($rounds->count()), 2);
+        } else {
+            return $rounds;
+        }
+
+
+    }
     public function scoringAverageMatchesByYear($year){}
     public function handicapRounds($playerId){}
 
@@ -17,8 +55,24 @@ class PlayerStatisticsEloquent implements PlayerStatistics
     public function eaglesByYear($year){}
     public function eaglesMatchesByYear($year){}
 
-    public function totalBirdies(){}
-    public function birdiesByYear($year){}
+    public function totalBirdies($playerId){}
+    public function birdiesByYear($playerId, $year)
+    {
+        $year = $year . '-01-01';
+        $holescores = Holescore::with('round.player','hole')
+            ->where('created_at', '>', $year)
+            ->get();
+        $allBirdies = array();
+        foreach($holescores as $key => $holescore) {
+            if($holescore['round']['match_id'] != null){
+                if( ($holescore['hole']['par'] - $holescore['score']) === 1) {
+                    $allBirdies[]= $holescore['round']['player']['id'];
+                }
+            }
+        }
+        return count(array_keys($allBirdies, $playerId));
+
+    }
     public function birdiesMatchesByYear($year){}
 
     public function totalPars(){}

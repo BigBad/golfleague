@@ -17,14 +17,14 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-6">
             <div class="box box-success">
                 <div class="box-header no-padding">
                 </div>{{-- end .box-header --}}
                 <div class="box-body">
                     <form role="form" id="matchForm">
                         <div class="row">
-                            <div class="form-group col-xs-5">
+                            <div class="form-group col-xs-6">
                                 <label for="player">Player</label>
                                 <select class="form-control" name="player" class="ui-corner-all" id="player">
                                     <option></option>
@@ -54,7 +54,7 @@
 
         <div class="col-md-4">
             <!-- small box -->
-            <!--
+
               <div class="small-box bg-green stats">
                 <div class="inner">
                 <p>Scoring Average</p>
@@ -63,7 +63,7 @@
                 <div class="icon">
                   <i class="fa fa-bar-chart"></i>
                 </div>
-              </div> -->
+              </div>
         </div>
 
     </div>{{-- end .row --}}
@@ -88,9 +88,20 @@
                 </div>{{-- end .box-body --}}
             </div>{{-- end .box.box-primary --}}
         </div>{{-- end .col-md-5 --}}
-        <div class="col-md-5">
+        <div class="col-md-4">
+            <!-- small box -->
 
-        </div>{{-- end .col-md-5 --}}
+            <div class="small-box bg-green stats">
+                <div class="inner">
+                    <p>Birdies in 2015</p>
+                    <h3 id="birdies"><sup style="font-size: 20px"></sup></h3>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-twitter"></i>
+                </div>
+            </div>
+        </div>
+
     </div>{{-- end .row --}}
 
 @stop
@@ -141,6 +152,17 @@
                 }
                 $('.stats').show("slow");
             });
+
+            $.getJSON("{{URL::to('/')}}/playerStatistics/scoringAverage/" + $("#player").val(), function(data){
+                $("#average").html(data);
+                $('.stats').show("slow");
+            });
+
+            $.getJSON("{{URL::to('/')}}/playerStatistics/birdies/" + $("#player").val() + '/2015', function(data){
+                $("#birdies").html(data);
+                $('.stats').show("slow");
+            });
+
         });
     });
     </script>

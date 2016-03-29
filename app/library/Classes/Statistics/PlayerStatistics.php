@@ -4,8 +4,8 @@
 interface PlayerStatistics {
 
     public function matchesHandicap($playerId);
-    public function scoringAverage();
-    public function scoringAverageByYear($year);
+    public function scoringAverage($playerId);
+    public function scoringAverageByYear($playerId, $year);
     public function scoringAverageMatchesByYear($year);
     public function handicapRounds($playerId);
 
@@ -17,8 +17,8 @@ interface PlayerStatistics {
     public function eaglesByYear($year);
     public function eaglesMatchesByYear($year);
 
-    public function totalBirdies();
-    public function birdiesByYear($year);
+    public function totalBirdies($playerId);
+    public function birdiesByYear($playerId, $year);
     public function birdiesMatchesByYear($year);
 
     public function totalPars();

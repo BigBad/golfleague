@@ -41,9 +41,9 @@ class LeagueStatisticsEloquent implements LeagueStatistics
                 ->where('date', '<=', $date2)
                 ->get();
             $scores = array();
-            foreach($rounds as $round) {
-                $scores[] = $round->score;
-            }
+			foreach($rounds as $round) {
+				$scores[] = $round->score;
+			}
             if(count($scores) > 0) {
                 $average[$i]['average'] = round((array_sum($scores) / count($scores)) ,2);
                 $average[$i]['player_id'] = $player->id;
@@ -55,7 +55,6 @@ class LeagueStatisticsEloquent implements LeagueStatistics
         array_multisort($average);
         return $average;
     }
-
     public function topFiveNetScoresByYear($year)
     {
 		$date1 = $year . '-01-01';
@@ -66,7 +65,6 @@ class LeagueStatisticsEloquent implements LeagueStatistics
 				->where('created_at', '<=', $date2)
 				->orderBy('score')->take(5)->get();
     }
-
     public function mostSkinsByYear($year)
     {
         $year = $year . '-01-01';
