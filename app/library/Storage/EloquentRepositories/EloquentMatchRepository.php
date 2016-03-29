@@ -33,6 +33,17 @@ class EloquentMatchRepository implements MatchRepository
 		 //dd($startDate);
 		 return Match::with('course')->where('date', '>=', $startDate)->where('date', '<=', $endDate)->get();
 	}
+
+	public function getYears()
+	{
+		$dates =  Match::orderBy('date', 'DESC')->get(['date']);
+		//return $dates;
+		$years = $dates->map(function($years){
+			return substr($years->date, 0, 4);
+		})->toArray();
+
+		return array_unique($years);
+	}
     //Find Scores by Player Id
     public function find($playerId)
     {

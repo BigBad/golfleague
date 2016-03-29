@@ -68,7 +68,8 @@ Route::resource('bird', 'BirdController');
 Route::resource('par', 'ParController');
 Route::resource('bogey', 'BogeyController');
 Route::resource('double', 'DoubleController');
-Route::resource('other', 'OtherController');//
+Route::resource('other', 'OtherController');
+Route::resource('years', 'YearsController');
 
 
 // Confide routes
