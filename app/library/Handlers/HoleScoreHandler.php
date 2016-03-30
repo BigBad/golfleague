@@ -27,12 +27,7 @@ class HoleScoreHandler
         $this->holescoreRepo = $holescoreRepo;
     } // End of __construct
 
-    /**
-     * Create an initial round for each player after a new match is created
-     *
-     * @param  Match $match
-     * @return void
-     */
+
     public function handle($holescore)
     {
         // Update score and esc in round table

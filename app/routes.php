@@ -71,6 +71,7 @@ Route::resource('double', 'DoubleController');
 Route::resource('other', 'OtherController');
 Route::resource('years', 'YearsController');
 
+Route::resource('test', 'TestController');
 
 //Player Statistics
 Route::get('playerStatistics/scoringAverage/{playerId}', 'PlayerStatisticsController@scoringAverage');
