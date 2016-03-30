@@ -15,20 +15,21 @@ class PlayerStatisticsEloquent implements PlayerStatistics
     public function matchesHandicap($playerId){}
     public function scoringAverage($playerId)
     {
-        $rounds = Round::where('match_id', '>', '0')
-            ->where('player_id', '=', $playerId)
+        $rounds = Round::where('player_id', '=', $playerId)
             ->get();
-
         $scores = $rounds->map(function($round)
         {
             return $round->score;
         });
-        return round(array_sum($scores->toArray())/($rounds->count()), 2);
+        if($rounds->count() > 0) {
+            return round(array_sum($scores->toArray())/($rounds->count()), 2);
+        } else {
+            return $rounds;
+        }
     }
     public function scoringAverageByYear($playerId, $year)
     {
-        $rounds = Round::where('match_id', '>', '0')
-            ->where('player_id', '=', $playerId)
+        $rounds = Round::where('player_id', '=', $playerId)
             ->where('date', '>=', $year . $this->date1)
             ->where('date', '<=', $year . $this->date2)
             ->get();

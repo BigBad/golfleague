@@ -70,27 +70,7 @@
 
     <div class="row">
         <div class="col-md-4">
-            <div class="box box-success stats">
-                <div class="box-header">
-                    <h3 class="box-title">All Scores</h3>
-                </div>{{-- end .box-header --}}
-                <div class="box-body no-padding">
-                    <table id="allScores" class="display table table-bordered table-hover dataTable" cellspacing="0" width="100%">
-                        <thead>
-                            <tr>
-                                <th>Player</th>
-                                <th>Score</th>
-                                <th>Course</th>
-                                <th>Date</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>{{-- end .box-body --}}
-            </div>{{-- end .box.box-primary --}}
-        </div>{{-- end .col-md-5 --}}
-        <div class="col-md-4">
             <!-- small box -->
-
             <div class="small-box bg-green stats">
                 <div class="inner">
                     <p>Birdies in 2015</p>
@@ -101,6 +81,30 @@
                 </div>
             </div>
         </div>
+
+
+    </div>{{-- end .row --}}
+
+    <div class="row">
+        <div class="col-md-5">
+            <div class="box box-success stats">
+                <div class="box-header">
+                    <h3 class="box-title">All Scores</h3>
+                </div>{{-- end .box-header --}}
+                <div class="box-body no-padding">
+                    <table id="allScores" class="display table table-bordered table-hover dataTable" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th>Player</th>
+                            <th>Score</th>
+                            <th>Course</th>
+                            <th>Date</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>{{-- end .box-body --}}
+            </div>{{-- end .box.box-primary --}}
+        </div>{{-- end .col-md-5 --}}
 
     </div>{{-- end .row --}}
 
