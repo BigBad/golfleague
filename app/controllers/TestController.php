@@ -16,8 +16,7 @@ class TestController extends \BaseController {
 	 */
 	public function index()
 	{
-		$matchId = 8;
-		return $this->matchRepo->get($matchId);
+		//
 	}
 
 
@@ -49,9 +48,9 @@ class TestController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($matchId)
 	{
-		//
+		return $this->matchRepo->get($matchId);
 	}
 
 
