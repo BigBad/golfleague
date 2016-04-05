@@ -75,7 +75,7 @@ class MatchesController extends \BaseController {
 		$diff=date_diff($today,$matchDate);
 		$dateDiff = $diff->format("%a");
 
-		if($dateDiff <= 2){
+		if($dateDiff <= 1){
 			//Show Editable View
 			$view = View::make('EnterMatch', $data);
 			return $view;

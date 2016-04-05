@@ -1,5 +1,6 @@
 <?php namespace GolfLeague\Storage\Match;
 
+use Carbon\Carbon;
 use \Match as Match;
 use \Player as Player;
 
@@ -20,13 +21,25 @@ class EloquentMatchRepository implements MatchRepository
 
     public function all()
     {
-		return $this->match->all();
+		return Match::orderBy('date', 'DESC')->get();
     }
 
 	public function get($matchid)
 	{
 		 return Match::with('course', 'players', 'course.holes')->find($matchid);
 	}
+
+	public function getEditable($matchid)
+	{
+		return Match::with('course', 'playersEdit', 'course.holes')->find($matchid);
+	}
+
+	public function getEditableMatches()
+	{
+		$today = Carbon::now();
+		return Match::with('course', 'players')->where('date', '>=', $today)->get();
+	}
+
 
 	public function getByDate($startDate, $endDate)
 	{
@@ -75,6 +88,27 @@ class EloquentMatchRepository implements MatchRepository
 		}// End foreach
 		return $this->match->id;
     }
+
+	public function update($matchdata)
+	{
+		//return $matchdata;
+		foreach ($matchdata['player'] as $player) {
+			// update match_player pivot tables
+			Match::find($matchdata['match'])
+				->players()
+				->updateExistingPivot(
+					$player['player_id'],
+					[
+						'level_id' => $player['level_id'],
+						'group' => $player['group']
+					]
+				);
+			//delete rounds for the match
+			Round::where('match_id', '=', $matchdata['match'])
+				->where('player_id', '=', $player['player_id']);
+		}
+
+	}
 
 	public function delete($matchId)
 	{

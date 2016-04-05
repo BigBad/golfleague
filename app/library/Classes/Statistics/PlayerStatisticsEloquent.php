@@ -1,5 +1,6 @@
 <?php namespace GolfLeague\Statistics\Player;
 
+use Carbon\Carbon;
 use \Round;
 use \Player;
 use \Skin;
@@ -15,7 +16,9 @@ class PlayerStatisticsEloquent implements PlayerStatistics
     public function matchesHandicap($playerId){}
     public function scoringAverage($playerId)
     {
+        $today = Carbon::now()->toDateString();
         $rounds = Round::where('player_id', '=', $playerId)
+            ->where('date', '<', $today)
             ->get();
         $scores = $rounds->map(function($round)
         {

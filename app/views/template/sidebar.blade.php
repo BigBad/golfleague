@@ -56,6 +56,12 @@
                             </a>
                         </li>
                         <li>
+                            <a href="{{ URL::to('matchEdit/create') }}" style="margin-left: 10px;">
+                                <i class="fa fa-pencil"></i>
+                                <span>Edit Match</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{ URL::to('finalize/create') }}" style="margin-left: 10px;">
                                 <i class="fa fa-calculator"></i>
                                 <span>Finalize Match</span>

@@ -12,7 +12,7 @@
 */
 Route::get('/', function()
 {
-    return View::make('home'); //make a home page
+    return Redirect::to('schedule');
 });
 /*
 Route::get('/test', function()
@@ -40,6 +40,7 @@ Route::resource('rounds', 'RoundsController');
 Route::resource('players', 'PlayersController');
 Route::resource('holes', 'HolesController');
 Route::resource('holescores', 'HoleScoresController');
+Route::resource('matchEdit', 'MatchEditController');
 Route::resource('matches', 'MatchesController');
 Route::resource('finalize', 'FinalizeController');
 Route::resource('courses', 'CoursesController');
@@ -51,8 +52,11 @@ Route::resource('schedule', 'ScheduleController');
 Route::resource('leaderboard', 'LeaderboardController');
 
 
-//Route::resource('administration', 'AdministrationController');
+// Authentication required for these routes
 Route::get('administration', array('before' => 'auth', 'uses' => 'AdministrationController@index'));
+Route::get('matches/create', array('before' => 'auth', 'uses' => 'MatchesController@create'));
+Route::get('finalize/create', array('before' => 'auth', 'uses' => 'FinalizeController@create'));
+
 
 Route::resource('calendar', 'CalendarController');
 Route::resource('liveleaderboard', 'LiveLeaderboardController');

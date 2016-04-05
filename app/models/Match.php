@@ -39,6 +39,11 @@ class Match extends Eloquent
         return $this->belongsToMany('Player')->withPivot('level_id', 'group', 'handicap', 'winnings')->orderBy('pivot_winnings', 'desc')->withTimestamps();
     }
 
+    public function playersEdit()
+    {
+        return $this->belongsToMany('Player')->withPivot('level_id', 'group', 'handicap', 'winnings')->orderBy('pivot_group', 'asc')->withTimestamps();
+    }
+
 	public function rounds()
 	{
 		return $this->hasMany('Round');
