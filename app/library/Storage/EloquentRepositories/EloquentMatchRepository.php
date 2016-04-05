@@ -37,7 +37,7 @@ class EloquentMatchRepository implements MatchRepository
 
 	public function getEditableMatches()
 	{
-		$today = Carbon::now();
+		$today = Carbon::today();
 		return Match::with('course', 'players')->where('date', '>=', $today)->get();
 	}
 
