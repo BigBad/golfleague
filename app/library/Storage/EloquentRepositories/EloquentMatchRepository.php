@@ -2,6 +2,7 @@
 
 use Carbon\Carbon;
 use \Match as Match;
+use \Round as Round;
 use \Player as Player;
 
 class EloquentMatchRepository implements MatchRepository
@@ -91,23 +92,40 @@ class EloquentMatchRepository implements MatchRepository
 
 	public function update($matchdata)
 	{
-		//return $matchdata;
-		foreach ($matchdata['player'] as $player) {
-			// update match_player pivot tables
-			Match::find($matchdata['match'])
-				->players()
-				->updateExistingPivot(
-					$player['player_id'],
-					[
-						'level_id' => $player['level_id'],
-						'group' => $player['group']
-					]
-				);
-			//delete rounds for the match
-			Round::where('match_id', '=', $matchdata['match'])
-				->where('player_id', '=', $player['player_id']);
-		}
+		//update course
+		$currentMatch = $this->match->find($matchdata['match']);
+		$currentMatch->course_id = $matchdata['course']; //update course
+		$currentMatch->update();
 
+		//Remove players from match_players
+		$currentMatch->players()->detach();
+
+		//Remove rounds
+		Round::where('match_id', '=', $currentMatch->id)->delete();
+
+		//Add players to  match_players
+		foreach ($matchdata['player'] as $key => $player) {
+			$currentPlayer = $this->player->find($player['player_id']);
+			$attributes = array(
+				"level_id" => $player['level_id'],
+				"group" => $player['group'],
+				"handicap" => $currentPlayer->handicap,
+				"winnings" => 0,
+			);
+			$currentPlayer->matches()->attach($currentMatch, $attributes); //save match_player pivot data
+
+			$newRound = array(
+				'date' => $currentMatch->date,
+				"player_id" => $player['player_id'],
+				"course_id" => $player['group'],
+				"match_id" => $currentMatch->course,
+				"score" => 0,
+				"esc" => 0
+			);
+			//Create New round for player
+			Round::create($newRound);
+
+		}// End foreach
 	}
 
 	public function delete($matchId)

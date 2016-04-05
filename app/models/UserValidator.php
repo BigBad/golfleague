@@ -15,11 +15,11 @@ class UserValidator extends ConfideUserValidator implements UserValidatorInterfa
     public $rules = [
         'create' => [
             'email'    => 'required|email',
-            'password' => 'required|min:4',
+            'password' => 'required|min:8',
         ],
         'update' => [
             'email'    => 'required|email',
-            'password' => 'required|min:4',
+            'password' => 'required|min:8',
         ]
     ];
 }
