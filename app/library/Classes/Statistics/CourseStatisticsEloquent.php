@@ -1,5 +1,6 @@
 <?php namespace GolfLeague\Statistics\Course;
 
+use Carbon\Carbon;
 use \Round;
 
 class CourseStatisticsEloquent implements CourseStatistics
@@ -9,7 +10,9 @@ class CourseStatisticsEloquent implements CourseStatistics
 
     public function averageScore($courseId)
     {
-        $rounds = Round::where('course_id', '=', $courseId)->get();
+        $today = Carbon::today()->toDateString();
+        $rounds = Round::where('course_id', '=', $courseId)
+            ->where('date', '<', $today)->get();
         $scores = $rounds->map(function($round)
         {
             return $round->score;
@@ -22,7 +25,9 @@ class CourseStatisticsEloquent implements CourseStatistics
     }
     public function averageScoreByPlayer($courseId, $playerId)
     {
+        $today = Carbon::today()->toDateString();
         $rounds = Round::where('course_id', '=', $courseId)
+            ->where('date', '<', $today)
             ->where('player_id', '=', $playerId)
             ->get();
         $scores = $rounds->map(function($round)

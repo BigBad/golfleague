@@ -16,7 +16,7 @@ class PlayerStatisticsEloquent implements PlayerStatistics
     public function matchesHandicap($playerId){}
     public function scoringAverage($playerId)
     {
-        $today = Carbon::now()->toDateString();
+        $today = Carbon::today()->toDateString();
         $rounds = Round::where('player_id', '=', $playerId)
             ->where('date', '<', $today)
             ->get();
