@@ -74,6 +74,8 @@ Route::resource('bogey', 'BogeyController');
 Route::resource('double', 'DoubleController');
 Route::resource('other', 'OtherController');
 Route::resource('years', 'YearsController');
+Route::resource('statistics/course', 'CourseStatisticsController');
+
 
 Route::get('test/{matchId}', 'TestController@show');
 
@@ -81,6 +83,13 @@ Route::get('test/{matchId}', 'TestController@show');
 Route::get('playerStatistics/scoringAverage/{playerId}', 'PlayerStatisticsController@scoringAverage');
 Route::get('playerStatistics/scoringAverage/{playerId}/{year}', 'PlayerStatisticsController@scoringAverageByYear');
 Route::get('playerStatistics/birdies/{playerId}/{year}', 'PlayerStatisticsController@birdiesByYear');
+
+
+Route::get('courseStatistics/course/{courseId}', 'CourseStatisticsController@averageScore');
+Route::get('courseStatistics/course/{courseId}/player/{playerId}', 'CourseStatisticsController@averageScoreByPlayer');
+Route::get('courseStatistics/course/{courseId}/year/{year}', 'CourseStatisticsController@averageScoreByYear');
+Route::get('courseStatistics/course/{courseId}/player/{playerId}/year/{year}', 'CourseStatisticsController@averageScoreByPlayerAndYear');
+
 
 // Confide routes
 Route::get('users/create', 'UsersController@create');

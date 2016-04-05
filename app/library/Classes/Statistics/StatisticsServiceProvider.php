@@ -16,5 +16,9 @@ class StatisticsServiceProvider extends ServiceProvider
           'GolfLeague\Statistics\Player\PlayerStatistics',
           'GolfLeague\Statistics\Player\PlayerStatisticsEloquent'
         );
+        $this->app->bind(
+            'GolfLeague\Statistics\Course\CourseStatistics',
+            'GolfLeague\Statistics\Course\CourseStatisticsEloquent'
+        );
     }
 }

@@ -40,6 +40,12 @@
                                 <span>Individual</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ URL::to('statistics/course') }}" style="margin-left: 10px;">
+                                <i class="fa fa-flag"></i>
+                                <span>Course</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                     <li class="treeview">
