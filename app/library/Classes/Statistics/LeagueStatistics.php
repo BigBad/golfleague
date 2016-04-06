@@ -15,4 +15,6 @@ interface LeagueStatistics {
     public function totalDoubles($year);
     public function totalOthers($year);
 
+    public function netScores();
+
 }

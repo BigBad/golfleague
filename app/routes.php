@@ -84,12 +84,14 @@ Route::get('playerStatistics/scoringAverage/{playerId}', 'PlayerStatisticsContro
 Route::get('playerStatistics/scoringAverage/{playerId}/{year}', 'PlayerStatisticsController@scoringAverageByYear');
 Route::get('playerStatistics/birdies/{playerId}/{year}', 'PlayerStatisticsController@birdiesByYear');
 
-
+//Course Statistics
 Route::get('courseStatistics/course/{courseId}', 'CourseStatisticsController@averageScore');
 Route::get('courseStatistics/course/{courseId}/player/{playerId}', 'CourseStatisticsController@averageScoreByPlayer');
 Route::get('courseStatistics/course/{courseId}/year/{year}', 'CourseStatisticsController@averageScoreByYear');
 Route::get('courseStatistics/course/{courseId}/player/{playerId}/year/{year}', 'CourseStatisticsController@averageScoreByPlayerAndYear');
 
+//League Statistics
+Route::get('leagueStatistics/netScores', 'LeagueStatisticsController@netScores');
 
 // Confide routes
 Route::get('users/create', 'UsersController@create');

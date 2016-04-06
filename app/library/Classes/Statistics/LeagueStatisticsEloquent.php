@@ -5,6 +5,7 @@ use \Player;
 use \Skin;
 use \Netwinner;
 use \Holescore;
+use \Match;
 
 class LeagueStatisticsEloquent implements LeagueStatistics
 {
@@ -205,5 +206,47 @@ class LeagueStatisticsEloquent implements LeagueStatistics
 				$i++;
 			}
 		return $others;
+	}
+
+	//Net scores relative to par
+	public function netScores()
+	{
+		//Get matches with players and rounds
+		$matches = Match::with('course','players', 'rounds')->get();
+
+		//return $matches;
+
+		//Get rounds from a match
+
+		$rounds = Round::with('player')
+			->where('match_id', '!=', 'null')
+			->get();
+
+		return $rounds;
+
+		$matches->map(function($round)
+		{
+
+		});
+
+		$rounds->map(function($round)
+		{
+			$net = ($round->score - round($round->player->handicap));
+			return $round->net = ($net - $round->course->par);
+		});
+
+		// Sort by net
+		$rounds->sort(function($a, $b)
+		{
+			$a = $a->net;
+			$b = $b->net;
+			if ($a === $b) {
+				return 0;
+			}
+			return ($a > $b) ? 1 : -1;
+		});
+
+		return $rounds;
+
 	}
 }

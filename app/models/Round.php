@@ -29,4 +29,10 @@ class Round extends Eloquent
     {
         return $this->hasManyThrough('Hole','Holescore');
     }
+
+    public function match()
+    {
+        return $this->belongsTo('Match');
+    }
+
 }

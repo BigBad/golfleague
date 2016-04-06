@@ -14,7 +14,7 @@ class Course extends Eloquent
 
 	public function match()
     {
-        return $this->hasOne('Match');
+        return $this->hasMany('Match');
     }
 
 }

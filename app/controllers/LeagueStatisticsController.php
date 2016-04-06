@@ -89,5 +89,9 @@ class LeagueStatisticsController extends \BaseController {
 		//
 	}
 
+	public function netScores()
+	{
+		return $this->leagueStatistics->netScores();
+	}
 
 }
