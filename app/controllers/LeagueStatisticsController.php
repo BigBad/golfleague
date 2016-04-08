@@ -91,7 +91,11 @@ class LeagueStatisticsController extends \BaseController {
 
 	public function netScores()
 	{
-		return $this->leagueStatistics->netScores();
+		return $this->leagueStatistics->netCumulativeByPlayer(2);
+		//return $this->leagueStatistics->netScoresLeagueTop(5);
+		//return $this->leagueStatistics->netScoresLeague();
+		//return $this->leagueStatistics->netScoresByPlayerTop(2,5);
+		//return $this->leagueStatistics->netScoresByPlayer(1);
 	}
 
 }

@@ -1,5 +1,6 @@
 <?php namespace GolfLeague\Statistics\League;
 
+use Illuminate\Support\Collection;
 use \Round;
 use \Player;
 use \Skin;
@@ -208,38 +209,32 @@ class LeagueStatisticsEloquent implements LeagueStatistics
 		return $others;
 	}
 
-	//Net scores relative to par
-	public function netScores()
+	public function netScoresByPlayer($playerId)
 	{
-		//Get matches with players and rounds
-		$matches = Match::with('course','players', 'rounds')->get();
+		// Get players match scores
+		$rounds = Round::with('player')->where('player_id', '=', $playerId)->whereNotNull('match_id')->get();
 
-		//return $matches;
-
-		//Get rounds from a match
-
-		$rounds = Round::with('player')
-			->where('match_id', '!=', 'null')
-			->get();
-
-		return $rounds;
-
-		$matches->map(function($round)
-		{
-
-		});
-
+		//for each round get match handicap
 		$rounds->map(function($round)
 		{
-			$net = ($round->score - round($round->player->handicap));
-			return $round->net = ($net - $round->course->par);
+			$playerMatch = Player::find($round->player_id)->matches()->where('match_player.match_id','=', $round->match_id)->get();
+			foreach($playerMatch as $player){
+				$handicap = $player['pivot']['handicap'];
+				$round->handicap = $handicap;
+			}
+		});
+		//Calculate net score using match handicap
+		$rounds->map(function($round)
+		{
+			$net = ($round->score - round($round->handicap));
+			return $round->netScore = ($net - $round->course->par);
 		});
 
-		// Sort by net
+		// Sort by netScore
 		$rounds->sort(function($a, $b)
 		{
-			$a = $a->net;
-			$b = $b->net;
+			$a = $a->netScore;
+			$b = $b->netScore;
 			if ($a === $b) {
 				return 0;
 			}
@@ -249,4 +244,50 @@ class LeagueStatisticsEloquent implements LeagueStatistics
 		return $rounds;
 
 	}
+	public function netScoresByPlayerTop($playerId,$number)
+	{
+		$netScores = $this->netScoresByPlayer($playerId);
+		return $netScores->take($number);
+	}
+	public function netScoresLeague()
+	{
+		//get players
+		$players = Player::all();
+
+		$netScores = new \Illuminate\Support\Collection();
+		foreach($players as $player){
+			$netScores->push($this->netScoresByPlayer($player->id));
+		}
+		return $netScores;
+		// Sort by netScore
+		$netScores->sort(function($a, $b)
+		{
+			$a = $a->netScore;
+			$b = $b->netScore;
+			if ($a === $b) {
+				return 0;
+			}
+			return ($a > $b) ? 1 : -1;
+		});
+
+		return $netScores;
+	}
+	public function netScoresLeagueTop($number)
+	{
+		//get players
+		$players = Player::all();
+
+		$netScores = new \Illuminate\Support\Collection();
+		foreach($players as $player){
+			$netScores->push($this->netScoresByPlayerTop($player->id, $number));
+		}
+		return $netScores;
+	}
+	public function netCumulativeByPlayer($playerId)
+	{
+		$netScores = $this->netScoresByPlayer($playerId);
+		$netScores->net = $netScores->sum('netScore');
+		return $netScores;
+	}
+
 }
