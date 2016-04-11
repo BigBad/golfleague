@@ -27,7 +27,6 @@
                             <div class="form-group col-xs-6">
                                 <label for="course">Course</label>
                                 <select class="form-control" name="course" class="ui-corner-all" id="course">
-                                    <option></option>
                                 </select>
                             </div>
                         </div>

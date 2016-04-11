@@ -212,7 +212,10 @@ class LeagueStatisticsEloquent implements LeagueStatistics
 	public function netScoresByPlayer($playerId)
 	{
 		// Get players match scores
-		$rounds = Round::with('player')->where('player_id', '=', $playerId)->whereNotNull('match_id')->get();
+		$rounds = Round::with('player')
+			->where('player_id', '=', $playerId)
+			->where('date', '>', '2016-01-01')
+			->whereNotNull('match_id')->get();
 
 		//for each round get match handicap
 		$rounds->map(function($round)
@@ -244,11 +247,58 @@ class LeagueStatisticsEloquent implements LeagueStatistics
 		return $rounds;
 
 	}
-	public function netScoresByPlayerTop($playerId,$number)
+	public function netScoresByPlayerTop($playerId,$top)
 	{
 		$netScores = $this->netScoresByPlayer($playerId);
-		return $netScores->take($number);
+		return $netScores->take($top);
 	}
+	public function netScoresByPlayerYear($playerId, $year)
+	{
+		$date1 = $year . '-01-01';
+		$date2 = $date1 -1;
+		$date2 .= '-01-01';
+		// Get players match scores
+		$rounds = Round::with('player')
+			->where('player_id', '=', $playerId)
+			->where('date', '>', $date1)
+			->where('date','<', $date2)
+			->whereNotNull('match_id')->get();
+
+		//for each round get match handicap
+		$rounds->map(function($round)
+		{
+			$playerMatch = Player::find($round->player_id)->matches()->where('match_player.match_id','=', $round->match_id)->get();
+			foreach($playerMatch as $player){
+				$handicap = $player['pivot']['handicap'];
+				$round->handicap = $handicap;
+			}
+		});
+		//Calculate net score using match handicap
+		$rounds->map(function($round)
+		{
+			$net = ($round->score - round($round->handicap));
+			return $round->netScore = ($net - $round->course->par);
+		});
+
+		// Sort by netScore
+		$rounds->sort(function($a, $b)
+		{
+			$a = $a->netScore;
+			$b = $b->netScore;
+			if ($a === $b) {
+				return 0;
+			}
+			return ($a > $b) ? 1 : -1;
+		});
+
+		return $rounds;
+	}
+	public function netScoresByPlayerTopYear($playerId,$top, $year)
+	{
+		$netScores = $this->netScoresByPlayerYear($playerId, $year);
+		return $netScores->take($top);
+	}
+
 	public function netScoresLeague()
 	{
 		//get players
@@ -259,18 +309,7 @@ class LeagueStatisticsEloquent implements LeagueStatistics
 			$netScores->push($this->netScoresByPlayer($player->id));
 		}
 		return $netScores;
-		// Sort by netScore
-		$netScores->sort(function($a, $b)
-		{
-			$a = $a->netScore;
-			$b = $b->netScore;
-			if ($a === $b) {
-				return 0;
-			}
-			return ($a > $b) ? 1 : -1;
-		});
 
-		return $netScores;
 	}
 	public function netScoresLeagueTop($number)
 	{
@@ -279,15 +318,157 @@ class LeagueStatisticsEloquent implements LeagueStatistics
 
 		$netScores = new \Illuminate\Support\Collection();
 		foreach($players as $player){
-			$netScores->push($this->netScoresByPlayerTop($player->id, $number));
+			$netScore = $this->netScoresByPlayerTop($player->id, $number);
+			if(!$netScore->isEmpty()){
+				$netScores->push($netScore);
+			}
+		}
+
+		return $netScores;
+	}
+	public function netScoresLeagueYear($year)
+	{
+		//get players
+		$players = Player::all();
+
+		$netScores = new \Illuminate\Support\Collection();
+		foreach($players as $player){
+			$netScores->push($this->netScoresByPlayerYear($player->id,$year));
 		}
 		return $netScores;
+	}
+	public function netScoresLeagueTopYear($top,$year)
+	{
+		//get players
+		$players = Player::all();
+
+		$netScores = new \Illuminate\Support\Collection();
+		foreach($players as $player){
+			$netScore = $this->netScoresByPlayerTopYear($player->id, $top, $year);
+			if(!$netScore->isEmpty()){
+				$netScores->push($netScore);
+			}
+		}
+
+		return $netScores;
+	}
+
+	public function netCumulative()
+	{
+		//get players
+		$players = Player::all();
+
+		$cumulativeNetScores = new \Illuminate\Support\Collection();
+		foreach($players as $player){
+			$cumulativeNetScores->push($this->netCumulativeByPlayer($player->id));
+		}
+		return $cumulativeNetScores;
+	}
+	public function netCumulativeTop($top)
+	{
+		//get players
+		$players = Player::all();
+
+		$cumulativeNetScores = new \Illuminate\Support\Collection();
+		foreach($players as $player){
+			$netScore = $this->netCumulativeByPlayerTop($player->id, $top);
+			if($netScore->isEmpty() == false){
+				$cumulativeNetScores->push($netScore);
+			}
+		}
+
+		return $cumulativeNetScores;
 	}
 	public function netCumulativeByPlayer($playerId)
 	{
 		$netScores = $this->netScoresByPlayer($playerId);
-		$netScores->net = $netScores->sum('netScore');
-		return $netScores;
+		$cumulativeNet= new \Illuminate\Support\Collection();
+
+		if($netScores->count() > 0){
+			$netScore = $netScores->first();
+
+			$totalNetScore = $netScores->sum('netScore');
+			$cumulativeNet->put('player', $netScore->player->name);
+			$cumulativeNet->put('score', $totalNetScore);
+			$cumulativeNet->put('rounds', $netScores->count());
+		}
+
+		return $cumulativeNet;
 	}
+	public function netCumulativeByPlayerTop($playerId, $top)
+	{
+		$netScores = $this->netScoresByPlayerTop($playerId, $top);
+		$cumulativeNet= new \Illuminate\Support\Collection();
+
+		if($netScores->count() > 0){
+			$netScore = $netScores->first();
+
+			$totalNetScore = $netScores->sum('netScore');
+			$cumulativeNet->put('player', $netScore->player->name);
+			$cumulativeNet->put('score', $totalNetScore);
+			$cumulativeNet->put('rounds', $netScores->count());
+		}
+
+		return $cumulativeNet;
+	}
+	public function netCumulativeYear($year)
+	{
+		//get players
+		$players = Player::all();
+
+		$cumulativeNetScores = new \Illuminate\Support\Collection();
+		foreach($players as $player){
+			$cumulativeNetScores->push($this->netCumulativeByPlayerYear($player->id,$year));
+		}
+		return $cumulativeNetScores;
+	}
+	public function netCumulativeTopYear($top,$year)
+	{
+		//get players
+		$players = Player::all();
+
+		$cumulativeNetScores = new \Illuminate\Support\Collection();
+		foreach($players as $player){
+			$netScore = $this->netCumulativeByPlayerTopYear($player->id, $top, $year);
+			if($netScore->isEmpty() == false){
+				$cumulativeNetScores->push($netScore);
+			}
+		}
+
+		return $cumulativeNetScores;
+	}
+	public function netCumulativeByPlayerYear($playerId,$year)
+	{
+		$netScores = $this->netScoresByPlayerYear($playerId, $year);
+		$cumulativeNet= new \Illuminate\Support\Collection();
+
+		if($netScores->count() > 0){
+			$netScore = $netScores->first();
+
+			$totalNetScore = $netScores->sum('netScore');
+			$cumulativeNet->put('player', $netScore->player->name);
+			$cumulativeNet->put('score', $totalNetScore);
+			$cumulativeNet->put('rounds', $netScores->count());
+		}
+
+		return $cumulativeNet;
+	}
+	public function netCumulativeByPlayerTopYear($playerId,$top,$year)
+	{
+		$netScores = $this->netScoresByPlayerTopYear($playerId, $top, $year);
+		$cumulativeNet= new \Illuminate\Support\Collection();
+
+		if($netScores->count() > 0){
+			$netScore = $netScores->first();
+
+			$totalNetScore = $netScores->sum('netScore');
+			$cumulativeNet->put('player', $netScore->player->name);
+			$cumulativeNet->put('score', $totalNetScore);
+			$cumulativeNet->put('rounds', $netScores->count());
+		}
+
+		return $cumulativeNet;
+	}
+
 
 }

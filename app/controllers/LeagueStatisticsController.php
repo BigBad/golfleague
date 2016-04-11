@@ -92,10 +92,45 @@ class LeagueStatisticsController extends \BaseController {
 	public function netScores()
 	{
 		return $this->leagueStatistics->netCumulativeByPlayer(2);
-		//return $this->leagueStatistics->netScoresLeagueTop(5);
-		//return $this->leagueStatistics->netScoresLeague();
 		//return $this->leagueStatistics->netScoresByPlayerTop(2,5);
 		//return $this->leagueStatistics->netScoresByPlayer(1);
+	}
+
+	public function netScoresLeague()
+	{
+		return $this->leagueStatistics->netScoresLeague();
+	}
+
+	public function netScoresLeagueTop($top)
+	{
+		return $this->leagueStatistics->netScoresLeagueTop($top);
+	}
+
+	public function netCumulativeByPlayer($playerId)
+	{
+		return $this->leagueStatistics->netCumulativeByPlayer($playerId);
+	}
+
+	public function netCumulative()
+	{
+		return $this->leagueStatistics->netCumulative();
+	}
+
+	public function netCumulativeByPlayerTop($playerId, $top)
+	{
+		return $this->leagueStatistics->netCumulativeByPlayerTop($playerId, $top);
+	}
+
+	public function netCumulativeTop($top)
+	{
+		$data['data'] = $this->leagueStatistics->netCumulativeTop($top);
+		return $data;
+	}
+
+	public function netCumulativeTopYear($top, $year)
+	{
+		$data['data'] = $this->leagueStatistics->netCumulativeTopYear($top, $year);
+		return $data;
 	}
 
 }

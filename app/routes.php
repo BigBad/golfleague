@@ -91,7 +91,15 @@ Route::get('courseStatistics/course/{courseId}/year/{year}', 'CourseStatisticsCo
 Route::get('courseStatistics/course/{courseId}/player/{playerId}/year/{year}', 'CourseStatisticsController@averageScoreByPlayerAndYear');
 
 //League Statistics
-Route::get('leagueStatistics/netScores', 'LeagueStatisticsController@netScores');
+Route::get('leagueStatistics/netScoresLeague', 'LeagueStatisticsController@netScoresLeague');
+Route::get('leagueStatistics/netScoresLeagueTop/{top}', 'LeagueStatisticsController@netScoresLeagueTop');
+Route::get('leagueStatistics/netCumulative', 'LeagueStatisticsController@netCumulative');
+Route::get('leagueStatistics/netCumulativeTop/{top}', 'LeagueStatisticsController@netCumulativeTop');
+Route::get('leagueStatistics/netCumulativeTop/{top}/{year}', 'LeagueStatisticsController@netCumulativeTopYear');
+Route::get('leagueStatistics/netCumulativeByPlayer/{player}', 'LeagueStatisticsController@netCumulativeByPlayer');
+Route::get('leagueStatistics/netCumulativeByPlayer/{player}/{top}', 'LeagueStatisticsController@netCumulativeByPlayerTop');
+
+
 
 // Confide routes
 Route::get('users/create', 'UsersController@create');
