@@ -214,7 +214,6 @@ class LeagueStatisticsEloquent implements LeagueStatistics
 		// Get players match scores
 		$rounds = Round::with('player')
 			->where('player_id', '=', $playerId)
-			->where('date', '>', '2016-01-01')
 			->whereNotNull('match_id')->get();
 
 		//for each round get match handicap
@@ -254,14 +253,14 @@ class LeagueStatisticsEloquent implements LeagueStatistics
 	}
 	public function netScoresByPlayerYear($playerId, $year)
 	{
-		$date1 = $year . '-01-01';
-		$date2 = $date1 -1;
+		$date1 = $year . '-12-31';
+		$date2 = $date1 - 1;
 		$date2 .= '-01-01';
 		// Get players match scores
 		$rounds = Round::with('player')
 			->where('player_id', '=', $playerId)
-			->where('date', '>', $date1)
-			->where('date','<', $date2)
+			->where('date', '<', $date1)
+			->where('date','>', $date2)
 			->whereNotNull('match_id')->get();
 
 		//for each round get match handicap

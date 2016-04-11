@@ -120,7 +120,7 @@
                     ]
                 });
                 $('#netScoreTable').DataTable({
-                    "order": [[1, "asc"],[2, "desc"]],
+                    "order": [[2, "desc"],[1, "asc"]],
                     "bDestroy": true,
                     "bPaginate": true,
                     "bFilter": false,
