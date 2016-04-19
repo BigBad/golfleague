@@ -2,7 +2,9 @@
 
 class Hole extends Eloquent 
 {
-	public function course()
+    protected $fillable = ['course_id', 'number', 'par', 'yards', 'handicap'];
+
+    public function course()
     {
         return $this->belongsTo('Course');
     }

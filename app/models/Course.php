@@ -2,7 +2,10 @@
 
 class Course extends Eloquent
 {
-	public function rounds()
+
+    protected $fillable = ['id', 'name', 'rating', 'slope', 'par'];
+
+    public function rounds()
     {
         return $this->hasMany('Round');
     }
