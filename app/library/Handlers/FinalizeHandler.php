@@ -42,7 +42,6 @@ class FinalizeHandler
         // match_player for the given player
 
         $winningPlayers = array();
-        $i = 1;
 
         $ctpWinners = Ctp::where('match_id', '=', $match->id)->get();
         $winningPlayers = $this->gameWinner($ctpWinners, $winningPlayers);
@@ -91,6 +90,7 @@ class FinalizeHandler
      */
     public function gameWinner($gameWinners, $winningPlayers)
     {
+        $i = 1;
         foreach($gameWinners as $key => $gameWinner){
             $playerExists = $this->recursive_array_search($gameWinner->player_id, $winningPlayers);
             //if player is already there add money here to other money
