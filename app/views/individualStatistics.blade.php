@@ -57,7 +57,7 @@
 
               <div class="small-box bg-green stats">
                 <div class="inner">
-                <p>Scoring Average</p>
+                <p>Scoring Average 2016</p>
                   <h3 id="average"><sup style="font-size: 20px"></sup></h3>
                 </div>
                 <div class="icon">
@@ -73,7 +73,7 @@
             <!-- small box -->
             <div class="small-box bg-green stats">
                 <div class="inner">
-                    <p>Birdies in 2015</p>
+                    <p>Birdies in 2016</p>
                     <h3 id="birdies"><sup style="font-size: 20px"></sup></h3>
                 </div>
                 <div class="icon">
@@ -157,12 +157,12 @@
                 $('.stats').show("slow");
             });
 
-            $.getJSON("{{URL::to('/')}}/playerStatistics/scoringAverage/" + $("#player").val(), function(data){
+            $.getJSON("{{URL::to('/')}}/playerStatistics/scoringAverage/" + $("#player").val() + "/" + '2016', function(data){
                 $("#average").html(data);
                 $('.stats').show("slow");
             });
 
-            $.getJSON("{{URL::to('/')}}/playerStatistics/birdies/" + $("#player").val() + '/2015', function(data){
+            $.getJSON("{{URL::to('/')}}/playerStatistics/birdies/" + $("#player").val() + '/2016', function(data){
                 $("#birdies").html(data);
                 $('.stats').show("slow");
             });
