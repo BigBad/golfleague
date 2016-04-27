@@ -254,8 +254,11 @@ class LeagueStatisticsEloquent implements LeagueStatistics
 	public function netScoresByPlayerYear($playerId, $year)
 	{
 		$date1 = $year . '-12-31';
-		$date2 = $date1 - 1;
-		$date2 .= '-01-01';
+		$date2 = $year . '-01-01';
+		//$date2 = $date1 - 1;
+		//$date2 .= '-01-01';
+
+
 		// Get players match scores
 		$rounds = Round::with('player')
 			->where('player_id', '=', $playerId)
