@@ -50,6 +50,7 @@ Route::resource('statistics/league', 'LeagueStatisticsController');
 Route::resource('statistics/individual', 'IndividualStatisticsController');
 Route::resource('schedule', 'ScheduleController');
 Route::resource('leaderboard', 'LeaderboardController');
+Route::resource('tournament', 'TournamentController');
 
 
 // Authentication required for these routes
@@ -68,6 +69,7 @@ Route::resource('skins', 'SkinsController');
 Route::resource('gross', 'GrossController');
 Route::resource('scoringaverage', 'ScoringAverageController');
 Route::resource('net', 'NetController');
+Route::resource('eagle', 'EagleController');
 Route::resource('bird', 'BirdController');
 Route::resource('par', 'ParController');
 Route::resource('bogey', 'BogeyController');

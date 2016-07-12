@@ -190,7 +190,7 @@
         </div>{{-- end .col-md-5 --}}
     </div>{{-- end .row --}}
 
-            <div class="row">
+    <div class="row">
         <div class="col-md-5">
             <div class="box box-success">
                 <div class="box-header">
@@ -209,7 +209,21 @@
             </div>{{-- end .box.box-primary --}}
         </div>{{-- end .col-md-5 --}}
         <div class="col-md-5">
-
+            <div class="box box-success">
+                <div class="box-header">
+                    <h3 class="box-title">Linvilles (Eagles)</h3>
+                </div>{{-- end .box-header --}}
+                <div class="box-body no-padding">
+                    <table id="eagles" class="display table table-bordered table-hover DataTable" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th>Player</th>
+                            <th>Eagles</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>{{-- end .box-body --}}
+            </div>{{-- end .box.box-primary --}}
         </div>{{-- end .col-md-5 --}}
     </div>{{-- end .row --}}
 @stop
@@ -370,6 +384,21 @@
                         {"data": "others"}
                     ]
                 });
+                $('#eagles').DataTable({
+                    "order": [[1, "desc"]],
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bInfo": false,
+                    "scrollY": "205px",
+                    "scrollX": false,
+                    "scrollCollapse": true,
+                    "paging": false,
+                    "ajax": "{{URL::to('/')}}/eagle/" + year,
+                    "columns": [
+                        {"data": "name"},
+                        {"data": "eagles"}
+                    ]
+                }).css('height', '700px');
             }
         });
     });

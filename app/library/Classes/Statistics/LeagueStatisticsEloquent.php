@@ -87,12 +87,38 @@ class LeagueStatisticsEloquent implements LeagueStatistics
         array_multisort($skinsCount, SORT_DESC);
         return $skinsCount;
     }
-    public function totalEagles($year){}
+    public function totalEagles($year){
+		$date1 = $year . '-01-01';
+		$date2 = $year . '-12-31';
+		$holescores = Holescore::with('round.player','hole')
+			->where('created_at', '>=', $date1)
+			->where('created_at', '<=', $date2)
+			->get();
+		$allEagles = array();
+		foreach($holescores as $key => $holescore) {
+			if($holescore['round']['match_id'] != null){
+				if( ($holescore['hole']['par'] - $holescore['score']) === 2) {
+					$allEagles[]= $holescore['round']['player']['name'];
+				}
+			}
+		}
+		$i =0;
+		$newArray = array_count_values($allEagles);
+		$eagles = array();
+		foreach ($newArray as $key => $value) {
+			$eagles[$i]['name'] = $key;
+			$eagles[$i]['eagles'] =$value;
+			$i++;
+		}
+		return $eagles;
+	}
     public function totalBirdies($year)
 	{
-		$year = $year . '-01-01';
+		$date1 = $year . '-01-01';
+		$date2 = $year . '-12-31';
 		$holescores = Holescore::with('round.player','hole')
-			->where('created_at', '>', $year)
+			->where('created_at', '>=', $date1)
+			->where('created_at', '<=', $date2)
 			->get();
 		$allBirdies = array();
 		foreach($holescores as $key => $holescore) {
