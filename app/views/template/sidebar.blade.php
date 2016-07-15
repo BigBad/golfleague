@@ -74,6 +74,12 @@
                             </a>
                         </li>
                         <li>
+                            <a href="{{ URL::to('tournament/create') }}" style="margin-left: 10px;">
+                                <i class="fa fa-trophy"></i>
+                                <span>Create Tournament</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{ URL::to('administration') }}" style="margin-left: 10px;">
                                 <i class="fa fa-user-plus"></i>
                                 <span>Players/Courses</span>

@@ -32,7 +32,7 @@ class LeaderboardService
 
 				$handicap = round($this->matchround->getMatchPlayerHandicap($matchId, $round->player->id),0);
 				//$handicap = round($round->player->handicap,0);
-                $par = $handicap + $par;
+				$par = $handicap + $par;
             }
 			$playerScore = $filteredHolecores->sum('score');
 
@@ -59,7 +59,7 @@ class LeaderboardService
 	 */
 	public function currentParTotal($courseId, $holesPlayed)
     {
-        //find par total for course given unmber of holes played
+        //find par total for course given number of holes played
 		$holes = Course::find($courseId)->holes;
 		$filteredHoles =$holes->slice(0,$holesPlayed);
 		return $filteredHoles->sum('par'); // Par for given number of holes
