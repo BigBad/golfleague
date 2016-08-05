@@ -51,6 +51,7 @@ Route::resource('statistics/individual', 'IndividualStatisticsController');
 Route::resource('schedule', 'ScheduleController');
 Route::resource('leaderboard', 'LeaderboardController');
 Route::resource('tournament', 'TournamentController');
+Route::resource('tournamentLeaderboard', 'TournamentLeaderboardController');
 
 
 // Authentication required for these routes

@@ -1,6 +1,7 @@
 <?php namespace GolfLeague\Storage\Round;
 
 use \Round as Round;
+use Carbon\Carbon;
 
 class EloquentRoundRepository implements RoundRepository
 {
@@ -12,9 +13,19 @@ class EloquentRoundRepository implements RoundRepository
    * Multideminsional Array of Hole Numbers and scores   *
    **/
 
+    public function __construct()
+    {
+        $this->today = Carbon::today()->toDateString();
+    }
+
     public function all()
     {
-        return Round::all();
+        //return Round::all();
+
+        $today = Carbon::today()->toDateString();
+        $rounds = Round::where('date', '<', $this->today)
+            ->get();
+        return $rounds;
     }
 
     public function find($id)
@@ -25,7 +36,10 @@ class EloquentRoundRepository implements RoundRepository
 
     public function findByPlayer($playerId)
     {
-        return Round::with('player', 'holescores', 'course')->where('player_id', '=', $playerId)->get();
+        return Round::with('player', 'holescores', 'course')
+            ->where('player_id', '=', $playerId)
+            ->where('date', '<', $this->today)
+            ->get();
     }
 
     public function findByMatch($matchId)

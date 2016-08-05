@@ -2,6 +2,7 @@
 
 use GolfLeague\Services\MatchService as MatchService;
 use GolfLeague\Storage\Match\MatchRepository as MatchRepository;
+use Carbon\Carbon;
 
 class MatchesController extends \BaseController {
 
@@ -68,14 +69,11 @@ class MatchesController extends \BaseController {
 	{
 		$data = $this->match->get($id);
 		
-		// Logic to allow editable for day of match and next day
-		// after the 2nd day the match page will be read only
-		$today=date_create(date('Y-m-d'));
+		// Logic to allow editable for day of match only
+		$today = Carbon::today();
 		$matchDate=date_create($data['date']);
-		$diff=date_diff($today,$matchDate);
-		$dateDiff = $diff->format("%a");
 
-		if($dateDiff <= 1){
+		if($today <= $matchDate){
 			//Show Editable View
 			$view = View::make('EnterMatch', $data);
 			return $view;

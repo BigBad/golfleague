@@ -102,9 +102,53 @@
     <script src="<?php echo asset('jqGrid/js/i18n/grid.locale-en.js')?>" type="text/javascript"></script>
     <script src="<?php echo asset('jqGrid/js/jquery.jqGrid.min.js')?>" type="text/javascript"></script>
 
+    <script>
+        // check for a tournament add on
+        function tournamentTable(){
+            $.ajax({
+                url:    "{{URL::to('/')}}/tournament/{{$id}}",
+                type:   "get",
+                success: function(data) {
+                    if (data[0].tournament_id){
+                        // Show Tounament leaderboard
+                        $('#tournamentLeaderboard').removeClass('hidden');
+                        $('#tournamentTable').DataTable({
+                            "scrollY": "200px",
+                            "bFilter": false,
+                            "bPaginate": false,
+                            "bInfo": false,
+                            "bSort": false,
+                            "bAutoWidth": false,
+                            "ajax": {
+                                "url": "{{URL::to('/')}}/tournamentLeaderboard/" + data[0].tournament_id,
+                                "type": "GET"
+                            },
+                            "columns": [
+                                {"data": "name"},
+                                {
+                                    "data": function (data) {
+                                        if (data.score === 0) {
+                                            return "E";
+                                        }
+                                        else
+                                            return data.score;
+                                    }
+                                }
+                            ]
+                        });
+                    }
+                },
+                error: function(data){
+                    alert(data.message);
+                }
+            });
+        }
+    </script>
 
     <script>
         $(document).ready(function () {
+
+            tournamentTable();
 
             var grossTable = $('#grossTable').DataTable( {
                 "scrollY":        "200px",
@@ -155,6 +199,7 @@
 			$( "#leaderboard" ).click(function(){
 				grossTable.ajax.reload();
 				netTable.ajax.reload();
+                tournamentTable();
 			});
 
             var groupId = get('group');
@@ -240,6 +285,7 @@
 <script>
     $(document).ready(function() {
 		$( "#leaderboard" ).show();
+
     });
 </script>
     @stop

@@ -1,12 +1,12 @@
 <?php
 
-use GolfLeague\Tournament\TournamentService;
+use GolfLeague\Tournament\TournamentLeaderboardService as TournamentLeaderboardService;
 
-class TournamentController extends \BaseController {
+class TournamentLeaderboardController extends \BaseController {
 
-	public function __construct(TournamentService $tournament)
+	public function __construct(TournamentLeaderboardService $tournamentLeaderboard)
 	{
-		$this->tournament = $tournament;
+		$this->tournamentLeaderboard = $tournamentLeaderboard;
 	}
 
 	/**
@@ -27,7 +27,7 @@ class TournamentController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('createTournament');
+		//
 	}
 
 
@@ -38,8 +38,7 @@ class TournamentController extends \BaseController {
 	 */
 	public function store()
 	{
-		$input = \Illuminate\Support\Facades\Input::all();
-		return $this->tournament->create($input);
+		//
 	}
 
 
@@ -51,7 +50,8 @@ class TournamentController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		return $this->tournament->getByMatchId($id);
+		$data['data'] =$this->tournamentLeaderboard->get($id);
+		return $data;
 	}
 
 

@@ -7,6 +7,7 @@ use \Skin;
 use \Netwinner;
 use \Holescore;
 use \Match;
+use Carbon\Carbon;
 
 class LeagueStatisticsEloquent implements LeagueStatistics
 {
@@ -16,12 +17,14 @@ class LeagueStatisticsEloquent implements LeagueStatistics
     }
     public function topFiveLowestScoresByYear($year)
     {
-        $date1 = $year . '-01-01';
+		$today = Carbon::today()->toDateString();
+		$date1 = $year . '-01-01';
         $date2 = $year . '-12-31';
         return Round::with('player', 'course')
             ->where('match_id', '>', '0')
             ->where('date', '>=', $date1)
             ->where('date', '<=', $date2)
+			->where('date', '<=', $today)
             ->orderBy('score')
             ->take(5)
             ->get();
@@ -39,6 +42,7 @@ class LeagueStatisticsEloquent implements LeagueStatistics
         foreach($players as $key => $player) {
             $rounds = Round::where('match_id', '>', '0')
                 ->where('player_id', '=', $player->id)
+				->where('score', '>', '30')
                 ->where('date', '>=', $date1)
                 ->where('date', '<=', $date2)
                 ->get();

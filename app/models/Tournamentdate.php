@@ -3,7 +3,8 @@
 
 class Tournamentdate extends Eloquent {
 
-	protected $table = 'tournaments';
+	protected $table = 'tournamentdates';
+	protected $fillable = ['date'];
 
 	public function setDateAttribute($date)
 	{
