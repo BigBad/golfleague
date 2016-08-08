@@ -104,51 +104,66 @@
 
     <script>
         // check for a tournament add on
-        function tournamentTable(){
-            $.ajax({
-                url:    "{{URL::to('/')}}/tournament/{{$id}}",
-                type:   "get",
-                success: function(data) {
-                    if (data[0].tournament_id){
-                        // Show Tounament leaderboard
-                        $('#tournamentLeaderboard').removeClass('hidden');
-                        $('#tournamentTable').DataTable({
-                            "scrollY": "200px",
-                            "bFilter": false,
-                            "bPaginate": false,
-                            "bInfo": false,
-                            "bSort": false,
-                            "bAutoWidth": false,
-                            "ajax": {
-                                "url": "{{URL::to('/')}}/tournamentLeaderboard/" + data[0].tournament_id,
-                                "type": "GET"
-                            },
-                            "columns": [
-                                {"data": "name"},
-                                {
-                                    "data": function (data) {
-                                        if (data.score === 0) {
-                                            return "E";
-                                        }
-                                        else
-                                            return data.score;
-                                    }
-                                }
-                            ]
-                        });
-                    }
-                },
-                error: function(data){
-                    alert(data.message);
-                }
-            });
-        }
+
+
     </script>
 
     <script>
+
         $(document).ready(function () {
 
-            tournamentTable();
+            var tournamentId;
+
+            var tournamentTable;
+
+            function getTournamentId(){
+                $.ajax({
+                    url:    "{{URL::to('/')}}/tournament/{{$id}}",
+                    type:   "get",
+                    success: function(data) {
+                        if(data[0].tournament_id){
+                            tournamentId = data[0].tournament_id;
+                            $('#tournamentLeaderboard').removeClass('hidden');
+
+                            tournamentTable = $('#tournamentTable').DataTable({
+                                "scrollY": "200px",
+                                "bFilter": false,
+                                "bPaginate": false,
+                                "bInfo": false,
+                                "bSort": false,
+                                "bAutoWidth": false,
+                                "ajax": {
+                                    "url": "{{URL::to('/')}}/tournamentLeaderboard/" + tournamentId,
+                                    "type": "GET"
+                                },
+                                "columns": [
+                                    {"data": "name"},
+                                    {
+                                        "data": function (data) {
+                                            if (data.score === 0) {
+                                                return "E";
+                                            }
+                                            else
+                                                return data.score;
+                                        }
+                                    }
+                                ]
+                            });
+
+
+                        } else {
+                            tournamentId = null;
+                        }
+
+                    },
+                    error: function(data){
+                        alert(data.message);
+                    }
+                });
+            }
+
+            tournamentId = getTournamentId();
+
 
             var grossTable = $('#grossTable').DataTable( {
                 "scrollY":        "200px",
@@ -199,7 +214,7 @@
 			$( "#leaderboard" ).click(function(){
 				grossTable.ajax.reload();
 				netTable.ajax.reload();
-                tournamentTable();
+                tournamentTable.ajax.reload();
 			});
 
             var groupId = get('group');
