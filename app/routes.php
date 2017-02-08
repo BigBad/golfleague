@@ -17,10 +17,19 @@ Route::get('/', function()
 /*
 Route::get('/test', function()
 {
-    $stats = new  GolfLeague\Statistics\League\LeagueStatisticsEloquent();
-    return $stats->totalOthers('2015');
+
+    $players = new \Player();
+    $players = $players->all();
+    //echo $players;
+   foreach ($players as $player){
+       $handicap = new \GolfLeague\Handicap($player);
+       $player->handicap = $handicap->calculate();
+       echo $player->name . " " . $player->handicap . "<br>";
+       //$player->save();
+   }
 });
 */
+
 Route::get('enterscore', 'ScoreController@view');
 Route::post('storescore', 'ScoreController@store');
 
