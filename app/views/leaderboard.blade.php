@@ -61,26 +61,6 @@
                 </div>{{-- end .box-body --}}
             </div>{{-- end .box.box-success --}}
         </div>{{-- end .col-md-5 --}}
-
-        <div class="col-md-5">
-            <div class="box box-success">
-                <div class="box-header">
-                    <h3 class="box-title">Net Leaders</h3>
-                </div>{{-- end .box-header --}}
-                <div class="box-body no-padding">
-                    <table id="netScoreTable" class="display table table-bordered table-hover DataTable" cellspacing="0" width="100%">
-                        <thead>
-                        <tr>
-                            <th>Player</th>
-                            <th>Total</th>
-                            <th>Rounds</th>
-                        </tr>
-                        </thead>
-                    </table>
-                </div>{{-- end .box-body --}}
-            </div>{{-- end .box.box-success --}}
-        </div>{{-- end .col-md-5 --}}
-
     </div>{{-- end .row --}}
 
 @stop
@@ -117,19 +97,6 @@
                         {"data": "winnings"},
                         {"data": "entryfees"},
                         {"data": "net"}
-                    ]
-                });
-                $('#netScoreTable').DataTable({
-                    "order": [[2, "desc"],[1, "asc"]],
-                    "bDestroy": true,
-                    "bPaginate": true,
-                    "bFilter": false,
-                    "bInfo": false,
-                    "ajax": "{{URL::to('/')}}/leagueStatistics/netCumulativeTop/5/" + year,
-                    "columns": [
-                        {"data": "player"},
-                        {"data": "score"},
-                        {"data": "rounds"}
                     ]
                 });
             }

@@ -28,8 +28,6 @@
                                 <label for="year">Year</label>
                                 <select class="form-control" name="year" class="ui-corner-all" id="year">
                                     <option></option>
-                                    <option value="2015">2015</option>
-                                    <option value="2016">2016</option>
                                 </select>
                             </div>
                         </div>
@@ -235,6 +233,14 @@
 @section('page-js')
 <script>
     $(document).ready(function() {
+
+        $.getJSON("{{URL::to('/')}}/years", function(result) {
+            var options = $("#year");
+            $.each(result, function(key, value) {
+                options.append($("<option />").val(value).text(value));
+            });
+        });
+
         $("#year").change(function (){
             var year = $("#year").val();
             if(year != '') {
