@@ -40,5 +40,9 @@ class StorageServiceProvider extends ServiceProvider
           'GolfLeague\Storage\Ctp\CtpRepository',
           'GolfLeague\Storage\Ctp\EloquentCtpRepository'
         );
+        $this->app->bind(
+            'GolfLeague\Storage\Team\TeamRepository',
+            'GolfLeague\Storage\Team\EloquentTeamRepository'
+        );
     }
 }

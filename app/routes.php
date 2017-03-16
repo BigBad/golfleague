@@ -61,7 +61,7 @@ Route::resource('schedule', 'ScheduleController');
 Route::resource('leaderboard', 'LeaderboardController');
 Route::resource('tournament', 'TournamentController');
 Route::resource('tournamentLeaderboard', 'TournamentLeaderboardController');
-
+Route::resource('team', 'TeamController');
 
 // Authentication required for these routes
 Route::get('administration', array('before' => 'auth', 'uses' => 'AdministrationController@index'));

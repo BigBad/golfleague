@@ -3,7 +3,7 @@
 class Round extends Eloquent
 {
 	protected $guarded = ['id'];
-	protected $fillable = ['date', 'player_id', 'course_id', 'match_id', 'score', 'esc'];
+	protected $fillable = ['date', 'player_id', 'course_id', 'match_id', 'score', 'esc', 'team_id'];
 
 	public function setDateAttribute($date)
     {

@@ -28,4 +28,9 @@ class Player extends Eloquent
         return $this->belongsToMany('Match')->withPivot('level_id', 'group', 'handicap', 'winnings')->withTimestamps();
     }
 
+    public function teams()
+    {
+        return $this->hasMany('Team');
+    }
+
 }

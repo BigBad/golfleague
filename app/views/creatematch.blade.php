@@ -19,7 +19,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-7">
             <div class="box box-success">
                 <div class="box-header no-padding">
                 </div>{{-- end .box-header --}}
@@ -35,12 +35,35 @@
 								<option></option>
 							</select>
 						</div>
+
+						<div class="form-group">
+							<label for="teamRadios">Match Type:</label>
+							<div class="radio">
+								<label>
+									<input type="radio" name="matchType" id="matchTypeBoth" value="both" checked="">
+									Team and Individual
+								</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" name="matchType" id="matchTypeIndividual" value="individual">
+									Individual Only
+								</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" name="matchType" id="matchTypeTeam" value="team">
+									Team Only
+								</label>
+							</div>
+						</div>
 						<div class="form-group" >
 							<label for="players">Number of players:</label>
 							<select class="form-control" name="players" class="ui-corner-all" id="players" >
 								<option></option>
 							</select>
 						</div>
+
 						<div class="form-group">
 							<div id="pursediv">
 								<label for="purse">Purse:</label>
@@ -77,7 +100,8 @@
 			todayHighlight: true
         });
 		var players = [];
-		var levels =[];
+		var levels = [];
+		var teams = [];
 		$(document).ready(function() {
                 $.getJSON("{{URL::to('/')}}/courses", function(data){
                     $.each(data, function(index, text) {
@@ -92,6 +116,9 @@
 		$.getJSON("{{URL::to('/')}}/levels", function(data){
                     levels = data;
                 });
+		$.getJSON("{{URL::to('/')}}/team", function(data){
+                teams = data;
+            });
 		for (i = 12; i > 0; i--) {
 			$("#players").append($("<option></option>").val(i).html(i));
 		}
@@ -100,9 +127,16 @@
 		$("#players")
 		  .change(function () {
 			$('#playersList').empty();
-			for (i = 1;  i <= $(this).val(); i++) {
-				$('#playersList').append('<div name="player"><label for="player">'+i+'</label><select name="player['+i+'][player_id]" class="player ui-corner-all" id="player"></select><label for="level">Level</label><select name="player['+i+'][level_id]" class="level ui-corner-all" id="level" ></select><label for="group">Group</label><select name="player['+i+'][group]" class="group ui-corner-all" id="group" ></select></div><br />'); //add player div
-			}
+			if($('#matchTypeIndividual').is(':checked')) {
+                for (i = 1; i <= $(this).val(); i++) {
+                    $('#playersList').append('<div name="player"><label for="player">' + i + '</label><select name="player[' + i + '][player_id]" class="player ui-corner-all" id="player"></select><label for="level">Level</label><select name="player[' + i + '][level_id]" class="level ui-corner-all" id="level" ></select><label for="group">Group</label><select name="player[' + i + '][group]" class="group ui-corner-all" id="group" ></select><br />'); //add player div
+                }
+            }
+              if(($('#matchTypeBoth').is(':checked')) || ($('#matchTypeTeam').is(':checked'))) {
+                  for (i = 1; i <= $(this).val(); i++) {
+                      $('#playersList').append('<div name="player"><label for="player">' + i + '</label><select name="player[' + i + '][player_id]" class="player ui-corner-all" id="player"></select><label for="level">Level</label><select name="player[' + i + '][level_id]" class="level ui-corner-all" id="level" ></select><label for="group">Group</label><select name="player[' + i + '][group]" class="group ui-corner-all" id="group" ></select><label for="team">Team</label><select name="player[' + i + '][team]" class="team ui-corner-all" id="team" ></select></div><br />'); //add player div
+                  }
+              }
 			$.each(players, function(index, text) {
 				$(".player").append(
 					$("<option></option>").val(text.id).html(text.name)
@@ -118,6 +152,12 @@
 					$("<option></option>").val(groups[i]).html(groups[i])
 				);
 			}
+              $.each(teams, function(index, text) {
+                  $(".team").append(
+                      $("<option></option>").val(text.id).html(text.name)
+                  );
+              });
+
 			//Determine purse and display
 			var purse = 5 * $(this).val();
 			$('#purse').val(purse);

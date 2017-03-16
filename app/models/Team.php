@@ -2,10 +2,8 @@
 
 class Team extends Eloquent
 {
-    public function match()
-    {
-        return $this->belongsTo('Match');
-    }
+    protected $guarded = ['id'];
+    protected $fillable = ['name'];
 
     public function players()
     {

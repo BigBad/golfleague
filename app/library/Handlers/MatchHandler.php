@@ -34,20 +34,22 @@ class MatchHandler
     public function handle($match)
     {
         //for each player create an initial round
-        //var_dump($holescore);
         $input = array(
         'date' => $match['date'],
-        // use holescore->round_id to get all holescores for that round
          'course_id' => $match['course'],
 
          'match_id' => $match['match_id'],
          'score' => 0,
-         'esc' =>0
+         'esc' => 0
          );
          foreach($match['player'] as $player){
-         $input['player_id'] = $player['player_id'];
-         $this->roundRepo->create($input);
- }
+             $input['player_id'] = $player['player_id'];
+             //If team match then add team id to $input array
+             if(isset($player['team'])){
+                 $input['team_id'] = $player['team'];
+             }
+             $this->roundRepo->create($input);
+         }
 
     }
 
