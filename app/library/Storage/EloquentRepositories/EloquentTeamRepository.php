@@ -4,6 +4,8 @@ use \Team as Team;
 
 class EloquentTeamRepository implements TeamRepository
 {
+    private $team;
+
     public function __construct(Team $team)
     {
         $this->team = $team;
@@ -13,17 +15,26 @@ class EloquentTeamRepository implements TeamRepository
     {
         return $this->team->all();
     }
-    public function find($id)
+    public function findById($id)
     {
-
+        return $this->team->where('id', '=', $id)->get();
     }
+
+    public function findByYear($year)
+    {
+        return $this->team->whereYear('created_at', '=', $year)->get();
+    }
+
     public function create($input)
     {
-        return 'Here';
+        $this->team->create($input);
     }
+
     public function update($team)
     {
-
+        $updateTeam = $this->team->where('id', '=', $id)->get();
+        $updateTeam = $team;
+        $updateTeam->save();
     }
 
 }

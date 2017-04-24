@@ -6,6 +6,7 @@ use Carbon\Carbon;
 
 class MatchesController extends \BaseController {
 
+
     public function __construct(MatchService $match, MatchRepository $matchRepo)
     {
         $this->match = $match;
@@ -41,9 +42,8 @@ class MatchesController extends \BaseController {
 	 */
 	public function store()
 	{
-		$input = Input::all();
+	    $input = Input::all();
 		return $this->match->create($input);
-
 	}
 
 
@@ -67,15 +67,22 @@ class MatchesController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$data = $this->match->get($id);
-		
+        $enterView = 'EnterTeamMatch';
+	    $data = $this->match->get($id);
+        $view = View::make($enterView, $data);
+        return $view;
 		// Logic to allow editable for day of match only
 		$today = Carbon::today();
-		$matchDate=date_create($data['date']);
+        $teamMatchDate = new Carbon('first day of January 2017');
+		$matchDate = new Carbon($data['date']);
+
+		if($matchDate >= $teamMatchDate){
+		    $enterView = 'EnterTeamMatch';
+        }
 
 		if($today <= $matchDate){
 			//Show Editable View
-			$view = View::make('EnterMatch', $data);
+			$view = View::make($enterView, $data);
 			return $view;
 		}
 		else {

@@ -40,7 +40,7 @@
 							<label for="teamRadios">Match Type:</label>
 							<div class="radio">
 								<label>
-									<input type="radio" name="matchType" id="matchTypeBoth" value="both" checked="">
+									<input type="radio" name="matchType" id="matchTypeBoth" value="both" >
 									Team and Individual
 								</label>
 							</div>
@@ -74,6 +74,58 @@
 						<div class="form-group">
 							<div name="playersList" id="playersList"></div>
 						</div>
+					    </br>
+                        <div class="form-group">
+                        <div id="teamMatchUp">
+                            <div  name="teamMatchUps" id="teamMatchUps" hidden>
+                                <label for="teamMatchUp1">Match Up 1:</label>
+                                <div  id="teamMatchUp1" name ="teamMatchUp1">
+                                    <div>
+                                        <select class="team ui-corner-all" id="team1MatchUp1" name="teamMatchUp1[]" >
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                    vs.
+                                    <div>
+                                        <select class="team ui-corner-all" id="team2MatchUp1" name="teamMatchUp1[]">
+                                            <option></option>
+                                        </select>
+                                    </div>
+                               </div>
+                                </br>
+                                <label for="teamMatchUp1">Match Up 2:</label>
+                                <div  id="teamMatchUp1" name ="teamMatchUp2">
+                                    <div>
+                                        <select class="team ui-corner-all" id="team1MatchUp2" name="teamMatchUp2[]">
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                    vs.
+                                    <div>
+                                        <select class="team ui-corner-all" id="team2MatchUp2" name="teamMatchUp2[]">
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                </br>
+                                <label for="teamMatchUp1">Match Up 3:</label>
+                                <div  id="teamMatchUp1" name ="teamMatchUp3">
+                                    <div>
+                                        <select class="team ui-corner-all" id="team1MatchUp3" name="teamMatchUp3[]">
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                    vs.
+                                    <div>
+                                        <select class="team ui-corner-all" id="team2MatchUp3" name="teamMatchUp3[]">
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        </br>
                     </form>
                 </div>{{-- end .box-body --}}
 					<div id="loadingOverlay"><i id="spinImage"></i></div>
@@ -103,22 +155,24 @@
 		var levels = [];
 		var teams = [];
 		$(document).ready(function() {
-                $.getJSON("{{URL::to('/')}}/courses", function(data){
-                    $.each(data, function(index, text) {
-                    $("#course").append(
-                        $("<option></option>").val(text.id).html(text.name)
-                        );
-                    });
-                });
+
+		$.getJSON("{{URL::to('/')}}/courses", function(data){
+			$.each(data, function(index, text) {
+			$("#course").append(
+				$("<option></option>").val(text.id).html(text.name)
+				);
+			});
+		});
 		$.getJSON("{{URL::to('/')}}/players", function(data){
 			players = data;
                 });
 		$.getJSON("{{URL::to('/')}}/levels", function(data){
                     levels = data;
                 });
-		$.getJSON("{{URL::to('/')}}/team", function(data){
+		$.getJSON("{{URL::to('/')}}/team/year/" + new Date().getFullYear(), function(data){
                 teams = data;
             });
+
 		for (i = 12; i > 0; i--) {
 			$("#players").append($("<option></option>").val(i).html(i));
 		}
@@ -181,6 +235,20 @@
 					}
                 });
             }
+
+        $('#scoreForm input').on('change', function() {
+
+            if($('#matchTypeBoth').is(':checked')  || $('#matchTypeTeam').is(':checked')) {
+                //show team matchups div
+                $('#teamMatchUps').show();
+            }
+            if($('#matchTypeIndividual').is(':checked')) {
+                //show team matchups div
+                $('#teamMatchUps').hide();
+            }
+
+        });
+
         </script>
 @stop
 

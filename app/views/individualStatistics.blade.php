@@ -41,29 +41,29 @@
     <div class="row">
         <div class="col-md-4">
             <!-- small box -->
-              <div class="small-box bg-green stats">
+            <div class="small-box bg-green stats">
                 <div class="inner">
-                <p>Current Handicap</p>
-                  <h3 id="handicap"><sup style="font-size: 20px"></sup></h3>
+                    <p>Current Handicap</p>
+                    <h3 id="handicap"><sup style="font-size: 20px"></sup></h3>
                 </div>
                 <div class="icon">
-                  <i class="fa fa-wheelchair"></i>
+                    <i class="fa fa-wheelchair"></i>
                 </div>
-              </div>
+            </div>
         </div>
 
         <div class="col-md-4">
             <!-- small box -->
 
-              <div class="small-box bg-green stats">
+            <div class="small-box bg-green stats">
                 <div class="inner">
-                <p>Scoring Average 2016</p>
-                  <h3 id="average"><sup style="font-size: 20px"></sup></h3>
+                    <p>Scoring Average 2017</p>
+                    <h3 id="average"><sup style="font-size: 20px"></sup></h3>
                 </div>
                 <div class="icon">
-                  <i class="fa fa-bar-chart"></i>
+                    <i class="fa fa-bar-chart"></i>
                 </div>
-              </div>
+            </div>
         </div>
 
     </div>{{-- end .row --}}
@@ -73,7 +73,7 @@
             <!-- small box -->
             <div class="small-box bg-green stats">
                 <div class="inner">
-                    <p>Birdies in 2016</p>
+                    <p>Birdies in 2017</p>
                     <h3 id="birdies"><sup style="font-size: 20px"></sup></h3>
                 </div>
                 <div class="icon">
@@ -116,16 +116,16 @@
 
 @section('page-js')
     <script>
-    $(document).ready(function() {
-     $('.stats').hide();
-        $.getJSON("{{URL::to('/')}}/players", function(data){
+        $(document).ready(function() {
+            $('.stats').hide();
+            $.getJSON("{{URL::to('/')}}/players", function(data){
                 $.each(data, function(index, text) {
                     $("#player").append(
                         $("<option></option>").val(text.id).html(text.name)
                     );
                 });
-        });
-        var allScoresTable = $('#allScores').DataTable( {
+            });
+            var allScoresTable = $('#allScores').DataTable( {
                 "order": [[ 3, "desc" ]],
                 "bPaginate": false,
                 "bFilter": false,
@@ -143,32 +143,32 @@
                 ]
             });
 
-        $("#player").change(function (){
-            var url = "{{URL::to('/')}}/rounds/" + $("#player").val();
-            allScoresTable.ajax.url(url).load();
+            $("#player").change(function (){
+                var url = "{{URL::to('/')}}/rounds/" + $("#player").val();
+                allScoresTable.ajax.url(url).load();
 
-            $.getJSON("{{URL::to('/')}}/players/" + $("#player").val(), function(data){
-                $("#playerName").html(data.name);
-                if(data.handicap < 0){
-                    $("#handicap").html('+' + Math.abs(data.handicap));
-                } else {
-                    $("#handicap").html(data.handicap);
-                }
-                $('.stats').show("slow");
+                $.getJSON("{{URL::to('/')}}/players/" + $("#player").val(), function(data){
+                    $("#playerName").html(data.name);
+                    if(data.handicap < 0){
+                        $("#handicap").html('+' + Math.abs(data.handicap));
+                    } else {
+                        $("#handicap").html(data.handicap);
+                    }
+                    $('.stats').show("slow");
+                });
+
+                $.getJSON("{{URL::to('/')}}/playerStatistics/scoringAverage/" + $("#player").val() + "/" + '2017', function(data){
+                    $("#average").html(data);
+                    $('.stats').show("slow");
+                });
+
+                $.getJSON("{{URL::to('/')}}/playerStatistics/birdies/" + $("#player").val() + '/2017', function(data){
+                    $("#birdies").html(data);
+                    $('.stats').show("slow");
+                });
+
             });
-
-            $.getJSON("{{URL::to('/')}}/playerStatistics/scoringAverage/" + $("#player").val() + "/" + '2016', function(data){
-                $("#average").html(data);
-                $('.stats').show("slow");
-            });
-
-            $.getJSON("{{URL::to('/')}}/playerStatistics/birdies/" + $("#player").val() + '/2016', function(data){
-                $("#birdies").html(data);
-                $('.stats').show("slow");
-            });
-
         });
-    });
     </script>
 @stop
 

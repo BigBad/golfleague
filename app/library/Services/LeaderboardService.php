@@ -37,9 +37,9 @@ class LeaderboardService
 			$playerScore = $filteredHolecores->sum('score');
 
 			$player = [
-				"name" => $round->player->name,
-				"score" => $playerScore - $par,
-			];
+                "name" => $round->player->name,
+                "score" => $playerScore - $par,
+            ];
 			array_push($leaderboard, $player);
 		}
 		$name = array();

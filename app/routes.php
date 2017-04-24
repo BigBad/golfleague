@@ -14,7 +14,7 @@ Route::get('/', function()
 {
     return Redirect::to('schedule');
 });
-/*
+
 Route::get('/test', function()
 {
 
@@ -25,10 +25,10 @@ Route::get('/test', function()
        $handicap = new \GolfLeague\Handicap($player);
        $player->handicap = $handicap->calculate();
        echo $player->name . " " . $player->handicap . "<br>";
-       //$player->save();
+       $player->save();
    }
 });
-*/
+
 
 Route::get('enterscore', 'ScoreController@view');
 Route::post('storescore', 'ScoreController@store');
@@ -61,7 +61,10 @@ Route::resource('schedule', 'ScheduleController');
 Route::resource('leaderboard', 'LeaderboardController');
 Route::resource('tournament', 'TournamentController');
 Route::resource('tournamentLeaderboard', 'TournamentLeaderboardController');
+Route::resource('teammatches','TeamMatchesController');
+Route::get('teammatches/points/{year}','TeamMatchesController@getPointsByYear');
 Route::resource('team', 'TeamController');
+Route::get('team/year/{year}', 'TeamController@findByYear');
 
 // Authentication required for these routes
 Route::get('administration', array('before' => 'auth', 'uses' => 'AdministrationController@index'));
@@ -87,9 +90,6 @@ Route::resource('double', 'DoubleController');
 Route::resource('other', 'OtherController');
 Route::resource('years', 'YearsController');
 Route::resource('statistics/course', 'CourseStatisticsController');
-
-
-Route::get('test/{matchId}', 'TestController@show');
 
 //Player Statistics
 Route::get('playerStatistics/scoringAverage/{playerId}', 'PlayerStatisticsController@scoringAverage');

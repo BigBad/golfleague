@@ -24,10 +24,14 @@
                 <div class="box-body">
                     <form role="form" id="matchForm">
                         <div class="row">
-                             <div class="form-group col-xs-6">
+                            <div class="form-group col-xs-6">
                                 <label for="year">Year</label>
                                 <select class="form-control" name="year" class="ui-corner-all" id="year">
                                     <option></option>
+                                    <option value="2017">2017</option>
+                                    <option value="2016">2016</option>
+                                    <option value="2015">2015</option>
+
                                 </select>
                             </div>
                         </div>
@@ -46,11 +50,11 @@
                 <div class="box-body no-padding">
                     <table id="topGrossTable" class="display table table-bordered table-hover DataTable" cellspacing="0" width="100%">
                         <thead>
-                            <tr>
-                                <th>Player</th>
-                                <th>Score</th>
-                                <th>Course</th>
-                            </tr>
+                        <tr>
+                            <th>Player</th>
+                            <th>Score</th>
+                            <th>Course</th>
+                        </tr>
                         </thead>
                     </table>
                 </div>{{-- end .box-body --}}
@@ -64,11 +68,11 @@
                 <div class="box-body no-padding">
                     <table id="top5NetTable" class="display table table-bordered table-hover DataTable" cellspacing="0" width="100%">
                         <thead>
-                            <tr>
-                                <th>Player</th>
-                                <th>Score</th>
-                                <th>Course</th>
-                            </tr>
+                        <tr>
+                            <th>Player</th>
+                            <th>Score</th>
+                            <th>Course</th>
+                        </tr>
                         </thead>
                     </table>
                 </div>{{-- end .box-body --}}
@@ -85,11 +89,11 @@
                 <div class="box-body no-padding">
                     <table id="scoringAverage" class="display table table-bordered table-hover DataTable" cellspacing="0" width="100%">
                         <thead>
-                            <tr>
-                                <th>Player</th>
-                                <th>Rounds</th>
-                                <th>Average</th>
-                            </tr>
+                        <tr>
+                            <th>Player</th>
+                            <th>Rounds</th>
+                            <th>Average</th>
+                        </tr>
                         </thead>
                     </table>
                 </div>{{-- end .box-body --}}
@@ -103,10 +107,10 @@
                 <div class="box-body no-padding">
                     <table id="mostSkins" class="display table table-bordered table-hover DataTable" cellspacing="0" width="100%">
                         <thead>
-                            <tr>
-                                <th>Player</th>
-                                <th>Skins</th>
-                            </tr>
+                        <tr>
+                            <th>Player</th>
+                            <th>Skins</th>
+                        </tr>
                         </thead>
                     </table>
                 </div>{{-- end .box-body --}}
@@ -123,10 +127,10 @@
                 <div class="box-body no-padding">
                     <table id="mostBirdies" class="display table table-bordered table-hover DataTable" cellspacing="0" width="100%">
                         <thead>
-                            <tr>
-                                <th>Player</th>
-                                <th>Birds</th>
-                            </tr>
+                        <tr>
+                            <th>Player</th>
+                            <th>Birds</th>
+                        </tr>
                         </thead>
                     </table>
                 </div>{{-- end .box-body --}}
@@ -140,10 +144,10 @@
                 <div class="box-body no-padding">
                     <table id="mostPars" class="display table table-bordered table-hover DataTable" cellspacing="0" width="100%">
                         <thead>
-                            <tr>
-                                <th>Player</th>
-                                <th>Pars</th>
-                            </tr>
+                        <tr>
+                            <th>Player</th>
+                            <th>Pars</th>
+                        </tr>
                         </thead>
                     </table>
                 </div>{{-- end .box-body --}}
@@ -151,7 +155,7 @@
         </div>{{-- end .col-md-5 --}}
     </div>{{-- end .row --}}
 
-        <div class="row">
+    <div class="row">
         <div class="col-md-5">
             <div class="box box-success">
                 <div class="box-header">
@@ -160,10 +164,10 @@
                 <div class="box-body no-padding">
                     <table id="bogeys" class="display table table-bordered table-hover DataTable" cellspacing="0" width="100%">
                         <thead>
-                            <tr>
-                                <th>Player</th>
-                                <th>Bogeys</th>
-                            </tr>
+                        <tr>
+                            <th>Player</th>
+                            <th>Bogeys</th>
+                        </tr>
                         </thead>
                     </table>
                 </div>{{-- end .box-body --}}
@@ -177,10 +181,10 @@
                 <div class="box-body no-padding">
                     <table id="doubles" class="display table table-bordered table-hover DataTable" cellspacing="0" width="100%">
                         <thead>
-                            <tr>
-                                <th>Player</th>
-                                <th>Double Bogeys</th>
-                            </tr>
+                        <tr>
+                            <th>Player</th>
+                            <th>Double Bogeys</th>
+                        </tr>
                         </thead>
                     </table>
                 </div>{{-- end .box-body --}}
@@ -197,10 +201,10 @@
                 <div class="box-body no-padding">
                     <table id="others" class="display table table-bordered table-hover DataTable" cellspacing="0" width="100%">
                         <thead>
-                            <tr>
-                                <th>Player</th>
-                                <th>Others</th>
-                            </tr>
+                        <tr>
+                            <th>Player</th>
+                            <th>Others</th>
+                        </tr>
                         </thead>
                     </table>
                 </div>{{-- end .box-body --}}
@@ -231,185 +235,177 @@
 @stop
 
 @section('page-js')
-<script>
-    $(document).ready(function() {
+    <script>
+        $(document).ready(function() {
+            $("#year").change(function (){
+                var year = $("#year").val();
+                if(year != '') {
+                    $('#mostSkins').DataTable({
+                        "order": [[1, "desc"]],
+                        "bPaginate": false,
+                        "bFilter": false,
+                        "bInfo": false,
+                        "scrollY": "205px",
+                        "scrollX": false,
+                        "scrollCollapse": true,
+                        "paging": false,
+                        "ajax": "{{URL::to('/')}}/skins/" + year,
+                        "columns": [
+                            {"data": "name"},
+                            {"data": "skins"}
+                        ]
+                    });
 
-        $.getJSON("{{URL::to('/')}}/years", function(result) {
-            var options = $("#year");
-            $.each(result, function(key, value) {
-                options.append($("<option />").val(value).text(value));
+                    $('#topGrossTable').DataTable({
+                        "order": [[1, "asc"]],
+                        "bPaginate": false,
+                        "bFilter": false,
+                        "bInfo": false,
+                        "scrollY": "205px",
+                        "scrollX": false,
+                        "scrollCollapse": true,
+                        "paging": false,
+                        "ajax": "{{URL::to('/')}}/gross/" + year,
+                        "columns": [
+                            {"data": "player.name"},
+                            {"data": "score"},
+                            {"data": "course.name"},
+                        ]
+                    });
+
+                    $('#scoringAverage').DataTable({
+                        "order": [[2, "asc"]],
+                        "bPaginate": false,
+                        "bFilter": false,
+                        "bInfo": false,
+                        "scrollY": "205px",
+                        "scrollX": false,
+                        "scrollCollapse": true,
+                        "paging": false,
+                        "ajax": "{{URL::to('/')}}/scoringaverage/" + year,
+                        "columns": [
+                            {"data": "name"},
+                            {"data": "rounds"},
+                            {"data": "average"},
+                        ]
+                    });
+
+                    $('#top5NetTable').DataTable({
+                        "order": [[1, "asc"]],
+                        "bPaginate": false,
+                        "bFilter": false,
+                        "bInfo": false,
+                        "scrollY": "205px",
+                        "scrollX": false,
+                        "scrollCollapse": true,
+                        "paging": false,
+                        "ajax": "{{URL::to('/')}}/net/" + year,
+                        "columns": [
+                            {"data": "player.name"},
+                            {"data": "score"},
+                            {"data": "match.course.name"},
+                        ]
+                    });
+
+                    $('#mostBirdies').DataTable({
+                        "order": [[1, "desc"]],
+                        "bPaginate": false,
+                        "bFilter": false,
+                        "bInfo": false,
+                        "scrollY": "205px",
+                        "scrollX": false,
+                        "scrollCollapse": true,
+                        "paging": false,
+                        "ajax": "{{URL::to('/')}}/bird/" + year,
+                        "columns": [
+                            {"data": "name"},
+                            {"data": "birds"}
+                        ]
+                    });
+
+                    $('#mostPars').DataTable({
+                        "order": [[1, "desc"]],
+                        "bPaginate": false,
+                        "bFilter": false,
+                        "bInfo": false,
+                        "scrollY": "205px",
+                        "scrollX": false,
+                        "scrollCollapse": true,
+                        "paging": false,
+                        "ajax": "{{URL::to('/')}}/par/" + year,
+                        "columns": [
+                            {"data": "name"},
+                            {"data": "pars"}
+                        ]
+                    });
+
+                    $('#bogeys').DataTable({
+                        "order": [[1, "desc"]],
+                        "bPaginate": false,
+                        "bFilter": false,
+                        "bInfo": false,
+                        "scrollY": "205px",
+                        "scrollX": false,
+                        "scrollCollapse": true,
+                        "paging": false,
+                        "ajax": "{{URL::to('/')}}/bogey/" + year,
+                        "columns": [
+                            {"data": "name"},
+                            {"data": "bogeys"}
+                        ]
+                    });
+
+                    $('#doubles').DataTable({
+                        "order": [[1, "desc"]],
+                        "bPaginate": false,
+                        "bFilter": false,
+                        "bInfo": false,
+                        "scrollY": "205px",
+                        "scrollX": false,
+                        "scrollCollapse": true,
+                        "paging": false,
+                        "ajax": "{{URL::to('/')}}/double/" + year,
+                        "columns": [
+                            {"data": "name"},
+                            {"data": "doubles"}
+                        ]
+                    });
+
+                    $('#others').DataTable({
+                        "order": [[1, "desc"]],
+                        "bPaginate": false,
+                        "bFilter": false,
+                        "bInfo": false,
+                        "scrollY": "205px",
+                        "scrollX": false,
+                        "scrollCollapse": true,
+                        "paging": false,
+                        "ajax": "{{URL::to('/')}}/other/" + year,
+                        "columns": [
+                            {"data": "name"},
+                            {"data": "others"}
+                        ]
+                    });
+                    $('#eagles').DataTable({
+                        "order": [[1, "desc"]],
+                        "bPaginate": false,
+                        "bFilter": false,
+                        "bInfo": false,
+                        "scrollY": "205px",
+                        "scrollX": false,
+                        "scrollCollapse": true,
+                        "paging": false,
+                        "ajax": "{{URL::to('/')}}/eagle/" + year,
+                        "columns": [
+                            {"data": "name"},
+                            {"data": "eagles"}
+                        ]
+                    }).css('height', '700px');
+                }
             });
         });
 
-        $("#year").change(function (){
-            var year = $("#year").val();
-            if(year != '') {
-                $('#mostSkins').DataTable({
-                    "order": [[1, "desc"]],
-                    "bPaginate": false,
-                    "bFilter": false,
-                    "bInfo": false,
-                    "scrollY": "205px",
-                    "scrollX": false,
-                    "scrollCollapse": true,
-                    "paging": false,
-                    "ajax": "{{URL::to('/')}}/skins/" + year,
-                    "columns": [
-                        {"data": "name"},
-                        {"data": "skins"}
-                    ]
-                });
-
-                $('#topGrossTable').DataTable({
-                    "order": [[1, "asc"]],
-                    "bPaginate": false,
-                    "bFilter": false,
-                    "bInfo": false,
-                    "scrollY": "205px",
-                    "scrollX": false,
-                    "scrollCollapse": true,
-                    "paging": false,
-                    "ajax": "{{URL::to('/')}}/gross/" + year,
-                    "columns": [
-                        {"data": "player.name"},
-                        {"data": "score"},
-                        {"data": "course.name"},
-                    ]
-                });
-
-                $('#scoringAverage').DataTable({
-                    "order": [[2, "asc"]],
-                    "bPaginate": false,
-                    "bFilter": false,
-                    "bInfo": false,
-                    "scrollY": "205px",
-                    "scrollX": false,
-                    "scrollCollapse": true,
-                    "paging": false,
-                    "ajax": "{{URL::to('/')}}/scoringaverage/" + year,
-                    "columns": [
-                        {"data": "name"},
-                        {"data": "rounds"},
-                        {"data": "average"},
-                    ]
-                });
-
-                $('#top5NetTable').DataTable({
-                    "order": [[1, "asc"]],
-                    "bPaginate": false,
-                    "bFilter": false,
-                    "bInfo": false,
-                    "scrollY": "205px",
-                    "scrollX": false,
-                    "scrollCollapse": true,
-                    "paging": false,
-                    "ajax": "{{URL::to('/')}}/net/" + year,
-                    "columns": [
-                        {"data": "player.name"},
-                        {"data": "score"},
-                        {"data": "match.course.name"},
-                    ]
-                });
-
-                $('#mostBirdies').DataTable({
-                    "order": [[1, "desc"]],
-                    "bPaginate": false,
-                    "bFilter": false,
-                    "bInfo": false,
-                    "scrollY": "205px",
-                    "scrollX": false,
-                    "scrollCollapse": true,
-                    "paging": false,
-                    "ajax": "{{URL::to('/')}}/bird/" + year,
-                    "columns": [
-                        {"data": "name"},
-                        {"data": "birds"}
-                    ]
-                });
-
-                $('#mostPars').DataTable({
-                    "order": [[1, "desc"]],
-                    "bPaginate": false,
-                    "bFilter": false,
-                    "bInfo": false,
-                    "scrollY": "205px",
-                    "scrollX": false,
-                    "scrollCollapse": true,
-                    "paging": false,
-                    "ajax": "{{URL::to('/')}}/par/" + year,
-                    "columns": [
-                        {"data": "name"},
-                        {"data": "pars"}
-                    ]
-                });
-
-                $('#bogeys').DataTable({
-                    "order": [[1, "desc"]],
-                    "bPaginate": false,
-                    "bFilter": false,
-                    "bInfo": false,
-                    "scrollY": "205px",
-                    "scrollX": false,
-                    "scrollCollapse": true,
-                    "paging": false,
-                    "ajax": "{{URL::to('/')}}/bogey/" + year,
-                    "columns": [
-                        {"data": "name"},
-                        {"data": "bogeys"}
-                    ]
-                });
-
-                $('#doubles').DataTable({
-                    "order": [[1, "desc"]],
-                    "bPaginate": false,
-                    "bFilter": false,
-                    "bInfo": false,
-                    "scrollY": "205px",
-                    "scrollX": false,
-                    "scrollCollapse": true,
-                    "paging": false,
-                    "ajax": "{{URL::to('/')}}/double/" + year,
-                    "columns": [
-                        {"data": "name"},
-                        {"data": "doubles"}
-                    ]
-                });
-
-                $('#others').DataTable({
-                    "order": [[1, "desc"]],
-                    "bPaginate": false,
-                    "bFilter": false,
-                    "bInfo": false,
-                    "scrollY": "205px",
-                    "scrollX": false,
-                    "scrollCollapse": true,
-                    "paging": false,
-                    "ajax": "{{URL::to('/')}}/other/" + year,
-                    "columns": [
-                        {"data": "name"},
-                        {"data": "others"}
-                    ]
-                });
-                $('#eagles').DataTable({
-                    "order": [[1, "desc"]],
-                    "bPaginate": false,
-                    "bFilter": false,
-                    "bInfo": false,
-                    "scrollY": "205px",
-                    "scrollX": false,
-                    "scrollCollapse": true,
-                    "paging": false,
-                    "ajax": "{{URL::to('/')}}/eagle/" + year,
-                    "columns": [
-                        {"data": "name"},
-                        {"data": "eagles"}
-                    ]
-                }).css('height', '700px');
-            }
-        });
-    });
-
-</script>
+    </script>
 @stop
 
 @section('onload')

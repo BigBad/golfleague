@@ -12,6 +12,7 @@ use \Netwinner;
 use \Skin;
 use GolfLeague\Services\CarryOver;
 use Illuminate\Events\Dispatcher;
+use \Teammatch;
 
 /**
  * Our MatchService, containing all useful methods for business logic around Matches
@@ -33,6 +34,7 @@ class MatchService
                                 Player $player,
                                 Match $match,
                                 CtpRepository $ctp,
+                                Teammatch $teammatch,
                                 Dispatcher $events)
     {
         $this->matchRoundRepo = $matchRoundRepo;
@@ -41,6 +43,7 @@ class MatchService
         $this->player = $player;
         $this->match = $match;
         $this->ctp = $ctp;
+        $this->teammatch = $teammatch;
         $this->events = $events;
     }
 
@@ -52,7 +55,6 @@ class MatchService
      */
     public function create($matchdata)
     {
-
         $this->prizeMoney->setPurse($matchdata['purse']);
 
         $matchdata['purse'] = number_format($matchdata['purse'], 2);
@@ -95,7 +97,71 @@ class MatchService
 
         $matchid = $this->matchRepo->create($matchdata);
         $matchdata['match_id'] = $matchid;
-        $this->events->fire('match.create', array($matchdata));
+        $this->events->fire('match.create', array($matchdata));  // MatchHandler and teamMatchHandler are listening...
+
+        // Run for team Matches
+        if($matchdata['matchType'] === 'team' || $matchdata['matchType'] === 'both'){
+
+            foreach ($matchdata['teamMatchUp1'] as $teamKey => $team){
+                $matchUp1[] = $this->search($matchdata['player'], 'team', $team);
+            }
+
+            //Save matchUp 1
+            $match1['match_id'] = $matchdata['match_id'];  // This is generated below and passed to listener
+            $match1['team_id'] = $matchUp1[0][0]['team'];
+            $match1['player1'] = $matchUp1[0][0]['player_id'];
+            $match1['player2'] = $matchUp1[0][1]['player_id'];
+            $match1['opponent'] = $matchUp1[1][0]['team'];
+            $this->teammatch->create($match1); //save to match table
+
+            $match1['match_id'] = $matchdata['match_id'];  // This is generated below and passed to listener
+            $match1['team_id'] = $matchUp1[1][0]['team'];
+            $match1['player1'] = $matchUp1[1][0]['player_id'];
+            $match1['player2'] = $matchUp1[1][1]['player_id'];
+            $match1['opponent'] = $matchUp1[0][0]['team'];
+            $this->teammatch->create($match1); //save to match table
+
+
+            foreach ($matchdata['teamMatchUp2'] as $teamKey => $team){
+                $matchUp2[] = $this->search($matchdata['player'], 'team', $team);
+            }
+
+            //Save matchUp 2
+            $match2['match_id'] = $matchdata['match_id'];  // This is generated below and passed to listener
+            $match2['team_id'] = $matchUp2[0][0]['team'];
+            $match2['player1'] = $matchUp2[0][0]['player_id'];
+            $match2['player2'] = $matchUp2[0][1]['player_id'];
+            $match2['opponent'] = $matchUp2[1][0]['team'];
+            $this->teammatch->create($match2); //save to match table
+
+            $match2['match_id'] = $matchdata['match_id'];  // This is generated below and passed to listener
+            $match2['team_id'] = $matchUp2[1][0]['team'];
+            $match2['player1'] = $matchUp2[1][0]['player_id'];
+            $match2['player2'] = $matchUp2[1][1]['player_id'];
+            $match2['opponent'] = $matchUp2[0][0]['team'];
+            $this->teammatch->create($match2); //save to match table
+
+
+            foreach ($matchdata['teamMatchUp3'] as $teamKey => $team){
+                $matchUp3[] = $this->search($matchdata['player'], 'team', $team);
+            }
+
+            //Save matchUp 3
+            $match3['match_id'] = $matchdata['match_id'];  // This is generated below and passed to listener
+            $match3['team_id'] = $matchUp3[0][0]['team'];
+            $match3['player1'] = $matchUp3[0][0]['player_id'];
+            $match3['player2'] = $matchUp3[0][1]['player_id'];
+            $match3['opponent'] = $matchUp3[1][0]['team'];
+            $this->teammatch->create($match3); //save to match table
+
+            $match3['match_id'] = $matchdata['match_id'];  // This is generated below and passed to listener
+            $match3['team_id'] = $matchUp3[1][0]['team'];
+            $match3['player1'] = $matchUp3[1][0]['player_id'];
+            $match3['player2'] = $matchUp3[1][1]['player_id'];
+            $match3['opponent'] = $matchUp3[0][0]['team'];
+            $this->teammatch->create($match3); //save to match table
+
+        }
     }
 
     public function finalize($matchdata)
@@ -286,5 +352,21 @@ class MatchService
     {
         $matchdata =  $this->matchRepo->get($matchid);
         return $matchdata;
+    }
+
+
+
+    private function search($array, $key, $value)
+    {
+        $results = array();
+        if (is_array($array)) {
+            if (isset($array[$key]) && $array[$key] == $value) {
+                $results[] = $array;
+            }
+            foreach ($array as $subarray) {
+                $results = array_merge($results, $this->search($subarray, $key, $value));
+            }
+        }
+        return $results;
     }
 }

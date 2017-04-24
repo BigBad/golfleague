@@ -4,6 +4,8 @@ use GolfLeague\Storage\Team\TeamRepository as TeamRepo;
 
 class TeamController extends \BaseController {
 
+    private $team;
+
     public function __construct(TeamRepo $team)
     {
         $this->team = $team;
@@ -40,6 +42,15 @@ class TeamController extends \BaseController {
 		//
 	}
 
+    /**
+     * Display a listing of the teams by year .
+     *
+     * @return Response
+     */
+	public function findByYear($year)
+    {
+        return $this->team->findByYear($year);
+    }
 
 	/**
 	 * Display the specified resource.
