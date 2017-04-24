@@ -107,6 +107,22 @@ class TeamMatchesController extends \BaseController {
             $team1Points = $this->calculatePoints($team1Scores, $team2Scores);
             $team2Points = $this->calculatePoints($team2Scores, $team1Scores);
 
+            // Bonus point logic
+            // Occurs after 9th hole score is added to both teams
+
+            if($team1Scores[8] != null && $team2Scores[8] != null){
+                if($team1Points > $team2Points){
+                    $team1Points = $team1Points + 1;
+                }
+                if($team2Points > $team1Points){
+                    $team2Points = $team2Points + 1;
+                }
+                if($team1Points == $team2Points){
+                    $team1Points = $team1Points + .5;
+                    $team2Points = $team2Points + .5;
+                }
+            }
+
             //Save Points in Teammatches
             Teammatch::where('match_id', '=', $id)->where('team_id', '=', $team1Id)->update(array('pointsWon' => $team1Points));
             Teammatch::where('match_id', '=', $id)->where('team_id', '=', $team2Id)->update(array('pointsWon' => $team2Points));
@@ -239,18 +255,9 @@ class TeamMatchesController extends \BaseController {
                     $points = $points + .5;
                 }
             }
-            $teamTotalPoints = $teamTotalPoints + $points;
-            $opponentTotalPoints = $opponentTotalPoints + $points;
+
         }
-        // Bonus point logic
-        if($team[8] != null && $opponent[8] != null){
-            if($teamTotalPoints > $opponentTotalPoints){
-                $points = $points + 1;
-            }
-            if($teamTotalPoints == $opponentTotalPoints){
-                $points = $points + .5;
-            }
-        }
+
         return $points;
     }
 
