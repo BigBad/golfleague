@@ -86,9 +86,28 @@ class TeamMatchesController extends \BaseController {
             }
 
 
-// Separate two teams
-        $team1 = array(array_shift ($matchUp));
-        $team1Id = $team1[0]['team'];
+        // Separate two teams
+
+        foreach($matchUp as $key=>$item){
+            $teamIds[$key] = $item['team'];
+        }
+        sort($teamIds);
+        $teamIds = array_slice($teamIds, 1, -1);
+        $team1Id = $teamIds[0];
+        $team2Id = $teamIds[1];
+
+        $team1 = array();
+        $team2 = array();
+
+        foreach($matchUp as $key=>$match){
+            if($match['team'] ==$team1Id ){
+                $team1[] = $matchUp[$key];
+            } else {
+                $team2[] = $matchUp[$key];
+            }
+        }
+
+
         $team1Name = Team::select('name')->where('id', '=', $team1Id)->get()->toArray();
         foreach($matchUp as $key=>$match){
             if($match['team'] == $team1[0]['team']){
@@ -96,8 +115,9 @@ class TeamMatchesController extends \BaseController {
                 unset($matchUp[$key]);
             }
         }
+
         $team2 = $matchUp;
-        $team2Id = $team2[1]['team'];
+
         $team2Name = Team::select('name')->where('id', '=', $team2Id)->get()->toArray();
 
             $holesData = Hole::select('handicap')->where('course_id', '=', $team1[0]['course'])->get();
