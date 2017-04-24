@@ -85,21 +85,20 @@ class TeamMatchesController extends \BaseController {
                 $matchUp[$key]['matchHandicap'] = $match['matchHandicap'] + $handicapChange;
             }
 
-        // Separate two teams
-            $team1 = array(array_shift ($matchUp));
-            $team1Id = $team1[0]['team'];
-            $team1Name = Team::select('name')->where('id', '=', $team1Id)->get()->toArray();
-            foreach($matchUp as $key=>$match){
-                if($match['team'] == $team1[0]['team']){
-                    $team1[] = $match;
-                    unset($matchUp[$key]);
-                }
-            }
-            $team2 = $matchUp;
 
-            $team2Id = $team2[1]['team'];
-            
-            $team2Name = Team::select('name')->where('id', '=', $team2Id)->get()->toArray();
+// Separate two teams
+        $team1 = array(array_shift ($matchUp));
+        $team1Id = $team1[0]['team'];
+        $team1Name = Team::select('name')->where('id', '=', $team1Id)->get()->toArray();
+        foreach($matchUp as $key=>$match){
+            if($match['team'] == $team1[0]['team']){
+                $team1[] = $match;
+                unset($matchUp[$key]);
+            }
+        }
+        $team2 = $matchUp;
+        $team2Id = $team2[1]['team'];
+        $team2Name = Team::select('name')->where('id', '=', $team2Id)->get()->toArray();
 
             $holesData = Hole::select('handicap')->where('course_id', '=', $team1[0]['course'])->get();
 
