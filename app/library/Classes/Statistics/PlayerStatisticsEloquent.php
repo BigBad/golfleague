@@ -32,9 +32,13 @@ class PlayerStatisticsEloquent implements PlayerStatistics
     }
     public function scoringAverageByYear($playerId, $year)
     {
-        $today = Carbon::today()->toDateString();
+        $date1 = $year . '-01-01';
+        $date2 = $year . '-12-31';
+
+
         $rounds = Round::where('player_id', '=', $playerId)
-            ->where('date', '<', $today)
+            ->where('date', '>=', $date1)
+            ->where('date', '<=', $date2)
             ->get();
         $scores = $rounds->map(function($round)
         {
