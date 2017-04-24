@@ -228,8 +228,8 @@ class TeamMatchesController extends \BaseController {
     private function calculatePoints($team, $opponent)
     {
         $points = 0;
-        $teamTotalScore = 0;
-        $opponentTotalScore = 0;
+        $teamTotalPoints = 0;
+        $opponentTotalPoints = 0;
         foreach ($team as $key=>$score){
             if($score != null){
                 if($score < $opponent[$key]){
@@ -239,15 +239,15 @@ class TeamMatchesController extends \BaseController {
                     $points = $points + .5;
                 }
             }
-            $teamTotalScore = $teamTotalScore + $score;
-            $opponentTotalScore = $opponentTotalScore + $score;
+            $teamTotalPoints = $teamTotalPoints + $points;
+            $opponentTotalPoints = $opponentTotalPoints + $points;
         }
         // Bonus point logic
         if($team[8] != null && $opponent[8] != null){
-            if($teamTotalScore > $opponentTotalScore){
+            if($teamTotalPoints > $opponentTotalPoints){
                 $points = $points + 1;
             }
-            if($teamTotalScore == $opponentTotalScore){
+            if($teamTotalPoints == $opponentTotalPoints){
                 $points = $points + .5;
             }
         }
