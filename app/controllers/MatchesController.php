@@ -67,12 +67,15 @@ class MatchesController extends \BaseController {
 	 */
 	public function edit($id)
 	{
+
         $enterView = 'EnterTeamMatch';
 	    $data = $this->match->get($id);
         $view = View::make($enterView, $data);
         return $view;
-		// Logic to allow editable for day of match only
+
+	    // Logic to allow editable for day of match only
 		$today = Carbon::today();
+
         $teamMatchDate = new Carbon('first day of January 2017');
 		$matchDate = new Carbon($data['date']);
 
