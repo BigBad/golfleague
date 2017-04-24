@@ -96,8 +96,9 @@ class TeamMatchesController extends \BaseController {
                 }
             }
             $team2 = $matchUp;
-            $team2Id = $team2[0]['team'];
 
+            $team2Id = $team2[1]['team'];
+            
             $team2Name = Team::select('name')->where('id', '=', $team2Id)->get()->toArray();
 
             $holesData = Hole::select('handicap')->where('course_id', '=', $team1[0]['course'])->get();
