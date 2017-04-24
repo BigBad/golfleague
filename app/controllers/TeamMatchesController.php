@@ -102,7 +102,6 @@ class TeamMatchesController extends \BaseController {
             $holesData = Hole::select('handicap')->where('course_id', '=', $team1[0]['course'])->get();
 
             $team1Scores = $this->getTeamNetScore($team1, $holesData);
-            //return $team1Scores;
             $team2Scores = $this->getTeamNetScore($team2, $holesData);
 
             $team1Points = $this->calculatePoints($team1Scores, $team2Scores);
@@ -248,7 +247,7 @@ class TeamMatchesController extends \BaseController {
             if($teamTotalScore > $opponentTotalScore){
                 $points = $points + 1;
             }
-            if($teamTotalScore = $opponentTotalScore){
+            if($teamTotalScore == $opponentTotalScore){
                 $points = $points + .5;
             }
         }
