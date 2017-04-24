@@ -246,6 +246,8 @@
                         "bPaginate": true,
                         "bFilter": false,
                         "bInfo": false,
+                        "scrollY": "205px",
+                        "scrollCollapse": true,
                         "ajax": "{{URL::to('/')}}/skins/" + year,
                         "columns": [
                             {"data": "name"},
@@ -259,6 +261,8 @@
                         "bPaginate": true,
                         "bFilter": false,
                         "bInfo": false,
+                        "scrollY": "205px",
+                        "scrollCollapse": true,
                         "ajax": "{{URL::to('/')}}/gross/" + year,
                         "columns": [
                             {"data": "player.name"},
@@ -273,6 +277,8 @@
                         "bPaginate": true,
                         "bFilter": false,
                         "bInfo": false,
+                        "scrollY": "205px",
+                        "scrollCollapse": true,
                         "ajax": "{{URL::to('/')}}/scoringaverage/" + year,
                         "columns": [
                             {"data": "name"},
@@ -287,6 +293,8 @@
                         "bPaginate": true,
                         "bFilter": false,
                         "bInfo": false,
+                        "scrollY": "205px",
+                        "scrollCollapse": true,
                         "ajax": "{{URL::to('/')}}/net/" + year,
                         "columns": [
                             {"data": "player.name"},
@@ -301,6 +309,8 @@
                         "bPaginate": true,
                         "bFilter": false,
                         "bInfo": false,
+                        "scrollY": "205px",
+                        "scrollCollapse": true,
                         "ajax": "{{URL::to('/')}}/bird/" + year,
                         "columns": [
                             {"data": "name"},
@@ -314,6 +324,8 @@
                         "bPaginate": true,
                         "bFilter": false,
                         "bInfo": false,
+                        "scrollY": "205px",
+                        "scrollCollapse": true,
                         "ajax": "{{URL::to('/')}}/par/" + year,
                         "columns": [
                             {"data": "name"},
@@ -327,6 +339,8 @@
                         "bPaginate": true,
                         "bFilter": false,
                         "bInfo": false,
+                        "scrollY": "205px",
+                        "scrollCollapse": true,
                         "ajax": "{{URL::to('/')}}/bogey/" + year,
                         "columns": [
                             {"data": "name"},
@@ -340,6 +354,8 @@
                         "bPaginate": true,
                         "bFilter": false,
                         "bInfo": false,
+                        "scrollY": "205px",
+                        "scrollCollapse": true,
                         "ajax": "{{URL::to('/')}}/double/" + year,
                         "columns": [
                             {"data": "name"},
@@ -353,6 +369,8 @@
                         "bPaginate": true,
                         "bFilter": false,
                         "bInfo": false,
+                        "scrollY": "205px",
+                        "scrollCollapse": true,
                         "ajax": "{{URL::to('/')}}/other/" + year,
                         "columns": [
                             {"data": "name"},
@@ -366,6 +384,8 @@
                         "bPaginate": true,
                         "bFilter": false,
                         "bInfo": false,
+                        "scrollY": "205px",
+                        "scrollCollapse": true,
                         "ajax": "{{URL::to('/')}}/eagle/" + year,
                         "columns": [
                             {"data": "name"},
