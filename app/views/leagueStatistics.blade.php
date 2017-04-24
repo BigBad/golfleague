@@ -242,13 +242,10 @@
                 if(year != '') {
                     $('#mostSkins').DataTable({
                         "order": [[1, "desc"]],
-                        "bPaginate": false,
+                        "bDestroy": true,
+                        "bPaginate": true,
                         "bFilter": false,
                         "bInfo": false,
-                        "scrollY": "205px",
-                        "scrollX": false,
-                        "scrollCollapse": true,
-                        "paging": false,
                         "ajax": "{{URL::to('/')}}/skins/" + year,
                         "columns": [
                             {"data": "name"},
@@ -258,13 +255,10 @@
 
                     $('#topGrossTable').DataTable({
                         "order": [[1, "asc"]],
-                        "bPaginate": false,
+                        "bDestroy": true,
+                        "bPaginate": true,
                         "bFilter": false,
                         "bInfo": false,
-                        "scrollY": "205px",
-                        "scrollX": false,
-                        "scrollCollapse": true,
-                        "paging": false,
                         "ajax": "{{URL::to('/')}}/gross/" + year,
                         "columns": [
                             {"data": "player.name"},
@@ -275,13 +269,10 @@
 
                     $('#scoringAverage').DataTable({
                         "order": [[2, "asc"]],
-                        "bPaginate": false,
+                        "bDestroy": true,
+                        "bPaginate": true,
                         "bFilter": false,
                         "bInfo": false,
-                        "scrollY": "205px",
-                        "scrollX": false,
-                        "scrollCollapse": true,
-                        "paging": false,
                         "ajax": "{{URL::to('/')}}/scoringaverage/" + year,
                         "columns": [
                             {"data": "name"},
@@ -292,13 +283,10 @@
 
                     $('#top5NetTable').DataTable({
                         "order": [[1, "asc"]],
-                        "bPaginate": false,
+                        "bDestroy": true,
+                        "bPaginate": true,
                         "bFilter": false,
                         "bInfo": false,
-                        "scrollY": "205px",
-                        "scrollX": false,
-                        "scrollCollapse": true,
-                        "paging": false,
                         "ajax": "{{URL::to('/')}}/net/" + year,
                         "columns": [
                             {"data": "player.name"},
@@ -309,13 +297,10 @@
 
                     $('#mostBirdies').DataTable({
                         "order": [[1, "desc"]],
-                        "bPaginate": false,
+                        "bDestroy": true,
+                        "bPaginate": true,
                         "bFilter": false,
                         "bInfo": false,
-                        "scrollY": "205px",
-                        "scrollX": false,
-                        "scrollCollapse": true,
-                        "paging": false,
                         "ajax": "{{URL::to('/')}}/bird/" + year,
                         "columns": [
                             {"data": "name"},
@@ -325,13 +310,10 @@
 
                     $('#mostPars').DataTable({
                         "order": [[1, "desc"]],
-                        "bPaginate": false,
+                        "bDestroy": true,
+                        "bPaginate": true,
                         "bFilter": false,
                         "bInfo": false,
-                        "scrollY": "205px",
-                        "scrollX": false,
-                        "scrollCollapse": true,
-                        "paging": false,
                         "ajax": "{{URL::to('/')}}/par/" + year,
                         "columns": [
                             {"data": "name"},
@@ -341,13 +323,10 @@
 
                     $('#bogeys').DataTable({
                         "order": [[1, "desc"]],
-                        "bPaginate": false,
+                        "bDestroy": true,
+                        "bPaginate": true,
                         "bFilter": false,
                         "bInfo": false,
-                        "scrollY": "205px",
-                        "scrollX": false,
-                        "scrollCollapse": true,
-                        "paging": false,
                         "ajax": "{{URL::to('/')}}/bogey/" + year,
                         "columns": [
                             {"data": "name"},
@@ -357,13 +336,10 @@
 
                     $('#doubles').DataTable({
                         "order": [[1, "desc"]],
-                        "bPaginate": false,
+                        "bDestroy": true,
+                        "bPaginate": true,
                         "bFilter": false,
                         "bInfo": false,
-                        "scrollY": "205px",
-                        "scrollX": false,
-                        "scrollCollapse": true,
-                        "paging": false,
                         "ajax": "{{URL::to('/')}}/double/" + year,
                         "columns": [
                             {"data": "name"},
@@ -373,28 +349,23 @@
 
                     $('#others').DataTable({
                         "order": [[1, "desc"]],
-                        "bPaginate": false,
+                        "bDestroy": true,
+                        "bPaginate": true,
                         "bFilter": false,
                         "bInfo": false,
-                        "scrollY": "205px",
-                        "scrollX": false,
-                        "scrollCollapse": true,
-                        "paging": false,
                         "ajax": "{{URL::to('/')}}/other/" + year,
                         "columns": [
                             {"data": "name"},
                             {"data": "others"}
                         ]
                     });
+
                     $('#eagles').DataTable({
                         "order": [[1, "desc"]],
-                        "bPaginate": false,
+                        "bDestroy": true,
+                        "bPaginate": true,
                         "bFilter": false,
                         "bInfo": false,
-                        "scrollY": "205px",
-                        "scrollX": false,
-                        "scrollCollapse": true,
-                        "paging": false,
                         "ajax": "{{URL::to('/')}}/eagle/" + year,
                         "columns": [
                             {"data": "name"},
