@@ -11,7 +11,7 @@ class Handicap
     private $player;
     private $roundsUsed;
 
-    public function __construct(Player $player, $roundsUsed = 20)
+    public function __construct(Player $player, $roundsUsed = 10)
     {
         $this->differentialArray = array(0,1,1,1,1,1,1,2,2,3,3,4,4,5,5,6,6,7,8,9,10);
         $this->player = $player;
