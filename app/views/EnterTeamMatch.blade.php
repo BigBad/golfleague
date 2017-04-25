@@ -11,6 +11,27 @@
             color: #00A65A;
         }
     </style>
+
+    <style type="text/css">
+        .ui-jqgrid .ui-jqgrid-htable th div {
+            height:auto;
+            height:50px; /* your own height in pixel */
+            overflow:hidden;
+            padding-right:4px;
+            padding-top:2px;
+            position:relative;
+            vertical-align:text-top;
+            white-space:normal !important;
+        }
+
+        .ui-jqgrid tr.jqgrow td { word-wrap: break-word; /* IE 5.5+ and CSS3 */ white-space: pre-wrap; /* CSS3 */ white-space: -moz-pre-wrap; /* Mozilla, since 1999 */ white-space: -pre-wrap; /* Opera 4-6 */ white-space: -o-pre-wrap; /* Opera 7 */ overflow: hidden; height: auto; vertical-align: middle; padding-top: 3px; padding-bottom: 3px; }
+        /*.ui-jqgrid tr.jqgrow td { white-space: normal !important; height: auto; vertical-align: text-top; padding-top: 2px; }*/
+        th.ui-th-column div {  word-wrap: break-word; /* IE 5.5+ and CSS3 */ white-space: pre-wrap; /* CSS3 */ white-space: -moz-pre-wrap; /* Mozilla, since 1999 */ white-space: -pre-wrap; /* Opera 4-6 */ white-space: -o-pre-wrap; /* Opera 7 */ overflow: hidden; height: auto; vertical-align: middle; padding-top: 3px; padding-bottom: 3px;  }
+
+
+
+
+    </style>
 @stop
 
 @section('page-header')
@@ -59,7 +80,7 @@
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive">
                     <table id="group1Grid"></table>
-                    <table id="group1Team" class="ui celled table" cellspacing="0" width="100%">
+                    <table id="group1Team" class="table table-borderded table-hover dataTable" cellspacing="0" width="100%">
                         <thead>
                         <tr>
                             <th>Team - Best Ball Net</th>
@@ -349,14 +370,14 @@
                 group1TeamTable.ajax.reload();
             });
             var groupId = get('group');
-            var scores = {'': '','1':'1','2':'2','3':'3','4':'4','5':'5','6':'6','7':'7','8':'8','9':'9','10':'10','11':'11','12':'12'};
+            var scores = {'': '','1':'1','2':'2','3':'3','4':'4','5':'5','6':'6','7':'7','8':'8','9':'9','10':'10'};
             for (i = 1; i < 4; i++) {
                 if (groupId == i) {
                     $("#group"+ i +"Grid").jqGrid({
                         url: '{{URL::to('/')}}/matchrounds/'+{{$id}} +'?group=' + i,
                         datatype: "json",
                         colModel: [
-                            { label: 'Hole <br /> <font color="blue">Par</font>', name: 'name',  width: 80, frozen: true },
+                            { label: 'Hole <br /> <font color="blue">Par</font><br /> <font color="red">Handicap</font><br>', name: 'name', width: 80, frozen: true },
                             { label: 'Hole', index: 'score', name: 'round.0.holescores.0.score', width: 37, align: 'center', sorttype:"int", editable: true,
                                 edittype: 'select',
                                 editoptions : { value: scores,
@@ -457,11 +478,10 @@
                                     ]
                                 }
                             },
-                            { label: '<br />Total', name: 'round.0.score', width: 37, align: 'center'}
+                            { label: '<br /><br />Total', name: 'round.0.score', width: 37, align: 'center'}
 
                         ],
                         width: 470,
-                        height: 100,
                         loadComplete: function (data) {
 
                             var $this = $(this), ids = $this.jqGrid('getDataIDs'), j, l = ids.length;
@@ -482,7 +502,8 @@
                             $.each(data[0].round[0].course.holes, function(key, value) {
                                 var name = 'round.0.holescores.' + key + '.score';
                                 var par = value.par;
-                                var label = value.number + '<br /><font color="blue">' + par + '</font>';
+                                var handicap = value.handicap;
+                                var label = value.number + '<br /><font color="blue">' + par + '</font>' + '<br /><font color="red">' + handicap + '</font>';
                                 $this.jqGrid('setLabel', name, label );
                             });
                         }
@@ -495,7 +516,7 @@
                         url: '{{URL::to('/')}}/matchrounds/'+{{$id}} +'?group=' + i,
                         datatype: "json",
                         colModel: [
-                            { label: 'Hole <br /> <font color="blue">Par</font>', name: 'name', height:50, width: 80, frozen: true },
+                            { label: 'Hole <br /> <font color="blue">Par</font><br /> <font color="red">Handicap</font>', name: 'name',  width: 80, frozen: true },
                             { label: 'Hole', name: 'round.0.holescores.0.score', width: 37, align: 'center'},
                             { label: 'Hole', name: 'round.0.holescores.1.score', width: 37, align: 'center' },
                             { label: 'Hole', name: 'round.0.holescores.2.score', width: 37, align: 'center' },
@@ -505,21 +526,21 @@
                             { label: 'Hole', name: 'round.0.holescores.6.score', width: 37, align: 'center' },
                             { label: 'Hole', name: 'round.0.holescores.7.score', width: 37, align: 'center' },
                             { label: 'Hole', name: 'round.0.holescores.8.score', width: 37, align: 'center' },
-                            { label: '<br />Total', name: 'round.0.score', width: 37, align: 'center'}
+                            { label: '<br /><br />Total', name: 'round.0.score', width: 37, align: 'center'}
 
                         ],
                         viewrecords: true,
                         width: 470,
-                        height: 100,
                         loadComplete: function (data) {
 
                             var $this = $(this), ids = $this.jqGrid('getDataIDs'), j, l = ids.length;
-                            $("table.ui-jqgrid-htable th div").css ("height", 30);
+                            //$("table.ui-jqgrid-htable th div").css ("height", 30);
                             //use data to populate the course holes and par
                             $.each(data[0].round[0].course.holes, function(key, value) {
                                 var name = 'round.0.holescores.' + key + '.score';
                                 var par = value.par;
-                                var label = value.number + '<br /><font color="blue">' + par + '</font>';
+                                var handicap = value.handicap;
+                                var label = value.number + '<br /><font color="blue">' + par + '</font>' + '<br /><font color="red">' + handicap + '</font>';
                                 $this.jqGrid('setLabel', name, label );
                             });
                         }
