@@ -320,10 +320,17 @@ class TeamMatchesController extends \BaseController {
 	public function getPointsByYear($year)
     {
         $teamMatches = Teammatch::select('team_id','pointsWon')->whereYear('created_at', '=', $year)->with('team')->get();
-        foreach ($teamMatches as $key=>$teamMatch) {
+        foreach($teamMatches as $key=>$teamMatch){
             $pointsData[$key]['name'] = $teamMatch['team']['name'];
-            $pointsData[$key]['points'] = $teamMatch['pointsWon'];
+            $pointsData[$key]['points'] =  Teammatch::select('team_id','pointsWon')
+                ->where('team_id', '=', $teamMatch->team_id)
+                ->whereYear('created_at', '=', $year)
+                ->with('team')
+                ->sum('pointsWon');
+
         }
+
+        $pointsData = array_map("unserialize", array_unique(array_map("serialize", $pointsData)));
         $data['data'] = $pointsData;
         return $data;
     }
