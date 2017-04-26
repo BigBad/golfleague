@@ -245,21 +245,24 @@ class TeamMatchesController extends \BaseController {
             $holeScores = $item['holescores'];
             foreach($holeScores as $key=>$holeScore){
                 //check if new score is less PlayerScores
-                if(isset($playerScores[$key])){ // 2nd time in for hole
-                    if($playerScores[$key] >= $holeScore['score']){
-                        $playerScores[$key] = $holeScore['score'] - $holes[$key+1];
+                if(isset($teamScores[$key])){ // 2nd time in for hole
+
+                    //set temp handi score
+                    $tempScore = $holeScore['score'] - $holes[$key+1];
+                    if($teamScores[$key] >= $tempScore){
+                        $teamScores[$key] = $holeScore['score'] - $holes[$key+1];
                     }
                 } else{ // first time in for hole
                     if($holeScore['score'] != null){
-                        $playerScores[$key] = $holeScore['score'] - $holes[$key+1];
+                        $teamScores[$key] = $holeScore['score'] - $holes[$key+1];
                     } else{
-                        $playerScores[$key] = null;
+                        $teamScores[$key] = null;
                     }
                 }
             }
 
         }
-        return $playerScores;
+        return $teamScores;
     }
 
     private function calculatePoints($team, $opponent)
