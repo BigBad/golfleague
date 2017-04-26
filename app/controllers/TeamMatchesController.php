@@ -131,16 +131,23 @@ class TeamMatchesController extends \BaseController {
             // Bonus point logic
             // Occurs after 9th hole score is added to both teams
 
+            $team1Bonus = null;
+            $team2Bonus = null;
+
             if($team1Scores[8] != null && $team2Scores[8] != null){
                 if($team1Points > $team2Points){
                     $team1Points = $team1Points + 1;
+                    $team1Bonus = 1;
                 }
                 if($team2Points > $team1Points){
                     $team2Points = $team2Points + 1;
+                    $team2Bonus = 1;
                 }
                 if($team1Points == $team2Points){
                     $team1Points = $team1Points + .5;
+                    $team1Bonus = .5;
                     $team2Points = $team2Points + .5;
+                    $team2Bonus = .5;
                 }
             }
 
@@ -152,17 +159,21 @@ class TeamMatchesController extends \BaseController {
         //Need to determine if same amount of scores are in both
         // If not then do not return
 
-            foreach($team1Scores as $key=>$teamScore){
-                if($teamScore <= 0){
-                    $team1Scores[$key] = '';
-                }
+        foreach($team1Scores as $key=>$teamScore){
+            if($teamScore <= 0){
+                $team1Scores[$key] = '';
             }
+        }
+        $team1Net = array_sum($team1Scores);
+
 
         foreach($team2Scores as $key=>$teamScore){
             if($teamScore <= 0){
                 $team2Scores[$key] = '';
             }
         }
+        $team2Net = array_sum($team2Scores);
+
 
         $team[0] = [
             "team" =>  $team1Name[0]['name'],
@@ -175,7 +186,9 @@ class TeamMatchesController extends \BaseController {
             "hole7" => $team1Scores[6],
             "hole8" => $team1Scores[7],
             "hole9" => $team1Scores[8],
-            "points" =>$team1Points
+            "bonus" => $team1Bonus,
+            "points" => $team1Points,
+            "netscore" => $team1Net
         ];
 
         $team[1] = [
@@ -189,7 +202,9 @@ class TeamMatchesController extends \BaseController {
             "hole7" => $team2Scores[6],
             "hole8" => $team2Scores[7],
             "hole9" => $team2Scores[8],
-            "points" => $team2Points
+            "bonus" => $team2Bonus,
+            "points" => $team2Points,
+            "netscore" => $team2Net,
         ];
 
         $data['data'] = $team;

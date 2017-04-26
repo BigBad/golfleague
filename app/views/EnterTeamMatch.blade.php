@@ -84,16 +84,18 @@
                         <thead>
                         <tr>
                             <th>Team - Best Ball Net</th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
+                            <th>1</th>
+                            <th>2</th>
+                            <th>3</th>
+                            <th>4</th>
+                            <th>5</th>
+                            <th>6</th>
+                            <th>7</th>
+                            <th>8</th>
+                            <th>9</th>
+                            <th>Bonus</th>
                             <th>Pts</th>
+                            <th>Score</th>
                         </tr>
                         </thead>
                     </table>
@@ -113,16 +115,18 @@
                         <thead>
                         <tr>
                             <th>Team - Best Ball Net</th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
+                            <th>1</th>
+                            <th>2</th>
+                            <th>3</th>
+                            <th>4</th>
+                            <th>5</th>
+                            <th>6</th>
+                            <th>7</th>
+                            <th>8</th>
+                            <th>9</th>
+                            <th>Bonus</th>
                             <th>Pts</th>
+                            <th>Score</th>
                         </tr>
                         </thead>
                     </table>
@@ -142,16 +146,18 @@
                         <thead>
                         <tr>
                             <th>Team - Best Ball Net</th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
+                            <th>1</th>
+                            <th>2</th>
+                            <th>3</th>
+                            <th>4</th>
+                            <th>5</th>
+                            <th>6</th>
+                            <th>7</th>
+                            <th>8</th>
+                            <th>9</th>
+                            <th>Bonus</th>
                             <th>Pts</th>
+                            <th>Score</th>
                         </tr>
                         </thead>
                     </table>
@@ -301,7 +307,9 @@
                     { "data": "hole7" },
                     { "data": "hole8" },
                     { "data": "hole9" },
-                    { "data": "points"}
+                    { "data": "bonus"},
+                    { "data": "points"},
+                    { "data": "netscore"}
                 ]
             });
 
@@ -332,7 +340,9 @@
                     { "data": "hole7" },
                     { "data": "hole8" },
                     { "data": "hole9" },
-                    { "data": "points"}
+                    { "data": "bonus"},
+                    { "data": "points"},
+                    { "data": "netscore"}
                 ]
             });
             var group3TeamTable = $('#group3Team').DataTable( {
@@ -360,7 +370,9 @@
                     { "data": "hole7" },
                     { "data": "hole8" },
                     { "data": "hole9" },
-                    { "data": "points"}
+                    { "data": "bonus"},
+                    { "data": "points"},
+                    { "data": "netscore"}
                 ]
             });
             $( "#leaderboard" ).click(function(){
