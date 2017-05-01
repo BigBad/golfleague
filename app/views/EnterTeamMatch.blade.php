@@ -84,15 +84,15 @@
                         <thead>
                         <tr>
                             <th>Team - Best Ball Net</th>
-                            <th>1</th>
-                            <th>2</th>
-                            <th>3</th>
-                            <th>4</th>
-                            <th>5</th>
-                            <th>6</th>
-                            <th>7</th>
-                            <th>8</th>
-                            <th>9</th>
+                            <th class="hole0"></th>
+                            <th class="hole1"></th>
+                            <th class="hole2"></th>
+                            <th class="hole3"></th>
+                            <th class="hole4"></th>
+                            <th class="hole5"></th>
+                            <th class="hole6"></th>
+                            <th class="hole7"></th>
+                            <th class="hole8"></th>
                             <th>Bonus</th>
                             <th>Pts</th>
                             <th>Score</th>
@@ -115,15 +115,15 @@
                         <thead>
                         <tr>
                             <th>Team - Best Ball Net</th>
-                            <th>1</th>
-                            <th>2</th>
-                            <th>3</th>
-                            <th>4</th>
-                            <th>5</th>
-                            <th>6</th>
-                            <th>7</th>
-                            <th>8</th>
-                            <th>9</th>
+                            <th class="hole0"></th>
+                            <th class="hole1"></th>
+                            <th class="hole2"></th>
+                            <th class="hole3"></th>
+                            <th class="hole4"></th>
+                            <th class="hole5"></th>
+                            <th class="hole6"></th>
+                            <th class="hole7"></th>
+                            <th class="hole8"></th>
                             <th>Bonus</th>
                             <th>Pts</th>
                             <th>Score</th>
@@ -146,15 +146,15 @@
                         <thead>
                         <tr>
                             <th>Team - Best Ball Net</th>
-                            <th>1</th>
-                            <th>2</th>
-                            <th>3</th>
-                            <th>4</th>
-                            <th>5</th>
-                            <th>6</th>
-                            <th>7</th>
-                            <th>8</th>
-                            <th>9</th>
+                            <th class="hole0"></th>
+                            <th class="hole1"></th>
+                            <th class="hole2"></th>
+                            <th class="hole3"></th>
+                            <th class="hole4"></th>
+                            <th class="hole5"></th>
+                            <th class="hole6"></th>
+                            <th class="hole7"></th>
+                            <th class="hole8"></th>
                             <th>Bonus</th>
                             <th>Pts</th>
                             <th>Score</th>
@@ -187,7 +187,7 @@
             var tournamentId;
 
             var tournamentTable;
-
+            /*
             function getTournamentId(){
                 $.ajax({
                     url:    "{{URL::to('/')}}/tournament/{{$id}}",
@@ -235,7 +235,7 @@
             }
 
             tournamentId = getTournamentId();
-
+            */
             var grossTable = $('#grossTable').DataTable( {
                 "scrollY":        "200px",
                 "bFilter": false,
@@ -280,6 +280,14 @@
                             return data.score;
                     }}
                 ]
+            });
+
+            // Label holes numbers on team tables
+            $.getJSON('{{URL::to('/')}}/matches/' +{{$id}}, function(data){
+                console.log(data.course.holes);
+                $.each(data.course.holes, function(key, value) {
+                    $(".hole" + key).text(value.number);
+                });
             });
 
             var group1TeamTable = $('#group1Team').DataTable( {
@@ -375,6 +383,8 @@
                     { "data": "netscore"}
                 ]
             });
+
+
             $( "#leaderboard" ).click(function(){
                 tournamentTable.ajax.reload();
                 grossTable.ajax.reload();
