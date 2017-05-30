@@ -110,14 +110,18 @@ class MatchService
             $match1['match_id'] = $matchdata['match_id'];  // This is generated below and passed to listener
             $match1['team_id'] = $matchUp1[0][0]['team'];
             $match1['player1'] = $matchUp1[0][0]['player_id'];
-            $match1['player2'] = $matchUp1[0][1]['player_id'];
+            if(isset($matchUp1[0][1]['player_id'])){
+                $match1['player2'] = $matchUp1[0][1]['player_id'];
+            }
             $match1['opponent'] = $matchUp1[1][0]['team'];
             $this->teammatch->create($match1); //save to match table
 
             $match1['match_id'] = $matchdata['match_id'];  // This is generated below and passed to listener
             $match1['team_id'] = $matchUp1[1][0]['team'];
             $match1['player1'] = $matchUp1[1][0]['player_id'];
-            $match1['player2'] = $matchUp1[1][1]['player_id'];
+            if(isset($matchUp1[1][1]['player_id'])){
+                $match1['player2'] = $matchUp1[1][1]['player_id'];
+            }
             $match1['opponent'] = $matchUp1[0][0]['team'];
             $this->teammatch->create($match1); //save to match table
 
@@ -130,14 +134,18 @@ class MatchService
             $match2['match_id'] = $matchdata['match_id'];  // This is generated below and passed to listener
             $match2['team_id'] = $matchUp2[0][0]['team'];
             $match2['player1'] = $matchUp2[0][0]['player_id'];
-            $match2['player2'] = $matchUp2[0][1]['player_id'];
+            if(isset($matchUp2[0][1]['player_id'])){
+                $match2['player2'] = $matchUp2[0][1]['player_id'];
+            }
             $match2['opponent'] = $matchUp2[1][0]['team'];
             $this->teammatch->create($match2); //save to match table
 
             $match2['match_id'] = $matchdata['match_id'];  // This is generated below and passed to listener
             $match2['team_id'] = $matchUp2[1][0]['team'];
             $match2['player1'] = $matchUp2[1][0]['player_id'];
-            $match2['player2'] = $matchUp2[1][1]['player_id'];
+            if(isset($matchUp2[1][1]['player_id'])){
+                $match2['player2'] = $matchUp2[1][1]['player_id'];
+            }
             $match2['opponent'] = $matchUp2[0][0]['team'];
             $this->teammatch->create($match2); //save to match table
 
@@ -150,14 +158,19 @@ class MatchService
             $match3['match_id'] = $matchdata['match_id'];  // This is generated below and passed to listener
             $match3['team_id'] = $matchUp3[0][0]['team'];
             $match3['player1'] = $matchUp3[0][0]['player_id'];
-            $match3['player2'] = $matchUp3[0][1]['player_id'];
+            if(isset($matchUp3[0][1]['player_id'])){
+                $match3['player2'] = $matchUp3[0][1]['player_id'];
+            }
+
             $match3['opponent'] = $matchUp3[1][0]['team'];
             $this->teammatch->create($match3); //save to match table
 
             $match3['match_id'] = $matchdata['match_id'];  // This is generated below and passed to listener
             $match3['team_id'] = $matchUp3[1][0]['team'];
             $match3['player1'] = $matchUp3[1][0]['player_id'];
-            $match3['player2'] = $matchUp3[1][1]['player_id'];
+            if(isset($matchUp3[1][1]['player_id'])){
+                $match3['player2'] = $matchUp3[1][1]['player_id'];
+            }
             $match3['opponent'] = $matchUp3[0][0]['team'];
             $this->teammatch->create($match3); //save to match table
 

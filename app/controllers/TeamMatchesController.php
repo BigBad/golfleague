@@ -54,14 +54,17 @@ class TeamMatchesController extends \BaseController {
 	 */
 	public function show($id)
 	{
-
-
-        $group = Input::get('group');
+        $group = Input::get('group');  // Stay in controller
 
 
         $groupPlayers = $this->matchRoundRepo->matchGroup($id, $group);
 
-        //Create Player data
+        //
+        // Create Player data from MatchRound Repo
+        // Takes group of players
+        //
+        // Creates data array for each player in the match
+        //
         $matchUp = array();
         foreach($groupPlayers as $key=>$groupPlayer){
             $matchUp[$key]['player'] = $groupPlayer->pivot->player_id;
@@ -71,28 +74,37 @@ class TeamMatchesController extends \BaseController {
                 $matchUp[$key]['course'] = $round->course_id;
                 $matchUp[$key]['holescores'] = $round->holescores;
             }
-
         }
 
         // Change lowest handicap to ZERO and change others to reflect it
+            // Create array of each players handicap
             foreach($matchUp as $key=>$match){
                 $matchHandicaps[] = $match['matchHandicap'];
             }
+
+            // Determine the lowest handicap in the group
             $lowestMatchHandicap = min($matchHandicaps);
-            //handicap change
+
+            //handicapChange is the number of strokes to offset on the others handicap
             $handicapChange = $lowestMatchHandicap * -1;
+
+            // Adjust all handicaps
             foreach($matchUp as $key=>$match){
                 $matchUp[$key]['matchHandicap'] = $match['matchHandicap'] + $handicapChange;
             }
 
-
-        // Separate two teams
+        // Separate group into two teams
 
         foreach($matchUp as $key=>$item){
             $teamIds[$key] = $item['team'];
         }
+
         sort($teamIds);
-        $teamIds = array_slice($teamIds, 1, -1);
+
+        //$teamIds = array_slice($teamIds, 1, -1);
+        $teamIds = array_unique($teamIds);
+        $teamIds = array_values($teamIds); //reset array keys
+
         $team1Id = $teamIds[0];
         $team2Id = $teamIds[1];
 
